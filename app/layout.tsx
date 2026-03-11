@@ -72,6 +72,19 @@ export const metadata: Metadata = {
   verification: {
     google: 'nVC8dNC7shQBmqHSNyw0eeuuwH7C5bMr3Y9raq8JJxk',
   },
+  openGraph: {
+    title: 'Team Staraptor CUET',
+    description: 'Engineers Bound by Flight',
+    url: 'https://staraptorcuet.vercel.app',
+    siteName: 'Team Staraptor',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Team Staraptor CUET',
+    description: 'Engineers Bound by Flight',
+  },
 };
 
 export default function RootLayout({
