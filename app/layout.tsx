@@ -66,6 +66,9 @@ const montserrat = localFont({
 export const metadata: Metadata = {
   title: 'Team Staraptor CUET',
   description: 'Engineers Bound by Flight',
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
