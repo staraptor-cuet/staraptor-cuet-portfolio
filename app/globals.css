@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-gray-sub font-sans;
+  }
+
+  /* Typography Design System */
+  .text-title-main {
+    font-family: var(--font-montserrat);
+    @apply text-h1 font-bold text-[#FAFAFA] tracking-tight uppercase;
+  }
+
+  .text-title-section {
+    font-family: var(--font-montserrat);
+    @apply text-h2 font-bold text-[#FAFAFA] tracking-tight;
+  }
+
+  .text-title-box {
+    font-family: var(--font-outfit);
+    @apply text-xl font-bold text-[#333333];
+  }
+
+  .text-subtitle-box {
+    font-family: var(--font-montserrat);
+    @apply text-lg font-bold italic text-primary;
+  }
+
+  .text-subtitle-general {
+    font-family: var(--font-montserrat);
+    @apply text-lg font-light text-[#A0A0A0];
+  }
+
+  .text-body {
+    font-family: var(--font-inter);
+    @apply text-base font-normal text-gray-sub leading-relaxed;
+  }
+
+  .text-label {
+    font-family: var(--font-outfit);
+    @apply text-sm font-bold text-primary uppercase tracking-[0.2em];
+  }
+
+  /* Legacy tag overrides for compatibility */
+  h1 { @apply text-title-main; }
+  h2 { @apply text-title-section; }
+  h3 { @apply text-title-box; }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-500;
+  }
+  .text-gradient-red-v {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-[#EF5F5A] to-[#6A2421];
+  }
+}
