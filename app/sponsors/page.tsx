@@ -88,13 +88,14 @@ export default function SponsorsPage() {
         >
           <p className="text-lg md:text-xl text-white mb-8 max-w-3xl mx-auto leading-relaxed">
             To become one of our sponsors, please contact us via email at:{' '}
-            <a href="mailto:staraptor@cuet.ac.bd" className="underline hover:text-primary transition-colors">
-              staraptor@cuet.ac.bd
+            <a href="mailto:staraptorcuet@gmail.com" className="underline hover:text-primary transition-colors">
+              staraptorcuet@gmail.com
             </a>
           </p>
           <a
-            href="/documents/Staraptor_Proposal_2026.pdf"
-            download
+            href="https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#D04741] to-[#6A2421] text-white px-8 py-3.5 rounded-lg font-bold hover:scale-105 transition-transform shadow-lg"
           >
             Download Proposal

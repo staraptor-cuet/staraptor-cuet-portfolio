@@ -49,7 +49,9 @@ export default function ContactPage() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
         >
           <motion.a
-            href="#"
+            href="https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-[#D04741] hover:bg-[#b03934] text-white px-8 py-4 rounded-md font-bold text-lg transition-all shadow-lg hover:shadow-primary/20"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
@@ -61,13 +63,28 @@ export default function ContactPage() {
 
         <div className="flex flex-wrap justify-center gap-6">
           {[
-            { icon: "facebook-box-fill.svg", text: "Facebook" },
-            { icon: "instagram-fill.svg", text: "Instagram" },
-            { icon: "linkedin-box-fill.svg", text: "LinkedIn" },
-            { icon: "phone-fill.svg", text: "01972723321" },
-            { icon: "mail-fill.svg", text: "staraptor@cuet.ac.bd" },
+            { icon: "facebook-box-fill.svg", text: "Facebook", href: "https://facebook.com/teamstaraptor" },
+            { icon: "instagram-fill.svg", text: "Instagram", href: "https://instagram.com/teamstaraptor" },
+            { icon: "linkedin-box-fill.svg", text: "LinkedIn", href: "https://linkedin.com/company/teamstaraptor" },
+            { icon: "phone-fill.svg", text: "01972723321", href: "tel:01972723321" },
+            { icon: "mail-fill.svg", text: "staraptorcuet@gmail.com", href: "mailto:staraptorcuet@gmail.com" },
           ].map((item, i) => (
-            <ContactMethod key={i} icon={item.icon} text={item.text} index={i} />
+            <motion.a
+              key={i}
+              href={item.href}
+              target={item.href.startsWith('http') ? "_blank" : undefined}
+              rel={item.href.startsWith('http') ? "noopener noreferrer" : undefined}
+              className="flex-1 min-w-[200px] bg-[#b03934] hover:bg-[#8e2d29] text-white py-4 px-6 rounded-lg flex items-center justify-center gap-3 transition-colors shadow-lg"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Image src={`/icons/${item.icon}`} alt={item.text} width={20} height={20} style={{ filter: 'brightness(0) invert(1)' }} />
+              <span className="font-bold">{item.text}</span>
+            </motion.a>
           ))}
         </div>
 

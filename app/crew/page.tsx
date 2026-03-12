@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { members, Member } from './members';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -12,7 +13,7 @@ const fadeUp = {
   }),
 };
 
-const CrewMemberCard = ({ name, batch, index }: { name: string; batch: string; index: number }) => (
+const CrewMemberCard = ({ member, index }: { member: Member; index: number }) => (
   <motion.div
     className="bg-[#2a2a2a] border border-gray-sub/20 rounded-xl p-3 shadow-lg flex flex-col items-center cursor-pointer"
     initial={{ opacity: 0, y: 20 }}
@@ -27,17 +28,33 @@ const CrewMemberCard = ({ name, batch, index }: { name: string; batch: string; i
       transition: { duration: 0.2 },
     }}
   >
-    <div className="border border-primary rounded-lg overflow-hidden relative aspect-[3/4] w-full mb-4">
-      <Image src="/images/kazi miftahul hoque.png" alt={name} fill className="object-cover" />
+    <div className="border border-primary rounded-lg overflow-hidden relative aspect-[3/4] w-full mb-4 group/img">
+      <Image 
+        src={member.image || "/images/kazi miftahul hoque.png"} 
+        alt={member.name} 
+        fill 
+        className="object-cover transition-all duration-500 group-hover/img:scale-110"
+        style={{ filter: 'drop-shadow(0 0 12px rgba(0,0,0,0.6)) blur(0.4px)' }}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
     </div>
 
-    <h3 className="text-white font-heading font-bold text-sm text-center mb-1">{name}</h3>
-    <p className="text-white text-xs mb-4">{batch}</p>
+    <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase">{member.name}</h3>
+    <p className="text-white text-xs mb-1">{member.batch}</p>
+    {member.isLead && (
+      <p className="text-[#D04741] font-heading font-bold text-xs text-center mb-3 uppercase">
+        {member.designation === "Project Lead" ? "Project Lead" : "Team Lead"}
+      </p>
+    )}
+    {!member.isLead && <div className="mb-3" />}
 
-    <div className="flex gap-2 w-full">
+    <div className="flex gap-2 w-full mt-auto">
       <a
-        href="#"
-        className="flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors"
+        href={member.linkedin || "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
+        onClick={(e) => !member.linkedin && e.preventDefault()}
       >
         <Image
           src="/icons/linkedin-box-fill.svg"
@@ -50,8 +67,9 @@ const CrewMemberCard = ({ name, batch, index }: { name: string; batch: string; i
       </a>
 
       <a
-        href="#"
-        className="flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors"
+        href={member.email ? `mailto:${member.email}` : "#"}
+        className={`flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors ${!member.email ? 'opacity-50 cursor-not-allowed' : ''}`}
+        onClick={(e) => !member.email && e.preventDefault()}
       >
         <Image
           src="/icons/mail-fill.svg"
@@ -66,7 +84,7 @@ const CrewMemberCard = ({ name, batch, index }: { name: string; batch: string; i
   </motion.div>
 );
 
-const CrewSection = ({ title, members }: { title: string; members: any[] }) => (
+const CrewSection = ({ title, members }: { title: string; members: Member[] }) => (
   <motion.div
     className="mb-16"
     initial="hidden"
@@ -81,10 +99,10 @@ const CrewSection = ({ title, members }: { title: string; members: any[] }) => (
     <div className="flex flex-wrap justify-center gap-3 sm:gap-6 max-w-5xl mx-auto">
       {members.map((m, i) => (
         <div
-          key={i}
+          key={m.name}
           className="w-[calc(50%-0.375rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] max-w-[240px]"
         >
-          <CrewMemberCard name={m.name} batch={m.batch} index={i} />
+          <CrewMemberCard member={m} index={i} />
         </div>
       ))}
     </div>
@@ -92,6 +110,14 @@ const CrewSection = ({ title, members }: { title: string; members: any[] }) => (
 );
 
 export default function CrewPage() {
+  const projectLeads = members.filter(m => m.designation === "Project Lead");
+  const designCrew = members.filter(m => m.designation.includes("Design"));
+  const simulationCrew = members.filter(m => m.designation.includes("Simulation"));
+  const brandingCrew = members.filter(m => m.designation.includes("Branding"));
+  const researchCrew = members.filter(m => m.designation.includes("Research"));
+  const softwareCrew = members.filter(m => m.designation.includes("Software"));
+  const documentationCrew = members.filter(m => m.designation.includes("Documentation"));
+
   return (
     <div className="bg-background min-h-screen pb-20">
 
@@ -137,8 +163,46 @@ export default function CrewPage() {
             </p>
           </motion.div>
 
+          {/* Stats */}
           <motion.div
-            className="mb-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <h2 className="text-title-section mb-10 text-gradient-red-v inline-block">
+              Stats
+            </h2>
+
+            <div className="flex flex-wrap justify-center items-center gap-y-6 gap-x-12">
+              {[
+                { label: 'Crew Members', value: '20' },
+                { label: 'Sub-Teams', value: '6' },
+                { label: 'Technical Roles', value: '8+' },
+                { label: 'Operational Roles', value: '4+' },
+              ].map(({ label, value }, i) => (
+                <motion.div
+                  key={i}
+                  className="flex items-center gap-3"
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.1 }}
+                >
+                  <span className="text-white font-semibold uppercase text-xs tracking-wide">
+                    {label}
+                  </span>
+
+                  <span className="text-primary text-4xl font-heading font-bold">
+                    {value}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="mb-12 mt-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -169,44 +233,6 @@ export default function CrewPage() {
             </p>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <h2 className="text-title-section mb-10 text-gradient-red-v inline-block">
-              Stats
-            </h2>
-
-            <div className="flex flex-wrap justify-center items-center gap-y-6 gap-x-12">
-              {[
-                { label: 'Crew Members', value: '20' },
-                { label: 'Sub-Teams', value: '4' },
-                { label: 'Technical Roles', value: '6+' },
-                { label: 'Operational Roles', value: '4+' },
-              ].map(({ label, value }, i) => (
-                <motion.div
-                  key={i}
-                  className="flex items-center gap-3"
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: i * 0.1 }}
-                >
-                  <span className="text-white font-semibold uppercase text-xs tracking-wide">
-                    {label}
-                  </span>
-
-                  <span className="text-primary text-4xl font-heading font-bold">
-                    {value}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
         </div>
       </section>
 
@@ -223,25 +249,54 @@ export default function CrewPage() {
           Meet The Crew
         </motion.h2>
 
-        <CrewSection
-          title="Designing Crew"
-          members={Array(4).fill({ name: 'Kazi Miftahul Hoque', batch: '2020 Batch' })}
-        />
+        {projectLeads.length > 0 && (
+          <CrewSection
+            title="Project Board"
+            members={projectLeads}
+          />
+        )}
 
-        <CrewSection
-          title="Simulation Crew"
-          members={Array(4).fill({ name: 'Kazi Miftahul Hoque', batch: '2020 Batch' })}
-        />
+        {designCrew.length > 0 && (
+          <CrewSection
+            title="Designing Crew"
+            members={designCrew}
+          />
+        )}
 
-        <CrewSection
-          title="Branding & Communication Crew"
-          members={Array(6).fill({ name: 'Kazi Miftahul Hoque', batch: '2020 Batch' })}
-        />
+        {simulationCrew.length > 0 && (
+          <CrewSection
+            title="Simulation Crew"
+            members={simulationCrew}
+          />
+        )}
 
-        <CrewSection
-          title="Research Crew"
-          members={Array(3).fill({ name: 'Kazi Miftahul Hoque', batch: '2020 Batch' })}
-        />
+        {brandingCrew.length > 0 && (
+          <CrewSection
+            title="Branding & Communication Crew"
+            members={brandingCrew}
+          />
+        )}
+
+        {researchCrew.length > 0 && (
+          <CrewSection
+            title="Research Crew"
+            members={researchCrew}
+          />
+        )}
+
+        {softwareCrew.length > 0 && (
+          <CrewSection
+            title="Software Crew"
+            members={softwareCrew}
+          />
+        )}
+
+        {documentationCrew.length > 0 && (
+          <CrewSection
+            title="Documentation Crew"
+            members={documentationCrew}
+          />
+        )}
 
         <motion.div
           className="mt-20 text-center"

@@ -47,7 +47,7 @@ export default function Footer() {
             <h4 className="text-primary font-heading font-semibold mb-5 md:mb-6">Contact</h4>
             <ul className="space-y-3 md:space-y-4 text-sm text-gray-sub leading-relaxed">
               <li>01972723321</li>
-              <li>staraptor@cuet.ac.bd</li>
+              <li>staraptorcuet@gmail.com</li>
               <li>Kaptai, Highway রাউজান<br />পাহাড়তলী সড়ক,<br />Chattogram 4349</li>
             </ul>
             <div className="flex gap-4 mt-6 md:mt-8">
