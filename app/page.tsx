@@ -96,7 +96,7 @@ export default function Home() {
                 We Are<br/>Staraptor
               </h2>
               <p className="text-white text-xs md:text-base lg:text-[1.1rem] leading-[1.8] mb-8 md:mb-12 max-w-xl text-center md:text-justify">
-                Welcome to Team Staraptor CUET, the first VTOL design team from CUET Bangladesh, set to make our mark at the METU VTOL Competition this October. Our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing a cutting-edge VTOL UAV. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!
+                Team Staraptor CUET is the first <strong>VTOL drone design team in Bangladesh</strong> from <strong>Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge <strong>UAV and VTOL aircraft systems</strong>. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!
               </p>
               <Link
                 href="/crew"

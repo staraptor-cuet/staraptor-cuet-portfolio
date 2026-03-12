@@ -64,23 +64,34 @@ const montserrat = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Team Staraptor CUET',
-  description: 'Engineers Bound by Flight',
+  title: 'Team Staraptor CUET | VTOL Drone Engineering Team',
+  description: 'Team Staraptor CUET is the first VTOL UAV design team from Chittagong University of Engineering & Technology (CUET), Bangladesh.',
+  keywords: [
+    'CUET drone team',
+    'Bangladesh UAV team',
+    'VTOL drone Bangladesh',
+    'student UAV team',
+    'CUET aerospace team',
+    'VTOL competition METU',
+    'Team Staraptor CUET',
+    'UAV design CUET',
+    'Aerospace engineering Bangladesh'
+  ],
   verification: {
     google: 'nVC8dNC7shQBmqHSNyw0eeuuwH7C5bMr3Y9raq8JJxk',
   },
   openGraph: {
-    title: 'Team Staraptor CUET',
-    description: 'Engineers Bound by Flight',
+    title: 'Team Staraptor CUET | VTOL Drone Engineering Team',
+    description: 'Team Staraptor CUET is the first VTOL UAV design team from Chittagong University of Engineering & Technology (CUET), Bangladesh.',
     url: 'https://staraptorcuet.vercel.app',
-    siteName: 'Team Staraptor',
+    siteName: 'Team Staraptor CUET',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Team Staraptor CUET',
-    description: 'Engineers Bound by Flight',
+    title: 'Team Staraptor CUET | VTOL Drone Engineering Team',
+    description: 'Team Staraptor CUET is the first VTOL UAV design team from Chittagong University of Engineering & Technology (CUET), Bangladesh.',
   },
 };
 
@@ -97,6 +108,23 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Team Staraptor CUET",
+              "url": "https://staraptorcuet.vercel.app",
+              "logo": "https://staraptorcuet.vercel.app/icon.png",
+              "description": "VTOL UAV design team from Chittagong University of Engineering & Technology (CUET), Bangladesh.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "Bangladesh"
+              }
+            }),
+          }}
+        />
       </body>
     </html>
   );
