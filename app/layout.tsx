@@ -64,8 +64,9 @@ const montserrat = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://staraptorcuet.vercel.app'),
   title: 'Team Staraptor CUET | VTOL Drone Engineering Team',
-  description: 'Team Staraptor CUET is the first VTOL UAV design team from Chittagong University of Engineering & Technology (CUET), Bangladesh.',
+  description: 'Team Staraptor CUET is the first VTOL UAV design team from CUET, Bangladesh. Engineers Bound by Flight.',
   keywords: [
     'CUET drone team',
     'Bangladesh UAV team',
@@ -82,16 +83,23 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Team Staraptor CUET | VTOL Drone Engineering Team',
-    description: 'Team Staraptor CUET is the first VTOL UAV design team from Chittagong University of Engineering & Technology (CUET), Bangladesh.',
+    description: 'Team Staraptor CUET is the first VTOL UAV design team from CUET, Bangladesh. Engineers Bound by Flight.',
     url: 'https://staraptorcuet.vercel.app',
     siteName: 'Team Staraptor CUET',
     locale: 'en_US',
     type: 'website',
+    images: [{
+      url: '/opengraph-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Team Staraptor CUET Logo',
+    }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Team Staraptor CUET | VTOL Drone Engineering Team',
-    description: 'Team Staraptor CUET is the first VTOL UAV design team from Chittagong University of Engineering & Technology (CUET), Bangladesh.',
+    description: 'Team Staraptor CUET is the first VTOL UAV design team from CUET, Bangladesh. Engineers Bound by Flight.',
+    images: ['/opengraph-image.png'],
   },
 };
 
