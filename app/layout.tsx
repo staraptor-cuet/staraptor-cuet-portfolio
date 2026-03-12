@@ -89,8 +89,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
     images: [{
-      url: 'https://staraptorcuet.vercel.app/opengraph-image.png?v=3',
-      secureUrl: 'https://staraptorcuet.vercel.app/opengraph-image.png?v=3',
+      url: 'https://staraptorcuet.vercel.app/opengraph-image.png',
+      secureUrl: 'https://staraptorcuet.vercel.app/opengraph-image.png',
       width: 1200,
       height: 630,
       type: 'image/png',
@@ -101,7 +101,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Team Staraptor CUET | VTOL Drone Engineering Team',
     description: 'Team Staraptor CUET is the first VTOL UAV design team from CUET, Bangladesh. Engineers Bound by Flight.',
-    images: ['https://staraptorcuet.vercel.app/opengraph-image.png?v=3'],
+    images: ['https://staraptorcuet.vercel.app/opengraph-image.png'],
   },
   icons: {
     icon: [
