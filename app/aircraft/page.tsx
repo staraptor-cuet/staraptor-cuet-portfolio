@@ -189,18 +189,17 @@ export default function AircraftPage() {
 
         <p className="text-body">
           This hover-condition analysis is critical for:
-        </p>
-
-        <p className="text-body">
+          <strong>
           • Evaluating vertical lift performance <br />
           • Understanding rotor–body aerodynamic interaction <br />
           • Supporting design optimization of VTOL configurations
+          </strong>
         </p>
 
         <p className="text-body">
-          Tools Used: ANSYS Fluent, ANSYS Workbench <br />
-          Analysis Type: 3D CFD (Hover Mode) <br />
-          Outputs: Static Pressure Contours, Flow Field Visualization
+          <strong> Tools Used:</strong>strong> ANSYS Fluent, ANSYS Workbench <br />
+          <strong>Analysis Type:</strong> 3D CFD (Hover Mode) <br />
+          <strong>Outputs:</strong>strong> Static Pressure Contours, Flow Field Visualization
         </p>
       </div>
     </div>
