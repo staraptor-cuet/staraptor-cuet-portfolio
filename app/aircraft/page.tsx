@@ -197,9 +197,9 @@ export default function AircraftPage() {
         </p>
 
         <p className="text-body">
-          <strong> Tools Used:</strong>strong> ANSYS Fluent, ANSYS Workbench <br />
+          <strong> Tools Used:</strong> ANSYS Fluent, ANSYS Workbench <br />
           <strong>Analysis Type:</strong> 3D CFD (Hover Mode) <br />
-          <strong>Outputs:</strong>strong> Static Pressure Contours, Flow Field Visualization
+          <strong>Outputs:</strong> Static Pressure Contours, Flow Field Visualization
         </p>
       </div>
     </div>
@@ -227,8 +227,13 @@ export default function AircraftPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#D04741]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
             </div><div className="space-y-6 mt-2">
-              <p className="text-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <p className="text-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+            <p className="text-body">
+  The first iteration of the VTOL UAV prototype has been completed, enabling preliminary validation of the design configuration and structural integrity. This phase provided critical insights into assembly constraints, material behavior, and integration of key components.
+</p>
+
+<p className="text-body">
+  Ongoing work is focused on iterative optimization, including improvements in structural efficiency, weight reduction, and alignment accuracy. These refinements aim to enhance aerodynamic performance and ensure better stability in subsequent prototype versions.
+</p>  
             </div>
           </div>
 
