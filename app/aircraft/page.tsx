@@ -145,39 +145,68 @@ export default function AircraftPage() {
         </motion.div>
 
         {/* Analysis */}
-        <motion.div
-          className="bg-[#1f1f1f] rounded-sm shadow-lg overflow-hidden border border-gray-sub/10 mb-16"
-          initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={fadeUp} custom={0}
-        >
-          <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
-            <div className="w-5 h-5 flex items-center justify-center shrink-0">
-              <img src="/icons/search-eye-line.svg" alt="Analysis" className="w-full h-full object-contain" />
-            </div>
-            <h3 className="text-title-box">Analysis</h3>
+<motion.div
+  className="bg-[#1f1f1f] rounded-sm shadow-lg overflow-hidden border border-gray-sub/10 mb-16"
+  initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={fadeUp} custom={0}
+>
+  <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
+    <div className="w-5 h-5 flex items-center justify-center shrink-0">
+      <img src="/icons/search-eye-line.svg" alt="Analysis" className="w-full h-full object-contain" />
+    </div>
+    <h3 className="text-title-box">Analysis</h3>
+  </div>
+  <div className="py-[55px] px-8 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] items-start gap-x-12 gap-y-6 lg:gap-y-12 bg-[#252525]">
+    
+    <div className="flex flex-col gap-1 lg:gap-2">
+      {[
+        { src: '/images/analysis-img-2.png', alt: 'CFD Analysis 2' },
+        { src: '/images/analysis-img-1.png', alt: 'CFD Analysis 1' },
+      ].map((img, i) => (
+        <div key={i} className="relative aspect-[16/9] w-full group overflow-hidden cursor-zoom-in rounded-sm">
+          <Image src={img.src} alt={img.alt} fill className="object-contain transition-transform duration-500 group-hover:scale-105" />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-400 flex items-center justify-center">
+            <span className="text-white text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#D04741]/80 px-3 py-1.5 rounded">
+              View Analysis
+            </span>
           </div>
-          <div className="py-[55px] px-8 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] items-start gap-x-12 gap-y-6 lg:gap-y-12 bg-[#252525]">
-            <div className="flex flex-col gap-1 lg:gap-2">
-              {[
-                { src: '/images/analysis-img-2.png', alt: 'CFD Analysis 2' },
-                { src: '/images/analysis-img-1.png', alt: 'CFD Analysis 1' },
-              ].map((img, i) => (
-                <div key={i} className="relative aspect-[16/9] w-full group overflow-hidden cursor-zoom-in rounded-sm">
-                  <Image src={img.src} alt={img.alt} fill className="object-contain transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-400 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#D04741]/80 px-3 py-1.5 rounded">View Analysis</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col gap-8 justify-start">
-              <p className="text-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <div className="flex flex-col gap-6">
-                <p className="text-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.</p>
-                <p className="text-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        </div>
+      ))}
+    </div>
+
+    <div className="flex flex-col gap-8 justify-start">
+      <p className="text-body">
+        VTOL UAV Aerodynamic CFD (Hover Mode Analysis)
+      </p>
+
+      <div className="flex flex-col gap-6">
+        <p className="text-body">
+          This simulation presents the static pressure distribution over a fixed-wing VTOL UAV in hover mode, performed using ANSYS Fluent (CFD). The analysis captures the complex interaction between the fuselage, wing, and multiple rotors operating under vertical lift conditions.
+        </p>
+
+        <p className="text-body">
+          A 3D computational domain was developed with rotor-induced flow modeled using appropriate rotating frame techniques. The results highlight high-pressure regions near rotor downwash zones and fuselage surfaces, along with low-pressure regions contributing to lift generation and flow recirculation.
+        </p>
+
+        <p className="text-body">
+          This hover-condition analysis is critical for:
+        </p>
+
+        <p className="text-body">
+          • Evaluating vertical lift performance <br />
+          • Understanding rotor–body aerodynamic interaction <br />
+          • Supporting design optimization of VTOL configurations
+        </p>
+
+        <p className="text-body">
+          Tools Used: ANSYS Fluent, ANSYS Workbench <br />
+          Analysis Type: 3D CFD (Hover Mode) <br />
+          Outputs: Static Pressure Contours, Flow Field Visualization
+        </p>
+      </div>
+    </div>
+
+  </div>
+</motion.div>
 
         {/* Progress */}
         <motion.div
