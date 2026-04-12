@@ -63,9 +63,9 @@ export default function ContactPage() {
 
         <div className="flex flex-wrap justify-center gap-6">
           {[
-            { icon: "facebook-box-fill.svg", text: "Facebook", href: "https://facebook.com/teamstaraptor" },
-            { icon: "instagram-fill.svg", text: "Instagram", href: "https://instagram.com/teamstaraptor" },
-            { icon: "linkedin-box-fill.svg", text: "LinkedIn", href: "https://linkedin.com/company/teamstaraptor" },
+            { icon: "facebook-box-fill.svg", text: "Facebook", href: "https://www.facebook.com/StaraptorCUET" },
+            { icon: "instagram-fill.svg", text: "Instagram", href: "https://www.instagram.com/staraptor_cuet/" },
+            { icon: "linkedin-box-fill.svg", text: "LinkedIn", href: "https://www.linkedin.com/company/staraptor-cuet/" },
             { icon: "phone-fill.svg", text: "01972723321", href: "tel:01972723321" },
             { icon: "mail-fill.svg", text: "staraptorcuet@gmail.com", href: "mailto:staraptorcuet@gmail.com" },
           ].map((item, i) => (
