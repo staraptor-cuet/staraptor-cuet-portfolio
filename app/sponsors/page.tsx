@@ -4,7 +4,17 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
 
-const SponsorTier = ({ title, count }: { title: string, count: number }) => (
+const SponsorTier = ({
+  title,
+  count,
+  sponsorName,
+  sponsorLogo,
+}: {
+  title: string;
+  count: number;
+  sponsorName?: string;
+  sponsorLogo?: string;
+}) => (
   <motion.div
     className="mb-16"
     initial={{ opacity: 0, y: 30 }}
@@ -12,6 +22,50 @@ const SponsorTier = ({ title, count }: { title: string, count: number }) => (
     viewport={{ once: true, amount: 0.1 }}
     transition={{ duration: 0.65, ease: 'easeOut' }}
   >
+    <div className="bg-gradient-to-b from-[#D04741] to-[#6A2421] py-4 px-8 text-center rounded-sm mb-8 shadow-md">
+      <h2 className="text-title-section !text-xl tracking-widest uppercase">
+        {title}
+      </h2>
+    </div>
+
+    <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+      {Array(count)
+        .fill(0)
+        .map((_, i) => (
+          <motion.div
+            key={i}
+            className="w-[calc(50%-0.5rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] bg-[#1f1f1f] border border-gray-sub/10 rounded-lg aspect-video flex flex-col items-center justify-center p-4 sm:p-6 group hover:border-primary/50 hover:bg-[#252525] hover:shadow-[0_0_20px_rgba(208,71,65,0.15)] transition-all"
+            initial={{ opacity: 0, scale: 0.92 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: i * 0.08 }}
+            whileHover={{ scale: 1.03 }}
+          >
+            {sponsorLogo && sponsorName ? (
+              <>
+                <div className="relative w-full h-24 sm:h-28 mb-4">
+                  <Image
+                    src={sponsorLogo}
+                    alt={`${sponsorName} logo`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+
+                <p className="text-white font-bold tracking-wide text-sm sm:text-base text-center">
+                  {sponsorName}
+                </p>
+              </>
+            ) : (
+              <p className="text-gray-sub/50 font-bold tracking-widest uppercase text-xs sm:text-sm group-hover:text-primary transition-colors">
+                TBA
+              </p>
+            )}
+          </motion.div>
+        ))}
+    </div>
+  </motion.div>
+);
     {/* Tier title — matches crew section banner style */}
     <div className="bg-gradient-to-b from-[#D04741] to-[#6A2421] py-4 px-8 text-center rounded-sm mb-8 shadow-md">
       <h2 className="text-title-section !text-xl tracking-widest uppercase">{title}</h2>
@@ -73,7 +127,12 @@ export default function SponsorsPage() {
           </p>
         </motion.div>
 
-        <SponsorTier title="Title Partners" count={1} />
+        <SponsorTier
+            title="Title Partners"
+            count={1}
+            sponsorName="Epic Properties Ltd."
+            sponsorLogo="/images/epic-logo.JPG"
+        />
         <SponsorTier title="Platinum Partners" count={2} />
         <SponsorTier title="Gold Partners" count={4} />
         <SponsorTier title="Media Partners" count={3} />
