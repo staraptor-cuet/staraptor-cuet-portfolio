@@ -113,8 +113,12 @@ export default function SponsorsPage() {
             sponsorLogo="/images/epic-logo.JPG"
         />
         <SponsorTier title="Platinum Partners" count={2} />
-        <SponsorTier title="Gold Partners" count={4} />
-        <SponsorTier title="Media Partners" count={3} />
+        <SponsorTier
+          title="Gold Partners"
+          count={1}
+          sponsorName="Pusti Group"
+          sponsorLogo="/images/Pusti logo~1.png"
+        />        <SponsorTier title="Media Partners" count={3} />
 
         {/* CTA Section */}
         <motion.div
