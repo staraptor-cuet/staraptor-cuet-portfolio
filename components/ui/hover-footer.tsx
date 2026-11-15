@@ -16,7 +16,7 @@ export const TextHoverEffect = ({
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hovered, setHovered] = useState(false);
-  const [maskPos, setMaskPos] = useState({ cx: 500, cy: 82 });
+  const [maskPos, setMaskPos] = useState({ cx: 500, cy: 64 });
 
   // Idle animation: sweeps automatically across the large name when not hovering
   useEffect(() => {
@@ -28,7 +28,7 @@ export const TextHoverEffect = ({
       const elapsed = (Date.now() - start) / 1000;
       // Gentle ambient sweep across the wide typography
       const x = 500 + Math.sin(elapsed * 1.5) * 360;
-      const y = 82 + Math.cos(elapsed * 2.1) * 20;
+      const y = 64 + Math.cos(elapsed * 2.1) * 14;
       setMaskPos({ cx: x, cy: y });
       frameId = requestAnimationFrame(animateIdle);
     };
@@ -40,9 +40,9 @@ export const TextHoverEffect = ({
   const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
     if (!svgRef.current) return;
     const rect = svgRef.current.getBoundingClientRect();
-    // Convert client coordinates to exact SVG viewBox coordinates (0 to 1000, 0 to 165)
+    // Convert client coordinates to exact SVG viewBox coordinates (0 to 1000, 0 to 128)
     const x = ((e.clientX - rect.left) / rect.width) * 1000;
-    const y = ((e.clientY - rect.top) / rect.height) * 165;
+    const y = ((e.clientY - rect.top) / rect.height) * 128;
     setMaskPos({ cx: x, cy: y });
     setHovered(true);
   };
@@ -52,12 +52,12 @@ export const TextHoverEffect = ({
       ref={svgRef}
       width="100%"
       height="100%"
-      viewBox="0 0 1000 165"
+      viewBox="0 0 1000 128"
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onMouseMove={handleMouseMove}
-      className={cn("select-none uppercase cursor-pointer overflow-visible", className)}
+      className={cn("select-none uppercase cursor-pointer overflow-visible block", className)}
     >
       <defs>
         {/* Glowing Aerospace Red Linear Gradient */}
@@ -94,7 +94,7 @@ export const TextHoverEffect = ({
             x="0"
             y="0"
             width="1000"
-            height="165"
+            height="128"
             fill="url(#revealMask)"
           />
         </mask>
@@ -103,11 +103,11 @@ export const TextHoverEffect = ({
       {/* 1. Base wireframe background stroke */}
       <text
         x="50%"
-        y="52%"
+        y="50%"
         textAnchor="middle"
         dominantBaseline="central"
         strokeWidth="1.2"
-        className="fill-transparent stroke-neutral-700/60 font-montserrat text-[118px] font-extrabold tracking-[0.02em]"
+        className="fill-transparent stroke-neutral-700/60 font-montserrat text-[116px] font-extrabold tracking-[0.02em]"
       >
         {text}
       </text>
@@ -115,11 +115,11 @@ export const TextHoverEffect = ({
       {/* 2. Drawing stroke line that animates when entering viewport */}
       <motion.text
         x="50%"
-        y="52%"
+        y="50%"
         textAnchor="middle"
         dominantBaseline="central"
         strokeWidth="1.6"
-        className="fill-transparent stroke-[#EF5F5A]/80 font-montserrat text-[118px] font-extrabold tracking-[0.02em]"
+        className="fill-transparent stroke-[#EF5F5A]/80 font-montserrat text-[116px] font-extrabold tracking-[0.02em]"
         initial={{ strokeDashoffset: 2800, strokeDasharray: 2800 }}
         whileInView={{
           strokeDashoffset: 0,
@@ -137,14 +137,14 @@ export const TextHoverEffect = ({
       {/* 3. Glowing gradient text revealed by radial mask */}
       <text
         x="50%"
-        y="52%"
+        y="50%"
         textAnchor="middle"
         dominantBaseline="central"
         mask="url(#textMask)"
         fill="url(#staraptorTextGradient)"
         stroke="url(#staraptorTextGradient)"
         strokeWidth="1.6"
-        className="font-montserrat text-[118px] font-extrabold tracking-[0.02em] pointer-events-none transition-opacity duration-300"
+        className="font-montserrat text-[116px] font-extrabold tracking-[0.02em] pointer-events-none transition-opacity duration-300"
         style={{ opacity: hovered ? 1 : 0.9 }}
       >
         {text}

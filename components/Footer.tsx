@@ -16,12 +16,12 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#141416] text-gray-300 border-t border-white/5 overflow-hidden pt-16 pb-8">
+    <footer className="relative bg-[#141416] text-gray-300 border-t border-white/5 overflow-hidden pt-12 pb-4">
       {/* Dynamic Red Aerospace Background Gradient */}
       <FooterBackgroundGradient />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-8 border-b border-white/10">
           
           {/* Brand Column */}
           <div className="space-y-4 lg:col-span-5">
@@ -121,15 +121,15 @@ export default function Footer() {
         </div>
 
         {/* Large Interactive Text Hover Effect "STARAPTOR" */}
-        <div className="relative w-full py-6 sm:py-10 md:py-14 flex items-center justify-center my-4 sm:my-6 pointer-events-auto">
+        <div className="relative w-full py-0 sm:py-1 flex items-center justify-center my-0 pointer-events-auto">
           <TextHoverEffect text="STARAPTOR" className="w-full max-w-7xl" />
         </div>
 
         {/* Bottom Copyright & Status Bar */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500 font-mono border-t border-white/5">
+        <div className="pt-2 pb-1 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-500/70 font-mono border-t border-white/5">
           <p>© {new Date().getFullYear()} Team Staraptor CUET. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="/admin" className="hover:text-[#EF5F5A] transition-colors">
+            <Link href="/admin" className="text-[10px] text-gray-500/40 hover:text-[#EF5F5A] transition-colors">
               Admin Portal
             </Link>
           </div>
