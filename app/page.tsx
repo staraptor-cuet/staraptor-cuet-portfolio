@@ -76,114 +76,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Combined Section: We Are Staraptor + Aircraft + Specializations + Stats */}
+      {/* Combined Section: Aeroplane (Left) + We Are Staraptor & 3 Points (Right) */}
       <section className="relative pt-16 md:pt-24 pb-16 md:pb-24 bg-background overflow-hidden border-t border-white/5">
         {/* Subtle mascot watermark silhouette */}
-        <div className="absolute left-[-6%] top-[50%] -translate-y-[50%] h-[120%] w-[55%] z-0 pointer-events-none opacity-15 mix-blend-screen">
+        <div className="absolute right-[-6%] top-[50%] -translate-y-[50%] h-[120%] w-[55%] z-0 pointer-events-none opacity-15 mix-blend-screen">
           <Image
             src="/images/we are staraptor bg.png"
             alt="Mascot background"
             fill
-            className="object-contain object-left"
+            className="object-contain object-right"
           />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
-            {/* Left Column: Heading + Description + 3 Stats */}
+            {/* Left Column: 3D Aeroplane Model + Under it Meet Crew & Our Progress buttons */}
             <motion.div
-              className="lg:col-span-5 flex flex-col justify-center"
+              className="lg:col-span-5 flex flex-col items-center justify-center relative group"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+              {/* Soft Radial Ambient & Hover Glow (No Box Edge) */}
+              <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[80%] bg-[#D04741]/25 group-hover:bg-[#D04741]/45 rounded-full blur-[60px] pointer-events-none transition-all duration-500" />
+              
+              {/* Floating Aircraft Container */}
+              <motion.div
+                className="relative aspect-[4/3] w-full max-w-sm sm:max-w-md lg:max-w-none cursor-pointer"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <Link href="/aircraft" className="block relative w-full h-full">
+                  <Image
+                    src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
+                    alt="Staraptor VTOL Aircraft"
+                    fill
+                    className="object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]"
+                    priority
+                  />
+                </Link>
+              </motion.div>
+
+              {/* Buttons under aeroplane: Meet Crew + Our Progress */}
+              <div className="flex flex-wrap items-center justify-center gap-4 mt-6 z-10">
+                <Button asChild size="default" className="rounded-lg font-bold px-7 py-2.5 shadow-[0_4px_15px_rgba(208,71,65,0.4)]">
+                  <Link href="/crew">
+                    Meet Crew
+                  </Link>
+                </Button>
+
+                <Button asChild variant="outline" size="default" className="rounded-lg font-bold px-7 py-2.5 border-[#D04741]/60 text-white hover:bg-[#D04741]/20 hover:border-[#D04741] transition-all">
+                  <Link href="/progress" className="gap-2 inline-flex items-center">
+                    <span>Our Progress</span>
+                    <span className="font-mono">→</span>
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Heading + Description Paragraph + 3 Points Under It */}
+            <motion.div
+              className="lg:col-span-7 flex flex-col justify-center"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeUp}
-              custom={0}
+              custom={0.15}
             >
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-montserrat uppercase tracking-tight text-[#EF5F5A] mb-5 leading-[1.08]">
                 WE ARE<br />STARAPTOR
               </h2>
               
-              <p className="text-gray-300 text-sm sm:text-base lg:text-[1.02rem] leading-relaxed mb-8 max-w-xl">
-                {general?.aboutDescription || "Chittagong University of Engineering & Technology's pioneering VTOL drone design team, driving Bangladesh's aerospace innovation on the global stage."}
+              <p className="text-gray-300 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed mb-8 max-w-2xl text-justify sm:text-left">
+                {general?.aboutDescription || (
+                  <>
+                    Team Staraptor CUET is the first <strong>VTOL drone design team in Bangladesh</strong> from <strong>Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge <strong>UAV and VTOL aircraft systems</strong>. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!
+                  </>
+                )}
               </p>
 
-              {/* 3 Stats in a Row */}
-              <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 max-w-lg">
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
-                    {crewCount}
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
-                    CREW MEMBERS
-                  </span>
-                </Card>
-
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
-                    1st
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
-                    VTOL TEAM IN BD
-                  </span>
-                </Card>
-
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
-                    2026
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
-                    METU COMPETITION
-                  </span>
-                </Card>
-              </div>
-            </motion.div>
-
-            {/* Center Column: 3D Aeroplane Model with Ambient & Hover Radial Glow */}
-            <motion.div
-              className="lg:col-span-3 flex flex-col items-center justify-center relative group cursor-pointer my-6 lg:my-0"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-            >
-              {/* Soft Radial Ambient & Hover Glow (No Box Edge) */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] bg-[#D04741]/25 group-hover:bg-[#D04741]/45 rounded-full blur-[55px] pointer-events-none transition-all duration-500" />
-              
-              {/* Floating Aircraft Container */}
-              <motion.div
-                className="relative aspect-[4/3] w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                whileHover={{ scale: 1.08 }}
-              >
-                <Link href="/aircraft" className="block relative w-full h-full">
-                  <Image
-                    src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
-                    alt="Staraptor VTOL Model"
-                    fill
-                    className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.85)]"
-                    priority
-                  />
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Right Column: Specializations + Show Crew Button */}
-            <motion.div
-              className="lg:col-span-4 flex flex-col justify-center space-y-4"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
-              custom={0.2}
-            >
-              <span className="text-xs uppercase font-mono font-bold tracking-[0.2em] text-[#EF5F5A] block">
-                OUR SPECIALIZATIONS
-              </span>
-
-              {/* 3 Horizontal Specialization Cards */}
-              <div className="space-y-3.5">
+              {/* 3 Points Under Paragraph */}
+              <div className="space-y-3.5 max-w-xl">
                 <Card className="bg-[#181818]/90 border border-white/10 rounded-xl p-3.5 sm:p-4 flex items-center gap-4 hover:border-[#D04741]/50 hover:bg-[#202020] transition-all group shadow-md">
                   <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/30 flex items-center justify-center text-[#D04741] group-hover:scale-105 group-hover:bg-[#D04741]/20 transition-all shrink-0">
                     <Feather size={20} />
@@ -210,15 +186,6 @@ export default function Home() {
                     Smart Control Systems
                   </span>
                 </Card>
-              </div>
-
-              {/* Show Crew Button */}
-              <div className="pt-2 flex justify-center sm:justify-start">
-                <Button asChild size="default" className="rounded-lg font-bold px-8 py-2.5 shadow-[0_4px_15px_rgba(208,71,65,0.4)]">
-                  <Link href="/crew">
-                    Show Crew
-                  </Link>
-                </Button>
               </div>
             </motion.div>
 
