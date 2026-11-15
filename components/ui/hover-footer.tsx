@@ -16,9 +16,9 @@ export const TextHoverEffect = ({
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hovered, setHovered] = useState(false);
-  const [maskPos, setMaskPos] = useState({ cx: 380, cy: 65 });
+  const [maskPos, setMaskPos] = useState({ cx: 500, cy: 82 });
 
-  // Idle animation: sweeps automatically across the name when user is not hovering
+  // Idle animation: sweeps automatically across the large name when not hovering
   useEffect(() => {
     if (hovered) return;
     let frameId: number;
@@ -26,9 +26,9 @@ export const TextHoverEffect = ({
 
     const animateIdle = () => {
       const elapsed = (Date.now() - start) / 1000;
-      // Gentle ambient sweep across the text
-      const x = 380 + Math.sin(elapsed * 1.6) * 240;
-      const y = 65 + Math.cos(elapsed * 2.2) * 18;
+      // Gentle ambient sweep across the wide typography
+      const x = 500 + Math.sin(elapsed * 1.5) * 360;
+      const y = 82 + Math.cos(elapsed * 2.1) * 20;
       setMaskPos({ cx: x, cy: y });
       frameId = requestAnimationFrame(animateIdle);
     };
@@ -40,9 +40,9 @@ export const TextHoverEffect = ({
   const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
     if (!svgRef.current) return;
     const rect = svgRef.current.getBoundingClientRect();
-    // Convert viewport client coordinates to exact SVG viewBox coordinates (0 to 760, 0 to 130)
-    const x = ((e.clientX - rect.left) / rect.width) * 760;
-    const y = ((e.clientY - rect.top) / rect.height) * 130;
+    // Convert client coordinates to exact SVG viewBox coordinates (0 to 1000, 0 to 165)
+    const x = ((e.clientX - rect.left) / rect.width) * 1000;
+    const y = ((e.clientY - rect.top) / rect.height) * 165;
     setMaskPos({ cx: x, cy: y });
     setHovered(true);
   };
@@ -52,7 +52,7 @@ export const TextHoverEffect = ({
       ref={svgRef}
       width="100%"
       height="100%"
-      viewBox="0 0 760 130"
+      viewBox="0 0 1000 165"
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -66,26 +66,26 @@ export const TextHoverEffect = ({
           gradientUnits="userSpaceOnUse"
           x1="0"
           y1="0"
-          x2="760"
+          x2="1000"
           y2="0"
         >
           <stop offset="0%" stopColor="#ff7973" />
           <stop offset="25%" stopColor="#EF5F5A" />
           <stop offset="50%" stopColor="#D04741" />
-          <stop offset="75%" stopColor="#c52e27" />
+          <stop offset="75%" stopColor="#ad2822" />
           <stop offset="100%" stopColor="#ff524a" />
         </linearGradient>
 
-        {/* Cursor & Idle Tracking Radial Mask */}
+        {/* Large Cursor & Ambient Tracking Radial Mask */}
         <radialGradient
           id="revealMask"
           gradientUnits="userSpaceOnUse"
-          r="175"
+          r="250"
           cx={maskPos.cx}
           cy={maskPos.cy}
         >
           <stop offset="0%" stopColor="white" stopOpacity="1" />
-          <stop offset="50%" stopColor="white" stopOpacity="0.85" />
+          <stop offset="55%" stopColor="white" stopOpacity="0.85" />
           <stop offset="100%" stopColor="white" stopOpacity="0" />
         </radialGradient>
 
@@ -93,8 +93,8 @@ export const TextHoverEffect = ({
           <rect
             x="0"
             y="0"
-            width="760"
-            height="130"
+            width="1000"
+            height="165"
             fill="url(#revealMask)"
           />
         </mask>
@@ -103,11 +103,11 @@ export const TextHoverEffect = ({
       {/* 1. Base wireframe background stroke */}
       <text
         x="50%"
-        y="50%"
+        y="52%"
         textAnchor="middle"
         dominantBaseline="central"
-        strokeWidth="0.8"
-        className="fill-transparent stroke-neutral-700/60 font-montserrat text-[68px] font-extrabold tracking-[0.06em]"
+        strokeWidth="1.2"
+        className="fill-transparent stroke-neutral-700/60 font-montserrat text-[118px] font-extrabold tracking-[0.02em]"
       >
         {text}
       </text>
@@ -115,15 +115,15 @@ export const TextHoverEffect = ({
       {/* 2. Drawing stroke line that animates when entering viewport */}
       <motion.text
         x="50%"
-        y="50%"
+        y="52%"
         textAnchor="middle"
         dominantBaseline="central"
-        strokeWidth="1.2"
-        className="fill-transparent stroke-[#EF5F5A]/70 font-montserrat text-[68px] font-extrabold tracking-[0.06em]"
-        initial={{ strokeDashoffset: 2000, strokeDasharray: 2000 }}
+        strokeWidth="1.6"
+        className="fill-transparent stroke-[#EF5F5A]/80 font-montserrat text-[118px] font-extrabold tracking-[0.02em]"
+        initial={{ strokeDashoffset: 2800, strokeDasharray: 2800 }}
         whileInView={{
           strokeDashoffset: 0,
-          strokeDasharray: 2000,
+          strokeDasharray: 2800,
         }}
         viewport={{ once: false, amount: 0.15 }}
         transition={{
@@ -137,15 +137,15 @@ export const TextHoverEffect = ({
       {/* 3. Glowing gradient text revealed by radial mask */}
       <text
         x="50%"
-        y="50%"
+        y="52%"
         textAnchor="middle"
         dominantBaseline="central"
         mask="url(#textMask)"
         fill="url(#staraptorTextGradient)"
         stroke="url(#staraptorTextGradient)"
-        strokeWidth="1.2"
-        className="font-montserrat text-[68px] font-extrabold tracking-[0.06em] pointer-events-none transition-opacity duration-300"
-        style={{ opacity: hovered ? 1 : 0.85 }}
+        strokeWidth="1.6"
+        className="font-montserrat text-[118px] font-extrabold tracking-[0.02em] pointer-events-none transition-opacity duration-300"
+        style={{ opacity: hovered ? 1 : 0.9 }}
       >
         {text}
       </text>
