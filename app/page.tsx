@@ -67,7 +67,7 @@ export default function Home() {
             variants={fadeUp}
           >
             <Button asChild size="lg" className="rounded-[0.4rem] tracking-wide font-bold px-8 shadow-[0_4px_20px_rgba(208,71,65,0.4)]">
-              <Link href="/aircraft">
+              <Link href="/vtol-2026?model=1#model-1">
                 Explore Aircraft
               </Link>
             </Button>
@@ -108,7 +108,7 @@ export default function Home() {
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                 whileHover={{ scale: 1.05 }}
               >
-                <Link href="/aircraft" className="block relative w-full h-full">
+                <Link href="/vtol-2026?model=1#model-1" className="block relative w-full h-full">
                   <Image
                     src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
                     alt="Staraptor VTOL Aircraft"

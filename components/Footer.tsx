@@ -27,10 +27,10 @@ export default function Footer() {
             <ul className="space-y-3 md:space-y-4">
               {[
                 { label: 'Home', href: '/' },
-                { label: 'Aircraft', href: '/aircraft' },
+                { label: 'Our Progress', href: '/progress' },
                 { label: 'VTOL 2026', href: '/vtol-2026' },
-                { label: 'Sponsors', href: '/sponsors' },
                 { label: 'Crew', href: '/crew' },
+                { label: 'Sponsors', href: '/sponsors' },
                 { label: 'Gallery', href: '/gallery' },
                 { label: 'Admin Portal', href: '/admin' },
               ].map((link) => (
