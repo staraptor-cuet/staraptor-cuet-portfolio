@@ -472,47 +472,6 @@ function Vtol2026Content() {
           )}
         </AnimatePresence>
 
-        {/* Competition Overview Section */}
-        <motion.div
-          className="mb-10"
-          initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={fadeUp} custom={0}
-        >
-          <div className="mb-4">
-            <span className="text-[11px] uppercase font-mono tracking-[0.2em] text-[#EF5F5A] font-bold block mb-1">
-              MISSION BRIEF
-            </span>
-            <h2 className="text-2xl font-bold font-montserrat text-white">
-              Competition Overview & Rules
-            </h2>
-          </div>
-
-          <Card className="bg-[#1f1f1f] rounded-xl shadow-xl overflow-hidden border border-white/5 p-0">
-            <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
-              <div className="w-5 h-5 flex items-center justify-center border-2 border-primary rounded-sm text-primary font-bold text-xs shrink-0">O</div>
-              <h3 className="text-title-box">METU Competition Specifications</h3>
-            </div>
-            
-            <div className="p-6 sm:p-8">
-              <p className="mb-6 text-sm sm:text-base leading-relaxed text-gray-300 whitespace-pre-line">
-                {vtol?.overviewText || 'The 9th VTOL Aircraft Design Competition challenges university engineering teams to design, fabricate, and autonomously operate a hybrid VTOL UAV capable of vertical takeoff, high-speed cruise transition, target payload delivery, and precision autonomous landing.'}
-              </p>
-              
-              {vtol?.posterImage && (
-                <div className="relative w-full aspect-[21/9] bg-black mb-6 border border-white/10 overflow-hidden rounded-lg">
-                  <Image
-                    src={vtol.posterImage}
-                    alt="METU VTOL Aircraft Competition Poster"
-                    fill
-                    className="object-cover"
-                    priority
-                    unoptimized={vtol.posterImage.startsWith('data:') || vtol.posterImage.startsWith('http')}
-                  />
-                </div>
-              )}
-            </div>
-          </Card>
-        </motion.div>
-
       </div>
     </div>
   );
