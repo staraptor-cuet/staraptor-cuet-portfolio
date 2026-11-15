@@ -47,8 +47,8 @@ export default function ProgressPage() {
             href="/vtol-2026"
             title="METU VTOL 2026 — Staraptor V1"
             description="Flagship hybrid tilt-rotor VTOL aircraft engineered for the 9th METU Competition. Combines fixed-wing aerodynamic cruise speed with vertical hover precision and autonomous maritime delivery."
-            image="/images/homepage bg 1.png"
-            dim={0.65}
+            image="/images/progress image.jpg"
+            dim={0.35}
             screen={{
               src: "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png",
               alt: "Staraptor VTOL Aircraft",
