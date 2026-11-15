@@ -1,26 +1,13 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useSiteContent } from '@/lib/useContent';
-import { Calendar, Rocket, Sparkles, Plane, Layers, ArrowRight } from 'lucide-react';
+import { Rocket, Sparkles, Plane, Layers, ArrowRight } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 export default function ProgressPage() {
-  const { content } = useSiteContent();
-  const progressList = content?.progress || [
-    {
-      id: 'default',
-      title: 'Our Progress',
-      date: '2026',
-      description: 'More coming soon...',
-      image: '/images/progress image.jpg',
-    },
-  ];
-
   return (
     <div className="bg-background min-h-screen py-16 md:py-24 text-gray-sub flex flex-col items-center justify-start">
       <div className="w-full max-w-5xl px-4 flex flex-col items-center">
@@ -43,8 +30,8 @@ export default function ProgressPage() {
           </p>
         </motion.div>
 
-        {/* Projects Section Under Our Progress: VTOL 2026 (Model 1 & 2) and More Soon */}
-        <div className="w-full mb-16">
+        {/* Projects Section: VTOL 2026 (Model 1 & 2) and Future Initiatives */}
+        <div className="w-full">
           <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-3">
             <div>
               <span className="text-[11px] uppercase font-mono tracking-[0.2em] text-[#EF5F5A] font-bold block mb-1">
@@ -171,70 +158,6 @@ export default function ProgressPage() {
           </div>
         </div>
 
-        {/* Timeline Log Section */}
-        <div className="w-full">
-          <div className="mb-6 border-b border-white/10 pb-3">
-            <span className="text-[11px] uppercase font-mono tracking-[0.2em] text-[#EF5F5A] font-bold block mb-1">
-              CHRONOLOGICAL LOGS
-            </span>
-            <h2 className="text-xl sm:text-2xl font-bold font-montserrat text-white">
-              Development Milestones & Testing
-            </h2>
-          </div>
-
-          <div className="space-y-12">
-            {progressList.map((item, idx) => (
-              <motion.div
-                key={item.id || idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: idx * 0.1 }}
-              >
-                <Card className="bg-[#1f1f1f] border-gray-sub/10 rounded-2xl overflow-hidden shadow-2xl group p-0">
-                  {item.image && (
-                    <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
-                        priority={idx === 0}
-                        unoptimized={item.image.startsWith('data:') || item.image.startsWith('http')}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1f1f1f] via-transparent to-transparent opacity-80" />
-                    </div>
-                  )}
-
-                  <div className="p-6 sm:p-8">
-                    {item.date && (
-                      <Badge variant="glow" className="mb-3 gap-1.5 px-3 py-1 text-xs">
-                        <Calendar size={13} />
-                        <span>{item.date}</span>
-                      </Badge>
-                    )}
-                    <h3 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-4">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
-                      {item.description}
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <motion.p
-          className="text-white text-base sm:text-lg mt-16 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Continuous updates will be published as testing progresses toward METU VTOL 2026.
-        </motion.p>
       </div>
     </div>
   );
