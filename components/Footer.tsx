@@ -129,8 +129,8 @@ export default function Footer() {
         </div>
 
         {/* Large Interactive Text Hover Effect "STARAPTOR" */}
-        <div className="relative w-full h-[10rem] sm:h-[15rem] md:h-[18rem] lg:h-[22rem] flex items-center justify-center overflow-hidden my-4 sm:my-6 pointer-events-auto">
-          <TextHoverEffect text="STARAPTOR" className="w-full max-w-6xl" />
+        <div className="relative w-full py-4 sm:py-8 flex items-center justify-center my-2 sm:my-4 pointer-events-auto">
+          <TextHoverEffect text="STARAPTOR" className="w-full max-w-5xl" />
         </div>
 
         {/* Bottom Copyright & Status Bar */}
