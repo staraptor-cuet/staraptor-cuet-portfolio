@@ -28,6 +28,7 @@ export default function Footer() {
               {[
                 { label: 'Home', href: '/' },
                 { label: 'Our Progress', href: '/progress' },
+                { label: 'Achievements', href: '/achievements' },
                 { label: 'VTOL 2026', href: '/vtol-2026' },
                 { label: 'Crew', href: '/crew' },
                 { label: 'Sponsors', href: '/sponsors' },
