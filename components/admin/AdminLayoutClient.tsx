@@ -189,3 +189,4 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
     </div>
   );
 }
+

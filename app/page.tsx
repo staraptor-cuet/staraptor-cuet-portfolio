@@ -158,63 +158,91 @@ export default function Home() {
       </motion.section>
 
       {/* Stats Section */}
-      <section className="py-16 md:py-24 bg-[#232323]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+      <section className="py-20 md:py-28 bg-[#232323] relative overflow-hidden">
+        {/* Subtle background ambient warmth */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#D04741]/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Column: Drone with unclipped pure radial glow */}
             <motion.div
-              className="relative aspect-[4/3] w-full max-w-sm sm:max-w-md lg:max-w-lg mx-auto lg:mx-0 group cursor-pointer overflow-hidden rounded-xl"
-              initial={{ opacity: 0, x: -40 }}
+              className="relative w-full max-w-md lg:max-w-xl mx-auto flex items-center justify-center group"
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              whileHover={{ scale: 1.03 }}
             >
-              <Image
-                src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
-                alt="Staraptor VTOL Model"
-                fill
-                className="object-contain drop-shadow-2xl transition-all duration-500 group-hover:drop-shadow-[0_0_40px_rgba(208,71,65,0.6)] group-hover:scale-105"
-              />
+              {/* Pure Soft Radial Red Glow - No Box, No Clipping */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#D04741]/25 rounded-full blur-[70px] pointer-events-none group-hover:bg-[#D04741]/40 group-hover:blur-[85px] transition-all duration-700" />
+              
+              {/* Floating Aircraft Container */}
+              <motion.div
+                className="relative aspect-[4/3] w-full cursor-pointer"
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                whileHover={{ scale: 1.04 }}
+              >
+                <Image
+                  src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
+                  alt="Staraptor VTOL Model"
+                  fill
+                  className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]"
+                  priority
+                />
+              </motion.div>
             </motion.div>
             
+            {/* Right Column: Stats & Progress */}
             <motion.div
-              className="flex flex-col"
+              className="flex flex-col items-center lg:items-end text-center lg:text-right"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeUp}
               custom={0.15}
             >
-              <h2 className="text-[2.2rem] md:text-[3rem] font-montserrat font-bold mb-8 md:mb-10 text-center lg:text-right lg:pr-10 text-[#D04741] tracking-wider uppercase">
-                STATS
-              </h2>
+              <div className="mb-8 md:mb-10">
+                <span className="text-xs uppercase font-mono tracking-[0.2em] text-[#ff7973] font-bold block mb-1">
+                  Team Benchmarks
+                </span>
+                <h2 className="text-[2.2rem] md:text-[3.2rem] font-montserrat font-bold text-[#D04741] tracking-wider uppercase leading-tight">
+                  STATS
+                </h2>
+              </div>
               
-              <div className="grid grid-cols-2 gap-y-8 gap-x-4 md:gap-x-8 mb-10 md:mb-12 max-w-sm sm:max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:pr-10">
-                {stats.map(({ label, value, labelFirst }, i) => (
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-10 md:mb-12 w-full max-w-lg">
+                {stats.map(({ label, value }, i) => (
                   <motion.div
                     key={i}
-                    className="flex items-center gap-2 sm:gap-3 justify-start"
+                    className="bg-[#1b1b1b]/80 border border-white/5 rounded-xl p-4 sm:p-5 flex flex-col justify-center items-center lg:items-end text-center lg:text-right hover:border-[#D04741]/40 hover:bg-[#202020] transition-all group/stat shadow-lg"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.1 * i, ease: 'easeOut' }}
+                    whileHover={{ y: -3 }}
                   >
-                    {labelFirst && <span className="text-xs sm:text-sm font-semibold text-white whitespace-nowrap">{label}</span>}
-                    <span className="text-[#D04741] text-3xl sm:text-4xl md:text-5xl font-heading font-bold whitespace-nowrap">{value}</span>
-                    {!labelFirst && <span className="text-xs sm:text-sm font-semibold text-white">{label}</span>}
+                    <span className="text-[#D04741] text-3xl sm:text-4xl lg:text-5xl font-heading font-bold whitespace-nowrap leading-none mb-1 group-hover/stat:scale-105 transition-transform inline-block">
+                      {value}
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wide uppercase">
+                      {label}
+                    </span>
                   </motion.div>
                 ))}
               </div>
               
-              <div className="text-center">
+              <div>
                 <Link
                   href="/progress"
-                  className="bg-gradient-to-b from-[#e35651] to-[#b03934] border border-[#ff6b66]/30 shadow-[0_4px_10px_rgba(208,71,65,0.4)] text-white px-10 md:px-12 py-[10px] rounded-[0.4rem] font-bold text-base md:text-lg transition-all inline-block hover:shadow-[0_6px_15px_rgba(208,71,65,0.6)] hover:scale-105"
+                  className="bg-gradient-to-b from-[#e35651] to-[#b03934] border border-[#ff6b66]/30 shadow-[0_4px_15px_rgba(208,71,65,0.4)] text-white px-10 md:px-12 py-3 rounded-[0.4rem] font-bold text-base md:text-lg transition-all inline-flex items-center gap-2 hover:shadow-[0_6px_25px_rgba(208,71,65,0.6)] hover:scale-105"
                 >
-                  Our Progress
+                  <span>Our Progress</span>
+                  <span className="text-sm font-mono">→</span>
                 </Link>
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>

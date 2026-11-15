@@ -74,3 +74,4 @@ export function isAuthenticated(): boolean {
   if (!sessionToken) return false;
   return verifyToken(sessionToken);
 }
+

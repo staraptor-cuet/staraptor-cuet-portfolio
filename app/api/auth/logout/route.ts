@@ -5,3 +5,4 @@ export async function POST() {
   clearAdminSession();
   return NextResponse.json({ success: true, message: 'Logged out successfully' });
 }
+

@@ -12,3 +12,4 @@ export async function GET() {
     user: authenticated ? (process.env.ADMIN_USERNAME || 'admin') : null,
   });
 }
+

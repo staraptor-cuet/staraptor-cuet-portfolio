@@ -118,3 +118,4 @@ export interface SiteContent {
   aircraft: AircraftSpecs;
   vtol2026: VtolCompetition;
 }
+

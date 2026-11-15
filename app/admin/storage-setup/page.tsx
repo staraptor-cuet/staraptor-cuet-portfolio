@@ -215,3 +215,4 @@ CREATE POLICY "Service Role Full Access"
     </div>
   );
 }
+

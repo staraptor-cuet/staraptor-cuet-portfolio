@@ -29,3 +29,4 @@ export function useSiteContent() {
 
   return { content, loading, error, refresh: fetchContent };
 }
+
