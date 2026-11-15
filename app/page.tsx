@@ -121,8 +121,8 @@ export default function Home() {
 
               {/* 3 Stat Cards Below the Plane */}
               <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 w-full max-w-md mt-4 mb-6 z-10">
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.25)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.42)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                <Card className="bg-[#181818]/90 border border-white/10 border-b-2 border-b-transparent rounded-xl p-3 sm:p-3.5 text-center shadow-md hover:border-b-[#D04741] hover:shadow-[0_8px_24px_rgba(208,71,65,0.45)] hover:-translate-y-1 transition-all duration-300 group/stat cursor-pointer">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#EF5F5A] transition-colors">
                     {crewCount}
                   </span>
                   <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
@@ -130,8 +130,8 @@ export default function Home() {
                   </span>
                 </Card>
 
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.25)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.42)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                <Card className="bg-[#181818]/90 border border-white/10 border-b-2 border-b-transparent rounded-xl p-3 sm:p-3.5 text-center shadow-md hover:border-b-[#D04741] hover:shadow-[0_8px_24px_rgba(208,71,65,0.45)] hover:-translate-y-1 transition-all duration-300 group/stat cursor-pointer">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#EF5F5A] transition-colors">
                     1st
                   </span>
                   <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
@@ -139,8 +139,8 @@ export default function Home() {
                   </span>
                 </Card>
 
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.25)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.42)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                <Card className="bg-[#181818]/90 border border-white/10 border-b-2 border-b-transparent rounded-xl p-3 sm:p-3.5 text-center shadow-md hover:border-b-[#D04741] hover:shadow-[0_8px_24px_rgba(208,71,65,0.45)] hover:-translate-y-1 transition-all duration-300 group/stat cursor-pointer">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#EF5F5A] transition-colors">
                     2026
                   </span>
                   <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
@@ -151,13 +151,13 @@ export default function Home() {
 
               {/* Action Buttons: Meet Crew + Our Progress */}
               <div className="flex flex-wrap items-center justify-center gap-4 z-10">
-                <Button asChild size="default" className="rounded-lg font-bold px-7 py-2.5 shadow-[0_4px_15px_rgba(208,71,65,0.4)]">
+                <Button asChild size="default" className="rounded-lg font-bold px-7 py-2.5 bg-[#D04741] text-white hover:bg-[#b83833] hover:shadow-[0_4px_16px_rgba(208,71,65,0.45)] transition-all">
                   <Link href="/crew">
                     Meet Crew
                   </Link>
                 </Button>
 
-                <Button asChild variant="outline" size="default" className="rounded-lg font-bold px-7 py-2.5 border-[#D04741]/60 text-white hover:bg-[#D04741]/20 hover:border-[#D04741] transition-all">
+                <Button asChild variant="outline" size="default" className="rounded-lg font-bold px-7 py-2.5 border-white/20 text-white hover:bg-[#D04741]/20 hover:border-[#D04741] transition-all">
                   <Link href="/progress" className="gap-2 inline-flex items-center">
                     <span>Our Progress</span>
                     <span className="font-mono">→</span>
