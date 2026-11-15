@@ -52,11 +52,18 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.path}
-                  className={`text-base font-semibold transition-colors ${
-                    pathname === link.path ? 'text-white' : 'text-gray-sub hover:text-white'
+                  className={`relative text-base font-semibold transition-colors py-1 ${
+                    pathname === link.path ? 'text-white' : 'text-gray-300 hover:text-white'
                   }`}
                 >
-                  {link.name}
+                  <span className="hover:text-[#EF5F5A] transition-colors">{link.name}</span>
+                  {pathname === link.path && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#EF5F5A] rounded-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </Link>
               ))}
             </div>

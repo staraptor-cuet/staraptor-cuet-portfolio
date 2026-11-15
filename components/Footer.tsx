@@ -10,11 +10,9 @@ export default function Footer() {
     { label: 'Home', href: '/' },
     { label: 'Our Progress', href: '/progress' },
     { label: 'Achievements', href: '/achievements' },
-    { label: 'VTOL 2026', href: '/vtol-2026' },
     { label: 'Crew', href: '/crew' },
     { label: 'Sponsors', href: '/sponsors' },
-    { label: 'Gallery', href: '/gallery' },
-    { label: 'Admin Portal', href: '/admin' },
+    { label: 'Contact Us', href: '/contact' },
   ];
 
   return (
@@ -42,7 +40,7 @@ export default function Footer() {
             </div>
 
             <p className="text-gray-400 text-sm leading-relaxed max-w-md pt-2">
-              Engineering the future of autonomous vertical flight. Team Staraptor is CUET&apos;s pioneering VTOL UAV research team, developing advanced aerial systems for the METU VTOL Competition and pushing the boundaries of aerospace innovation.
+              Engineering the future of autonomous vertical flight. Team Staraptor is CUET&apos;s pioneering VTOL UAV research team, developing advanced aerial systems and pushing the boundaries of aerospace innovation.
             </p>
 
             {/* Social Media Icons */}
@@ -80,14 +78,14 @@ export default function Footer() {
               <span className="w-1.5 h-1.5 rounded-full bg-[#EF5F5A]"></span>
               Navigation
             </h4>
-            <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2.5">
+            <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-white hover:translate-x-1 inline-flex items-center text-sm transition-all"
+                    className="text-gray-400 hover:text-white hover:translate-x-1 inline-flex items-center text-sm transition-all group"
                   >
-                    <span className="hover:text-[#EF5F5A] transition-colors">{link.label}</span>
+                    <span className="group-hover:text-[#EF5F5A] transition-colors">{link.label}</span>
                   </Link>
                 </li>
               ))}
@@ -118,12 +116,6 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-
-            <div className="pt-2">
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-xs text-gray-400 font-mono">
-                <span className="text-[#EF5F5A] font-bold">METU VTOL 2026:</span> Actively fabricating & testing hybrid tilt-rotor autonomous UAV platforms.
-              </div>
-            </div>
           </div>
 
         </div>
@@ -137,8 +129,6 @@ export default function Footer() {
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500 font-mono border-t border-white/5">
           <p>© {new Date().getFullYear()} Team Staraptor CUET. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <span>METU VTOL Competition 2026</span>
-            <span>•</span>
             <Link href="/admin" className="hover:text-[#EF5F5A] transition-colors">
               Admin Portal
             </Link>
