@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useSiteContent } from '@/lib/useContent';
 import { Calendar } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export default function ProgressPage() {
   const { content } = useSiteContent();
@@ -33,40 +35,41 @@ export default function ProgressPage() {
           {progressList.map((item, idx) => (
             <motion.div
               key={item.id || idx}
-              className="bg-[#1f1f1f] border border-gray-sub/10 rounded-2xl overflow-hidden shadow-2xl group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: idx * 0.1 }}
             >
-              {item.image && (
-                <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
-                    priority={idx === 0}
-                    unoptimized={item.image.startsWith('data:') || item.image.startsWith('http')}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1f1f1f] via-transparent to-transparent opacity-80" />
-                </div>
-              )}
-
-              <div className="p-6 sm:p-8">
-                {item.date && (
-                  <div className="flex items-center gap-2 text-xs font-bold text-[#D04741] uppercase tracking-wider mb-2">
-                    <Calendar size={14} />
-                    <span>{item.date}</span>
+              <Card className="bg-[#1f1f1f] border-gray-sub/10 rounded-2xl overflow-hidden shadow-2xl group p-0">
+                {item.image && (
+                  <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
+                      priority={idx === 0}
+                      unoptimized={item.image.startsWith('data:') || item.image.startsWith('http')}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1f1f1f] via-transparent to-transparent opacity-80" />
                   </div>
                 )}
-                <h2 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-4">
-                  {item.title}
-                </h2>
-                <p className="text-gray-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
-                  {item.description}
-                </p>
-              </div>
+
+                <div className="p-6 sm:p-8">
+                  {item.date && (
+                    <Badge variant="glow" className="mb-3 gap-1.5 px-3 py-1 text-xs">
+                      <Calendar size={13} />
+                      <span>{item.date}</span>
+                    </Badge>
+                  )}
+                  <h2 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-4">
+                    {item.title}
+                  </h2>
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
+                    {item.description}
+                  </p>
+                </div>
+              </Card>
             </motion.div>
           ))}
         </div>

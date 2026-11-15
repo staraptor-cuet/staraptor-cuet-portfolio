@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useSiteContent } from '@/lib/useContent';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -43,7 +45,9 @@ export default function AircraftPage() {
         
         {/* Header */}
         <motion.div className="mb-12" initial="hidden" animate="visible" variants={fadeUp} custom={0}>
-          <p className="text-label mb-2">Classification: {aircraft?.classification || 'Unmanned Aerial Vehicle'}</p>
+          <Badge variant="glow" className="mb-2 uppercase tracking-wider text-xs">
+            Classification: {aircraft?.classification || 'Unmanned Aerial Vehicle'}
+          </Badge>
           <h1 className="text-title-main">
             {aircraft?.name || 'STARAPTOR VTOL - V1'}
           </h1>
@@ -74,85 +78,89 @@ export default function AircraftPage() {
 
         {/* Engineering Specifications */}
         <motion.div
-          className="bg-[#1f1f1f] border border-gray-sub/10 rounded-sm mb-16 shadow-lg overflow-hidden"
           initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={fadeUp} custom={0}
+          className="mb-16"
         >
-          <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
-            <div className="w-5 h-5 flex items-center justify-center">
-              <img src="/icons/Stat Icon.svg" alt="Engineering" className="w-full h-full object-contain" />
+          <Card className="bg-[#1f1f1f] border-gray-sub/10 rounded-sm shadow-lg overflow-hidden p-0">
+            <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
+              <div className="w-5 h-5 flex items-center justify-center">
+                <img src="/icons/Stat Icon.svg" alt="Engineering" className="w-full h-full object-contain" />
+              </div>
+              <h3 className="text-title-box">Engineering Specifications</h3>
             </div>
-            <h3 className="text-title-box">Engineering Specifications</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 p-8 gap-8">
-            <div>
-              <h3 className="text-subtitle-box mb-6 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">Physical Data</h3>
-              <ul className="space-y-4 font-semibold text-sm font-['Montserrat']">
-                {physicalData.map((item, i) => (
-                  <li key={i} className="flex justify-between items-center border-b border-gray-sub/10 pb-2">
-                    <span>{item.label}</span>
-                    <span className="text-primary text-lg">{item.value}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="grid grid-cols-1 md:grid-cols-3 p-8 gap-8">
+              <div>
+                <h3 className="text-subtitle-box mb-6 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">Physical Data</h3>
+                <ul className="space-y-4 font-semibold text-sm font-['Montserrat']">
+                  {physicalData.map((item, i) => (
+                    <li key={i} className="flex justify-between items-center border-b border-gray-sub/10 pb-2">
+                      <span>{item.label}</span>
+                      <span className="text-primary text-lg">{item.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="md:border-l md:border-gray-sub/10 md:pl-8">
+                <h3 className="text-subtitle-box mb-6 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">Performance Data</h3>
+                <ul className="space-y-4 font-semibold text-sm">
+                  {performanceData.map((item, i) => (
+                    <li key={i} className="flex justify-between items-center border-b border-gray-sub/10 pb-2">
+                      <span>{item.label}</span>
+                      <span className="text-primary text-lg">{item.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="md:border-l md:border-gray-sub/10 md:pl-8">
+                <h3 className="text-subtitle-box mb-6 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">Avionics Package</h3>
+                <ul className="space-y-6 text-sm">
+                  {avionics.map((item, i) => (
+                    <li key={i} className="flex gap-3">
+                      <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5"><span className="text-white text-xs">✓</span></div>
+                      <div>
+                        <span className="text-primary font-bold block mb-1">{item.title}</span>
+                        <span className="text-xs text-gray-sub/80">{item.desc}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="md:border-l md:border-gray-sub/10 md:pl-8">
-              <h3 className="text-subtitle-box mb-6 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">Performance Data</h3>
-              <ul className="space-y-4 font-semibold text-sm">
-                {performanceData.map((item, i) => (
-                  <li key={i} className="flex justify-between items-center border-b border-gray-sub/10 pb-2">
-                    <span>{item.label}</span>
-                    <span className="text-primary text-lg">{item.value}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="md:border-l md:border-gray-sub/10 md:pl-8">
-              <h3 className="text-subtitle-box mb-6 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">Avionics Package</h3>
-              <ul className="space-y-6 text-sm">
-                {avionics.map((item, i) => (
-                  <li key={i} className="flex gap-3">
-                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5"><span className="text-white text-xs">✓</span></div>
-                    <div>
-                      <span className="text-primary font-bold block mb-1">{item.title}</span>
-                      <span className="text-xs text-gray-sub/80">{item.desc}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          </Card>
         </motion.div>
 
         {/* Basic Component List */}
         {components.length > 0 && (
           <motion.div
-            className="bg-[#1f1f1f] rounded-sm mb-16 shadow-lg overflow-hidden border border-gray-sub/10"
             initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={fadeUp} custom={0}
+            className="mb-16"
           >
-            <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
-              <div className="w-6 h-6 flex items-center justify-center">
-                <img src="/icons/settings-5-fill.svg" alt="Component List" className="w-full h-full object-contain" />
+            <Card className="bg-[#1f1f1f] rounded-sm shadow-lg overflow-hidden border-gray-sub/10 p-0">
+              <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
+                <div className="w-6 h-6 flex items-center justify-center">
+                  <img src="/icons/settings-5-fill.svg" alt="Component List" className="w-full h-full object-contain" />
+                </div>
+                <h3 className="text-title-box">Basic Component List</h3>
               </div>
-              <h3 className="text-title-box">Basic Component List</h3>
-            </div>
-            <div className="w-full overflow-x-auto">
-              <table className="w-full text-sm text-left">
-                <thead className="text-white bg-[#D04741] font-heading font-semibold text-base">
-                  <tr>
-                    <th className="px-6 py-3 border-r border-white/20 w-1/3">Item</th>
-                    <th className="px-6 py-3 text-center">Description</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-[#282828] divide-y divide-gray-sub/10">
-                  {components.map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-[#1f1f1f]" : "bg-[#282828]"}>
-                      <td className="px-6 py-3 border-r border-gray-sub/10 font-semibold">{row.name}</td>
-                      <td className="px-6 py-3 text-gray-sub">{row.desc}</td>
+              <div className="w-full overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                  <thead className="text-white bg-[#D04741] font-heading font-semibold text-base">
+                    <tr>
+                      <th className="px-6 py-3 border-r border-white/20 w-1/3">Item</th>
+                      <th className="px-6 py-3 text-center">Description</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="bg-[#282828] divide-y divide-gray-sub/10">
+                    {components.map((row, i) => (
+                      <tr key={i} className={i % 2 === 0 ? "bg-[#1f1f1f]" : "bg-[#282828]"}>
+                        <td className="px-6 py-3 border-r border-gray-sub/10 font-semibold">{row.name}</td>
+                        <td className="px-6 py-3 text-gray-sub">{row.desc}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
           </motion.div>
         )}
 

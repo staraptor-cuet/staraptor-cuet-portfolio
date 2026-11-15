@@ -4,6 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useSiteContent } from '@/lib/useContent';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -69,12 +72,11 @@ export default function Home() {
             custom={0.55}
             variants={fadeUp}
           >
-            <Link
-              href="/aircraft"
-              className="bg-gradient-to-b from-[#e35651] to-[#b03934] border border-[#ff6b66]/30 shadow-[0_0_20px_rgba(208,71,65,0.25)] hover:shadow-[0_0_25px_rgba(208,71,65,0.5)] hover:scale-105 text-white px-8 md:px-10 py-3 md:py-[14px] rounded-[0.4rem] font-bold text-base md:text-[1.1rem] transition-all tracking-wide inline-block"
-            >
-              Explore Aircraft
-            </Link>
+            <Button asChild size="lg" className="rounded-[0.4rem] tracking-wide font-bold">
+              <Link href="/aircraft">
+                Explore Aircraft
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </section>
@@ -112,12 +114,11 @@ export default function Home() {
                   </>
                 )}
               </p>
-              <Link
-                href="/crew"
-                className="bg-gradient-to-b from-[#e35651] to-[#b03934] border border-[#ff6b66]/30 shadow-[0_0_20px_rgba(208,71,65,0.25)] hover:shadow-[0_0_25px_rgba(208,71,65,0.5)] hover:scale-105 text-white px-8 py-[10px] rounded-[0.4rem] font-bold text-[1rem] transition-all tracking-wide inline-block"
-              >
-                Show Crew
-              </Link>
+              <Button asChild size="default" className="rounded-[0.4rem] tracking-wide font-bold">
+                <Link href="/crew">
+                  Show Crew
+                </Link>
+              </Button>
             </motion.div>
           </div>
         </div>
@@ -141,14 +142,14 @@ export default function Home() {
                 .flatMap((t) => t.sponsors)
                 .slice(0, 4)
                 .map((sp) => (
-                  <div key={sp.id} className="bg-white/10 px-6 py-3 rounded-lg flex items-center gap-3">
+                  <Card key={sp.id} className="bg-white/10 border-white/10 px-6 py-3 flex flex-row items-center gap-3 rounded-lg shadow-sm">
                     {sp.logo && (
                       <div className="relative w-8 h-8">
                         <Image src={sp.logo} alt={sp.name} fill className="object-contain" />
                       </div>
                     )}
                     <span className="text-white font-bold text-sm">{sp.name}</span>
-                  </div>
+                  </Card>
                 ))}
             </div>
           ) : (
@@ -157,31 +158,28 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* Stats Section */}
-      <section className="py-20 md:py-28 bg-[#232323] relative overflow-hidden">
-        {/* Subtle background ambient warmth */}
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#D04741]/10 rounded-full blur-[120px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      {/* Stats Section - Compact Width, Hover-Only Glow, Shadcn Cards */}
+      <section className="py-16 md:py-20 bg-[#232323] relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
             
-            {/* Left Column: Drone with unclipped pure radial glow */}
+            {/* Left Column: Drone - ONLY GLOWS ON HOVER, NO BOX SHAPE */}
             <motion.div
-              className="relative w-full max-w-md lg:max-w-xl mx-auto flex items-center justify-center group"
-              initial={{ opacity: 0, x: -30 }}
+              className="relative w-full max-w-sm sm:max-w-md mx-auto flex items-center justify-center group cursor-pointer"
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              {/* Pure Soft Radial Red Glow - No Box, No Clipping */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#D04741]/25 rounded-full blur-[70px] pointer-events-none group-hover:bg-[#D04741]/40 group-hover:blur-[85px] transition-all duration-700" />
+              {/* Soft Radial Glow - ONLY APPEARS ON HOVER */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-[#D04741]/35 rounded-full blur-[65px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               {/* Floating Aircraft Container */}
               <motion.div
-                className="relative aspect-[4/3] w-full cursor-pointer"
+                className="relative aspect-[4/3] w-full"
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                whileHover={{ scale: 1.04 }}
+                whileHover={{ scale: 1.05 }}
               >
                 <Image
                   src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
@@ -193,53 +191,47 @@ export default function Home() {
               </motion.div>
             </motion.div>
             
-            {/* Right Column: Stats & Progress */}
+            {/* Right Column: Stats using Shadcn Cards & Button */}
             <motion.div
-              className="flex flex-col items-center lg:items-end text-center lg:text-right"
+              className="flex flex-col items-center md:items-end text-center md:text-right"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeUp}
               custom={0.15}
             >
-              <div className="mb-8 md:mb-10">
-                <span className="text-xs uppercase font-mono tracking-[0.2em] text-[#ff7973] font-bold block mb-1">
+              <div className="mb-6">
+                <Badge variant="glow" className="mb-2 uppercase tracking-widest text-[10px] font-mono">
                   Team Benchmarks
-                </span>
-                <h2 className="text-[2.2rem] md:text-[3.2rem] font-montserrat font-bold text-[#D04741] tracking-wider uppercase leading-tight">
+                </Badge>
+                <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[2.8rem] font-montserrat font-bold text-[#D04741] tracking-wider uppercase leading-none">
                   STATS
                 </h2>
               </div>
               
-              <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-10 md:mb-12 w-full max-w-lg">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 w-full max-w-md">
                 {stats.map(({ label, value }, i) => (
-                  <motion.div
+                  <Card
                     key={i}
-                    className="bg-[#1b1b1b]/80 border border-white/5 rounded-xl p-4 sm:p-5 flex flex-col justify-center items-center lg:items-end text-center lg:text-right hover:border-[#D04741]/40 hover:bg-[#202020] transition-all group/stat shadow-lg"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 * i, ease: 'easeOut' }}
-                    whileHover={{ y: -3 }}
+                    className="p-3.5 sm:p-4 bg-[#1b1b1b]/90 border-white/5 hover:border-[#D04741]/40 hover:bg-[#202020] transition-all flex flex-col items-center md:items-end text-center md:text-right group/stat"
                   >
-                    <span className="text-[#D04741] text-3xl sm:text-4xl lg:text-5xl font-heading font-bold whitespace-nowrap leading-none mb-1 group-hover/stat:scale-105 transition-transform inline-block">
+                    <span className="text-[#D04741] text-2xl sm:text-3xl lg:text-4xl font-heading font-bold whitespace-nowrap leading-none mb-1 group-hover/stat:scale-105 transition-transform">
                       {value}
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wide uppercase">
+                    <span className="text-[11px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wide">
                       {label}
                     </span>
-                  </motion.div>
+                  </Card>
                 ))}
               </div>
               
               <div>
-                <Link
-                  href="/progress"
-                  className="bg-gradient-to-b from-[#e35651] to-[#b03934] border border-[#ff6b66]/30 shadow-[0_4px_15px_rgba(208,71,65,0.4)] text-white px-10 md:px-12 py-3 rounded-[0.4rem] font-bold text-base md:text-lg transition-all inline-flex items-center gap-2 hover:shadow-[0_6px_25px_rgba(208,71,65,0.6)] hover:scale-105"
-                >
-                  <span>Our Progress</span>
-                  <span className="text-sm font-mono">→</span>
-                </Link>
+                <Button asChild size="default" className="rounded-[0.4rem] font-bold">
+                  <Link href="/progress" className="gap-2">
+                    <span>Our Progress</span>
+                    <span className="text-sm font-mono">→</span>
+                  </Link>
+                </Button>
               </div>
             </motion.div>
 

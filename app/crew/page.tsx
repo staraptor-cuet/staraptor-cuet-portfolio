@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Member, members as fallbackMembers } from './members';
 import { useSiteContent } from '@/lib/useContent';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -16,7 +18,6 @@ const fadeUp = {
 
 const CrewMemberCard = ({ member, index }: { member: Member; index: number }) => (
   <motion.div
-    className="bg-[#2a2a2a] border border-gray-sub/20 rounded-xl p-3 shadow-lg flex flex-col items-center cursor-pointer"
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
@@ -24,65 +25,66 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
     whileHover={{
       y: -8,
       scale: 1.03,
-      boxShadow: '0 12px 30px rgba(208,71,65,0.35)',
-      borderColor: 'rgba(208,71,65,0.7)',
       transition: { duration: 0.2 },
     }}
+    className="h-full"
   >
-    <div className="border border-primary rounded-lg overflow-hidden relative aspect-[3/4] w-full mb-4 group/img">
-      <Image 
-        src={member.image || "/images/kazi miftahul hoque.png"} 
-        alt={member.name} 
-        fill 
-        className="object-cover transition-all duration-500 group-hover/img:scale-110"
-        style={{ filter: 'drop-shadow(0 0 12px rgba(0,0,0,0.6)) blur(0.4px)' }}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        unoptimized={member.image?.startsWith('data:') || member.image?.startsWith('http')}
-      />
-    </div>
-
-    <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase">{member.name}</h3>
-    <p className="text-white text-xs mb-1">{member.batch}</p>
-    {member.isLead && (
-      <p className="text-[#D04741] font-heading font-bold text-xs text-center mb-3 uppercase">
-        {member.designation === "Project Lead" ? "Project Lead" : "Team Lead"}
-      </p>
-    )}
-    {!member.isLead && <div className="mb-3" />}
-
-    <div className="flex gap-2 w-full mt-auto">
-      <a
-        href={member.linkedin || "#"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
-        onClick={(e) => !member.linkedin && e.preventDefault()}
-      >
-        <Image
-          src="/icons/linkedin-box-fill.svg"
-          alt="LinkedIn"
-          width={14}
-          height={14}
-          style={{ filter: 'brightness(0) invert(1)' }}
+    <Card className="bg-[#2a2a2a] border-gray-sub/20 rounded-xl p-3 shadow-lg flex flex-col items-center cursor-pointer h-full hover:border-[#D04741]/70 hover:shadow-[0_12px_30px_rgba(208,71,65,0.35)] transition-all">
+      <div className="border border-primary rounded-lg overflow-hidden relative aspect-[3/4] w-full mb-4 group/img">
+        <Image 
+          src={member.image || "/images/kazi miftahul hoque.png"} 
+          alt={member.name} 
+          fill 
+          className="object-cover transition-all duration-500 group-hover/img:scale-110"
+          style={{ filter: 'drop-shadow(0 0 12px rgba(0,0,0,0.6)) blur(0.4px)' }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          unoptimized={member.image?.startsWith('data:') || member.image?.startsWith('http')}
         />
-        <span className="text-[10px] font-bold">LinkedIn</span>
-      </a>
+      </div>
 
-      <a
-        href={member.email ? `mailto:${member.email}` : "#"}
-        className={`flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors ${!member.email ? 'opacity-50 cursor-not-allowed' : ''}`}
-        onClick={(e) => !member.email && e.preventDefault()}
-      >
-        <Image
-          src="/icons/mail-fill.svg"
-          alt="Email"
-          width={14}
-          height={14}
-          style={{ filter: 'brightness(0) invert(1)' }}
-        />
-        <span className="text-[10px] font-bold">Email</span>
-      </a>
-    </div>
+      <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase">{member.name}</h3>
+      <p className="text-white text-xs mb-1">{member.batch}</p>
+      {member.isLead && (
+        <Badge variant="glow" className="mb-3 text-[10px] font-heading uppercase px-2 py-0.5">
+          {member.designation === "Project Lead" ? "Project Lead" : "Team Lead"}
+        </Badge>
+      )}
+      {!member.isLead && <div className="mb-3" />}
+
+      <div className="flex gap-2 w-full mt-auto">
+        <a
+          href={member.linkedin || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
+          onClick={(e) => !member.linkedin && e.preventDefault()}
+        >
+          <Image
+            src="/icons/linkedin-box-fill.svg"
+            alt="LinkedIn"
+            width={14}
+            height={14}
+            style={{ filter: 'brightness(0) invert(1)' }}
+          />
+          <span className="text-[10px] font-bold">LinkedIn</span>
+        </a>
+
+        <a
+          href={member.email ? `mailto:${member.email}` : "#"}
+          className={`flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors ${!member.email ? 'opacity-50 cursor-not-allowed' : ''}`}
+          onClick={(e) => !member.email && e.preventDefault()}
+        >
+          <Image
+            src="/icons/mail-fill.svg"
+            alt="Email"
+            width={14}
+            height={14}
+            style={{ filter: 'brightness(0) invert(1)' }}
+          />
+          <span className="text-[10px] font-bold">Email</span>
+        </a>
+      </div>
+    </Card>
   </motion.div>
 );
 

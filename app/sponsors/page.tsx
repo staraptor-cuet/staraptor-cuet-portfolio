@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
 import { useSiteContent } from '@/lib/useContent';
 import { SponsorTier as SponsorTierType } from '@/lib/types';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const SponsorTierComponent = ({ tier }: { tier: SponsorTierType }) => {
   const filledSponsors = tier.sponsors || [];
@@ -31,51 +33,53 @@ const SponsorTierComponent = ({ tier }: { tier: SponsorTierType }) => {
           return (
             <motion.div
               key={i}
-              className="w-[calc(50%-0.5rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] bg-[#1f1f1f] border border-gray-sub/10 rounded-lg aspect-video flex flex-col items-center justify-center p-4 sm:p-6 group hover:border-primary/50 hover:bg-[#252525] hover:shadow-[0_0_20px_rgba(208,71,65,0.15)] transition-all"
+              className="w-[calc(50%-0.5rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] aspect-video"
               initial={{ opacity: 0, scale: 0.92 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
               whileHover={{ scale: 1.03 }}
             >
-              {sponsor && sponsor.name ? (
-                <>
-                  <div className="relative w-full h-24 sm:h-28 mb-4">
-                    {sponsor.logo ? (
-                      <Image
-                        src={sponsor.logo}
-                        alt={`${sponsor.name} logo`}
-                        fill
-                        className="object-contain"
-                        unoptimized={sponsor.logo.startsWith('data:') || sponsor.logo.startsWith('http')}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center font-bold text-gray-400">
-                        {sponsor.name}
-                      </div>
-                    )}
-                  </div>
+              <Card className="h-full bg-[#1f1f1f] border-gray-sub/10 rounded-lg flex flex-col items-center justify-center p-4 sm:p-6 group hover:border-[#D04741]/50 hover:bg-[#252525] hover:shadow-[0_0_20px_rgba(208,71,65,0.15)] transition-all">
+                {sponsor && sponsor.name ? (
+                  <>
+                    <div className="relative w-full h-24 sm:h-28 mb-4">
+                      {sponsor.logo ? (
+                        <Image
+                          src={sponsor.logo}
+                          alt={`${sponsor.name} logo`}
+                          fill
+                          className="object-contain"
+                          unoptimized={sponsor.logo.startsWith('data:') || sponsor.logo.startsWith('http')}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center font-bold text-gray-400">
+                          {sponsor.name}
+                        </div>
+                      )}
+                    </div>
 
-                  {sponsor.website ? (
-                    <a
-                      href={sponsor.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-primary font-bold tracking-wide text-sm sm:text-base text-center transition-colors truncate max-w-full"
-                    >
-                      {sponsor.name}
-                    </a>
-                  ) : (
-                    <p className="text-white font-bold tracking-wide text-sm sm:text-base text-center truncate max-w-full">
-                      {sponsor.name}
-                    </p>
-                  )}
-                </>
-              ) : (
-                <p className="text-gray-sub/50 font-bold tracking-widest uppercase text-xs sm:text-sm group-hover:text-primary transition-colors">
-                  TBA
-                </p>
-              )}
+                    {sponsor.website ? (
+                      <a
+                        href={sponsor.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white hover:text-primary font-bold tracking-wide text-sm sm:text-base text-center transition-colors truncate max-w-full"
+                      >
+                        {sponsor.name}
+                      </a>
+                    ) : (
+                      <p className="text-white font-bold tracking-wide text-sm sm:text-base text-center truncate max-w-full">
+                        {sponsor.name}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-gray-sub/50 font-bold tracking-widest uppercase text-xs sm:text-sm group-hover:text-primary transition-colors">
+                    TBA
+                  </p>
+                )}
+              </Card>
             </motion.div>
           );
         })}
@@ -145,15 +149,16 @@ export default function SponsorsPage() {
               {contactEmail}
             </a>
           </p>
-          <a
-            href={proposalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#D04741] to-[#6A2421] text-white px-8 py-3.5 rounded-lg font-bold hover:scale-105 transition-transform shadow-lg"
-          >
-            Download Proposal
-            <Download size={20} />
-          </a>
+          <Button asChild size="lg" className="rounded-lg font-bold gap-2">
+            <a
+              href={proposalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Download Proposal</span>
+              <Download size={20} />
+            </a>
+          </Button>
         </motion.div>
 
       </div>

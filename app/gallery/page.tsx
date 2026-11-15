@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSiteContent } from '@/lib/useContent';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export default function GalleryPage() {
   const { content } = useSiteContent();
@@ -28,7 +30,9 @@ export default function GalleryPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <p className="text-label mb-2">Media</p>
+          <Badge variant="glow" className="mb-3 uppercase tracking-widest text-xs">
+            Media
+          </Badge>
           <h1 className="text-title-main">Gallery</h1>
         </motion.div>
 
@@ -36,31 +40,33 @@ export default function GalleryPage() {
           {galleryItems.map((item, idx) => (
             <motion.div
               key={item.id || idx}
-              className="relative aspect-video bg-[#1f1f1f] rounded-lg overflow-hidden cursor-pointer group border border-gray-sub/10 hover:border-primary/50 transition-colors"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.07, ease: 'easeOut' }}
               whileHover={{ scale: 1.02 }}
               onClick={() => setSelectedImage(item.src)}
+              className="cursor-pointer"
             >
-              <Image
-                src={item.src}
-                alt={item.title || `Gallery image ${idx + 1}`}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                unoptimized={item.src.startsWith('data:') || item.src.startsWith('http')}
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex flex-col items-center justify-center p-4">
-                <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-bold uppercase tracking-widest text-xs bg-[#D04741]/80 px-3 py-1 rounded drop-shadow-md mb-1">
-                  View
-                </span>
-                {item.title && (
-                  <span className="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity text-center truncate max-w-full">
-                    {item.title}
-                  </span>
-                )}
-              </div>
+              <Card className="relative aspect-video bg-[#1f1f1f] rounded-lg overflow-hidden group border-gray-sub/10 hover:border-[#D04741]/50 transition-colors p-0">
+                <Image
+                  src={item.src}
+                  alt={item.title || `Gallery image ${idx + 1}`}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  unoptimized={item.src.startsWith('data:') || item.src.startsWith('http')}
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-colors flex flex-col items-center justify-center p-4">
+                  <Badge variant="default" className="opacity-0 group-hover:opacity-100 transition-opacity font-bold uppercase tracking-widest text-xs shadow-md mb-1">
+                    View
+                  </Badge>
+                  {item.title && (
+                    <span className="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity text-center truncate max-w-full">
+                      {item.title}
+                    </span>
+                  )}
+                </div>
+              </Card>
             </motion.div>
           ))}
         </div>
