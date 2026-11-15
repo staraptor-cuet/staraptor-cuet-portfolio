@@ -3,15 +3,17 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSiteContent } from '@/lib/useContent';
 
 export default function GalleryPage() {
-  const images = [
-    "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png",
-    "/images/progress image.jpg",
-    "/images/analysis-img-1.png",
-    "/images/analysis-img-2.png",
-    "/images/we are staraptor bg.png",
-    "/images/logo.png"
+  const { content } = useSiteContent();
+  const galleryItems = content?.gallery || [
+    { id: '1', src: "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png", title: "Staraptor VTOL" },
+    { id: '2', src: "/images/progress image.jpg", title: "Progress" },
+    { id: '3', src: "/images/analysis-img-1.png", title: "CFD Analysis" },
+    { id: '4', src: "/images/analysis-img-2.png", title: "CFD Analysis" },
+    { id: '5', src: "/images/we are staraptor bg.png", title: "Staraptor Logo" },
+    { id: '6', src: "/images/logo.png", title: "Emblem" }
   ];
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -31,25 +33,33 @@ export default function GalleryPage() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {images.map((src, idx) => (
+          {galleryItems.map((item, idx) => (
             <motion.div
-              key={idx}
+              key={item.id || idx}
               className="relative aspect-video bg-[#1f1f1f] rounded-lg overflow-hidden cursor-pointer group border border-gray-sub/10 hover:border-primary/50 transition-colors"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.07, ease: 'easeOut' }}
               whileHover={{ scale: 1.02 }}
-              onClick={() => setSelectedImage(src)}
+              onClick={() => setSelectedImage(item.src)}
             >
               <Image
-                src={src}
-                alt={`Gallery image ${idx + 1}`}
+                src={item.src}
+                alt={item.title || `Gallery image ${idx + 1}`}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
+                unoptimized={item.src.startsWith('data:') || item.src.startsWith('http')}
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-bold uppercase tracking-widest text-sm drop-shadow-md">View</span>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex flex-col items-center justify-center p-4">
+                <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-bold uppercase tracking-widest text-xs bg-[#D04741]/80 px-3 py-1 rounded drop-shadow-md mb-1">
+                  View
+                </span>
+                {item.title && (
+                  <span className="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity text-center truncate max-w-full">
+                    {item.title}
+                  </span>
+                )}
               </div>
             </motion.div>
           ))}
@@ -78,13 +88,19 @@ export default function GalleryPage() {
             </button>
             <motion.div
               className="relative w-full h-full max-w-5xl max-h-[80vh]"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <Image src={selectedImage} alt="Expanded view" fill className="object-contain" />
+              <Image
+                src={selectedImage}
+                alt="Selected view"
+                fill
+                className="object-contain"
+                unoptimized={selectedImage.startsWith('data:') || selectedImage.startsWith('http')}
+              />
             </motion.div>
           </motion.div>
         )}

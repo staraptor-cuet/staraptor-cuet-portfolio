@@ -23,7 +23,7 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h4 className="text-primary font-heading font-semibold mb-5 md:mb-6">Company</h4>
+            <h4 className="text-primary font-heading font-semibold mb-5 md:mb-6">Navigation</h4>
             <ul className="space-y-3 md:space-y-4">
               {[
                 { label: 'Home', href: '/' },
@@ -32,6 +32,7 @@ export default function Footer() {
                 { label: 'Sponsors', href: '/sponsors' },
                 { label: 'Crew', href: '/crew' },
                 { label: 'Gallery', href: '/gallery' },
+                { label: 'Admin Portal', href: '/admin' },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-gray-sub hover:text-white text-sm transition-colors">
@@ -48,17 +49,19 @@ export default function Footer() {
             <ul className="space-y-3 md:space-y-4 text-sm text-gray-sub leading-relaxed">
               <li>01972723321</li>
               <li>staraptorcuet@gmail.com</li>
-              <li>Kaptai, Highway রাউজান<br />পাহাড়তলী সড়ক,<br />Chattogram 4349</li>
+              <li>Kaptai Highway, Raozan<br />Pahartoli Road,<br />Chattogram 4349</li>
             </ul>
             <div className="flex gap-4 mt-6 md:mt-8">
               {[
-                { icon: 'linkedin-box-fill.svg', label: 'LinkedIn' },
-                { icon: 'instagram-fill.svg', label: 'Instagram' },
-                { icon: 'facebook-box-fill.svg', label: 'Facebook' },
-              ].map(({ icon, label }) => (
+                { icon: 'linkedin-box-fill.svg', label: 'LinkedIn', href: 'https://www.linkedin.com/company/staraptor-cuet/' },
+                { icon: 'instagram-fill.svg', label: 'Instagram', href: 'https://www.instagram.com/staraptor_cuet/' },
+                { icon: 'facebook-box-fill.svg', label: 'Facebook', href: 'https://www.facebook.com/StaraptorCUET' },
+              ].map(({ icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-primary hover:text-white transition-colors"
                   aria-label={label}
                 >
@@ -76,7 +79,13 @@ export default function Footer() {
 
         <div className="border-t border-gray-sub/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-sub/60">
           <p>© 2026 Team Staraptor CUET. All rights reserved.</p>
-          <p>METU VTOL Competition 2026</p>
+          <div className="flex items-center gap-4">
+            <p>METU VTOL Competition 2026</p>
+            <span>•</span>
+            <Link href="/admin" className="hover:text-primary transition-colors">
+              Admin Control
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

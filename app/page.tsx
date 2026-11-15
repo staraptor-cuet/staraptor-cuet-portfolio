@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useSiteContent } from '@/lib/useContent';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -14,6 +15,15 @@ const fadeUp = {
 };
 
 export default function Home() {
+  const { content } = useSiteContent();
+  const general = content?.general;
+  const stats = general?.stats || [
+    { label: 'Crew Size', value: '20', labelFirst: true },
+    { label: 'VTOL Design Team', value: '1st', labelFirst: false },
+    { label: 'Founding', value: '2026', labelFirst: true },
+    { label: 'Target', value: 'July 2026', labelFirst: true },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -51,7 +61,7 @@ export default function Home() {
             custom={0.3}
             variants={fadeUp}
           >
-            Engineers Bound by Flight
+            {general?.tagline || 'Engineers Bound by Flight'}
           </motion.h1>
           <motion.div
             initial="hidden"
@@ -93,10 +103,14 @@ export default function Home() {
               custom={0}
             >
               <h2 className="text-title-section uppercase tracking-wider !text-[#d84e46] mb-6 md:mb-8 leading-[1.1]">
-                We Are<br/>Staraptor
+                {general?.aboutTitle || 'We Are Staraptor'}
               </h2>
-              <p className="text-white text-xs md:text-base lg:text-[1.1rem] leading-[1.8] mb-8 md:mb-12 max-w-xl text-center md:text-justify">
-                Team Staraptor CUET is the first <strong>VTOL drone design team in Bangladesh</strong> from <strong>Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge <strong>UAV and VTOL aircraft systems</strong>. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!
+              <p className="text-white text-xs md:text-base lg:text-[1.1rem] leading-[1.8] mb-8 md:mb-12 max-w-xl text-center md:text-justify whitespace-pre-line">
+                {general?.aboutDescription || (
+                  <>
+                    Team Staraptor CUET is the first <strong>VTOL drone design team in Bangladesh</strong> from <strong>Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge <strong>UAV and VTOL aircraft systems</strong>. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!
+                  </>
+                )}
               </p>
               <Link
                 href="/crew"
@@ -121,7 +135,25 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 to-transparent"></div>
         <div className="relative z-10">
           <h2 className="text-title-section mb-8 uppercase tracking-wider">Sponsors</h2>
-          <p className="text-white text-lg md:text-xl font-bold tracking-wide italic">To Be Announced</p>
+          {content?.sponsors?.some((t) => t.sponsors?.length > 0) ? (
+            <div className="flex flex-wrap items-center justify-center gap-6 px-4">
+              {content.sponsors
+                .flatMap((t) => t.sponsors)
+                .slice(0, 4)
+                .map((sp) => (
+                  <div key={sp.id} className="bg-white/10 px-6 py-3 rounded-lg flex items-center gap-3">
+                    {sp.logo && (
+                      <div className="relative w-8 h-8">
+                        <Image src={sp.logo} alt={sp.name} fill className="object-contain" />
+                      </div>
+                    )}
+                    <span className="text-white font-bold text-sm">{sp.name}</span>
+                  </div>
+                ))}
+            </div>
+          ) : (
+            <p className="text-white text-lg md:text-xl font-bold tracking-wide italic">To Be Announced</p>
+          )}
         </div>
       </motion.section>
 
@@ -138,7 +170,7 @@ export default function Home() {
               whileHover={{ scale: 1.03 }}
             >
               <Image
-                src="/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"
+                src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
                 alt="Staraptor VTOL Model"
                 fill
                 className="object-contain drop-shadow-2xl transition-all duration-500 group-hover:drop-shadow-[0_0_40px_rgba(208,71,65,0.6)] group-hover:scale-105"
@@ -158,12 +190,7 @@ export default function Home() {
               </h2>
               
               <div className="grid grid-cols-2 gap-y-8 gap-x-4 md:gap-x-8 mb-10 md:mb-12 max-w-sm sm:max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:pr-10">
-                {[
-                  { label: 'Crew Size', value: '20', labelFirst: true },
-                  { label: 'VTOL Design Team', value: '1st', labelFirst: false },
-                  { label: 'Founding', value: '2026', labelFirst: true },
-                  { label: 'Target', value: 'July 2026', labelFirst: true },
-                ].map(({ label, value, labelFirst }, i) => (
+                {stats.map(({ label, value, labelFirst }, i) => (
                   <motion.div
                     key={i}
                     className="flex items-center gap-2 sm:gap-3 justify-start"

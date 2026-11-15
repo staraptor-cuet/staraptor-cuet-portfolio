@@ -2,24 +2,25 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-
-const ContactMethod = ({ icon, text, index }: { icon: string, text: string, index: number }) => (
-  <motion.a
-    href="#"
-    className="flex-1 min-w-[200px] bg-[#b03934] hover:bg-[#8e2d29] text-white py-4 px-6 rounded-lg flex items-center justify-center gap-3 transition-colors shadow-lg"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
-    whileHover={{ scale: 1.04 }}
-    whileTap={{ scale: 0.97 }}
-  >
-    <Image src={`/icons/${icon}`} alt={text} width={20} height={20} style={{ filter: 'brightness(0) invert(1)' }} />
-    <span className="font-bold">{text}</span>
-  </motion.a>
-);
+import { useSiteContent } from '@/lib/useContent';
 
 export default function ContactPage() {
+  const { content } = useSiteContent();
+  const general = content?.general;
+  const proposalUrl = general?.proposalUrl || "https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing";
+  const contactEmail = general?.contactEmail || "staraptorcuet@gmail.com";
+  const facebookUrl = general?.socials?.facebook || "https://www.facebook.com/StaraptorCUET";
+  const linkedinUrl = general?.socials?.linkedin || "https://www.linkedin.com/company/staraptor-cuet/";
+  const instagramUrl = general?.socials?.instagram || "https://www.instagram.com/staraptor_cuet/";
+
+  const contactMethods = [
+    { icon: "facebook-box-fill.svg", text: "Facebook", href: facebookUrl },
+    { icon: "instagram-fill.svg", text: "Instagram", href: instagramUrl },
+    { icon: "linkedin-box-fill.svg", text: "LinkedIn", href: linkedinUrl },
+    { icon: "phone-fill.svg", text: "01972723321", href: "tel:01972723321" },
+    { icon: "mail-fill.svg", text: contactEmail, href: `mailto:${contactEmail}` },
+  ].filter(item => item.href);
+
   return (
     <div className="bg-[#242424] min-h-screen py-24 text-gray-sub flex flex-col justify-center">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
@@ -49,7 +50,7 @@ export default function ContactPage() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
         >
           <motion.a
-            href="https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing"
+            href={proposalUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-[#D04741] hover:bg-[#b03934] text-white px-8 py-4 rounded-md font-bold text-lg transition-all shadow-lg hover:shadow-primary/20"
@@ -62,13 +63,7 @@ export default function ContactPage() {
         </motion.div>
 
         <div className="flex flex-wrap justify-center gap-6">
-          {[
-            { icon: "facebook-box-fill.svg", text: "Facebook", href: "https://www.facebook.com/StaraptorCUET" },
-            { icon: "instagram-fill.svg", text: "Instagram", href: "https://www.instagram.com/staraptor_cuet/" },
-            { icon: "linkedin-box-fill.svg", text: "LinkedIn", href: "https://www.linkedin.com/company/staraptor-cuet/" },
-            { icon: "phone-fill.svg", text: "01972723321", href: "tel:01972723321" },
-            { icon: "mail-fill.svg", text: "staraptorcuet@gmail.com", href: "mailto:staraptorcuet@gmail.com" },
-          ].map((item, i) => (
+          {contactMethods.map((item, i) => (
             <motion.a
               key={i}
               href={item.href}

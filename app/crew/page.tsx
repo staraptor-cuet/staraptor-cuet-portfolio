@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { members, Member } from './members';
+import { Member, members as fallbackMembers } from './members';
+import { useSiteContent } from '@/lib/useContent';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -36,6 +37,7 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
         className="object-cover transition-all duration-500 group-hover/img:scale-110"
         style={{ filter: 'drop-shadow(0 0 12px rgba(0,0,0,0.6)) blur(0.4px)' }}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        unoptimized={member.image?.startsWith('data:') || member.image?.startsWith('http')}
       />
     </div>
 
@@ -110,13 +112,27 @@ const CrewSection = ({ title, members }: { title: string; members: Member[] }) =
 );
 
 export default function CrewPage() {
-  const projectLeads = members.filter(m => m.designation === "Project Lead");
-  const designCrew = members.filter(m => m.designation.includes("Design"));
-  const simulationCrew = members.filter(m => m.designation.includes("Simulation"));
-  const brandingCrew = members.filter(m => m.designation.includes("Branding"));
-  const researchCrew = members.filter(m => m.designation.includes("Research"));
-  const softwareCrew = members.filter(m => m.designation.includes("Software"));
-  const documentationCrew = members.filter(m => m.designation.includes("Documentation"));
+  const { content } = useSiteContent();
+  const activeMembers: Member[] = content?.crew?.length ? (content.crew as Member[]) : fallbackMembers;
+
+  const projectLeads = activeMembers.filter(m => m.designation === "Project Lead");
+  const designCrew = activeMembers.filter(m => m.designation.includes("Design"));
+  const simulationCrew = activeMembers.filter(m => m.designation.includes("Simulation"));
+  const brandingCrew = activeMembers.filter(m => m.designation.includes("Branding"));
+  const researchCrew = activeMembers.filter(m => m.designation.includes("Research"));
+  const softwareCrew = activeMembers.filter(m => m.designation.includes("Software"));
+  const documentationCrew = activeMembers.filter(m => m.designation.includes("Documentation"));
+  
+  // Any extra members that don't match the specific buckets
+  const otherCrew = activeMembers.filter(m => 
+    m.designation !== "Project Lead" &&
+    !m.designation.includes("Design") &&
+    !m.designation.includes("Simulation") &&
+    !m.designation.includes("Branding") &&
+    !m.designation.includes("Research") &&
+    !m.designation.includes("Software") &&
+    !m.designation.includes("Documentation")
+  );
 
   return (
     <div className="bg-background min-h-screen pb-20">
@@ -159,7 +175,7 @@ export default function CrewPage() {
             </h1>
 
             <p className="text-sm text-gray-sub leading-relaxed max-w-2xl mx-auto">
-              Welcome to Team Staraptor CUET, the first VTOL design team from CUET Bangladesh, set to make our mark at the METU VTOL Competition this October. Our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing a cutting-edge VTOL UAV. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy.
+              Welcome to Team Staraptor CUET, the first VTOL design team from CUET Bangladesh, set to make our mark at the METU VTOL Competition this October. Our team of {activeMembers.length} passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing a cutting-edge VTOL UAV. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy.
             </p>
           </motion.div>
 
@@ -176,7 +192,7 @@ export default function CrewPage() {
 
             <div className="flex flex-wrap justify-center items-center gap-y-6 gap-x-12">
               {[
-                { label: 'Crew Members', value: '20' },
+                { label: 'Crew Members', value: `${activeMembers.length}` },
                 { label: 'Sub-Teams', value: '6' },
                 { label: 'Technical Roles', value: '8+' },
                 { label: 'Operational Roles', value: '4+' },
@@ -295,6 +311,13 @@ export default function CrewPage() {
           <CrewSection
             title="Documentation Crew"
             members={documentationCrew}
+          />
+        )}
+
+        {otherCrew.length > 0 && (
+          <CrewSection
+            title="General Engineering Crew"
+            members={otherCrew}
           />
         )}
 
