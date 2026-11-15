@@ -80,13 +80,10 @@ function Vtol2026Content() {
         
         {/* Page Header */}
         <motion.div className="mb-10" initial="hidden" animate="visible" variants={fadeUp} custom={0}>
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
-            <Badge variant="glow" className="uppercase tracking-widest text-[11px] font-mono px-3 py-1">
-              Project: {vtol?.subtitle || 'METU VTOL 2026 Objective'}
-            </Badge>
-            <div className="text-xs text-gray-400 font-mono">
+          <div className="mb-2">
+            <span className="text-xs text-gray-400 font-mono tracking-wider uppercase">
               CUET Autonomous Aerospace Initiative
-            </div>
+            </span>
           </div>
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-montserrat tracking-tight text-white uppercase">
@@ -156,20 +153,11 @@ function Vtol2026Content() {
               transition={{ duration: 0.4 }}
               className="bg-[#242424] rounded-2xl p-4 sm:p-8 md:p-10 shadow-2xl border border-white/5 mb-14"
             >
-              {/* Model 1 Badge & Header */}
-              <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-                <div>
-                  <Badge variant="glow" className="mb-2 uppercase tracking-wider text-xs">
-                    Classification: {aircraft?.classification || 'Hybrid VTOL UAV'}
-                  </Badge>
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-montserrat text-white">
-                    {aircraft?.name || 'STARAPTOR VTOL - MODEL 1 (V1)'}
-                  </h3>
-                </div>
-                <div className="px-3.5 py-1.5 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-mono font-bold flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                  Active Prototype & Flight Ready
-                </div>
+              {/* Model 1 Header */}
+              <div className="mb-8">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-montserrat text-white">
+                  {aircraft?.name || 'STARAPTOR VTOL - MODEL 1 (V1)'}
+                </h3>
               </div>
 
               {/* Hero Render (clean without crosshair bars) */}
@@ -445,10 +433,6 @@ function Vtol2026Content() {
                 <div className="w-16 h-16 rounded-2xl bg-[#D04741]/10 border border-[#D04741]/30 flex items-center justify-center text-[#EF5F5A] mb-6 shadow-[0_0_30px_rgba(208,71,65,0.3)]">
                   <Sparkles size={32} />
                 </div>
-
-                <Badge variant="glow" className="mb-4 uppercase tracking-widest text-xs font-mono">
-                  Advanced Development Phase
-                </Badge>
 
                 <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-montserrat text-white uppercase tracking-tight mb-4">
                   Staraptor VTOL - Model 2
