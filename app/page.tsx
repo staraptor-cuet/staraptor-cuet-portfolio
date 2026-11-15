@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Feather, Wind, Sliders } from 'lucide-react';
 import { useSiteContent } from '@/lib/useContent';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -137,7 +136,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Right Column: Heading + Description Paragraph + 3 Points Under It */}
+            {/* Right Column: Heading + Description Paragraph with 3 Specializations Integrated */}
             <motion.div
               className="lg:col-span-7 flex flex-col justify-center"
               initial="hidden"
@@ -146,46 +145,17 @@ export default function Home() {
               variants={fadeUp}
               custom={0.15}
             >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-montserrat uppercase tracking-tight text-[#EF5F5A] mb-5 leading-[1.08]">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-montserrat uppercase tracking-tight text-[#EF5F5A] mb-6 leading-[1.08]">
                 WE ARE<br />STARAPTOR
               </h2>
               
-              <p className="text-gray-300 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed mb-8 max-w-2xl text-justify sm:text-left">
-                {general?.aboutDescription || (
-                  <>
-                    Team Staraptor CUET is the first <strong>VTOL drone design team in Bangladesh</strong> from <strong>Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge <strong>UAV and VTOL aircraft systems</strong>. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!
-                  </>
-                )}
-              </p>
-
-              {/* 3 Points Under Paragraph */}
-              <div className="space-y-3.5 max-w-xl">
-                <Card className="bg-[#181818]/90 border border-white/10 rounded-xl p-3.5 sm:p-4 flex items-center gap-4 hover:border-[#D04741]/50 hover:bg-[#202020] transition-all group shadow-md">
-                  <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/30 flex items-center justify-center text-[#D04741] group-hover:scale-105 group-hover:bg-[#D04741]/20 transition-all shrink-0">
-                    <Feather size={20} />
-                  </div>
-                  <span className="font-bold text-white text-base sm:text-lg group-hover:text-[#ff7973] transition-colors">
-                    Lightweight Airframe
-                  </span>
-                </Card>
-
-                <Card className="bg-[#181818]/90 border border-white/10 rounded-xl p-3.5 sm:p-4 flex items-center gap-4 hover:border-[#D04741]/50 hover:bg-[#202020] transition-all group shadow-md">
-                  <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/30 flex items-center justify-center text-[#D04741] group-hover:scale-105 group-hover:bg-[#D04741]/20 transition-all shrink-0">
-                    <Wind size={20} />
-                  </div>
-                  <span className="font-bold text-white text-base sm:text-lg group-hover:text-[#ff7973] transition-colors">
-                    Advanced Aerodynamics
-                  </span>
-                </Card>
-
-                <Card className="bg-[#181818]/90 border border-white/10 rounded-xl p-3.5 sm:p-4 flex items-center gap-4 hover:border-[#D04741]/50 hover:bg-[#202020] transition-all group shadow-md">
-                  <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/30 flex items-center justify-center text-[#D04741] group-hover:scale-105 group-hover:bg-[#D04741]/20 transition-all shrink-0">
-                    <Sliders size={20} />
-                  </div>
-                  <span className="font-bold text-white text-base sm:text-lg group-hover:text-[#ff7973] transition-colors">
-                    Smart Control Systems
-                  </span>
-                </Card>
+              <div className="space-y-4 text-gray-300 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed max-w-2xl text-justify sm:text-left">
+                <p>
+                  Team Staraptor CUET is the first <strong className="text-white font-semibold">VTOL drone design team in Bangladesh</strong> from <strong className="text-white font-semibold">Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related engineering fields—is dedicated to designing cutting-edge UAV and VTOL aircraft systems.
+                </p>
+                <p>
+                  Our engineering focus seamlessly integrates a <strong className="text-white font-semibold underline decoration-[#EF5F5A] decoration-2 underline-offset-4">Lightweight Airframe</strong>, <strong className="text-white font-semibold underline decoration-[#EF5F5A] decoration-2 underline-offset-4">Advanced Aerodynamics</strong>, and <strong className="text-white font-semibold underline decoration-[#EF5F5A] decoration-2 underline-offset-4">Smart Control Systems</strong> to deliver an aircraft that excels in stability, endurance, efficiency, and autonomous mission accuracy. Our vision is to showcase Bangladesh&apos;s engineering talent on the global stage. Join us as we take flight!
+                </p>
               </div>
             </motion.div>
 
