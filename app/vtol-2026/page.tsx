@@ -2,14 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSiteContent } from '@/lib/useContent';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Plane, Sparkles, CheckCircle2, AlertCircle, Cpu, Shield, ArrowUpRight } from 'lucide-react';
+import { Plane, Sparkles, Cpu, Shield } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 25 },
@@ -60,18 +58,21 @@ export default function Vtol2026Page() {
     { title: 'Electronics', desc: 'BLDC motors, Pixhawk flight controller, GPS' },
   ];
 
-  const components = aircraft?.components || [];
-
-  const requirements = vtol?.requirements || [
-    {
-      title: "Aircraft Requirement",
-      description: "Hybrid VTOL configuration with vertical takeoff and landing capability, transition mechanism, autonomous hover stabilization, and minimum 5kg payload bay."
-    },
-    {
-      title: "Mission Logistics",
-      description: "Simulated multi-point offshore maritime delivery including waypoint navigation, crosswind tolerance, and autonomous return-to-base failsafe protocols."
-    }
+  const defaultComponents = [
+    { name: "LiPo Battery", desc: "Primary onboard power source that supplies electrical energy to motors and electronics." },
+    { name: "LiPo Charger", desc: "Specialized charger designed to safely charge lithium polymer batteries." },
+    { name: "Flight Controller", desc: "The central autopilot system that stabilizes the aircraft and manages navigation, sensors, and control algorithms." },
+    { name: "Companion Computer", desc: "Auxiliary onboard computer used for advanced processing such as computer vision, AI tasks, or mission logic." },
+    { name: "GPS Module", desc: "Provides global positioning data for navigation, waypoint following, and autonomous flight operations." },
+    { name: "Airspeed Sensor", desc: "Measures the aircraft's airspeed to support accurate flight control and efficiency optimization." },
+    { name: "Camera", desc: "Captures visual data for monitoring, surveillance, or computer vision tasks." },
+    { name: "Wide Angle Lens", desc: "Expands the camera's field of view to capture a broader visual area during flight." },
+    { name: "Telemetry Radio", desc: "Enables wireless data communication between the aircraft and the ground control station." },
+    { name: "RC Transmitter", desc: "Handheld remote controller used by the pilot to send control commands to the aircraft." },
+    { name: "RC Receiver", desc: "Onboard device that receives signals from the RC transmitter and passes them to the flight controller." }
   ];
+
+  const components = (aircraft?.components && aircraft.components.length > 0) ? aircraft.components : defaultComponents;
 
   return (
     <div className="bg-background min-h-screen py-10 md:py-16 text-gray-sub">
@@ -171,14 +172,8 @@ export default function Vtol2026Page() {
                 </div>
               </div>
 
-              {/* Hero Render */}
+              {/* Hero Render (clean without crosshair bars) */}
               <div className="relative w-full aspect-video md:aspect-[21/10] mb-10 border-b border-white/10 pb-6 flex items-center justify-center overflow-hidden bg-[#1a1a1a]/60 rounded-xl">
-                <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-40">
-                  <div className="absolute w-full h-[1px] border-b border-dashed border-white/40"></div>
-                  <div className="absolute h-[110%] w-[1px] border-r border-dashed border-white/40"></div>
-                </div>
-                
-                {/* Aircraft image */}
                 <div className="relative w-full h-[85%] z-10 flex items-center justify-center group">
                   <div className="absolute inset-0 bg-[#D04741]/20 rounded-full blur-[80px] opacity-40 group-hover:opacity-75 transition-opacity duration-500 pointer-events-none" />
                   <Image
@@ -258,7 +253,7 @@ export default function Vtol2026Page() {
 
               {/* Component List */}
               {components.length > 0 && (
-                <div>
+                <div className="mb-12">
                   <Card className="bg-[#1b1b1b] rounded-xl shadow-lg overflow-hidden border border-white/5 p-0">
                     <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
                       <div className="w-5 h-5 flex items-center justify-center">
@@ -284,9 +279,154 @@ export default function Vtol2026Page() {
                         </tbody>
                       </table>
                     </div>
+                    <div className="py-4 text-center border-t border-white/5">
+                      <p className="text-xs uppercase tracking-wider text-gray-400">Additional subsystems & telemetry modules utilized during bench testing</p>
+                    </div>
                   </Card>
                 </div>
               )}
+
+              {/* Analysis */}
+              <div className="mb-12">
+                <Card className="bg-[#1b1b1b] rounded-xl shadow-lg overflow-hidden border border-white/5 p-0">
+                  <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
+                    <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                      <img src="/icons/search-eye-line.svg" alt="Analysis" className="w-full h-full object-contain" />
+                    </div>
+                    <h4 className="text-title-box">Analysis</h4>
+                  </div>
+                  <div className="py-8 sm:py-12 px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] items-start gap-8 lg:gap-12 bg-[#202020]">
+                    <div className="flex flex-col gap-4">
+                      {[
+                        { src: '/images/analysis-img-2.png', alt: 'CFD Analysis - Top View' },
+                        { src: '/images/analysis-img-1.png', alt: 'CFD Analysis - Side View' },
+                      ].map((img, i) => (
+                        <div key={i} className="relative aspect-[16/9] w-full group overflow-hidden rounded-lg bg-black/40 border border-white/5">
+                          <Image src={img.src} alt={img.alt} fill className="object-contain transition-transform duration-500 group-hover:scale-105" />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                            <span className="text-white text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#D04741]/90 px-3 py-1.5 rounded">
+                              View Analysis
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-col gap-6 justify-start text-gray-300 text-sm leading-relaxed">
+                      <h5 className="text-lg font-bold font-montserrat text-white">
+                        VTOL UAV Aerodynamic CFD (Hover Mode Analysis)
+                      </h5>
+
+                      <p>
+                        This simulation presents the static pressure distribution over a fixed-wing VTOL UAV in hover mode, performed using ANSYS Fluent (CFD). The analysis captures the complex interaction between the fuselage, wing, and multiple rotors operating under vertical lift conditions.
+                      </p>
+
+                      <p>
+                        A 3D computational domain was developed with rotor-induced flow modeled using appropriate rotating frame techniques. The results highlight high-pressure regions near rotor downwash zones and fuselage surfaces, along with low-pressure regions contributing to lift generation and flow recirculation.
+                      </p>
+
+                      <div className="space-y-2">
+                        <p className="font-semibold text-white">
+                          This hover-condition analysis is critical for:
+                        </p>
+                        <ul className="list-disc list-inside space-y-1 text-gray-300 pl-1 font-semibold">
+                          <li><span className="text-white">Evaluating vertical lift performance</span></li>
+                          <li><span className="text-white">Understanding rotor–body aerodynamic interaction</span></li>
+                          <li><span className="text-white">Supporting design optimization of VTOL configurations</span></li>
+                        </ul>
+                      </div>
+
+                      <div className="pt-2 border-t border-white/10 space-y-1.5 text-xs text-gray-400 font-mono">
+                        <p><span className="text-white font-bold font-sans text-sm">Tools Used:</span> ANSYS Fluent, ANSYS Workbench</p>
+                        <p><span className="text-white font-bold font-sans text-sm">Analysis Type:</span> 3D CFD (Hover Mode)</p>
+                        <p><span className="text-white font-bold font-sans text-sm">Outputs:</span> Static Pressure Contours, Flow Field Visualization</p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Progress */}
+              <div>
+                <Card className="bg-[#1b1b1b] rounded-xl shadow-lg overflow-hidden border border-white/5 p-0">
+                  <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
+                    <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                      <img src="/icons/donut-chart-fill.svg" alt="Progress" className="w-full h-full object-contain" />
+                    </div>
+                    <h4 className="text-title-box">Progress</h4>
+                  </div>
+                  <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-start bg-[#202020]">
+                    <div className="group relative overflow-hidden rounded-lg border border-white/5 cursor-pointer">
+                      <img
+                        src="/images/progress image.jpg"
+                        alt="Progress Parts"
+                        className="w-full h-auto object-contain block transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#D04741]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    </div>
+                    <div className="space-y-4 text-gray-300 text-sm leading-relaxed">
+                      <p>
+                        The first iteration of the VTOL UAV prototype has been completed, enabling preliminary validation of the design configuration and structural integrity. This phase provided critical insights into assembly constraints, material behavior, and integration of key components.
+                      </p>
+                      <p>
+                        Ongoing work is focused on iterative optimization, including improvements in structural efficiency, weight reduction, and alignment accuracy. These refinements aim to enhance aerodynamic performance and ensure better stability in subsequent prototype versions.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Integrated Timeline */}
+                  <div className="px-6 sm:px-8 pb-10 pt-4 bg-[#202020] w-full hidden md:block border-t border-white/5">
+                    <div className="w-full flex flex-col relative mx-auto max-w-4xl pt-4">
+                      <div className="flex justify-between w-full mb-6 relative">
+                        {[
+                          '/icons/checkbox-circle-fill.svg',
+                          '/icons/checkbox-circle-fill.svg',
+                          '/icons/settings-fill.svg',
+                          '/icons/settings-fill.svg',
+                        ].map((icon, i) => (
+                          <div key={i} className="flex flex-col items-center flex-1">
+                            <div className="w-14 h-14 rounded-full bg-[#e4e4e4] flex items-center justify-center shrink-0 shadow-md">
+                              <img src={icon} alt="Step" className="w-8 h-8 object-contain" />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="w-full flex h-2 mb-6 rounded-full overflow-hidden bg-[#474747]">
+                        <div className="w-[38%] h-full bg-[#D04741]"></div>
+                      </div>
+                      <div className="flex justify-between w-full">
+                        {['Conceptual Design', 'Simulation', 'Prototype', 'Successful Launch'].map((label, i) => (
+                          <div key={i} className="flex-1 text-center px-2">
+                            <span className="text-sm font-semibold font-montserrat text-white tracking-wide">{label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mobile Timeline */}
+                  <div className="px-6 pb-8 pt-4 bg-[#202020] w-full border-t border-white/5 md:hidden space-y-4">
+                    {[
+                      { name: 'Conceptual Design', icon: '/icons/checkbox-circle-fill.svg' },
+                      { name: 'Simulation', icon: '/icons/checkbox-circle-fill.svg' },
+                      { name: 'Prototype', icon: '/icons/settings-fill.svg' },
+                      { name: 'Successful Launch', icon: '/icons/settings-fill.svg' }
+                    ].map((step, i, arr) => (
+                      <div key={i} className="flex items-start gap-4">
+                        <div className="flex flex-col items-center shrink-0">
+                          <div className="w-11 h-11 rounded-full bg-[#e4e4e4] flex items-center justify-center shadow">
+                            <img src={step.icon} alt={step.name} className="w-6 h-6 object-contain" />
+                          </div>
+                          {i < arr.length - 1 && (
+                            <div className="w-0.5 h-8 bg-white/20 mt-1" />
+                          )}
+                        </div>
+                        <span className="text-sm font-semibold font-montserrat text-white pt-2.5">{step.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </div>
             </motion.div>
           ) : (
             /* MODEL 2 - Coming Soon Card */
@@ -388,44 +528,6 @@ export default function Vtol2026Page() {
             </div>
           </Card>
         </motion.div>
-
-        {/* Dynamic Requirements */}
-        <div className="space-y-6 mb-12">
-          {requirements.map((req, idx) => (
-            <motion.div
-              key={idx}
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={0.1 * idx}
-            >
-              <Card className="bg-[#1f1f1f] rounded-xl shadow-lg overflow-hidden border border-white/5 p-0">
-                <div className="bg-[#e4e4e4] px-6 py-3 flex items-center gap-3">
-                  <div className="w-5 h-5 flex items-center justify-center border-2 border-primary rounded-sm text-primary font-bold text-xs shrink-0">
-                    {idx + 1}
-                  </div>
-                  <h4 className="text-title-box">{req.title}</h4>
-                </div>
-                <div className="p-6 sm:p-8">
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed whitespace-pre-line">
-                    {req.description}
-                  </p>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Call to Action: Track Progress */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#2a1d1d] to-[#1c1c1c] border border-[#D04741]/30">
-          <div>
-            <h4 className="text-white font-bold text-lg mb-1">Want to track fabrication and testing?</h4>
-            <p className="text-gray-400 text-sm">Follow flight logs, CAD prototypes, and development milestones.</p>
-          </div>
-          <Button asChild className="rounded-lg font-bold px-6 py-2.5 shrink-0">
-            <Link href="/progress" className="gap-2 inline-flex items-center">
-              <span>View Progress Timeline</span>
-              <ArrowUpRight size={16} />
-            </Link>
-          </Button>
-        </div>
 
       </div>
     </div>
