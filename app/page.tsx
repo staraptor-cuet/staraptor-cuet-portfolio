@@ -90,7 +90,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
-            {/* Left Column: 3D Aeroplane Model + Under it Meet Crew & Our Progress buttons */}
+            {/* Left Column: 3D Aeroplane Model + 3 Stats + Meet Crew & Our Progress buttons */}
             <motion.div
               className="lg:col-span-5 flex flex-col items-center justify-center relative group"
               initial={{ opacity: 0, x: -30 }}
@@ -99,7 +99,7 @@ export default function Home() {
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
               {/* Soft Radial Ambient & Hover Glow (No Box Edge) */}
-              <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[80%] bg-[#D04741]/25 group-hover:bg-[#D04741]/45 rounded-full blur-[60px] pointer-events-none transition-all duration-500" />
+              <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[75%] bg-[#D04741]/25 group-hover:bg-[#D04741]/45 rounded-full blur-[60px] pointer-events-none transition-all duration-500" />
               
               {/* Floating Aircraft Container */}
               <motion.div
@@ -119,8 +119,38 @@ export default function Home() {
                 </Link>
               </motion.div>
 
-              {/* Buttons under aeroplane: Meet Crew + Our Progress */}
-              <div className="flex flex-wrap items-center justify-center gap-4 mt-6 z-10">
+              {/* 3 Stat Cards Below the Plane */}
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 w-full max-w-md mt-4 mb-6 z-10">
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.25)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.42)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                    {crewCount}
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
+                    CREW MEMBERS
+                  </span>
+                </Card>
+
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.25)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.42)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                    1st
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
+                    VTOL TEAM IN BD
+                  </span>
+                </Card>
+
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.25)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.42)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                    2026
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
+                    METU COMPETITION
+                  </span>
+                </Card>
+              </div>
+
+              {/* Action Buttons: Meet Crew + Our Progress */}
+              <div className="flex flex-wrap items-center justify-center gap-4 z-10">
                 <Button asChild size="default" className="rounded-lg font-bold px-7 py-2.5 shadow-[0_4px_15px_rgba(208,71,65,0.4)]">
                   <Link href="/crew">
                     Meet Crew
