@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] lg:min-h-[92vh] flex flex-col justify-center items-center overflow-hidden pt-2 sm:pt-4 md:pt-6 pb-12 md:pb-16">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/homepage bg 1.png"
@@ -37,9 +37,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90" />
         </div>
         
-        <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-6xl mx-auto mt-8 mb-10 w-full">
+        <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-7xl mx-auto -mt-10 sm:-mt-14 md:-mt-20 lg:-mt-24 mb-4 w-full">
           <motion.div
-            className="relative mb-0 lg:mb-2 w-full max-w-[560px] md:max-w-[720px] lg:max-w-[849px] aspect-[849/530]"
+            className="relative mb-0 sm:mb-1 w-full max-w-[620px] sm:max-w-[760px] md:max-w-[920px] lg:max-w-[1060px] xl:max-w-[1140px] aspect-[849/530]"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, ease: 'easeOut' }}
@@ -53,7 +53,7 @@ export default function Home() {
             />
           </motion.div>
           <motion.h1
-            className="text-[1.8rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] font-mechanical font-bold mb-8 md:mb-10 text-[#d84e46] shadow-sm tracking-wide leading-tight"
+            className="text-[1.8rem] sm:text-4xl md:text-5xl lg:text-[4.2rem] font-mechanical font-bold mb-6 md:mb-8 text-[#d84e46] shadow-sm tracking-wide leading-tight -mt-4 sm:-mt-6 md:-mt-8"
             initial="hidden"
             animate="visible"
             custom={0.3}
@@ -67,7 +67,7 @@ export default function Home() {
             custom={0.55}
             variants={fadeUp}
           >
-            <Button asChild size="lg" className="rounded-[0.4rem] tracking-wide font-bold">
+            <Button asChild size="lg" className="rounded-[0.4rem] tracking-wide font-bold px-8 shadow-[0_4px_20px_rgba(208,71,65,0.4)]">
               <Link href="/aircraft">
                 Explore Aircraft
               </Link>
@@ -76,10 +76,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Combined Section: We Are Staraptor + Stats + Specializations (Matches Mockup) */}
+      {/* Combined Section: We Are Staraptor + Aircraft + Specializations + Stats */}
       <section className="relative pt-16 md:pt-24 pb-16 md:pb-24 bg-background overflow-hidden border-t border-white/5">
         {/* Subtle mascot watermark silhouette */}
-        <div className="absolute left-[-6%] top-[50%] -translate-y-[50%] h-[120%] w-[55%] z-0 pointer-events-none opacity-20 mix-blend-screen">
+        <div className="absolute left-[-6%] top-[50%] -translate-y-[50%] h-[120%] w-[55%] z-0 pointer-events-none opacity-15 mix-blend-screen">
           <Image
             src="/images/we are staraptor bg.png"
             alt="Mascot background"
@@ -89,11 +89,11 @@ export default function Home() {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             
             {/* Left Column: Heading + Description + 3 Stats */}
             <motion.div
-              className="lg:col-span-7 flex flex-col justify-center"
+              className="lg:col-span-5 flex flex-col justify-center"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
@@ -104,44 +104,74 @@ export default function Home() {
                 WE ARE<br />STARAPTOR
               </h2>
               
-              <p className="text-gray-300 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed mb-8 max-w-xl">
+              <p className="text-gray-300 text-sm sm:text-base lg:text-[1.02rem] leading-relaxed mb-8 max-w-xl">
                 {general?.aboutDescription || "Chittagong University of Engineering & Technology's pioneering VTOL drone design team, driving Bangladesh's aerospace innovation on the global stage."}
               </p>
 
               {/* 3 Stats in a Row */}
-              <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-lg">
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-4 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 max-w-lg">
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
                     {crewCount}
                   </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider block">
+                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
                     CREW MEMBERS
                   </span>
                 </Card>
 
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-4 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
                     1st
                   </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider block">
+                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
                     VTOL TEAM IN BD
                   </span>
                 </Card>
 
-                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-4 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
-                  <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-3.5 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
                     2026
                   </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider block">
+                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
                     METU COMPETITION
                   </span>
                 </Card>
               </div>
             </motion.div>
 
+            {/* Center Column: 3D Aeroplane Model with Ambient & Hover Radial Glow */}
+            <motion.div
+              className="lg:col-span-3 flex flex-col items-center justify-center relative group cursor-pointer my-6 lg:my-0"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
+              {/* Soft Radial Ambient & Hover Glow (No Box Edge) */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] bg-[#D04741]/25 group-hover:bg-[#D04741]/45 rounded-full blur-[55px] pointer-events-none transition-all duration-500" />
+              
+              {/* Floating Aircraft Container */}
+              <motion.div
+                className="relative aspect-[4/3] w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                whileHover={{ scale: 1.08 }}
+              >
+                <Link href="/aircraft" className="block relative w-full h-full">
+                  <Image
+                    src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
+                    alt="Staraptor VTOL Model"
+                    fill
+                    className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.85)]"
+                    priority
+                  />
+                </Link>
+              </motion.div>
+            </motion.div>
+
             {/* Right Column: Specializations + Show Crew Button */}
             <motion.div
-              className="lg:col-span-5 flex flex-col justify-center space-y-4"
+              className="lg:col-span-4 flex flex-col justify-center space-y-4"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
