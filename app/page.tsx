@@ -3,13 +3,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Feather, Wind, Sliders } from 'lucide-react';
 import { useSiteContent } from '@/lib/useContent';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 35 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
@@ -20,12 +20,7 @@ const fadeUp = {
 export default function Home() {
   const { content } = useSiteContent();
   const general = content?.general;
-  const stats = general?.stats || [
-    { label: 'Crew Size', value: '20', labelFirst: true },
-    { label: 'VTOL Design Team', value: '1st', labelFirst: false },
-    { label: 'Founding', value: '2026', labelFirst: true },
-    { label: 'Target', value: 'July 2026', labelFirst: true },
-  ];
+  const crewCount = content?.crew?.length || 20;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -81,45 +76,122 @@ export default function Home() {
         </div>
       </section>
 
-      {/* We Are Staraptor */}
-      <section className="relative pt-16 md:pt-24 pb-12 bg-background overflow-hidden border-t border-gray-sub/5">
-        <div className="absolute left-[-5%] top-[50%] -translate-y-[50%] h-[130%] w-[65%] z-0 pointer-events-none">
+      {/* Combined Section: We Are Staraptor + Stats + Specializations (Matches Mockup) */}
+      <section className="relative pt-16 md:pt-24 pb-16 md:pb-24 bg-background overflow-hidden border-t border-white/5">
+        {/* Subtle mascot watermark silhouette */}
+        <div className="absolute left-[-6%] top-[50%] -translate-y-[50%] h-[120%] w-[55%] z-0 pointer-events-none opacity-20 mix-blend-screen">
           <Image
             src="/images/we are staraptor bg.png"
             alt="Mascot background"
             fill
-            className="object-contain object-left opacity-25 mix-blend-screen"
+            className="object-contain object-left"
           />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <div className="hidden lg:block relative h-[500px]"></div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
+            {/* Left Column: Heading + Description + 3 Stats */}
             <motion.div
-              className="flex flex-col items-center text-center"
+              className="lg:col-span-7 flex flex-col justify-center"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeUp}
               custom={0}
             >
-              <h2 className="text-title-section uppercase tracking-wider !text-[#d84e46] mb-6 md:mb-8 leading-[1.1]">
-                {general?.aboutTitle || 'We Are Staraptor'}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-montserrat uppercase tracking-tight text-[#EF5F5A] mb-5 leading-[1.08]">
+                WE ARE<br />STARAPTOR
               </h2>
-              <p className="text-white text-xs md:text-base lg:text-[1.1rem] leading-[1.8] mb-8 md:mb-12 max-w-xl text-center md:text-justify whitespace-pre-line">
-                {general?.aboutDescription || (
-                  <>
-                    Team Staraptor CUET is the first <strong>VTOL drone design team in Bangladesh</strong> from <strong>Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge <strong>UAV and VTOL aircraft systems</strong>. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!
-                  </>
-                )}
+              
+              <p className="text-gray-300 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed mb-8 max-w-xl">
+                {general?.aboutDescription || "Chittagong University of Engineering & Technology's pioneering VTOL drone design team, driving Bangladesh's aerospace innovation on the global stage."}
               </p>
-              <Button asChild size="default" className="rounded-[0.4rem] tracking-wide font-bold">
-                <Link href="/crew">
-                  Show Crew
-                </Link>
-              </Button>
+
+              {/* 3 Stats in a Row */}
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-lg">
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-4 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                    {crewCount}
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider block">
+                    CREW MEMBERS
+                  </span>
+                </Card>
+
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-4 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                    1st
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider block">
+                    VTOL TEAM IN BD
+                  </span>
+                </Card>
+
+                <Card className="bg-[#181818]/90 border border-white/5 border-b-2 border-b-[#D04741] rounded-xl p-3 sm:p-4 text-center shadow-[0_4px_16px_rgba(208,71,65,0.22)] hover:shadow-[0_8px_24px_rgba(208,71,65,0.38)] hover:-translate-y-1 transition-all group/stat">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#ff7973] transition-colors">
+                    2026
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider block">
+                    METU COMPETITION
+                  </span>
+                </Card>
+              </div>
             </motion.div>
+
+            {/* Right Column: Specializations + Show Crew Button */}
+            <motion.div
+              className="lg:col-span-5 flex flex-col justify-center space-y-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={fadeUp}
+              custom={0.2}
+            >
+              <span className="text-xs uppercase font-mono font-bold tracking-[0.2em] text-[#EF5F5A] block">
+                OUR SPECIALIZATIONS
+              </span>
+
+              {/* 3 Horizontal Specialization Cards */}
+              <div className="space-y-3.5">
+                <Card className="bg-[#181818]/90 border border-white/10 rounded-xl p-3.5 sm:p-4 flex items-center gap-4 hover:border-[#D04741]/50 hover:bg-[#202020] transition-all group shadow-md">
+                  <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/30 flex items-center justify-center text-[#D04741] group-hover:scale-105 group-hover:bg-[#D04741]/20 transition-all shrink-0">
+                    <Feather size={20} />
+                  </div>
+                  <span className="font-bold text-white text-base sm:text-lg group-hover:text-[#ff7973] transition-colors">
+                    Lightweight Airframe
+                  </span>
+                </Card>
+
+                <Card className="bg-[#181818]/90 border border-white/10 rounded-xl p-3.5 sm:p-4 flex items-center gap-4 hover:border-[#D04741]/50 hover:bg-[#202020] transition-all group shadow-md">
+                  <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/30 flex items-center justify-center text-[#D04741] group-hover:scale-105 group-hover:bg-[#D04741]/20 transition-all shrink-0">
+                    <Wind size={20} />
+                  </div>
+                  <span className="font-bold text-white text-base sm:text-lg group-hover:text-[#ff7973] transition-colors">
+                    Advanced Aerodynamics
+                  </span>
+                </Card>
+
+                <Card className="bg-[#181818]/90 border border-white/10 rounded-xl p-3.5 sm:p-4 flex items-center gap-4 hover:border-[#D04741]/50 hover:bg-[#202020] transition-all group shadow-md">
+                  <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/30 flex items-center justify-center text-[#D04741] group-hover:scale-105 group-hover:bg-[#D04741]/20 transition-all shrink-0">
+                    <Sliders size={20} />
+                  </div>
+                  <span className="font-bold text-white text-base sm:text-lg group-hover:text-[#ff7973] transition-colors">
+                    Smart Control Systems
+                  </span>
+                </Card>
+              </div>
+
+              {/* Show Crew Button */}
+              <div className="pt-2 flex justify-center sm:justify-start">
+                <Button asChild size="default" className="rounded-lg font-bold px-8 py-2.5 shadow-[0_4px_15px_rgba(208,71,65,0.4)]">
+                  <Link href="/crew">
+                    Show Crew
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </section>
@@ -157,87 +229,6 @@ export default function Home() {
           )}
         </div>
       </motion.section>
-
-      {/* Stats Section - Compact Width, Hover-Only Glow, Shadcn Cards */}
-      <section className="py-16 md:py-20 bg-[#232323] relative overflow-hidden">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
-            
-            {/* Left Column: Drone - ONLY GLOWS ON HOVER, NO BOX SHAPE */}
-            <motion.div
-              className="relative w-full max-w-sm sm:max-w-md mx-auto flex items-center justify-center group cursor-pointer"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-            >
-              {/* Soft Radial Glow - ONLY APPEARS ON HOVER */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-[#D04741]/35 rounded-full blur-[65px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              {/* Floating Aircraft Container */}
-              <motion.div
-                className="relative aspect-[4/3] w-full"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Image
-                  src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
-                  alt="Staraptor VTOL Model"
-                  fill
-                  className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]"
-                  priority
-                />
-              </motion.div>
-            </motion.div>
-            
-            {/* Right Column: Stats using Shadcn Cards & Button */}
-            <motion.div
-              className="flex flex-col items-center md:items-end text-center md:text-right"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
-              custom={0.15}
-            >
-              <div className="mb-6">
-                <Badge variant="glow" className="mb-2 uppercase tracking-widest text-[10px] font-mono">
-                  Team Benchmarks
-                </Badge>
-                <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[2.8rem] font-montserrat font-bold text-[#D04741] tracking-wider uppercase leading-none">
-                  STATS
-                </h2>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 w-full max-w-md">
-                {stats.map(({ label, value }, i) => (
-                  <Card
-                    key={i}
-                    className="p-3.5 sm:p-4 bg-[#1b1b1b]/90 border-white/5 hover:border-[#D04741]/40 hover:bg-[#202020] transition-all flex flex-col items-center md:items-end text-center md:text-right group/stat"
-                  >
-                    <span className="text-[#D04741] text-2xl sm:text-3xl lg:text-4xl font-heading font-bold whitespace-nowrap leading-none mb-1 group-hover/stat:scale-105 transition-transform">
-                      {value}
-                    </span>
-                    <span className="text-[11px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wide">
-                      {label}
-                    </span>
-                  </Card>
-                ))}
-              </div>
-              
-              <div>
-                <Button asChild size="default" className="rounded-[0.4rem] font-bold">
-                  <Link href="/progress" className="gap-2">
-                    <span>Our Progress</span>
-                    <span className="text-sm font-mono">→</span>
-                  </Link>
-                </Button>
-              </div>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
