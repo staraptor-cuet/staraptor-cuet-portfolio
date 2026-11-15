@@ -14,7 +14,8 @@ import {
   PlusCircle,
   ArrowRight,
   Shield,
-  Layers
+  Layers,
+  Award
 } from 'lucide-react';
 import { SiteContent } from '@/lib/types';
 
@@ -51,6 +52,7 @@ export default function AdminDashboardPage() {
   const totalSponsors = content?.sponsors?.reduce((acc, t) => acc + (t.sponsors?.length || 0), 0) || 0;
   const progressCount = content?.progress?.length || 0;
   const galleryCount = content?.gallery?.length || 0;
+  const achievementsCount = content?.achievements?.length || 0;
 
   return (
     <div className="space-y-8">
@@ -102,7 +104,18 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="bg-[#1c1c1c] border border-white/10 rounded-xl p-5 hover:border-white/20 transition-all">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Achievements</span>
+            <Award size={18} className="text-[#EF5F5A]" />
+          </div>
+          <div className="text-3xl font-extrabold text-white font-montserrat">{achievementsCount}</div>
+          <div className="text-xs text-gray-400 mt-1">
+            Posts & milestones
+          </div>
+        </div>
+
         <div className="bg-[#1c1c1c] border border-white/10 rounded-xl p-5 hover:border-white/20 transition-all">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Crew Members</span>
@@ -155,6 +168,13 @@ export default function AdminDashboardPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
+            {
+              title: 'Achievements & Posts',
+              desc: 'Publish social-style updates, awards, milestones, and testing announcements with photos.',
+              href: '/admin/achievements',
+              icon: Award,
+              action: 'Manage Posts',
+            },
             {
               title: 'Crew & Team',
               desc: 'Add new team members, edit designations, upload profile photos, and assign team leads.',

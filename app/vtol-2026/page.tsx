@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,7 +18,7 @@ const fadeUp = {
   }),
 };
 
-export default function Vtol2026Page() {
+function Vtol2026Content() {
   const searchParams = useSearchParams();
   const { content } = useSiteContent();
   const vtol = content?.vtol2026;
@@ -531,5 +531,17 @@ export default function Vtol2026Page() {
 
       </div>
     </div>
+  );
+}
+
+export default function Vtol2026Page() {
+  return (
+    <Suspense fallback={
+      <div className="bg-[#202020] min-h-screen py-24 flex items-center justify-center text-gray-400 font-mono text-sm">
+        <div className="animate-spin w-8 h-8 border-2 border-[#D04741] border-t-transparent rounded-full mx-auto" />
+      </div>
+    }>
+      <Vtol2026Content />
+    </Suspense>
   );
 }

@@ -4,8 +4,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { TextHoverEffect, FooterBackgroundGradient } from '@/components/ui/hover-footer';
+import { useSiteContent } from '@/lib/useContent';
 
 export default function Footer() {
+  const { content } = useSiteContent();
+  const contactEmail = content?.general?.contactEmail || 'staraptorcuet@gmail.com';
+  const contactPhone = content?.general?.contactPhone || '01972723321';
+  const headquarters = content?.general?.headquarters || 'Kaptai Highway, Raozan, Pahartoli Road, Chattogram 4349, Bangladesh';
+
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Our Progress', href: '/progress' },
@@ -101,18 +107,18 @@ export default function Footer() {
             <ul className="space-y-3.5 text-sm text-gray-400">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-[#EF5F5A] shrink-0 mt-0.5" />
-                <span>Kaptai Highway, Raozan, Pahartoli Road, Chattogram 4349, Bangladesh</span>
+                <span>{headquarters}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={17} className="text-[#EF5F5A] shrink-0" />
-                <a href="tel:01972723321" className="hover:text-white transition-colors">
-                  01972723321
+                <a href={`tel:${contactPhone}`} className="hover:text-white transition-colors">
+                  {contactPhone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={17} className="text-[#EF5F5A] shrink-0" />
-                <a href="mailto:staraptorcuet@gmail.com" className="hover:text-white transition-colors">
-                  staraptorcuet@gmail.com
+                <a href={`mailto:${contactEmail}`} className="hover:text-white transition-colors">
+                  {contactEmail}
                 </a>
               </li>
             </ul>

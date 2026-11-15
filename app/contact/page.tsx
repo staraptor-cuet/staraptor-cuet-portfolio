@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Headphones, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useSiteContent } from '@/lib/useContent';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 25 },
@@ -15,6 +16,11 @@ const fadeUp = {
 };
 
 export default function ContactPage() {
+  const { content } = useSiteContent();
+  const contactEmail = content?.general?.contactEmail || 'staraptorcuet@gmail.com';
+  const contactPhone = content?.general?.contactPhone || '+880 1972-723321';
+  const headquarters = content?.general?.headquarters || 'CUET Autonomous Aerospace Lab';
+
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -91,7 +97,7 @@ export default function ContactPage() {
               <div className="space-y-4">
                 {/* Email */}
                 <a
-                  href="mailto:staraptorcuet@gmail.com"
+                  href={`mailto:${contactEmail}`}
                   className="flex items-center gap-4 p-3.5 rounded-xl bg-[#1a1a1a] border border-white/5 hover:border-[#D04741]/50 hover:bg-[#222222] transition-all group"
                 >
                   <div className="w-11 h-11 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 group-hover:text-[#EF5F5A] group-hover:border-[#EF5F5A]/40 transition-colors shrink-0">
@@ -100,14 +106,14 @@ export default function ContactPage() {
                   <div>
                     <span className="text-xs font-mono text-gray-500 uppercase block">Email</span>
                     <span className="text-sm font-semibold text-white group-hover:text-[#EF5F5A] transition-colors">
-                      staraptorcuet@gmail.com
+                      {contactEmail}
                     </span>
                   </div>
                 </a>
 
                 {/* Phone */}
                 <a
-                  href="tel:01972723321"
+                  href={`tel:${contactPhone.replace(/\s+/g, '')}`}
                   className="flex items-center gap-4 p-3.5 rounded-xl bg-[#1a1a1a] border border-white/5 hover:border-[#D04741]/50 hover:bg-[#222222] transition-all group"
                 >
                   <div className="w-11 h-11 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 group-hover:text-[#EF5F5A] group-hover:border-[#EF5F5A]/40 transition-colors shrink-0">
@@ -116,7 +122,7 @@ export default function ContactPage() {
                   <div>
                     <span className="text-xs font-mono text-gray-500 uppercase block">Direct Line</span>
                     <span className="text-sm font-semibold text-white group-hover:text-[#EF5F5A] transition-colors">
-                      +880 1972-723321
+                      {contactPhone}
                     </span>
                   </div>
                 </a>
@@ -129,7 +135,7 @@ export default function ContactPage() {
                   <div>
                     <span className="text-xs font-mono text-gray-500 uppercase block">Headquarters</span>
                     <span className="text-sm font-semibold text-white">
-                      CUET Autonomous Aerospace Lab
+                      {headquarters}
                     </span>
                   </div>
                 </div>

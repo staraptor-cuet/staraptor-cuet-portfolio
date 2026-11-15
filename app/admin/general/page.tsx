@@ -194,6 +194,32 @@ export default function AdminGeneralPage() {
                 className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-[#D04741]"
               />
             </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-gray-400 mb-1">
+                Direct Contact Phone
+              </label>
+              <input
+                type="text"
+                placeholder="+880 1972-723321"
+                value={general.contactPhone || ''}
+                onChange={(e) => setGeneral({ ...general, contactPhone: e.target.value })}
+                className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-[#D04741]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-gray-400 mb-1">
+                Headquarters Address
+              </label>
+              <input
+                type="text"
+                placeholder="Kaptai Highway, Raozan, Pahartoli Road, Chattogram 4349, Bangladesh"
+                value={general.headquarters || ''}
+                onChange={(e) => setGeneral({ ...general, headquarters: e.target.value })}
+                className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-[#D04741]"
+              />
+            </div>
           </div>
         </div>
 

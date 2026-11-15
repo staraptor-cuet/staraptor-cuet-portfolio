@@ -13,6 +13,8 @@ export interface GeneralSettings {
   stats: StatItem[];
   proposalUrl: string;
   contactEmail: string;
+  contactPhone?: string;
+  headquarters?: string;
   socials: {
     facebook: string;
     linkedin: string;
@@ -101,6 +103,20 @@ export interface RequirementItem {
   description: string;
 }
 
+export interface AchievementPost {
+  id: string;
+  title: string;
+  date: string;
+  category?: string;
+  badge?: string;
+  description: string;
+  content?: string;
+  image?: string;
+  author?: string;
+  featured?: boolean;
+  createdAt?: string;
+}
+
 export interface VtolCompetition {
   title: string;
   subtitle: string;
@@ -114,6 +130,7 @@ export interface SiteContent {
   crew: CrewMember[];
   sponsors: SponsorTier[];
   progress: ProgressItem[];
+  achievements?: AchievementPost[];
   gallery: GalleryItem[];
   aircraft: AircraftSpecs;
   vtol2026: VtolCompetition;

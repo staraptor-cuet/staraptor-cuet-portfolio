@@ -12,6 +12,7 @@ import {
   Image as ImageIcon,
   Plane,
   Trophy,
+  Award,
   Sliders,
   Cloud,
   LogOut,
@@ -68,6 +69,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
 
   const navItems = [
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+    { name: 'Achievements', href: '/admin/achievements', icon: Award },
     { name: 'Crew Members', href: '/admin/crew', icon: Users },
     { name: 'Sponsors', href: '/admin/sponsors', icon: Handshake },
     { name: 'Progress', href: '/admin/progress', icon: TrendingUp },

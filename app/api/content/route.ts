@@ -45,6 +45,7 @@ export async function PUT(req: NextRequest) {
       revalidatePath('/crew');
       revalidatePath('/sponsors');
       revalidatePath('/progress');
+      revalidatePath('/achievements');
       revalidatePath('/gallery');
       revalidatePath('/vtol-2026');
       revalidatePath('/contact');
