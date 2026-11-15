@@ -15,13 +15,6 @@ import { cn } from "@/lib/utils";
  * The notch is drawn by three layers painted in the colour of the surface
  * BEHIND the card (`surface`, the page background by default). Put the card
  * on a different background and pass that colour, or the notch shows.
- *
- * Optional extras:
- * - `screen`: a product screen layered over the cover photo. The photo holds
- *   still and the screen grows on hover, so the card gains depth instead of
- *   just zooming.
- * - `monochrome`: the cover sits in black and white and takes its colours
- *   back on hover or keyboard focus.
  */
 
 export interface NotchedProjectCardProps {
@@ -34,7 +27,7 @@ export interface NotchedProjectCardProps {
   /** a pill at the top of the cover, e.g. the year */
   badge?: string;
   tags?: string[];
-  /** a product screen over the photo (transparent PNG/WebP works best) */
+  /** a product screen or 3D render layered over the cover photo */
   screen?: { src: string; alt: string; className?: string };
   /** a dark wash between the photo and the screen, 0 to 1 */
   dim?: number;
@@ -69,8 +62,8 @@ export function NotchedProjectCard({
   className,
 }: NotchedProjectCardProps) {
   const tone = monochrome
-    ? "grayscale transition-[filter,scale] duration-500 group-hover:grayscale-0 group-focus-visible:grayscale-0"
-    : "transition-[scale] duration-500";
+    ? "grayscale transition-[filter,scale] duration-700 group-hover:grayscale-0 group-focus-visible:grayscale-0"
+    : "transition-transform duration-700 ease-out";
 
   return (
     <a
@@ -82,33 +75,45 @@ export function NotchedProjectCard({
     >
       <div className="relative">
         {/* the cover */}
-        <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-[#1a1a1a] border border-white/5">
+        <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-[28px] bg-[#1a1a1a] border border-white/5">
           <img
             src={image}
             alt={screen ? "" : imageAlt}
             className={cn(
-              "absolute inset-0 h-full w-full object-cover",
+              "absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out",
               tone,
-              !screen && "group-hover:scale-[1.04]",
+              !screen && "group-hover:scale-105",
             )}
           />
+          
           {dim > 0 && (
             <div aria-hidden className="absolute inset-0" style={{ backgroundColor: `rgb(0 0 0 / ${dim})` }} />
           )}
+
+          {/* Ambient red glow behind aeroplane */}
+          {screen && (
+            <div
+              aria-hidden
+              className="absolute inset-0 m-auto w-3/4 h-3/4 bg-[#D04741]/25 rounded-full blur-3xl opacity-30 group-hover:opacity-85 transition-opacity duration-700 pointer-events-none"
+            />
+          )}
+
+          {/* Layered Aeroplane: slowly expands on hover */}
           {screen && (
             <img
               src={screen.src}
               alt={screen.alt}
               className={cn(
-                "absolute bottom-0 right-0 w-[82%] origin-bottom-right drop-shadow-[0_18px_40px_rgba(0,0,0,0.5)] group-hover:scale-[1.07]",
+                "absolute inset-0 m-auto max-h-[88%] max-w-[90%] object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.9)] transition-transform duration-700 ease-out group-hover:scale-[1.18]",
                 tone,
                 screen.className,
               )}
             />
           )}
+
           {badge && (
             <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center pt-4 z-10">
-              <span className="rounded-full border border-white/30 bg-black/60 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-md shadow-md">
+              <span className="rounded-full border border-white/30 bg-black/60 px-3.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md shadow-md">
                 {badge}
               </span>
             </div>
@@ -161,10 +166,10 @@ export function NotchedProjectCard({
         </span>
       </div>
 
-      <h3 className="mt-5 text-xl sm:text-2xl font-bold font-montserrat tracking-tight text-white group-hover:text-[#EF5F5A] transition-colors">
+      <h3 className="mt-5 text-2xl sm:text-3xl font-bold font-montserrat tracking-tight text-white group-hover:text-[#EF5F5A] transition-colors">
         {title}
       </h3>
-      {description && <p className="mt-2 text-sm leading-relaxed text-gray-300">{description}</p>}
+      {description && <p className="mt-2 text-sm sm:text-base leading-relaxed text-gray-300">{description}</p>}
       {tags.length > 0 && (
         <ul className="mt-4 flex flex-wrap gap-2">
           {tags.map((t, i) => (
