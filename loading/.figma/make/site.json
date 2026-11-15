@@ -1,0 +1,10 @@
+{
+  "description": "Displays a centered bird-shaped red loading indicator with a transparent center.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
