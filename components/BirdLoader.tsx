@@ -64,3 +64,4 @@ export default function BirdLoader({ className = '' }: BirdLoaderProps) {
     </div>
   );
 }
+

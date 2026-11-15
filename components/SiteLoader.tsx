@@ -119,14 +119,19 @@ export default function SiteLoader() {
   return (
     <div
       aria-hidden="true"
-      className={`fixed inset-0 z-[99999] flex items-center justify-center transition-opacity duration-500 ease-out ${
+      className={`fixed inset-0 z-[99999] flex items-center justify-center bg-black/50 backdrop-blur-md transition-all duration-500 ease-out ${
         isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
-      style={{
-        background: 'radial-gradient(circle at 50% 46%, rgba(109, 23, 20, 0.16), transparent 36%), #151313',
-      }}
     >
+      {/* Subtle radial aerospace glow behind bird loader */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(208, 71, 65, 0.18), transparent 55%)',
+        }}
+      />
       <BirdLoader />
     </div>
   );
 }
+

@@ -67,10 +67,10 @@
 }
 
 .bird-loader {
-  width: min(52rem, 85vw);
+  width: min(48rem, 84vw);
   height: auto;
   overflow: visible;
-  filter: drop-shadow(0 0 1.5rem rgba(222, 45, 37, 0.22));
+  filter: drop-shadow(0 0 2rem rgba(222, 45, 37, 0.35));
   animation: bird-hover 2s ease-in-out infinite;
 }
 
