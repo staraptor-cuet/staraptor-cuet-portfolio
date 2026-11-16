@@ -85,8 +85,14 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   const navItems = [
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
     { name: 'Home (Landing Page)', href: '/admin/general', icon: Home },
-    { name: 'Our Progress', href: '/admin/progress', icon: TrendingUp },
-    { name: 'Aircraft Specs (VTOL Model 1)', href: '/admin/aircraft', icon: Plane },
+    {
+      name: 'Our Progress',
+      href: '/admin/progress',
+      icon: TrendingUp,
+      subItems: [
+        { name: 'Aircraft Specs (VTOL Model 1)', href: '/admin/aircraft', icon: Plane },
+      ],
+    },
     { name: 'Achievements', href: '/admin/achievements', icon: Award },
     { name: 'Crew Members', href: '/admin/crew', icon: Users },
     { name: 'Sponsors', href: '/admin/sponsors', icon: Handshake },
@@ -158,19 +164,45 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
             const Icon = item.icon;
             const isActive = pathname === item.href;
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  isActive
-                    ? 'bg-[#D04741] text-white shadow-lg shadow-[#D04741]/20 font-bold'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <Icon size={18} className={isActive ? 'text-white' : 'text-gray-400'} />
-                <span>{item.name}</span>
-              </Link>
+              <div key={item.name} className="space-y-1">
+                <Link
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                    isActive
+                      ? 'bg-[#D04741] text-white shadow-lg shadow-[#D04741]/20 font-bold'
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  <Icon size={18} className={isActive ? 'text-white' : 'text-gray-400'} />
+                  <span>{item.name}</span>
+                </Link>
+
+                {/* Sub-Items visibly nested & indented under parent */}
+                {item.subItems && (
+                  <div className="ml-5 pl-3 border-l-2 border-white/10 my-1 space-y-1">
+                    {item.subItems.map((sub) => {
+                      const SubIcon = sub.icon;
+                      const isSubActive = pathname === sub.href;
+                      return (
+                        <Link
+                          key={sub.name}
+                          href={sub.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+                            isSubActive
+                              ? 'bg-[#D04741]/25 text-[#ff8883] font-bold border border-[#D04741]/40 shadow-sm'
+                              : 'text-gray-400 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          <SubIcon size={13} className={isSubActive ? 'text-[#EF5F5A]' : 'text-gray-500'} />
+                          <span>{sub.name}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             );
           })}
         </nav>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import {
   Plane,
   Save,
@@ -140,6 +141,12 @@ export default function AdminAircraftPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
+          <Link
+            href="/admin/progress"
+            className="inline-flex items-center gap-1.5 text-xs text-[#EF5F5A] hover:text-[#ff7872] font-mono mb-2 transition-colors"
+          >
+            <span>← Section: Our Progress</span>
+          </Link>
           <div className="flex items-center gap-2 mb-1">
             <span className="p-2 rounded-lg bg-[#D04741]/10 text-[#EF5F5A]">
               <Plane size={20} />

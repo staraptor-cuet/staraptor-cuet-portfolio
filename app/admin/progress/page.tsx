@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   TrendingUp,
   Plus,
@@ -10,7 +11,9 @@ import {
   Check,
   Calendar,
   Loader2,
-  X
+  X,
+  Plane,
+  ArrowRight
 } from 'lucide-react';
 import { ProgressItem } from '@/lib/types';
 import ImageUploader from '@/components/admin/ImageUploader';
@@ -136,6 +139,38 @@ export default function AdminProgressPage() {
             <span>Add Milestone</span>
           </button>
         </div>
+      </div>
+
+      {/* Aircraft Specs Sub-Section Banner under Our Progress */}
+      <div className="p-4 sm:p-5 rounded-2xl border border-[#D04741]/40 bg-gradient-to-r from-[#2a1a1a] via-[#1f1616] to-[#181818] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-[#D04741]/20 border border-[#D04741]/40 flex items-center justify-center text-[#EF5F5A] shrink-0 shadow-inner">
+            <Plane size={22} />
+          </div>
+          <div>
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#EF5F5A] font-bold">
+                Under Our Progress
+              </span>
+              <span className="text-gray-500">•</span>
+              <span className="text-[10px] font-mono text-gray-400">Model 1 Active</span>
+            </div>
+            <h3 className="text-sm sm:text-base font-bold text-white font-montserrat">
+              Aircraft Specifications (VTOL Model 1)
+            </h3>
+            <p className="text-xs text-gray-400 mt-0.5">
+              Edit STARAPTOR VTOL - V1 physical dimensions, performance data, avionics, and components.
+            </p>
+          </div>
+        </div>
+
+        <Link
+          href="/admin/aircraft"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] hover:opacity-95 text-white text-xs font-bold transition-opacity shrink-0 shadow-md shadow-[#D04741]/20"
+        >
+          <span>Edit Aircraft Specs</span>
+          <ArrowRight size={14} />
+        </Link>
       </div>
 
       {/* Progress Cards */}
