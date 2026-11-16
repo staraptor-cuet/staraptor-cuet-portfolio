@@ -31,6 +31,7 @@ export default function AdminCrewPage() {
   // Modal State
   const [modalOpen, setModalOpen] = useState(false);
   const [editingMember, setEditingMember] = useState<CrewMember | null>(null);
+  const [isCustomDesignation, setIsCustomDesignation] = useState(false);
   const [formData, setFormData] = useState<Partial<CrewMember>>({
     name: '',
     designation: '',
@@ -40,6 +41,22 @@ export default function AdminCrewPage() {
     image: '',
     isLead: false,
   });
+
+  const PRESET_DESIGNATIONS = [
+    'Project Lead',
+    'Design Team Lead',
+    'Design Team',
+    'Simulation Team Lead',
+    'Simulation Team',
+    'Research Team Lead',
+    'Research Team',
+    'Software Team Lead',
+    'Software Team',
+    'Branding & Communication Team Lead',
+    'Branding & Communication Team',
+    'Documentation Team Lead',
+    'Documentation Team',
+  ];
 
   useEffect(() => {
     fetch('/api/content')
@@ -74,10 +91,11 @@ export default function AdminCrewPage() {
 
   const handleOpenAdd = () => {
     setEditingMember(null);
+    setIsCustomDesignation(false);
     setFormData({
       id: `member-${Date.now()}`,
       name: '',
-      designation: '',
+      designation: 'Design Team',
       batch: 'ME-22',
       email: '',
       linkedin: '',
@@ -89,6 +107,9 @@ export default function AdminCrewPage() {
 
   const handleOpenEdit = (member: CrewMember) => {
     setEditingMember(member);
+    setIsCustomDesignation(
+      Boolean(member.designation && !PRESET_DESIGNATIONS.includes(member.designation))
+    );
     setFormData({ ...member });
     setModalOpen(true);
   };
@@ -328,17 +349,111 @@ export default function AdminCrewPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5">
-                    Designation *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.designation || ''}
-                    onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
-                    placeholder="e.g. Project Lead / Design Team"
-                    className="w-full bg-[#121212] border border-white/10 rounded-lg px-3.5 py-2 text-white text-xs focus:outline-none focus:border-[#D04741]"
-                  />
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                      Designation *
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setIsCustomDesignation(!isCustomDesignation)}
+                      className="text-[10px] text-[#EF5F5A] hover:underline transition-colors"
+                    >
+                      {isCustomDesignation ? '← Select from List' : '+ Custom Entry'}
+                    </button>
+                  </div>
+
+                  {!isCustomDesignation ? (
+                    <select
+                      required
+                      value={formData.designation || ''}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        const isLead = val.includes('Lead');
+                        setFormData({ ...formData, designation: val, isLead });
+                      }}
+                      className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-[#D04741] cursor-pointer"
+                    >
+                      <option value="" disabled>-- Select Designation --</option>
+                      <optgroup label="Leadership">
+                        <option value="Project Lead">Project Lead</option>
+                      </optgroup>
+                      <optgroup label="Design Sub-Team">
+                        <option value="Design Team Lead">Design Team Lead</option>
+                        <option value="Design Team">Design Team</option>
+                      </optgroup>
+                      <optgroup label="Simulation Sub-Team">
+                        <option value="Simulation Team Lead">Simulation Team Lead</option>
+                        <option value="Simulation Team">Simulation Team</option>
+                      </optgroup>
+                      <optgroup label="Research Sub-Team">
+                        <option value="Research Team Lead">Research Team Lead</option>
+                        <option value="Research Team">Research Team</option>
+                      </optgroup>
+                      <optgroup label="Software Sub-Team">
+                        <option value="Software Team Lead">Software Team Lead</option>
+                        <option value="Software Team">Software Team</option>
+                      </optgroup>
+                      <optgroup label="Branding & Communication">
+                        <option value="Branding & Communication Team Lead">Branding & Communication Team Lead</option>
+                        <option value="Branding & Communication Team">Branding & Communication Team</option>
+                      </optgroup>
+                      <optgroup label="Documentation Sub-Team">
+                        <option value="Documentation Team Lead">Documentation Team Lead</option>
+                        <option value="Documentation Team">Documentation Team</option>
+                      </optgroup>
+                    </select>
+                  ) : (
+                    <input
+                      type="text"
+                      required
+                      value={formData.designation || ''}
+                      onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
+                      placeholder="e.g. Aerodynamics Specialist"
+                      className="w-full bg-[#121212] border border-white/10 rounded-lg px-3.5 py-2 text-white text-xs focus:outline-none focus:border-[#D04741]"
+                    />
+                  )}
+
+                  {/* 1-Click Quick Toggle Chips */}
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {[
+                      { label: 'Project Lead', value: 'Project Lead', isLead: true },
+                      { label: 'Design', base: 'Design Team' },
+                      { label: 'Simulation', base: 'Simulation Team' },
+                      { label: 'Research', base: 'Research Team' },
+                      { label: 'Software', base: 'Software Team' },
+                      { label: 'Branding', base: 'Branding & Communication Team' },
+                      { label: 'Docs', base: 'Documentation Team' },
+                    ].map((item) => {
+                      const targetVal = item.value || (formData.isLead ? `${item.base} Lead` : item.base);
+                      const isSelected =
+                        formData.designation === targetVal ||
+                        (!formData.isLead && formData.designation === item.base);
+
+                      return (
+                        <button
+                          key={item.label}
+                          type="button"
+                          onClick={() => {
+                            setIsCustomDesignation(false);
+                            const val = item.value || (formData.isLead ? `${item.base} Lead` : item.base);
+                            const lead = item.isLead !== undefined ? item.isLead : Boolean(formData.isLead);
+                            setFormData({
+                              ...formData,
+                              designation: val,
+                              isLead: lead,
+                            });
+                          }}
+                          className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-all ${
+                            isSelected
+                              ? 'bg-[#D04741] text-white shadow-sm shadow-[#D04741]/40'
+                              : 'bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white'
+                          }`}
+                        >
+                          {item.label}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div>
@@ -392,16 +507,29 @@ export default function AdminCrewPage() {
               </div>
 
               <div className="pt-2">
-                <label className="flex items-center gap-2 cursor-pointer bg-white/5 p-3 rounded-lg border border-white/5">
+                <label className="flex items-center gap-2 cursor-pointer bg-white/5 p-3 rounded-lg border border-white/5 hover:border-white/10 transition-colors">
                   <input
                     type="checkbox"
                     checked={formData.isLead || false}
-                    onChange={(e) => setFormData({ ...formData, isLead: e.target.checked })}
+                    onChange={(e) => {
+                      const newLead = e.target.checked;
+                      let newDesig = formData.designation || '';
+                      if (newDesig && newDesig !== 'Project Lead') {
+                        if (newLead && !newDesig.includes('Lead')) {
+                          newDesig = `${newDesig} Lead`;
+                        } else if (!newLead && newDesig.endsWith(' Lead')) {
+                          newDesig = newDesig.replace(/ Lead$/, '');
+                        }
+                      }
+                      setFormData({ ...formData, isLead: newLead, designation: newDesig });
+                    }}
                     className="rounded border-white/20 text-[#D04741] focus:ring-[#D04741]"
                   />
                   <div>
                     <span className="text-xs font-bold text-white block">Team Lead Position</span>
-                    <span className="text-[11px] text-gray-400">Highlighted on public crew directory</span>
+                    <span className="text-[11px] text-gray-400">
+                      {formData.isLead ? 'Will be tagged as Team Lead & given glowing badge' : 'Standard crew member position'}
+                    </span>
                   </div>
                 </label>
               </div>
