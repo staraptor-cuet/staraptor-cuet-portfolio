@@ -319,200 +319,200 @@ function ProgressContent() {
                     />
                   </div>
 
-                  {/* Specifications Section Header */}
-                  <div className="bg-white/5 rounded-2xl p-4 sm:p-5 border border-white/5 mb-8 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#D04741]/20 border border-[#D04741]/40 flex items-center justify-center text-[#EF5F5A] shrink-0">
-                      <Activity size={20} />
+                  {/* Engineering Specifications Card (with Previous White Bar Header) */}
+                  <Card className="bg-[#1b1b1b] border border-white/10 rounded-2xl shadow-xl overflow-hidden p-0 mb-10">
+                    <div className="bg-[#e4e4e4] px-6 py-4 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-5 h-5 flex items-center justify-center">
+                          <Activity size={18} className="text-[#202020]" />
+                        </div>
+                        <h3 className="text-title-box">
+                          {activeProject.name} Engineering Specifications
+                        </h3>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold text-white font-montserrat">
-                        Engineering Specifications & Technical Data
-                      </h3>
-                      <p className="text-xs text-gray-400">
-                        Aerodynamic geometries, payload capacity, performance envelope, and flight systems.
-                      </p>
-                    </div>
-                  </div>
 
-                  {/* 3-Column Specifications Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    
-                    {/* 1. Physical Data */}
-                    <Card className="bg-[#1e1e1e] border-white/10 p-5 rounded-2xl shadow-lg">
-                      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
-                        <Plane size={18} className="text-[#D04741]" />
-                        <h4 className="text-sm font-bold font-mono uppercase tracking-wider text-white">
-                          Physical Data
+                    {/* 3-Column Specifications Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 p-6 sm:p-8 gap-8">
+                      {/* 1. Physical Data */}
+                      <div>
+                        <h4 className="text-subtitle-box mb-5 border-b border-gray-sub/20 pb-2 uppercase tracking-wide flex items-center gap-2">
+                          <Plane size={16} className="text-[#D04741]" />
+                          <span>Physical Data</span>
                         </h4>
-                      </div>
-                      <div className="space-y-3">
-                        {activeProject.physicalData && activeProject.physicalData.length > 0 ? (
-                          activeProject.physicalData.map((item, idx) => (
-                            <div key={item.id || idx} className="flex justify-between items-center text-xs border-b border-white/5 pb-2">
-                              <span className="text-gray-400 font-mono">{item.label}</span>
-                              <span className="text-white font-semibold font-mono">{item.value}</span>
-                            </div>
-                          ))
-                        ) : (
-                          <p className="text-xs text-gray-500">No physical specs configured.</p>
-                        )}
-                      </div>
-                    </Card>
-
-                    {/* 2. Performance Data */}
-                    <Card className="bg-[#1e1e1e] border-white/10 p-5 rounded-2xl shadow-lg">
-                      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
-                        <Activity size={18} className="text-[#D04741]" />
-                        <h4 className="text-sm font-bold font-mono uppercase tracking-wider text-white">
-                          Performance Data
-                        </h4>
-                      </div>
-                      <div className="space-y-3">
-                        {activeProject.performanceData && activeProject.performanceData.length > 0 ? (
-                          activeProject.performanceData.map((item, idx) => (
-                            <div key={item.id || idx} className="flex justify-between items-center text-xs border-b border-white/5 pb-2">
-                              <span className="text-gray-400 font-mono">{item.label}</span>
-                              <span className="text-white font-semibold font-mono">{item.value}</span>
-                            </div>
-                          ))
-                        ) : (
-                          <p className="text-xs text-gray-500">No performance specs configured.</p>
-                        )}
-                      </div>
-                    </Card>
-
-                    {/* 3. Avionics & Systems */}
-                    <Card className="bg-[#1e1e1e] border-white/10 p-5 rounded-2xl shadow-lg">
-                      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
-                        <Cpu size={18} className="text-[#D04741]" />
-                        <h4 className="text-sm font-bold font-mono uppercase tracking-wider text-white">
-                          Avionics & Systems
-                        </h4>
-                      </div>
-                      <div className="space-y-3">
-                        {activeProject.avionics && activeProject.avionics.length > 0 ? (
-                          activeProject.avionics.map((item, idx) => (
-                            <div key={item.id || idx} className="text-xs border-b border-white/5 pb-2">
-                              <span className="text-[#EF5F5A] font-semibold block mb-0.5">{item.title}</span>
-                              <span className="text-gray-400">{item.desc}</span>
-                            </div>
-                          ))
-                        ) : (
-                          <p className="text-xs text-gray-500">No avionics configured.</p>
-                        )}
-                      </div>
-                    </Card>
-                  </div>
-
-                  {/* DYNAMIC CUSTOM SECTIONS (Added by Admin) */}
-                  {activeProject.customSections && activeProject.customSections.length > 0 && (
-                    <div className="space-y-8 mb-12">
-                      {activeProject.customSections.map((sec, secIdx) => (
-                        <div key={sec.id || secIdx} className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-6 shadow-xl">
-                          <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-white/10">
-                            <Layers size={18} className="text-[#D04741]" />
-                            <h4 className="text-base font-bold text-white font-montserrat">
-                              {sec.title}
-                            </h4>
-                          </div>
-
-                          {/* Custom Specs Table */}
-                          {sec.type === 'specs' && sec.specs && (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                              {sec.specs.map((sp, spIdx) => (
-                                <div key={sp.id || spIdx} className="bg-black/20 p-3 rounded-xl border border-white/5 flex justify-between items-center text-xs">
-                                  <span className="text-gray-400 font-mono">{sp.label}</span>
-                                  <span className="text-white font-bold font-mono">{sp.value}</span>
-                                </div>
-                              ))}
-                            </div>
+                        <ul className="space-y-3.5 font-semibold text-sm font-montserrat">
+                          {activeProject.physicalData && activeProject.physicalData.length > 0 ? (
+                            activeProject.physicalData.map((item, idx) => (
+                              <li key={item.id || idx} className="flex justify-between items-center text-xs">
+                                <span className="text-gray-300 font-mono">{item.label}</span>
+                                <span className="text-white font-mono font-bold">{item.value}</span>
+                              </li>
+                            ))
+                          ) : (
+                            <p className="text-xs text-gray-500">No physical specs configured.</p>
                           )}
+                        </ul>
+                      </div>
 
-                          {/* Custom Component List */}
-                          {sec.type === 'components' && sec.components && (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              {sec.components.map((cp, cpIdx) => (
-                                <div key={cpIdx} className="bg-black/20 p-3.5 rounded-xl border border-white/5">
-                                  <span className="text-white font-bold text-xs block mb-1">{cp.name}</span>
-                                  <span className="text-gray-400 text-xs leading-relaxed">{cp.desc}</span>
-                                </div>
-                              ))}
-                            </div>
+                      {/* 2. Performance Data */}
+                      <div>
+                        <h4 className="text-subtitle-box mb-5 border-b border-gray-sub/20 pb-2 uppercase tracking-wide flex items-center gap-2">
+                          <Activity size={16} className="text-[#D04741]" />
+                          <span>Performance Data</span>
+                        </h4>
+                        <ul className="space-y-3.5 font-semibold text-sm font-montserrat">
+                          {activeProject.performanceData && activeProject.performanceData.length > 0 ? (
+                            activeProject.performanceData.map((item, idx) => (
+                              <li key={item.id || idx} className="flex justify-between items-center text-xs">
+                                <span className="text-gray-300 font-mono">{item.label}</span>
+                                <span className="text-white font-mono font-bold">{item.value}</span>
+                              </li>
+                            ))
+                          ) : (
+                            <p className="text-xs text-gray-500">No performance specs configured.</p>
                           )}
+                        </ul>
+                      </div>
 
-                          {/* Custom Text / Overview */}
-                          {sec.type === 'text' && sec.content && (
-                            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-line">
-                              {sec.content}
-                            </p>
+                      {/* 3. Avionics & Systems */}
+                      <div>
+                        <h4 className="text-subtitle-box mb-5 border-b border-gray-sub/20 pb-2 uppercase tracking-wide flex items-center gap-2">
+                          <Cpu size={16} className="text-[#D04741]" />
+                          <span>Avionics & Systems</span>
+                        </h4>
+                        <div className="space-y-4">
+                          {activeProject.avionics && activeProject.avionics.length > 0 ? (
+                            activeProject.avionics.map((item, idx) => (
+                              <div key={item.id || idx} className="text-xs">
+                                <span className="text-[#EF5F5A] font-bold block mb-1">{item.title}</span>
+                                <span className="text-gray-300 leading-relaxed block">{item.desc}</span>
+                              </div>
+                            ))
+                          ) : (
+                            <p className="text-xs text-gray-500">No avionics configured.</p>
                           )}
                         </div>
-                      ))}
+                      </div>
                     </div>
-                  )}
+                  </Card>
 
-                  {/* Component Bill of Materials (BOM) List */}
+                  {/* Component Bill of Materials (BOM) List (with Previous White Bar Header) */}
                   {activeProject.components && activeProject.components.length > 0 && (
-                    <div className="mb-12">
-                      <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-white/10">
-                        <Layers size={20} className="text-[#D04741]" />
-                        <h4 className="text-lg font-bold text-white font-montserrat">
-                          Component Bill of Materials (BOM)
-                        </h4>
-                        <span className="text-xs font-mono text-gray-400 ml-auto">
+                    <Card className="bg-[#1b1b1b] border border-white/10 rounded-2xl shadow-xl overflow-hidden p-0 mb-10">
+                      <div className="bg-[#e4e4e4] px-6 py-4 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-5 h-5 flex items-center justify-center">
+                            <Layers size={18} className="text-[#202020]" />
+                          </div>
+                          <h3 className="text-title-box">Component Bill of Materials (BOM)</h3>
+                        </div>
+                        <span className="text-xs font-mono font-bold text-[#333333]">
                           {activeProject.components.length} Selected Parts
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        {activeProject.components.map((comp, idx) => (
-                          <div
-                            key={idx}
-                            className="bg-[#1a1a1a] p-3.5 rounded-xl border border-white/5 hover:border-white/20 transition-colors"
-                          >
-                            <span className="text-xs font-bold text-white block mb-1 font-montserrat">
-                              {comp.name}
-                            </span>
-                            <span className="text-[11px] text-gray-400 leading-relaxed block">
-                              {comp.desc}
-                            </span>
-                          </div>
-                        ))}
+                      <div className="p-6 sm:p-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                          {activeProject.components.map((comp, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-[#141414] p-3.5 rounded-xl border border-white/5 hover:border-white/15 transition-colors"
+                            >
+                              <span className="text-xs font-bold text-white block mb-1 font-montserrat">
+                                {comp.name}
+                              </span>
+                              <span className="text-[11px] text-gray-400 leading-relaxed block">
+                                {comp.desc}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    </Card>
                   )}
 
-                  {/* Aerodynamic CFD & Structural Analyses */}
+                  {/* Aerodynamic CFD & Structural Analyses (with Previous White Bar Header) */}
                   {activeProject.analyses && activeProject.analyses.length > 0 && (
-                    <div>
-                      <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-white/10">
-                        <Activity size={20} className="text-[#D04741]" />
-                        <h4 className="text-lg font-bold text-white font-montserrat">
-                          Aerodynamic & CFD Flight Analyses
-                        </h4>
+                    <Card className="bg-[#1b1b1b] border border-white/10 rounded-2xl shadow-xl overflow-hidden p-0 mb-10">
+                      <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
+                        <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                          <Activity size={18} className="text-[#202020]" />
+                        </div>
+                        <h3 className="text-title-box">Aerodynamic & CFD Flight Analyses</h3>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {activeProject.analyses.map((analysis, idx) => (
-                          <div
-                            key={idx}
-                            className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 p-3 group"
-                          >
-                            <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-black/40 mb-3">
-                              <Image
-                                src={analysis.src}
-                                alt={analysis.alt || 'Analysis'}
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                              />
+                      <div className="p-6 sm:p-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {activeProject.analyses.map((analysis, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-[#141414] rounded-2xl overflow-hidden border border-white/5 p-3 group"
+                            >
+                              <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-black/40 mb-3">
+                                <Image
+                                  src={analysis.src}
+                                  alt={analysis.alt || 'Analysis'}
+                                  fill
+                                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                  sizes="(max-width: 768px) 100vw, 50vw"
+                                />
+                              </div>
+                              <p className="text-xs font-mono text-gray-300 px-1">
+                                {analysis.caption}
+                              </p>
                             </div>
-                            <p className="text-xs font-mono text-gray-300 px-1">
-                              {analysis.caption}
-                            </p>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
+                    </Card>
+                  )}
+
+                  {/* DYNAMIC CUSTOM SECTIONS (with Previous White Bar Header) */}
+                  {activeProject.customSections && activeProject.customSections.length > 0 && (
+                    <div className="space-y-10 mb-10">
+                      {activeProject.customSections.map((sec, secIdx) => (
+                        <Card key={sec.id || secIdx} className="bg-[#1b1b1b] border border-white/10 rounded-2xl shadow-xl overflow-hidden p-0">
+                          <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
+                            <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                              <Layers size={18} className="text-[#202020]" />
+                            </div>
+                            <h3 className="text-title-box">{sec.title}</h3>
+                          </div>
+
+                          <div className="p-6 sm:p-8">
+                            {/* Custom Specs Table */}
+                            {sec.type === 'specs' && sec.specs && (
+                              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                                {sec.specs.map((sp, spIdx) => (
+                                  <div key={sp.id || spIdx} className="bg-[#141414] p-3 rounded-xl border border-white/5 flex justify-between items-center text-xs">
+                                    <span className="text-gray-400 font-mono">{sp.label}</span>
+                                    <span className="text-white font-bold font-mono">{sp.value}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Custom Component List */}
+                            {sec.type === 'components' && sec.components && (
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {sec.components.map((cp, cpIdx) => (
+                                  <div key={cpIdx} className="bg-[#141414] p-3.5 rounded-xl border border-white/5">
+                                    <span className="text-white font-bold text-xs block mb-1">{cp.name}</span>
+                                    <span className="text-gray-400 text-xs leading-relaxed">{cp.desc}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Custom Text / Overview */}
+                            {sec.type === 'text' && sec.content && (
+                              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-line">
+                                {sec.content}
+                              </p>
+                            )}
+                          </div>
+                        </Card>
+                      ))}
                     </div>
                   )}
 
