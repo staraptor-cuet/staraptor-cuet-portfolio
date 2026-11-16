@@ -90,7 +90,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
     { name: 'Gallery', href: '/admin/gallery', icon: ImageIcon },
     { name: 'Aircraft Specs', href: '/admin/aircraft', icon: Plane },
     { name: 'VTOL 2026', href: '/admin/vtol-2026', icon: Trophy },
-    { name: 'General & Stats', href: '/admin/general', icon: Sliders },
+    { name: 'Landing Page & Stats', href: '/admin/general', icon: Sliders },
     { name: 'Cloud Storage', href: '/admin/storage-setup', icon: Cloud },
   ];
 

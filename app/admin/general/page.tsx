@@ -103,25 +103,30 @@ export default function AdminGeneralPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-white font-montserrat">General Settings & Copy</h1>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="p-2 rounded-lg bg-[#D04741]/10 text-[#EF5F5A]">
+              <Sliders size={20} />
+            </span>
+            <h1 className="text-2xl font-extrabold text-white font-montserrat">Landing Page & Hero Configuration</h1>
+          </div>
           <p className="text-xs text-gray-400 mt-1">
-            Configure homepage hero typography, mission statement, landing stats counters, and contact links.
+            Edit the main homepage (<span className="text-[#EF5F5A] font-mono">/</span>) hero headline, &quot;We Are Staraptor&quot; section, live stats counters, proposal link, and contact details.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           {saveSuccess && (
             <span className="text-xs text-emerald-400 font-bold flex items-center gap-1 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20">
-              <Check size={14} /> Saved Live!
+              <Check size={14} /> Saved & Published Live!
             </span>
           )}
           <button
             onClick={handleSave}
             disabled={saving}
-            className="bg-[#D04741] hover:bg-[#b03934] text-white px-5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-[#D04741]/20 disabled:opacity-50"
+            className="bg-gradient-to-r from-[#D04741] to-[#EF5F5A] hover:opacity-95 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-[#D04741]/20 disabled:opacity-50"
           >
             {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
-            <span>Save Settings</span>
+            <span>Save Landing Page</span>
           </button>
         </div>
       </div>

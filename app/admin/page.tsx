@@ -211,11 +211,11 @@ export default function AdminDashboardPage() {
               action: 'Edit Specs',
             },
             {
-              title: 'Home & General Settings',
-              desc: 'Update headline text, mission statement, proposal download link, and stats.',
+              title: 'Landing Page & Hero',
+              desc: 'Edit hero tagline ("Engineers Bound by Flight"), "We Are Staraptor" section, landing stats counters, proposal link, and contacts.',
               href: '/admin/general',
               icon: Layers,
-              action: 'Edit General',
+              action: 'Edit Landing Page',
             },
           ].map((card, i) => {
             const Icon = card.icon;
