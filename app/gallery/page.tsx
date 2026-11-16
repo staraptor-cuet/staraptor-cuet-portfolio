@@ -304,7 +304,7 @@ export default function GalleryPage() {
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+          <div className="flex flex-wrap justify-center gap-5 sm:gap-6">
             {filteredItems.slice(0, visibleCount).map((item, idx) => (
               <motion.div
                 key={item.id || idx}
@@ -313,7 +313,7 @@ export default function GalleryPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: (idx % 6) * 0.06 }}
                 onClick={() => openLightbox(idx)}
-                className="group cursor-pointer relative bg-[#181818] rounded-2xl overflow-hidden border border-white/10 hover:border-[#D04741]/60 shadow-xl transition-all duration-300 flex flex-col justify-between"
+                className="w-full sm:w-[calc(50%-0.8rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)] max-w-[340px] group cursor-pointer relative bg-[#181818] rounded-2xl overflow-hidden border border-white/10 hover:border-[#D04741]/60 shadow-xl transition-all duration-300 flex flex-col justify-between"
               >
                 {/* Photo Image Aspect */}
                 <div className="relative aspect-[16/10] bg-black/50 overflow-hidden">

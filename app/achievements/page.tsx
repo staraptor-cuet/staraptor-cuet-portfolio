@@ -369,8 +369,8 @@ export default function AchievementsPage() {
                   </span>
                 </div>
 
-                {/* 4 Posts Per Row Grid (Instagram Profile Style) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+                {/* Centered Posts: 1 in middle, 2 in middle, 3 in middle, 4 across, 5 starts new row */}
+                <div className="flex flex-wrap justify-center gap-4 sm:gap-5">
                   {feedPosts.map((post, idx) => (
                     <motion.div
                       key={post.id}
@@ -380,7 +380,7 @@ export default function AchievementsPage() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.45, delay: idx * 0.05 }}
                       onClick={() => setSelectedPost(post)}
-                      className="rounded-2xl bg-[#181818] border border-white/10 hover:border-[#D04741]/60 shadow-lg hover:shadow-2xl hover:shadow-[#D04741]/10 overflow-hidden flex flex-col group cursor-pointer transition-all duration-300 hover:-translate-y-1"
+                      className="w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-1rem)] max-w-[280px] sm:max-w-[320px] lg:max-w-[280px] rounded-2xl bg-[#181818] border border-white/10 hover:border-[#D04741]/60 shadow-lg hover:shadow-2xl hover:shadow-[#D04741]/10 overflow-hidden flex flex-col group cursor-pointer transition-all duration-300 hover:-translate-y-1"
                     >
                       {/* Square Image Box (1:1 Instagram style) */}
                       <div className="relative aspect-square w-full bg-[#121212] overflow-hidden">

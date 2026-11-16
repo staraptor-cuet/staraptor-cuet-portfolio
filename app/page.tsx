@@ -225,8 +225,8 @@ export default function Home() {
             </Button>
           </motion.div>
 
-          {/* Gallery Preview Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Gallery Preview Grid (Centered Flex) */}
+          <div className="flex flex-wrap justify-center gap-6">
             {(
               content?.gallery
                 ?.filter((item) => item.published !== false && (item.featuredOnHome !== false || item.isCover))
@@ -240,7 +240,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative"
+                className="w-full sm:w-[calc(50%-0.8rem)] lg:w-[calc(33.333%-1rem)] max-w-[380px] group relative"
               >
                 <Link href="/gallery" className="block">
                   <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#1f1f1f] border border-white/10 group-hover:border-[#D04741]/60 shadow-xl transition-all duration-300">
