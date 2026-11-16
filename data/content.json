@@ -5,10 +5,30 @@
     "aboutTitle": "We Are Staraptor",
     "aboutDescription": "Team Staraptor CUET is the first VTOL drone design team in Bangladesh from Chittagong University of Engineering & Technology (CUET). Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge UAV and VTOL aircraft systems. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!",
     "stats": [
-      { "id": "stat-1", "label": "Crew Size", "value": "20", "labelFirst": true },
-      { "id": "stat-2", "label": "VTOL Design Team", "value": "1st", "labelFirst": false },
-      { "id": "stat-3", "label": "Founding", "value": "2026", "labelFirst": true },
-      { "id": "stat-4", "label": "Target", "value": "July 2026", "labelFirst": true }
+      {
+        "id": "stat-1",
+        "label": "Crew Size",
+        "value": "20",
+        "labelFirst": true
+      },
+      {
+        "id": "stat-2",
+        "label": "VTOL Design Team",
+        "value": "1st",
+        "labelFirst": false
+      },
+      {
+        "id": "stat-3",
+        "label": "Founding",
+        "value": "2026",
+        "labelFirst": true
+      },
+      {
+        "id": "stat-4",
+        "label": "Target",
+        "value": "July 2026",
+        "labelFirst": true
+      }
     ],
     "proposalUrl": "https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing",
     "contactEmail": "staraptorcuet@gmail.com",
@@ -356,45 +376,150 @@
     "name": "STARAPTOR VTOL - V1",
     "heroImage": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png",
     "physicalData": [
-      { "id": "pd-1", "label": "Wingspan", "value": "1.340 m" },
-      { "id": "pd-2", "label": "Length", "value": "0.99 m" },
-      { "id": "pd-3", "label": "Payload Capacity", "value": "8 Kg" },
-      { "id": "pd-4", "label": "Approximate Weight", "value": "2 Kg" }
+      {
+        "id": "pd-1",
+        "label": "Wingspan",
+        "value": "1.340 m"
+      },
+      {
+        "id": "pd-2",
+        "label": "Length",
+        "value": "0.99 m"
+      },
+      {
+        "id": "pd-3",
+        "label": "Payload Capacity",
+        "value": "8 Kg"
+      },
+      {
+        "id": "pd-4",
+        "label": "Approximate Weight",
+        "value": "2 Kg"
+      }
     ],
     "performanceData": [
-      { "id": "perf-1", "label": "Cruise Speed", "value": "60-70 Kmph" },
-      { "id": "perf-2", "label": "Endurance", "value": "90 min" },
-      { "id": "perf-3", "label": "Wing Load", "value": "55-75 gm/dm²" }
+      {
+        "id": "perf-1",
+        "label": "Cruise Speed",
+        "value": "60-70 Kmph"
+      },
+      {
+        "id": "perf-2",
+        "label": "Endurance",
+        "value": "90 min"
+      },
+      {
+        "id": "perf-3",
+        "label": "Wing Load",
+        "value": "55-75 gm/dm²"
+      }
     ],
     "avionics": [
-      { "id": "av-1", "title": "Top Quality Materials", "desc": "Carbon Fiber / GRP Composite Sheet" },
-      { "id": "av-2", "title": "Airfoil Type", "desc": "Eppler E205" },
-      { "id": "av-3", "title": "Electronics", "desc": "BLDC motors, Pixhawk flight controller, GPS" }
+      {
+        "id": "av-1",
+        "title": "Top Quality Materials",
+        "desc": "Carbon Fiber / GRP Composite Sheet"
+      },
+      {
+        "id": "av-2",
+        "title": "Airfoil Type",
+        "desc": "Eppler E205"
+      },
+      {
+        "id": "av-3",
+        "title": "Electronics",
+        "desc": "BLDC motors, Pixhawk flight controller, GPS"
+      }
     ],
     "components": [
-      { "name": "3D Printer", "desc": "Used to manufacture custom aircraft parts such as mounts, brackets, and structural components during prototyping and testing." },
-      { "name": "LW-PLA Filament", "desc": "Lightweight PLA filament used for printing aerodynamic components such as wings and fuselage parts where low weight is critical." },
-      { "name": "PETG Filament", "desc": "Durable 3D printing material used for parts requiring higher strength and heat resistance." },
-      { "name": "Carbon Fiber Rods", "desc": "Structural reinforcement elements used inside wings or frames to increase stiffness while keeping weight low." },
-      { "name": "Brushless Motor", "desc": "Electric motor responsible for generating thrust to propel the aircraft." },
-      { "name": "Propellers", "desc": "Rotating blades that convert motor torque into thrust to move the aircraft through the air." },
-      { "name": "ESC (Electronic Speed Controller)", "desc": "Controls the speed and power delivered from the battery to the brushless motor." },
-      { "name": "Servo Motor", "desc": "Actuator used to control aircraft control surfaces such as ailerons, elevators, and rudders." },
-      { "name": "LiPo Battery", "desc": "Primary onboard power source that supplies electrical energy to motors and electronics." },
-      { "name": "LiPo Charger", "desc": "Specialized charger designed to safely charge lithium polymer batteries." },
-      { "name": "Flight Controller", "desc": "The central autopilot system that stabilizes the aircraft and manages navigation, sensors, and control algorithms." },
-      { "name": "Companion Computer", "desc": "Auxiliary onboard computer used for advanced processing such as computer vision, AI tasks, or mission logic." },
-      { "name": "GPS Module", "desc": "Provides global positioning data for navigation, waypoint following, and autonomous flight operations." },
-      { "name": "Airspeed Sensor", "desc": "Measures the aircraft's airspeed to support accurate flight control and efficiency optimization." },
-      { "name": "Camera", "desc": "Captures visual data for monitoring, surveillance, or computer vision tasks." },
-      { "name": "Wide Angle Lens", "desc": "Expands the camera's field of view to capture a broader visual area during flight." },
-      { "name": "Telemetry Radio", "desc": "Enables wireless data communication between the aircraft and the ground control station." },
-      { "name": "RC Transmitter", "desc": "Handheld remote controller used by the pilot to send control commands to the aircraft." },
-      { "name": "RC Receiver", "desc": "Onboard device that receives signals from the RC transmitter and passes them to the flight controller." }
+      {
+        "name": "3D Printer",
+        "desc": "Used to manufacture custom aircraft parts such as mounts, brackets, and structural components during prototyping and testing."
+      },
+      {
+        "name": "LW-PLA Filament",
+        "desc": "Lightweight PLA filament used for printing aerodynamic components such as wings and fuselage parts where low weight is critical."
+      },
+      {
+        "name": "PETG Filament",
+        "desc": "Durable 3D printing material used for parts requiring higher strength and heat resistance."
+      },
+      {
+        "name": "Carbon Fiber Rods",
+        "desc": "Structural reinforcement elements used inside wings or frames to increase stiffness while keeping weight low."
+      },
+      {
+        "name": "Brushless Motor",
+        "desc": "Electric motor responsible for generating thrust to propel the aircraft."
+      },
+      {
+        "name": "Propellers",
+        "desc": "Rotating blades that convert motor torque into thrust to move the aircraft through the air."
+      },
+      {
+        "name": "ESC (Electronic Speed Controller)",
+        "desc": "Controls the speed and power delivered from the battery to the brushless motor."
+      },
+      {
+        "name": "Servo Motor",
+        "desc": "Actuator used to control aircraft control surfaces such as ailerons, elevators, and rudders."
+      },
+      {
+        "name": "LiPo Battery",
+        "desc": "Primary onboard power source that supplies electrical energy to motors and electronics."
+      },
+      {
+        "name": "LiPo Charger",
+        "desc": "Specialized charger designed to safely charge lithium polymer batteries."
+      },
+      {
+        "name": "Flight Controller",
+        "desc": "The central autopilot system that stabilizes the aircraft and manages navigation, sensors, and control algorithms."
+      },
+      {
+        "name": "Companion Computer",
+        "desc": "Auxiliary onboard computer used for advanced processing such as computer vision, AI tasks, or mission logic."
+      },
+      {
+        "name": "GPS Module",
+        "desc": "Provides global positioning data for navigation, waypoint following, and autonomous flight operations."
+      },
+      {
+        "name": "Airspeed Sensor",
+        "desc": "Measures the aircraft's airspeed to support accurate flight control and efficiency optimization."
+      },
+      {
+        "name": "Camera",
+        "desc": "Captures visual data for monitoring, surveillance, or computer vision tasks."
+      },
+      {
+        "name": "Wide Angle Lens",
+        "desc": "Expands the camera's field of view to capture a broader visual area during flight."
+      },
+      {
+        "name": "Telemetry Radio",
+        "desc": "Enables wireless data communication between the aircraft and the ground control station."
+      },
+      {
+        "name": "RC Transmitter",
+        "desc": "Handheld remote controller used by the pilot to send control commands to the aircraft."
+      },
+      {
+        "name": "RC Receiver",
+        "desc": "Onboard device that receives signals from the RC transmitter and passes them to the flight controller."
+      }
     ],
     "analyses": [
-      { "src": "/images/analysis-img-2.png", "alt": "CFD Analysis 2", "caption": "VTOL UAV Aerodynamic CFD (Hover Mode Analysis)" },
-      { "src": "/images/analysis-img-1.png", "alt": "CFD Analysis 1", "caption": "VTOL UAV Pressure Distribution (Transition Mode)" }
+      {
+        "src": "/images/analysis-img-2.png",
+        "alt": "CFD Analysis 2",
+        "caption": "VTOL UAV Aerodynamic CFD (Hover Mode Analysis)"
+      },
+      {
+        "src": "/images/analysis-img-1.png",
+        "alt": "CFD Analysis 1",
+        "caption": "VTOL UAV Pressure Distribution (Transition Mode)"
+      }
     ]
   },
   "vtol2026": {

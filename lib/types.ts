@@ -122,6 +122,7 @@ export interface AchievementPost {
   image?: string;
   author?: string;
   featured?: boolean;
+  pinned?: boolean;
   createdAt?: string;
 }
 

@@ -16,7 +16,8 @@ import {
   User,
   ArrowUp,
   ArrowDown,
-  ExternalLink
+  ExternalLink,
+  Pin
 } from 'lucide-react';
 import { AchievementPost } from '@/lib/types';
 import ImageUploader from '@/components/admin/ImageUploader';
@@ -40,6 +41,7 @@ export default function AdminAchievementsPage() {
     content: '',
     image: '',
     featured: false,
+    pinned: false,
   });
 
   useEffect(() => {
@@ -95,7 +97,8 @@ export default function AdminAchievementsPage() {
       description: '',
       content: '',
       image: '',
-      featured: achievements.length === 0, // default first one to featured
+      featured: achievements.length === 0, // default first one to featured if empty
+      pinned: false,
     });
     setModalOpen(true);
   };
@@ -116,9 +119,21 @@ export default function AdminAchievementsPage() {
     let updated: AchievementPost[];
 
     if (editingItem) {
-      updated = achievements.map((item) =>
-        item.id === editingItem.id ? ({ ...item, ...formData } as AchievementPost) : item
-      );
+      updated = achievements.map((item) => {
+        if (item.id === editingItem.id) {
+          return {
+            ...item,
+            ...formData,
+            featured: Boolean(formData.featured),
+            pinned: Boolean(formData.pinned),
+          } as AchievementPost;
+        }
+        // If this item was marked featured, unfeature others so there's only 1 featured hero
+        if (formData.featured) {
+          return { ...item, featured: false };
+        }
+        return item;
+      });
     } else {
       const newItem: AchievementPost = {
         id: `ach-${Date.now()}`,
@@ -131,13 +146,18 @@ export default function AdminAchievementsPage() {
         content: formData.content || '',
         image: formData.image || '',
         featured: Boolean(formData.featured),
+        pinned: Boolean(formData.pinned),
         createdAt: new Date().toISOString(),
       };
-      // Prepend to top so recent post comes first
-      updated = [newItem, ...achievements];
+
+      // If new item is featured, unfeature existing
+      let baseList = achievements;
+      if (newItem.featured) {
+        baseList = achievements.map((a) => ({ ...a, featured: false }));
+      }
+      updated = [newItem, ...baseList];
     }
 
-    // If marked featured, we can ensure it is top or flagged
     await saveAchievements(updated);
     setModalOpen(false);
   };
@@ -149,9 +169,27 @@ export default function AdminAchievementsPage() {
   };
 
   const toggleFeatured = async (id: string) => {
+    // Make this the single featured post (or unfeature it)
+    const target = achievements.find((a) => a.id === id);
+    const willBeFeatured = !target?.featured;
+
     const updated = achievements.map((item) => {
       if (item.id === id) {
-        return { ...item, featured: !item.featured };
+        return { ...item, featured: willBeFeatured };
+      }
+      // If setting a new featured, unfeature others
+      if (willBeFeatured) {
+        return { ...item, featured: false };
+      }
+      return item;
+    });
+    await saveAchievements(updated);
+  };
+
+  const togglePinned = async (id: string) => {
+    const updated = achievements.map((item) => {
+      if (item.id === id) {
+        return { ...item, pinned: !item.pinned };
       }
       return item;
     });
@@ -276,14 +314,16 @@ export default function AdminAchievementsPage() {
                   {/* Details */}
                   <div className="space-y-1.5 flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      {idx === 0 && (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#D04741] text-white">
-                          ★ Top Featured Post
+                      {item.featured && (
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#D04741] text-white flex items-center gap-1 shadow">
+                          <span>★</span>
+                          <span>Hero Featured</span>
                         </span>
                       )}
-                      {item.featured && idx !== 0 && (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                          Pinned
+                      {item.pinned && (
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-black flex items-center gap-1 shadow">
+                          <Pin size={10} className="fill-black" />
+                          <span>Pinned</span>
                         </span>
                       )}
                       {item.badge && (
@@ -343,17 +383,33 @@ export default function AdminAchievementsPage() {
                   </div>
 
                   <div className="flex items-center gap-1">
+                    {/* Hero Feature Button */}
                     <button
                       onClick={() => toggleFeatured(item.id)}
                       className={`p-1.5 rounded-lg border transition-colors ${
                         item.featured
-                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                          ? 'bg-[#D04741] text-white border-[#ff6a64]'
+                          : 'bg-white/5 text-gray-400 hover:text-[#EF5F5A] border-white/5'
+                      }`}
+                      title={item.featured ? 'Unset from Hero Featured' : 'Set as Top Hero Featured'}
+                    >
+                      <Star size={14} className={item.featured ? 'fill-white' : ''} />
+                    </button>
+
+                    {/* Pin in Grid Button */}
+                    <button
+                      onClick={() => togglePinned(item.id)}
+                      className={`p-1.5 rounded-lg border transition-colors ${
+                        item.pinned
+                          ? 'bg-amber-500 text-black border-amber-400'
                           : 'bg-white/5 text-gray-400 hover:text-amber-300 border-white/5'
                       }`}
-                      title={item.featured ? 'Unpin' : 'Pin to top'}
+                      title={item.pinned ? 'Unpin from top of grid' : 'Pin to top of Instagram grid'}
                     >
-                      <Star size={14} className={item.featured ? 'fill-amber-400' : ''} />
+                      <Pin size={14} className={item.pinned ? 'fill-black' : ''} />
                     </button>
+
+                    {/* Edit */}
                     <button
                       onClick={() => openEditModal(item)}
                       className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors"
@@ -361,6 +417,8 @@ export default function AdminAchievementsPage() {
                     >
                       <Edit2 size={14} />
                     </button>
+
+                    {/* Delete */}
                     <button
                       onClick={() => handleDelete(item.id)}
                       className="p-1.5 rounded-lg bg-white/5 hover:bg-red-500/20 text-gray-400 hover:text-red-400 transition-colors"
@@ -516,18 +574,43 @@ export default function AdminAchievementsPage() {
                 />
               </div>
 
-              {/* Pin to Top Checkbox */}
-              <div className="flex items-center gap-2 pt-2">
-                <input
-                  type="checkbox"
-                  id="featured-check"
-                  checked={Boolean(formData.featured)}
-                  onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                  className="w-4 h-4 rounded text-[#D04741] focus:ring-[#D04741] bg-black/40 border-white/20"
-                />
-                <label htmlFor="featured-check" className="text-xs text-gray-300 cursor-pointer select-none">
-                  Pin / Highlight as Featured Achievement
-                </label>
+              {/* Feature & Pin Toggles */}
+              <div className="space-y-3 pt-2 border-t border-white/10">
+                <div className="flex items-start gap-2.5">
+                  <input
+                    type="checkbox"
+                    id="featured-check"
+                    checked={Boolean(formData.featured)}
+                    onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+                    className="w-4 h-4 rounded text-[#D04741] focus:ring-[#D04741] bg-black/40 border-white/20 mt-0.5"
+                  />
+                  <div>
+                    <label htmlFor="featured-check" className="text-xs font-bold text-white cursor-pointer select-none flex items-center gap-1.5">
+                      <span>⭐ Set as Top Featured Hero Post</span>
+                    </label>
+                    <p className="text-[11px] text-gray-400 mt-0.5">
+                      Displays this dispatch in the prominent 2-column top hero card with the fixed text box and &quot;See more...&quot; full-page viewer.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <input
+                    type="checkbox"
+                    id="pinned-check"
+                    checked={Boolean(formData.pinned)}
+                    onChange={(e) => setFormData({ ...formData, pinned: e.target.checked })}
+                    className="w-4 h-4 rounded text-amber-500 focus:ring-amber-500 bg-black/40 border-white/20 mt-0.5"
+                  />
+                  <div>
+                    <label htmlFor="pinned-check" className="text-xs font-bold text-amber-300 cursor-pointer select-none flex items-center gap-1.5">
+                      <span>📌 Pin to Top of Instagram-Style Grid</span>
+                    </label>
+                    <p className="text-[11px] text-gray-400 mt-0.5">
+                      Keeps this post pinned at the beginning of the 4-column archive feed with a visible pinned badge.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* Modal Footer */}
