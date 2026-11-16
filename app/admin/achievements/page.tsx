@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { AchievementPost } from '@/lib/types';
 import ImageUploader from '@/components/admin/ImageUploader';
+import { setPreviewDraft } from '@/lib/preview';
 
 export default function AdminAchievementsPage() {
   const [achievements, setAchievements] = useState<AchievementPost[]>([]);
@@ -54,6 +55,13 @@ export default function AdminAchievementsPage() {
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
+
+  // Broadcast real-time preview draft whenever achievements list or item changes
+  useEffect(() => {
+    if (!loading) {
+      setPreviewDraft('achievements', achievements);
+    }
+  }, [achievements, loading]);
 
   const saveAchievements = async (updated: AchievementPost[]) => {
     setSaving(true);

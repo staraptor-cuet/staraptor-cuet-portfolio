@@ -14,6 +14,7 @@ import {
   Trash2
 } from 'lucide-react';
 import { GeneralSettings } from '@/lib/types';
+import { setPreviewDraft } from '@/lib/preview';
 
 export default function AdminGeneralPage() {
   const [general, setGeneral] = useState<GeneralSettings | null>(null);
@@ -30,6 +31,13 @@ export default function AdminGeneralPage() {
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
+
+  // Broadcast real-time preview draft whenever admin modifies form values
+  useEffect(() => {
+    if (general && !loading) {
+      setPreviewDraft('general', general);
+    }
+  }, [general, loading]);
 
   const handleSave = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();

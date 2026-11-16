@@ -20,8 +20,11 @@ import {
   Menu,
   X,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Eye,
+  Sparkles
 } from 'lucide-react';
+import AdminPreviewModal from './AdminPreviewModal';
 
 export default function AdminLayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -29,6 +32,17 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [storageStatus, setStorageStatus] = useState<{ isCloudConnected: boolean; provider: string } | null>(null);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
+
+  const getPreviewRoute = (adminPath: string) => {
+    if (adminPath.includes('/admin/achievements')) return '/achievements';
+    if (adminPath.includes('/admin/crew')) return '/crew';
+    if (adminPath.includes('/admin/sponsors')) return '/sponsors';
+    if (adminPath.includes('/admin/progress')) return '/progress';
+    if (adminPath.includes('/admin/gallery')) return '/gallery';
+    if (adminPath.includes('/admin/aircraft') || adminPath.includes('/admin/vtol')) return '/vtol-2026';
+    return '/';
+  };
 
   const isLoginPage = pathname === '/admin/login';
 
@@ -88,12 +102,21 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
           <Image src="/images/logo.svg" alt="Staraptor" width={32} height={32} className="object-contain" />
           <span className="font-bebas text-xl text-white tracking-wider">Staraptor Admin</span>
         </div>
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="text-gray-300 hover:text-white p-2 rounded-lg bg-white/5"
-        >
-          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setPreviewOpen(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#D04741]/20 border border-[#D04741]/40 text-[#ff817a] text-xs font-bold"
+          >
+            <Eye size={13} />
+            <span>Preview</span>
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-gray-300 hover:text-white p-2 rounded-lg bg-white/5"
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {/* Sidebar Navigation */}
@@ -113,6 +136,20 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
               <div className="text-[10px] uppercase font-bold text-[#D04741] tracking-widest">Admin Control</div>
             </div>
           </Link>
+        </div>
+
+        {/* Live Preview Trigger Button */}
+        <div className="px-3 pt-3">
+          <button
+            onClick={() => setPreviewOpen(true)}
+            className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#D04741]/20 to-[#EF5F5A]/20 border border-[#D04741]/40 text-[#ff817a] hover:text-white hover:bg-[#D04741] transition-all text-xs font-bold shadow-md group"
+          >
+            <span className="flex items-center gap-2">
+              <Eye size={15} className="text-[#EF5F5A] group-hover:text-white" />
+              <span>Live Preview Site</span>
+            </span>
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          </button>
         </div>
 
         {/* Navigation Links */}
@@ -183,11 +220,30 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 min-w-0 overflow-y-auto">
+      <main className="flex-1 min-w-0 overflow-y-auto relative">
         <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
           {children}
         </div>
+
+        {/* Floating Quick Live Preview Pill (Bottom-Right) */}
+        <div className="fixed bottom-6 right-6 z-40 hidden sm:block">
+          <button
+            onClick={() => setPreviewOpen(true)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1e1e1e] hover:bg-[#D04741] text-white border border-white/20 hover:border-[#D04741] shadow-2xl transition-all duration-300 font-bold text-xs group"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <Eye size={14} className="text-[#EF5F5A] group-hover:text-white" />
+            <span>Preview Site</span>
+          </button>
+        </div>
       </main>
+
+      {/* Live Preview Modal */}
+      <AdminPreviewModal
+        isOpen={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+        initialRoute={getPreviewRoute(pathname)}
+      />
     </div>
   );
 }

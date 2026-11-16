@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SiteLoader from '@/components/SiteLoader';
+import PreviewBanner from '@/components/PreviewBanner';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
@@ -124,6 +125,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${outfit.variable} ${bebas.variable} ${orbitron.variable} ${montserrat.variable} ${mechanical.variable} flex flex-col min-h-screen bg-[#202020] text-gray-300 antialiased`}>
+        <Suspense fallback={null}>
+          <PreviewBanner />
+        </Suspense>
         <Suspense fallback={null}>
           <SiteLoader />
         </Suspense>

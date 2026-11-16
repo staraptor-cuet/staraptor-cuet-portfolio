@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { GalleryItem } from '@/lib/types';
 import ImageUploader from '@/components/admin/ImageUploader';
+import { setPreviewDraft } from '@/lib/preview';
 
 export default function AdminGalleryPage() {
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
@@ -70,6 +71,13 @@ export default function AdminGalleryPage() {
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
+
+  // Broadcast real-time preview draft whenever gallery photos or status change
+  useEffect(() => {
+    if (!loading) {
+      setPreviewDraft('gallery', gallery);
+    }
+  }, [gallery, loading]);
 
   const saveGallery = async (updated: GalleryItem[]) => {
     setSaving(true);

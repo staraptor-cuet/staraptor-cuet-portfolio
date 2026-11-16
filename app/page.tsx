@@ -120,34 +120,25 @@ export default function Home() {
                 </Link>
               </motion.div>
 
-              {/* 3 Stat Cards Below the Plane */}
+              {/* Stat Cards Below the Plane */}
               <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 w-full max-w-md mt-4 mb-6 z-10">
-                <Card className="bg-[#181818]/90 border border-white/10 border-b-2 border-b-transparent rounded-xl p-3 sm:p-3.5 text-center shadow-md hover:border-b-[#D04741] hover:shadow-[0_8px_24px_rgba(208,71,65,0.45)] hover:-translate-y-1 transition-all duration-300 group/stat cursor-pointer">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#EF5F5A] transition-colors">
-                    {crewCount}
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
-                    CREW MEMBERS
-                  </span>
-                </Card>
-
-                <Card className="bg-[#181818]/90 border border-white/10 border-b-2 border-b-transparent rounded-xl p-3 sm:p-3.5 text-center shadow-md hover:border-b-[#D04741] hover:shadow-[0_8px_24px_rgba(208,71,65,0.45)] hover:-translate-y-1 transition-all duration-300 group/stat cursor-pointer">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#EF5F5A] transition-colors">
-                    1st
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
-                    VTOL TEAM IN BD
-                  </span>
-                </Card>
-
-                <Card className="bg-[#181818]/90 border border-white/10 border-b-2 border-b-transparent rounded-xl p-3 sm:p-3.5 text-center shadow-md hover:border-b-[#D04741] hover:shadow-[0_8px_24px_rgba(208,71,65,0.45)] hover:-translate-y-1 transition-all duration-300 group/stat cursor-pointer">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#EF5F5A] transition-colors">
-                    2026
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
-                    METU COMPETITION
-                  </span>
-                </Card>
+                {(general?.stats && general.stats.length > 0 ? general.stats.slice(0, 3) : [
+                  { id: '1', label: 'CREW MEMBERS', value: String(crewCount) },
+                  { id: '2', label: 'VTOL TEAM IN BD', value: '1st' },
+                  { id: '3', label: 'METU COMPETITION', value: '2026' },
+                ]).map((stat) => (
+                  <Card
+                    key={stat.id}
+                    className="bg-[#181818]/90 border border-white/10 border-b-2 border-b-transparent rounded-xl p-3 sm:p-3.5 text-center shadow-md hover:border-b-[#D04741] hover:shadow-[0_8px_24px_rgba(208,71,65,0.45)] hover:-translate-y-1 transition-all duration-300 group/stat cursor-pointer"
+                  >
+                    <span className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat leading-none block mb-1.5 group-hover/stat:text-[#EF5F5A] transition-colors truncate">
+                      {stat.value}
+                    </span>
+                    <span className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-gray-400 uppercase tracking-wider block line-clamp-1">
+                      {stat.label}
+                    </span>
+                  </Card>
+                ))}
               </div>
 
               {/* Action Buttons: Meet Crew + Our Progress */}
@@ -176,17 +167,23 @@ export default function Home() {
               variants={fadeUp}
               custom={0.15}
             >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-montserrat uppercase tracking-tight text-[#EF5F5A] mb-6 leading-[1.08]">
-                WE ARE<br />STARAPTOR
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-montserrat uppercase tracking-tight text-[#EF5F5A] mb-6 leading-[1.08] whitespace-pre-line">
+                {general?.aboutTitle || 'WE ARE\nSTARAPTOR'}
               </h2>
               
-              <div className="space-y-4 text-gray-300 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed max-w-2xl text-justify sm:text-left">
-                <p>
-                  Team Staraptor CUET is the first <strong className="text-white font-semibold">VTOL drone design team in Bangladesh</strong> from <strong className="text-white font-semibold">Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related engineering fields—is dedicated to designing cutting-edge UAV and VTOL aircraft systems.
-                </p>
-                <p>
-                  Our engineering focus seamlessly integrates a <strong className="text-white font-bold">Lightweight Airframe</strong>, <strong className="text-white font-bold">Advanced Aerodynamics</strong>, and <strong className="text-white font-bold">Smart Control Systems</strong> to deliver an aircraft that excels in stability, endurance, efficiency, and autonomous mission accuracy. Our vision is to showcase Bangladesh&apos;s engineering talent on the global stage. Join us as we take flight!
-                </p>
+              <div className="space-y-4 text-gray-300 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed max-w-2xl text-justify sm:text-left whitespace-pre-line">
+                {general?.aboutDescription ? (
+                  <p>{general.aboutDescription}</p>
+                ) : (
+                  <>
+                    <p>
+                      Team Staraptor CUET is the first <strong className="text-white font-semibold">VTOL drone design team in Bangladesh</strong> from <strong className="text-white font-semibold">Chittagong University of Engineering & Technology (CUET)</strong>. Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related engineering fields—is dedicated to designing cutting-edge UAV and VTOL aircraft systems.
+                    </p>
+                    <p>
+                      Our engineering focus seamlessly integrates a <strong className="text-white font-bold">Lightweight Airframe</strong>, <strong className="text-white font-bold">Advanced Aerodynamics</strong>, and <strong className="text-white font-bold">Smart Control Systems</strong> to deliver an aircraft that excels in stability, endurance, efficiency, and autonomous mission accuracy. Our vision is to showcase Bangladesh&apos;s engineering talent on the global stage. Join us as we take flight!
+                    </p>
+                  </>
+                )}
               </div>
             </motion.div>
 
