@@ -41,7 +41,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
     if (adminPath.includes('/admin/sponsors')) return '/sponsors';
     if (adminPath.includes('/admin/progress')) return '/progress';
     if (adminPath.includes('/admin/gallery')) return '/gallery';
-    if (adminPath.includes('/admin/aircraft') || adminPath.includes('/admin/vtol')) return '/vtol-2026';
+    if (adminPath.includes('/admin/progress') || adminPath.includes('/admin/aircraft')) return '/progress';
     return '/';
   };
 
@@ -91,7 +91,6 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
     { name: 'Crew Members', href: '/admin/crew', icon: Users },
     { name: 'Sponsors', href: '/admin/sponsors', icon: Handshake },
     { name: 'Gallery', href: '/admin/gallery', icon: ImageIcon },
-    { name: 'VTOL 2026', href: '/admin/vtol-2026', icon: Trophy },
     { name: 'Cloud Storage', href: '/admin/storage-setup', icon: Cloud },
   ];
 

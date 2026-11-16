@@ -47,7 +47,6 @@ export async function PUT(req: NextRequest) {
       revalidatePath('/progress');
       revalidatePath('/achievements');
       revalidatePath('/gallery');
-      revalidatePath('/vtol-2026');
       revalidatePath('/contact');
     } catch (e) {
       // Revalidation non-fatal in development

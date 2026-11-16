@@ -219,13 +219,6 @@ export default function AdminDashboardPage() {
               icon: ImageIcon,
               action: 'Manage Gallery',
             },
-            {
-              title: 'VTOL 2026 Project',
-              desc: 'Manage METU VTOL 2026 competition overview, mission requirements, and competition poster.',
-              href: '/admin/vtol-2026',
-              icon: Trophy,
-              action: 'Manage VTOL 2026',
-            },
           ].map((card, i) => {
             const Icon = card.icon;
             return (

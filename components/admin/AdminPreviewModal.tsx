@@ -24,9 +24,8 @@ interface AdminPreviewModalProps {
 
 const PREVIEW_PAGES = [
   { label: 'Landing Page (Home)', path: '/' },
+  { label: 'Our Progress & Specs', path: '/progress' },
   { label: 'Achievements Feed', path: '/achievements' },
-  { label: 'Aircraft & Models', path: '/vtol-2026' },
-  { label: 'Our Progress', path: '/progress' },
   { label: 'Crew & Team', path: '/crew' },
   { label: 'Sponsors & Partners', path: '/sponsors' },
   { label: 'Media Gallery', path: '/gallery' },
@@ -218,3 +217,4 @@ export default function AdminPreviewModal({
     </div>
   );
 }
+
