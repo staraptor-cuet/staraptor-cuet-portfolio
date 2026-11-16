@@ -326,37 +326,42 @@ export default function GalleryPage() {
                     unoptimized={item.src.startsWith('data:') || item.src.startsWith('http')}
                   />
 
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
+                  {/* Dual Top & Bottom Scrim Gradients for guaranteed contrast on ANY background */}
+                  <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none z-[1]" />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none z-[1]" />
 
-                  {/* Top Badges */}
-                  <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2 z-10">
-                    <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-gray-200">
+                  {/* Top Badges (High Contrast Solid Pills) */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 z-10">
+                    <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                       {item.category || 'Media'}
                     </span>
-                    {item.isCover && (
-                      <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-[#D04741] text-white font-bold shadow-md">
-                        ★ Cover
-                      </span>
-                    )}
-                    {item.project && !item.isCover && (
-                      <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-[#D04741]/30 border border-[#D04741]/40 text-[#ff8c86]">
-                        {item.project}
-                      </span>
-                    )}
+                    <div className="flex items-center gap-1.5">
+                      {item.isCover && (
+                        <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#D04741] border border-[#ff6660] text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)] flex items-center gap-1">
+                          <span>★</span>
+                          <span>Cover</span>
+                        </span>
+                      )}
+                      {item.project && !item.isCover && (
+                        <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-black/90 backdrop-blur-md border border-[#EF5F5A] text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)] flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#EF5F5A]" />
+                          <span>{item.project}</span>
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {/* Hover Quick Zoom Pill */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                    <div className="p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-xl group-hover:scale-110 transition-transform">
+                    <div className="p-3 rounded-full bg-black/80 backdrop-blur-md border border-white/30 text-white shadow-2xl group-hover:scale-110 transition-transform">
                       <Maximize2 size={18} />
                     </div>
                   </div>
 
-                  {/* Date Stamp on Card */}
-                  <div className="absolute bottom-3 right-3.5 z-10 text-[10px] font-mono text-gray-400 flex items-center gap-1">
-                    <Calendar size={11} />
-                    <span>{item.date}</span>
+                  {/* Date Stamp on Card (High-Contrast Solid Dark Pill with Border) */}
+                  <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white text-[10px] font-mono font-semibold flex items-center gap-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                    <Calendar size={11} className="text-[#EF5F5A]" />
+                    <span className="text-gray-100">{item.date}</span>
                   </div>
                 </div>
 

@@ -252,28 +252,30 @@ export default function Home() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
+                    {/* Dual Top & Bottom Scrim Gradients for guaranteed contrast on ANY background */}
+                    <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none z-[1]" />
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none z-[1]" />
 
-                    {/* Top Badges */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10">
-                      <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-gray-200">
+                    {/* Top Badges (High Contrast Solid Pills) */}
+                    <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2 z-10">
+                      <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                         {item.category || 'Media'}
                       </span>
                       {item.project && (
-                        <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-[#D04741]/40 border border-[#D04741]/50 text-white font-bold">
-                          {item.project}
+                        <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-black/90 backdrop-blur-md border border-[#EF5F5A] text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)] flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#EF5F5A]" />
+                          <span>{item.project}</span>
                         </span>
                       )}
                     </div>
 
-                    {/* Bottom Title & Eye Icon */}
-                    <div className="absolute bottom-4 left-4 right-4 z-10">
-                      <h3 className="text-lg font-bold font-montserrat text-white group-hover:text-[#ff7872] transition-colors truncate">
+                    {/* Bottom Title & Caption */}
+                    <div className="absolute bottom-3.5 left-3.5 right-3.5 z-10">
+                      <h3 className="text-base sm:text-lg font-bold font-montserrat text-white group-hover:text-[#ff7872] transition-colors truncate drop-shadow-md">
                         {item.title}
                       </h3>
                       {item.caption && (
-                        <p className="text-xs text-gray-300 line-clamp-1 mt-1 font-sans">
+                        <p className="text-xs text-gray-200 line-clamp-1 mt-0.5 font-sans drop-shadow-sm">
                           {item.caption}
                         </p>
                       )}

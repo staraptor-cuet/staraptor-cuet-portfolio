@@ -446,38 +446,45 @@ export default function AdminGalleryPage() {
                     unoptimized={item.src.startsWith('data:') || item.src.startsWith('http')}
                   />
 
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
+                  {/* Dual Top & Bottom Scrim Gradients for guaranteed contrast on ANY background */}
+                  <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none z-[1]" />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none z-[1]" />
 
-                  {/* Badges on Image */}
+                  {/* Badges on Image (High Contrast Solid Pills) */}
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 z-10">
-                    <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-gray-200">
+                    <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                       {item.category || 'Render'}
                     </span>
                     <div className="flex items-center gap-1.5">
                       {item.isCover && (
-                        <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-[#D04741] text-white font-bold shadow-md">
-                          ★ Cover
+                        <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#D04741] border border-[#ff6660] text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)] flex items-center gap-1">
+                          <span>★</span>
+                          <span>Cover</span>
                         </span>
                       )}
                       {!isPublished && (
-                        <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/30">
-                          Draft (Hidden)
+                        <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-red-600/90 border border-red-400 text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                          Draft
                         </span>
                       )}
                     </div>
                   </div>
 
-                  {/* Project Tag */}
-                  {item.project && (
-                    <div className="absolute bottom-2.5 left-3 text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 border border-white/10 text-gray-300">
-                      {item.project}
-                    </div>
-                  )}
+                  {/* Bottom Tags: Project & Date (High-Contrast Solid Dark Pills) */}
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 z-10">
+                    {item.project ? (
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md border border-[#EF5F5A] text-white shadow-[0_2px_8px_rgba(0,0,0,0.8)] flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#EF5F5A]" />
+                        <span>{item.project}</span>
+                      </span>
+                    ) : (
+                      <span />
+                    )}
 
-                  {/* Date Tag */}
-                  <div className="absolute bottom-2.5 right-3 text-[10px] font-mono text-gray-400">
-                    {item.date}
+                    <div className="px-2.5 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white text-[10px] font-mono font-semibold flex items-center gap-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                      <Calendar size={11} className="text-[#EF5F5A]" />
+                      <span className="text-gray-100">{item.date}</span>
+                    </div>
                   </div>
                 </div>
 
