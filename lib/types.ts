@@ -134,11 +134,41 @@ export interface VtolCompetition {
   requirements: RequirementItem[];
 }
 
+export interface DynamicSection {
+  id: string;
+  title: string;
+  type: 'specs' | 'components' | 'text';
+  specs?: SpecItem[];
+  components?: ComponentItem[];
+  content?: string;
+}
+
+export interface ProgressProject {
+  id: string;
+  slug: string;
+  name: string;
+  category?: string;
+  competition?: string;
+  summary: string;
+  heroImage: string;
+  badges?: string[];
+  statusText?: string;
+  date?: string;
+  featured?: boolean;
+  physicalData: SpecItem[];
+  performanceData: SpecItem[];
+  avionics: AvionicsItem[];
+  components: ComponentItem[];
+  analyses: AnalysisItem[];
+  customSections?: DynamicSection[];
+}
+
 export interface SiteContent {
   general: GeneralSettings;
   crew: CrewMember[];
   sponsors: SponsorTier[];
   progress: ProgressItem[];
+  projects?: ProgressProject[];
   achievements?: AchievementPost[];
   gallery: GalleryItem[];
   aircraft: AircraftSpecs;

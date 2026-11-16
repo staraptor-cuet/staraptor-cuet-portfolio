@@ -1,63 +1,119 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Plane, Cpu, Shield, Activity, CheckCircle2, Layers } from 'lucide-react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Plane,
+  Cpu,
+  Shield,
+  Activity,
+  ArrowRight,
+  ArrowLeft,
+  Layers,
+  ChevronRight,
+  Plus,
+  Compass,
+  Zap,
+  Info
+} from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useSiteContent } from '@/lib/useContent';
+import { ProgressProject, SpecItem, AvionicsItem, ComponentItem, AnalysisItem } from '@/lib/types';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 25 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: 'easeOut', delay },
+    transition: { duration: 0.6, ease: 'easeOut', delay },
   }),
 };
 
-export default function ProgressPage() {
+function ProgressContent() {
   const { content, loading } = useSiteContent();
-  const aircraft = content?.aircraft;
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  // Fallback defaults if not set yet in content
-  const physicalData = aircraft?.physicalData || [
-    { id: 'pd-1', label: 'Wingspan', value: '1.340 m' },
-    { id: 'pd-2', label: 'Length', value: '0.99 m' },
-    { id: 'pd-3', label: 'Payload Capacity', value: '8 Kg' },
-    { id: 'pd-4', label: 'Approximate Weight', value: '2 Kg' },
-  ];
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
-  const performanceData = aircraft?.performanceData || [
-    { id: 'perf-1', label: 'Cruise Speed', value: '60-70 Kmph' },
-    { id: 'perf-2', label: 'Endurance', value: '90 min' },
-    { id: 'perf-3', label: 'Wing Load', value: '55-75 gm/dm²' },
-  ];
+  // Fallback default project if content hasn't loaded or projects array is empty
+  const defaultFallbackProject: ProgressProject = {
+    id: 'staraptor-vtol-v1',
+    slug: 'vtol-v1',
+    name: content?.aircraft?.name || 'STARAPTOR VTOL - V1',
+    category: 'FEATURED PROJECT: Active Aerospace Platform',
+    competition: 'METU VTOL 2026',
+    summary:
+      'Flagship hybrid tilt-rotor VTOL aircraft engineered for the 9th METU Competition. Combines fixed-wing aerodynamic cruise speed with vertical hover precision and autonomous maritime delivery.',
+    heroImage: content?.aircraft?.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png',
+    badges: ['HYBRID VTOL', 'TILT-ROTOR', 'MODEL 1 ACTIVE', 'AUTONOMOUS'],
+    statusText: 'Active Prototype & Flight Ready',
+    date: '2026-03-01',
+    featured: true,
+    physicalData: content?.aircraft?.physicalData || [
+      { id: 'pd-1', label: 'Wingspan', value: '1.340 m' },
+      { id: 'pd-2', label: 'Length', value: '0.99 m' },
+      { id: 'pd-3', label: 'Payload Capacity', value: '8 Kg' },
+      { id: 'pd-4', label: 'Approximate Weight', value: '2 Kg' },
+    ],
+    performanceData: content?.aircraft?.performanceData || [
+      { id: 'perf-1', label: 'Cruise Speed', value: '60-70 Kmph' },
+      { id: 'perf-2', label: 'Endurance', value: '90 min' },
+      { id: 'perf-3', label: 'Wing Load', value: '55-75 gm/dm²' },
+    ],
+    avionics: content?.aircraft?.avionics || [
+      { id: 'av-1', title: 'Top Quality Materials', desc: 'Carbon Fiber / GRP Composite Sheet' },
+      { id: 'av-2', title: 'Airfoil Type', desc: 'Eppler E205' },
+      { id: 'av-3', title: 'Electronics', desc: 'BLDC motors, Pixhawk flight controller, GPS' },
+    ],
+    components: content?.aircraft?.components || [],
+    analyses: content?.aircraft?.analyses || [],
+    customSections: [],
+  };
 
-  const avionics = aircraft?.avionics || [
-    { id: 'av-1', title: 'Top Quality Materials', desc: 'Carbon Fiber / GRP Composite Sheet' },
-    { id: 'av-2', title: 'Airfoil Type', desc: 'Eppler E205' },
-    { id: 'av-3', title: 'Electronics', desc: 'BLDC motors, Pixhawk flight controller, GPS' },
-  ];
+  const projects: ProgressProject[] =
+    content?.projects && content.projects.length > 0 ? content.projects : [defaultFallbackProject];
 
-  const components = aircraft?.components || [];
-  const analyses = aircraft?.analyses || [];
+  // Sync selected project with URL query param if present
+  useEffect(() => {
+    const projParam = searchParams.get('project');
+    if (projParam) {
+      setSelectedProjectId(projParam);
+    }
+  }, [searchParams]);
+
+  const activeProject = selectedProjectId
+    ? projects.find((p) => p.id === selectedProjectId || p.slug === selectedProjectId) || projects[0]
+    : null;
+
+  const handleSelectProject = (projectId: string) => {
+    setSelectedProjectId(projectId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    router.push(`/progress?project=${projectId}`, { scroll: false });
+  };
+
+  const handleBackToFleet = () => {
+    setSelectedProjectId(null);
+    router.push('/progress', { scroll: false });
+  };
 
   return (
     <div className="bg-[#202020] min-h-screen py-12 md:py-20 text-gray-sub flex flex-col items-center justify-start">
       <div className="w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
+        {/* Header Section */}
         <motion.div
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-10 sm:mb-14"
           initial="hidden"
           animate="visible"
           variants={fadeUp}
           custom={0}
         >
           <Badge variant="glow" className="uppercase tracking-widest text-[11px] font-mono px-3 py-1 mb-3">
-            Aircraft Fleet & Specifications
+            Aircraft Fleet & Engineering Progress
           </Badge>
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-orbitron font-bold text-[#d84e46]">
             Our Progress
@@ -70,193 +126,425 @@ export default function ProgressPage() {
         {loading ? (
           <div className="py-20 text-center">
             <div className="animate-spin w-8 h-8 border-2 border-[#D04741] border-t-transparent rounded-full mx-auto mb-4" />
-            <p className="text-sm text-gray-400 font-mono">Loading aircraft telemetry...</p>
+            <p className="text-sm text-gray-400 font-mono">Loading aircraft fleet...</p>
           </div>
         ) : (
-          /* Main Aircraft Specifications Box */
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65 }}
-            className="space-y-12 mb-16"
-          >
-            {/* Model Card Container */}
-            <div className="bg-[#242424] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl border border-white/10">
-              
-              {/* Aircraft Identity Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#EF5F5A] font-bold">
-                      Active Prototype & Flight Ready
-                    </span>
-                  </div>
-                  <h2 className="text-2xl sm:text-4xl font-extrabold font-montserrat text-white tracking-tight">
-                    {aircraft?.name || 'STARAPTOR VTOL - V1'}
-                  </h2>
-                </div>
+          <AnimatePresence mode="wait">
+            {!activeProject ? (
+              /* VIEW 1: PROJECTS SUMMARY BOX (Centered flex wrapping) */
+              <motion.div
+                key="summary-list"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="w-full"
+              >
+                {/* Centered flex wrap: 1 in middle, 2 middle, 3 middle, 4 middle, 5 wraps */}
+                <div className="flex flex-wrap justify-center gap-6 sm:gap-8 max-w-5xl mx-auto">
+                  {projects.map((project, idx) => (
+                    <motion.div
+                      key={project.id || idx}
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.45, delay: idx * 0.1 }}
+                      className="w-full sm:w-[calc(100%-1rem)] md:w-[calc(50%-1rem)] lg:w-[calc(50%-1rem)] max-w-xl flex"
+                    >
+                      <div
+                        onClick={() => handleSelectProject(project.id)}
+                        className="group relative bg-[#242424] hover:bg-[#282828] border border-white/10 hover:border-[#D04741]/60 rounded-3xl p-5 sm:p-7 shadow-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer hover:shadow-[0_15px_40px_rgba(208,71,65,0.22)] w-full overflow-hidden"
+                      >
+                        {/* Top Accent Line */}
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#D04741]/50 to-transparent group-hover:via-[#EF5F5A] transition-all" />
 
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1.5 rounded-full text-xs font-mono uppercase font-bold tracking-wider bg-black/60 border border-white/20 text-white shadow-md">
-                    Hybrid Tilt-Rotor
-                  </span>
-                  <span className="px-3 py-1.5 rounded-full text-xs font-mono uppercase font-bold tracking-wider bg-[#D04741] text-white shadow-md">
-                    Model 1
-                  </span>
-                </div>
-              </div>
+                        <div>
+                          {/* Card Subtitle & Lab Tag */}
+                          <div className="flex items-center justify-between gap-2 mb-3">
+                            <span className="text-[11px] font-mono uppercase tracking-widest text-[#EF5F5A] font-bold">
+                              {project.category || 'Featured Platform'}
+                            </span>
+                            <span className="text-[10px] font-mono text-gray-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/5">
+                              {project.competition || 'CUET Aerospace'}
+                            </span>
+                          </div>
 
-              {/* 3D Aircraft Hero Render */}
-              <div className="relative w-full aspect-video md:aspect-[21/10] mb-10 border-b border-white/10 pb-6 flex items-center justify-center overflow-hidden bg-[#1a1a1a]/70 rounded-2xl">
-                <div className="relative w-full h-[90%] z-10 flex items-center justify-center group">
-                  <div className="absolute inset-0 bg-[#D04741]/20 rounded-full blur-[90px] opacity-40 group-hover:opacity-75 transition-opacity duration-500 pointer-events-none" />
-                  <Image
-                    src={aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
-                    alt={aircraft?.name || 'Staraptor VTOL Aircraft'}
-                    fill
-                    className="object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)] transition-transform duration-500 group-hover:scale-105"
-                    priority
-                    unoptimized={aircraft?.heroImage?.startsWith('data:') || aircraft?.heroImage?.startsWith('http')}
-                  />
-                </div>
-              </div>
+                          {/* Cover Image / 3D Render Preview */}
+                          <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-[#181818] border border-white/5 mb-5 group-hover:border-[#D04741]/30 transition-colors">
+                            <Image
+                              src={project.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png'}
+                              alt={project.name}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                              sizes="(max-width: 768px) 100vw, 50vw"
+                            />
 
-              {/* Engineering Specifications (3 Columns) */}
-              <div className="mb-10">
-                <Card className="bg-[#1b1b1b] border border-white/10 rounded-2xl shadow-xl overflow-hidden p-0">
-                  <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
-                    <div className="w-5 h-5 flex items-center justify-center">
-                      <Activity size={18} className="text-[#202020]" />
-                    </div>
-                    <h3 className="text-title-box">Model 1 Engineering Specifications</h3>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 p-6 sm:p-8 gap-8">
-                    {/* Physical Data */}
-                    <div>
-                      <h4 className="text-subtitle-box mb-5 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">
-                        Physical Data
-                      </h4>
-                      <ul className="space-y-3.5 font-semibold text-sm font-['Montserrat']">
-                        {physicalData.map((item, i) => (
-                          <li key={item.id || i} className="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span className="text-gray-300">{item.label}</span>
-                            <span className="text-primary text-base font-bold">{item.value}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Performance Data */}
-                    <div className="md:border-l md:border-white/10 md:pl-8">
-                      <h4 className="text-subtitle-box mb-5 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">
-                        Performance Data
-                      </h4>
-                      <ul className="space-y-3.5 font-semibold text-sm">
-                        {performanceData.map((item, i) => (
-                          <li key={item.id || i} className="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span className="text-gray-300">{item.label}</span>
-                            <span className="text-primary text-base font-bold">{item.value}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Avionics Package */}
-                    <div className="md:border-l md:border-white/10 md:pl-8">
-                      <h4 className="text-subtitle-box mb-5 border-b border-gray-sub/20 pb-2 uppercase tracking-wide">
-                        Avionics & Systems
-                      </h4>
-                      <ul className="space-y-4 text-sm">
-                        {avionics.map((item, i) => (
-                          <li key={item.id || i} className="flex gap-3">
-                            <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <span className="text-white text-xs">✓</span>
+                            {/* Floating Active Status Pill */}
+                            <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10 flex items-center gap-1.5 shadow-md">
+                              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                              <span className="text-[10px] font-mono uppercase tracking-wider text-white font-medium">
+                                {project.statusText || 'Active Prototype'}
+                              </span>
                             </div>
-                            <div>
-                              <span className="text-primary font-bold block mb-0.5">{item.title}</span>
-                              <span className="text-xs text-gray-400">{item.desc}</span>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </Card>
-              </div>
 
-              {/* Component Bill of Materials (Centered flex wrapping rule) */}
-              {components.length > 0 && (
-                <div className="mb-10">
-                  <Card className="bg-[#1b1b1b] rounded-2xl shadow-xl overflow-hidden border border-white/10 p-0">
-                    <div className="bg-[#e4e4e4] px-6 py-4 flex items-center gap-3">
-                      <div className="w-5 h-5 flex items-center justify-center">
-                        <Cpu size={18} className="text-[#202020]" />
+                            {/* Floating Arrow Icon Button */}
+                            <div className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-black/70 backdrop-blur-md border border-white/10 group-hover:bg-[#D04741] group-hover:border-[#D04741] flex items-center justify-center text-white transition-all shadow-lg group-hover:scale-110">
+                              <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                            </div>
+                          </div>
+
+                          {/* Title */}
+                          <h2 className="text-xl sm:text-2xl font-bold font-montserrat text-white tracking-tight group-hover:text-[#ff8883] transition-colors mb-2">
+                            {project.name}
+                          </h2>
+
+                          {/* Summary Paragraph */}
+                          <p className="text-xs sm:text-sm text-gray-300 leading-relaxed line-clamp-3 mb-4">
+                            {project.summary}
+                          </p>
+
+                          {/* Badges */}
+                          {project.badges && project.badges.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mb-5">
+                              {project.badges.map((badge, bIdx) => (
+                                <span
+                                  key={bIdx}
+                                  className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-white/5 border border-white/5 text-gray-300 group-hover:border-[#D04741]/30 transition-colors"
+                                >
+                                  {badge}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Quick Spec Metrics Snapshot & CTA Button */}
+                        <div className="pt-4 border-t border-white/10 mt-auto">
+                          {project.physicalData && project.physicalData.length > 0 && (
+                            <div className="grid grid-cols-2 gap-2 mb-4 bg-black/30 p-2.5 rounded-xl border border-white/5">
+                              {project.physicalData.slice(0, 2).map((metric, mIdx) => (
+                                <div key={mIdx} className="text-center">
+                                  <span className="text-[10px] uppercase font-mono text-gray-400 block">
+                                    {metric.label}
+                                  </span>
+                                  <span className="text-xs font-bold text-white font-mono">
+                                    {metric.value}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          <div className="flex items-center justify-between text-xs font-bold text-[#EF5F5A] group-hover:text-white transition-colors">
+                            <span>Explore Full Specifications & Data</span>
+                            <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                              View Specs <ArrowRight size={13} />
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <h3 className="text-title-box">Basic Component List</h3>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ) : (
+              /* VIEW 2: FULL DETAILED ENGINEERING SPECIFICATIONS PAGE */
+              <motion.div
+                key="detail-view"
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.5 }}
+                className="space-y-12 mb-16 w-full"
+              >
+                {/* Back Button Navigation Bar */}
+                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                  <button
+                    onClick={handleBackToFleet}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-gray-300 hover:text-white transition-all shadow-sm"
+                  >
+                    <ArrowLeft size={14} className="text-[#EF5F5A]" />
+                    <span>← Back to Fleet Overview</span>
+                  </button>
+
+                  <div className="flex items-center gap-2 text-xs font-mono text-gray-400">
+                    <span>Project:</span>
+                    <span className="text-white font-bold">{activeProject.name}</span>
+                  </div>
+                </div>
+
+                {/* Model Card Container */}
+                <div className="bg-[#242424] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl border border-white/10">
+                  
+                  {/* Aircraft Identity Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#EF5F5A] font-bold">
+                          {activeProject.statusText || 'Active Prototype & Flight Ready'}
+                        </span>
+                      </div>
+                      <h2 className="text-2xl sm:text-4xl font-extrabold font-montserrat text-white tracking-tight">
+                        {activeProject.name}
+                      </h2>
+                      <p className="text-xs sm:text-sm text-gray-400 mt-2 max-w-2xl leading-relaxed">
+                        {activeProject.summary}
+                      </p>
                     </div>
 
-                    <div className="p-6 sm:p-8">
-                      <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-                        {components.map((comp, idx) => (
+                    {activeProject.badges && activeProject.badges.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-2">
+                        {activeProject.badges.map((badge, bIdx) => (
+                          <Badge
+                            key={bIdx}
+                            variant={bIdx === 0 ? 'default' : 'outline'}
+                            className="font-mono text-xs uppercase px-3 py-1"
+                          >
+                            {badge}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* High-Resolution Hero Render */}
+                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-gradient-to-b from-[#181818] to-[#121212] border border-white/5 mb-10 shadow-inner group">
+                    <Image
+                      src={activeProject.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png'}
+                      alt={activeProject.name}
+                      fill
+                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-700 ease-out"
+                      priority
+                      sizes="(max-width: 1200px) 100vw, 1200px"
+                    />
+                  </div>
+
+                  {/* Specifications Section Header */}
+                  <div className="bg-white/5 rounded-2xl p-4 sm:p-5 border border-white/5 mb-8 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#D04741]/20 border border-[#D04741]/40 flex items-center justify-center text-[#EF5F5A] shrink-0">
+                      <Activity size={20} />
+                    </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-bold text-white font-montserrat">
+                        Engineering Specifications & Technical Data
+                      </h3>
+                      <p className="text-xs text-gray-400">
+                        Aerodynamic geometries, payload capacity, performance envelope, and flight systems.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 3-Column Specifications Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    
+                    {/* 1. Physical Data */}
+                    <Card className="bg-[#1e1e1e] border-white/10 p-5 rounded-2xl shadow-lg">
+                      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
+                        <Plane size={18} className="text-[#D04741]" />
+                        <h4 className="text-sm font-bold font-mono uppercase tracking-wider text-white">
+                          Physical Data
+                        </h4>
+                      </div>
+                      <div className="space-y-3">
+                        {activeProject.physicalData && activeProject.physicalData.length > 0 ? (
+                          activeProject.physicalData.map((item, idx) => (
+                            <div key={item.id || idx} className="flex justify-between items-center text-xs border-b border-white/5 pb-2">
+                              <span className="text-gray-400 font-mono">{item.label}</span>
+                              <span className="text-white font-semibold font-mono">{item.value}</span>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-xs text-gray-500">No physical specs configured.</p>
+                        )}
+                      </div>
+                    </Card>
+
+                    {/* 2. Performance Data */}
+                    <Card className="bg-[#1e1e1e] border-white/10 p-5 rounded-2xl shadow-lg">
+                      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
+                        <Activity size={18} className="text-[#D04741]" />
+                        <h4 className="text-sm font-bold font-mono uppercase tracking-wider text-white">
+                          Performance Data
+                        </h4>
+                      </div>
+                      <div className="space-y-3">
+                        {activeProject.performanceData && activeProject.performanceData.length > 0 ? (
+                          activeProject.performanceData.map((item, idx) => (
+                            <div key={item.id || idx} className="flex justify-between items-center text-xs border-b border-white/5 pb-2">
+                              <span className="text-gray-400 font-mono">{item.label}</span>
+                              <span className="text-white font-semibold font-mono">{item.value}</span>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-xs text-gray-500">No performance specs configured.</p>
+                        )}
+                      </div>
+                    </Card>
+
+                    {/* 3. Avionics & Systems */}
+                    <Card className="bg-[#1e1e1e] border-white/10 p-5 rounded-2xl shadow-lg">
+                      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/10">
+                        <Cpu size={18} className="text-[#D04741]" />
+                        <h4 className="text-sm font-bold font-mono uppercase tracking-wider text-white">
+                          Avionics & Systems
+                        </h4>
+                      </div>
+                      <div className="space-y-3">
+                        {activeProject.avionics && activeProject.avionics.length > 0 ? (
+                          activeProject.avionics.map((item, idx) => (
+                            <div key={item.id || idx} className="text-xs border-b border-white/5 pb-2">
+                              <span className="text-[#EF5F5A] font-semibold block mb-0.5">{item.title}</span>
+                              <span className="text-gray-400">{item.desc}</span>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-xs text-gray-500">No avionics configured.</p>
+                        )}
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* DYNAMIC CUSTOM SECTIONS (Added by Admin) */}
+                  {activeProject.customSections && activeProject.customSections.length > 0 && (
+                    <div className="space-y-8 mb-12">
+                      {activeProject.customSections.map((sec, secIdx) => (
+                        <div key={sec.id || secIdx} className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-6 shadow-xl">
+                          <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-white/10">
+                            <Layers size={18} className="text-[#D04741]" />
+                            <h4 className="text-base font-bold text-white font-montserrat">
+                              {sec.title}
+                            </h4>
+                          </div>
+
+                          {/* Custom Specs Table */}
+                          {sec.type === 'specs' && sec.specs && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                              {sec.specs.map((sp, spIdx) => (
+                                <div key={sp.id || spIdx} className="bg-black/20 p-3 rounded-xl border border-white/5 flex justify-between items-center text-xs">
+                                  <span className="text-gray-400 font-mono">{sp.label}</span>
+                                  <span className="text-white font-bold font-mono">{sp.value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Custom Component List */}
+                          {sec.type === 'components' && sec.components && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              {sec.components.map((cp, cpIdx) => (
+                                <div key={cpIdx} className="bg-black/20 p-3.5 rounded-xl border border-white/5">
+                                  <span className="text-white font-bold text-xs block mb-1">{cp.name}</span>
+                                  <span className="text-gray-400 text-xs leading-relaxed">{cp.desc}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Custom Text / Overview */}
+                          {sec.type === 'text' && sec.content && (
+                            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-line">
+                              {sec.content}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Component Bill of Materials (BOM) List */}
+                  {activeProject.components && activeProject.components.length > 0 && (
+                    <div className="mb-12">
+                      <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-white/10">
+                        <Layers size={20} className="text-[#D04741]" />
+                        <h4 className="text-lg font-bold text-white font-montserrat">
+                          Component Bill of Materials (BOM)
+                        </h4>
+                        <span className="text-xs font-mono text-gray-400 ml-auto">
+                          {activeProject.components.length} Selected Parts
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {activeProject.components.map((comp, idx) => (
                           <div
                             key={idx}
-                            className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)] p-4 rounded-xl bg-black/40 border border-white/5 hover:border-[#D04741]/40 transition-colors flex flex-col justify-between"
+                            className="bg-[#1a1a1a] p-3.5 rounded-xl border border-white/5 hover:border-white/20 transition-colors"
                           >
-                            <span className="font-montserrat font-bold text-sm text-white block mb-1">
+                            <span className="text-xs font-bold text-white block mb-1 font-montserrat">
                               {comp.name}
                             </span>
-                            <span className="text-xs text-gray-400 leading-relaxed font-sans">
+                            <span className="text-[11px] text-gray-400 leading-relaxed block">
                               {comp.desc}
                             </span>
                           </div>
                         ))}
                       </div>
                     </div>
-                  </Card>
-                </div>
-              )}
+                  )}
 
-              {/* Aerodynamic CFD Analyses */}
-              {analyses.length > 0 && (
-                <div>
-                  <div className="flex items-center gap-2 border-b border-white/10 pb-3 mb-6">
-                    <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#EF5F5A] font-bold">
-                      Aerodynamic CFD Simulations & Testing
-                    </span>
-                  </div>
-
-                  <div className="flex flex-wrap justify-center gap-6">
-                    {analyses.map((analysis, idx) => (
-                      <div
-                        key={idx}
-                        className="w-full md:w-[calc(50%-0.75rem)] rounded-2xl overflow-hidden bg-black/50 border border-white/10 hover:border-[#D04741]/50 transition-all group"
-                      >
-                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/60">
-                          <Image
-                            src={analysis.src}
-                            alt={analysis.alt}
-                            fill
-                            className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                        <div className="p-4 bg-[#1a1a1a] border-t border-white/5">
-                          <p className="text-xs sm:text-sm font-semibold text-gray-300 font-montserrat">
-                            {analysis.caption}
-                          </p>
-                        </div>
+                  {/* Aerodynamic CFD & Structural Analyses */}
+                  {activeProject.analyses && activeProject.analyses.length > 0 && (
+                    <div>
+                      <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-white/10">
+                        <Activity size={20} className="text-[#D04741]" />
+                        <h4 className="text-lg font-bold text-white font-montserrat">
+                          Aerodynamic & CFD Flight Analyses
+                        </h4>
                       </div>
-                    ))}
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {activeProject.analyses.map((analysis, idx) => (
+                          <div
+                            key={idx}
+                            className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 p-3 group"
+                          >
+                            <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-black/40 mb-3">
+                              <Image
+                                src={analysis.src}
+                                alt={analysis.alt || 'Analysis'}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                              />
+                            </div>
+                            <p className="text-xs font-mono text-gray-300 px-1">
+                              {analysis.caption}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Return Button at Bottom */}
+                  <div className="mt-12 pt-6 border-t border-white/10 flex justify-center">
+                    <button
+                      onClick={handleBackToFleet}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white text-xs font-bold shadow-lg shadow-[#D04741]/20 hover:opacity-95 transition-all"
+                    >
+                      <ArrowLeft size={16} />
+                      <span>← Back to Our Progress Fleet Overview</span>
+                    </button>
                   </div>
                 </div>
-              )}
-
-            </div>
-          </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         )}
-
       </div>
     </div>
+  );
+}
+
+export default function ProgressPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-[#202020] min-h-screen py-20 text-center">
+        <div className="animate-spin w-8 h-8 border-2 border-[#D04741] border-t-transparent rounded-full mx-auto mb-4" />
+        <p className="text-sm text-gray-400 font-mono">Loading telemetry...</p>
+      </div>
+    }>
+      <ProgressContent />
+    </Suspense>
   );
 }

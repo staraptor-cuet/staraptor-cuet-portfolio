@@ -47,6 +47,33 @@ export default function AdminAircraftPage() {
       });
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.error || 'Failed to save');
+
+      // Two-way sync: update primary project in projects array
+      try {
+        const contentRes = await fetch('/api/content');
+        const allContent = await contentRes.json();
+        if (allContent.projects && allContent.projects.length > 0) {
+          const updatedProjects = [...allContent.projects];
+          updatedProjects[0] = {
+            ...updatedProjects[0],
+            name: specs.name,
+            heroImage: specs.heroImage,
+            physicalData: specs.physicalData,
+            performanceData: specs.performanceData,
+            avionics: specs.avionics,
+            components: specs.components,
+            analyses: specs.analyses,
+          };
+          await fetch('/api/content', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ section: 'projects', data: updatedProjects }),
+          });
+        }
+      } catch (e) {
+        console.warn('Projects sync warning:', e);
+      }
+
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
     } catch (err: any) {
