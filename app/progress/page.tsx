@@ -46,9 +46,9 @@ export default function ProgressPage() {
           </div>
 
           <NotchedProjectCard
-            href="/vtol-2026"
+            href="/vtol-2026?model=1#fleet"
             title="METU VTOL 2026 — Staraptor V1"
-            description="Flagship hybrid tilt-rotor VTOL aircraft engineered for the 9th METU Competition. Combines fixed-wing aerodynamic cruise speed with vertical hover precision and autonomous maritime delivery."
+            description="Flagship hybrid tilt-rotor VTOL aircraft engineered for the 9th METU Competition. Combines fixed-wing aerodynamic cruise speed with vertical hover precision and autonomous maritime delivery. Click to inspect full aircraft specifications and technical data."
             image="/images/progress image.jpg"
             dim={0.35}
             screen={{

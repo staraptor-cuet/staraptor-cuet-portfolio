@@ -185,18 +185,18 @@ export default function AdminDashboardPage() {
               action: 'Update Progress',
             },
             {
-              title: 'Achievements & Posts',
-              desc: 'Publish social-style updates, awards, milestones, and testing announcements with photos.',
-              href: '/admin/achievements',
-              icon: Award,
-              action: 'Manage Posts',
-            },
-            {
               title: 'Aircraft Specs (VTOL Model 1)',
               desc: 'Configure STARAPTOR VTOL - V1 dimensions, endurance, payload capacity, avionics, and component bill of materials.',
               href: '/admin/aircraft',
               icon: Plane,
               action: 'Edit Model 1 Specs',
+            },
+            {
+              title: 'Achievements & Posts',
+              desc: 'Publish social-style updates, awards, milestones, and testing announcements with photos.',
+              href: '/admin/achievements',
+              icon: Award,
+              action: 'Manage Posts',
             },
             {
               title: 'Crew & Team',
