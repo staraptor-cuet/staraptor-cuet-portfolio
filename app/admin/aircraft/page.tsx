@@ -140,9 +140,14 @@ export default function AdminAircraftPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-white font-montserrat">Aircraft Specifications</h1>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="p-2 rounded-lg bg-[#D04741]/10 text-[#EF5F5A]">
+              <Plane size={20} />
+            </span>
+            <h1 className="text-2xl font-extrabold text-white font-montserrat">Aircraft Specifications (VTOL Model 1)</h1>
+          </div>
           <p className="text-xs text-gray-400 mt-1">
-            Update technical drone metrics, physical dimensions, avionics package, and component bill of materials.
+            Configure technical drone metrics, physical dimensions, avionics package, and components for <strong className="text-white">STARAPTOR VTOL - V1</strong>.
           </p>
         </div>
 
@@ -155,10 +160,10 @@ export default function AdminAircraftPage() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="bg-[#D04741] hover:bg-[#b03934] text-white px-5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-[#D04741]/20 disabled:opacity-50"
+            className="bg-gradient-to-r from-[#D04741] to-[#EF5F5A] hover:opacity-95 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-[#D04741]/20 disabled:opacity-50"
           >
             {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
-            <span>Save All Specs</span>
+            <span>Save Model 1 Specs</span>
           </button>
         </div>
       </div>

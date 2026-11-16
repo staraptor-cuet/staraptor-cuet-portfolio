@@ -343,32 +343,6 @@
       "isCover": false,
       "featuredOnHome": false,
       "published": true
-    },
-    {
-      "id": "gal-5",
-      "src": "/images/we are staraptor bg.png",
-      "title": "Staraptor Mascot Silhouette",
-      "caption": "Aesthetic aerospace emblem artwork developed for competition livery and uniforms.",
-      "category": "Branding",
-      "project": "Team Staraptor",
-      "year": "2026",
-      "date": "2026-01-05",
-      "isCover": false,
-      "featuredOnHome": false,
-      "published": true
-    },
-    {
-      "id": "gal-6",
-      "src": "/images/logo.png",
-      "title": "Official Team Insignia",
-      "caption": "The vanguard crest representing Chittagong University of Engineering & Technology.",
-      "category": "Branding",
-      "project": "Team Staraptor",
-      "year": "2026",
-      "date": "2026-01-01",
-      "isCover": false,
-      "featuredOnHome": false,
-      "published": true
     }
   ],
   "aircraft": {

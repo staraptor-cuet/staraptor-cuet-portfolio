@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
+  Home,
   Users,
   Handshake,
   TrendingUp,
@@ -83,14 +84,14 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
 
   const navItems = [
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+    { name: 'Home (Landing Page)', href: '/admin/general', icon: Home },
+    { name: 'Our Progress', href: '/admin/progress', icon: TrendingUp },
     { name: 'Achievements', href: '/admin/achievements', icon: Award },
+    { name: 'Aircraft Specs (VTOL Model 1)', href: '/admin/aircraft', icon: Plane },
     { name: 'Crew Members', href: '/admin/crew', icon: Users },
     { name: 'Sponsors', href: '/admin/sponsors', icon: Handshake },
-    { name: 'Progress', href: '/admin/progress', icon: TrendingUp },
     { name: 'Gallery', href: '/admin/gallery', icon: ImageIcon },
-    { name: 'Aircraft Specs', href: '/admin/aircraft', icon: Plane },
     { name: 'VTOL 2026', href: '/admin/vtol-2026', icon: Trophy },
-    { name: 'Landing Page & Stats', href: '/admin/general', icon: Sliders },
     { name: 'Cloud Storage', href: '/admin/storage-setup', icon: Cloud },
   ];
 

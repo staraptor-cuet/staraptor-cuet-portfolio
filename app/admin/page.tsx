@@ -15,7 +15,9 @@ import {
   ArrowRight,
   Shield,
   Layers,
-  Award
+  Award,
+  Home,
+  Trophy
 } from 'lucide-react';
 import { SiteContent } from '@/lib/types';
 
@@ -169,11 +171,32 @@ export default function AdminDashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             {
+              title: 'Home / Landing Page',
+              desc: 'Edit hero tagline ("Engineers Bound by Flight"), "We Are Staraptor" section, landing stats counters, proposal link, and contacts.',
+              href: '/admin/general',
+              icon: Home,
+              action: 'Edit Landing Page',
+            },
+            {
+              title: 'Our Progress',
+              desc: 'Publish design and testing milestones with photos and status reports.',
+              href: '/admin/progress',
+              icon: TrendingUp,
+              action: 'Update Progress',
+            },
+            {
               title: 'Achievements & Posts',
               desc: 'Publish social-style updates, awards, milestones, and testing announcements with photos.',
               href: '/admin/achievements',
               icon: Award,
               action: 'Manage Posts',
+            },
+            {
+              title: 'Aircraft Specs (VTOL Model 1)',
+              desc: 'Configure STARAPTOR VTOL - V1 dimensions, endurance, payload capacity, avionics, and component bill of materials.',
+              href: '/admin/aircraft',
+              icon: Plane,
+              action: 'Edit Model 1 Specs',
             },
             {
               title: 'Crew & Team',
@@ -190,13 +213,6 @@ export default function AdminDashboardPage() {
               action: 'Manage Sponsors',
             },
             {
-              title: 'Progress Milestones',
-              desc: 'Publish design and testing milestones with photos and status reports.',
-              href: '/admin/progress',
-              icon: TrendingUp,
-              action: 'Update Progress',
-            },
-            {
               title: 'Media Gallery',
               desc: 'Upload drone renders, workshop photos, CFD analyses, and event pictures.',
               href: '/admin/gallery',
@@ -204,18 +220,11 @@ export default function AdminDashboardPage() {
               action: 'Manage Gallery',
             },
             {
-              title: 'Aircraft Specs',
-              desc: 'Edit drone dimensions, endurance, payload capacity, avionics, and component list.',
-              href: '/admin/aircraft',
-              icon: Plane,
-              action: 'Edit Specs',
-            },
-            {
-              title: 'Landing Page & Hero',
-              desc: 'Edit hero tagline ("Engineers Bound by Flight"), "We Are Staraptor" section, landing stats counters, proposal link, and contacts.',
-              href: '/admin/general',
-              icon: Layers,
-              action: 'Edit Landing Page',
+              title: 'VTOL 2026 Project',
+              desc: 'Manage METU VTOL 2026 competition overview, mission requirements, and competition poster.',
+              href: '/admin/vtol-2026',
+              icon: Trophy,
+              action: 'Manage VTOL 2026',
             },
           ].map((card, i) => {
             const Icon = card.icon;
