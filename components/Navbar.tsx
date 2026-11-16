@@ -38,7 +38,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 md:h-20">
             
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 shrink-0">
+            <Link href="/" className="flex items-center gap-2 shrink-0 outline-none focus:outline-none focus:ring-0">
               <div className="relative w-12 h-12 md:w-16 md:h-16 -my-2">
                 <Image src="/images/logo.svg" alt="Staraptor Logo" fill className="object-contain" priority />
               </div>
@@ -53,7 +53,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.path}
-                  className={`relative text-base font-semibold transition-colors py-1 ${
+                  className={`relative text-base font-semibold transition-colors py-1 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none ${
                     pathname === link.path ? 'text-white' : 'text-gray-300 hover:text-white'
                   }`}
                 >
@@ -73,14 +73,14 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className="hidden sm:inline-flex px-4 py-2 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-all text-sm font-semibold"
+                className="hidden sm:inline-flex px-4 py-2 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-all text-sm font-semibold outline-none focus:outline-none focus:ring-0"
               >
                 Contact Us
               </Link>
 
               {/* Hamburger button (mobile only) */}
               <button
-                className="md:hidden flex items-center justify-center w-10 h-10 rounded-md text-white hover:bg-white/10 transition-colors"
+                className="md:hidden flex items-center justify-center w-10 h-10 rounded-md text-white hover:bg-white/10 transition-colors outline-none focus:outline-none focus:ring-0"
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-label="Toggle menu"
               >
@@ -123,7 +123,7 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.path}
-                      className={`flex items-center gap-3 py-3 px-3 rounded-lg text-base font-semibold transition-colors ${
+                      className={`flex items-center gap-3 py-3 px-3 rounded-lg text-base font-semibold transition-colors outline-none focus:outline-none focus:ring-0 ${
                         pathname === link.path
                           ? 'text-white bg-white/8'
                           : 'text-gray-sub hover:text-white hover:bg-white/5'

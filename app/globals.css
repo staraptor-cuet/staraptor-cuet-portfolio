@@ -7,6 +7,14 @@
     @apply bg-background text-gray-sub font-sans;
   }
 
+  /* Remove default browser focus rings on links and interactive elements */
+  a:focus,
+  a:focus-visible,
+  button:focus,
+  button:focus-visible {
+    outline: none !important;
+  }
+
   /* Typography Design System */
   .text-title-main {
     font-family: var(--font-montserrat);
