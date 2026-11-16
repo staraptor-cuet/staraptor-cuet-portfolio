@@ -22,6 +22,11 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  // Never render the public website navbar inside the admin portal
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   const links = [
     { name: 'Home', path: '/' },
     { name: 'Our Progress', path: '/progress' },

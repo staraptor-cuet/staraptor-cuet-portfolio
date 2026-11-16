@@ -2,12 +2,19 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { TextHoverEffect, FooterBackgroundGradient } from '@/components/ui/hover-footer';
 import { useSiteContent } from '@/lib/useContent';
 
 export default function Footer() {
+  const pathname = usePathname();
   const { content } = useSiteContent();
+
+  // Never render the public website footer inside the admin portal
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
   const contactEmail = content?.general?.contactEmail || 'staraptorcuet@gmail.com';
   const contactPhone = content?.general?.contactPhone || '01972723321';
   const headquarters = content?.general?.headquarters || 'Kaptai Highway, Raozan, Pahartoli Road, Chattogram 4349, Bangladesh';
