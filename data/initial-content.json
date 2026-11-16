@@ -276,43 +276,79 @@
       "id": "gal-1",
       "src": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png",
       "title": "Staraptor VTOL 3D Model",
+      "caption": "Aerodynamic high-speed hybrid tilt-rotor 3D airframe render with high-aspect Eppler E205 wings.",
       "category": "Render",
-      "date": "2026"
+      "project": "Staraptor V1",
+      "year": "2026",
+      "date": "2026-03-01",
+      "isCover": true,
+      "featuredOnHome": true,
+      "published": true
     },
     {
       "id": "gal-2",
       "src": "/images/progress image.jpg",
-      "title": "Team Testing Session",
-      "category": "Progress",
-      "date": "2026"
+      "title": "Team Testing & Prototype Workshop",
+      "caption": "CUET aerospace engineering team conducting motor thrust benchmarking and structural assembly.",
+      "category": "Workshop",
+      "project": "Staraptor V1",
+      "year": "2026",
+      "date": "2026-02-15",
+      "isCover": false,
+      "featuredOnHome": true,
+      "published": true
     },
     {
       "id": "gal-3",
       "src": "/images/analysis-img-1.png",
       "title": "CFD Pressure Distribution",
-      "category": "Analysis",
-      "date": "2026"
+      "caption": "Transition mode aerodynamic surface pressure contours simulated in ANSYS Fluent.",
+      "category": "CFD Analysis",
+      "project": "METU VTOL 2026",
+      "year": "2026",
+      "date": "2026-01-20",
+      "isCover": false,
+      "featuredOnHome": true,
+      "published": true
     },
     {
       "id": "gal-4",
       "src": "/images/analysis-img-2.png",
       "title": "Velocity Streamlines Analysis",
-      "category": "Analysis",
-      "date": "2026"
+      "caption": "Hover mode downwash turbulence and crosswind hover stabilization aerodynamics.",
+      "category": "CFD Analysis",
+      "project": "METU VTOL 2026",
+      "year": "2026",
+      "date": "2026-01-10",
+      "isCover": false,
+      "featuredOnHome": false,
+      "published": true
     },
     {
       "id": "gal-5",
       "src": "/images/we are staraptor bg.png",
-      "title": "Staraptor Team Emblem",
+      "title": "Staraptor Mascot Silhouette",
+      "caption": "Aesthetic aerospace emblem artwork developed for competition livery and uniforms.",
       "category": "Branding",
-      "date": "2026"
+      "project": "Team Staraptor",
+      "year": "2026",
+      "date": "2026-01-05",
+      "isCover": false,
+      "featuredOnHome": false,
+      "published": true
     },
     {
       "id": "gal-6",
       "src": "/images/logo.png",
-      "title": "Official Insignia",
+      "title": "Official Team Insignia",
+      "caption": "The vanguard crest representing Chittagong University of Engineering & Technology.",
       "category": "Branding",
-      "date": "2026"
+      "project": "Team Staraptor",
+      "year": "2026",
+      "date": "2026-01-01",
+      "isCover": false,
+      "featuredOnHome": false,
+      "published": true
     }
   ],
   "aircraft": {

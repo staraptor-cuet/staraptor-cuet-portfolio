@@ -60,8 +60,16 @@ export interface GalleryItem {
   id: string;
   src: string;
   title: string;
+  caption?: string;
   category: string;
+  project?: string;
+  year?: string;
   date: string;
+  isCover?: boolean;
+  featuredOnHome?: boolean;
+  published?: boolean;
+  order?: number;
+  createdAt?: string;
 }
 
 export interface SpecItem {

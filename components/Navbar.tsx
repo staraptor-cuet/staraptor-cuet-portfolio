@@ -28,6 +28,7 @@ export default function Navbar() {
     { name: 'Achievements', path: '/achievements' },
     { name: 'Crew', path: '/crew' },
     { name: 'Sponsors', path: '/sponsors' },
+    { name: 'Gallery', path: '/gallery' },
   ];
 
   return (

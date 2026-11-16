@@ -18,6 +18,7 @@ export default function Footer() {
     { label: 'Achievements', href: '/achievements' },
     { label: 'Crew', href: '/crew' },
     { label: 'Sponsors', href: '/sponsors' },
+    { label: 'Gallery', href: '/gallery' },
     { label: 'Contact Us', href: '/contact' },
   ];
 
@@ -134,10 +135,8 @@ export default function Footer() {
         {/* Bottom Copyright & Status Bar */}
         <div className="pt-2 pb-1 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-500/70 font-mono border-t border-white/5">
           <p>© {new Date().getFullYear()} Team Staraptor CUET. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <Link href="/admin" className="text-[10px] text-gray-500/40 hover:text-[#EF5F5A] transition-colors">
-              Admin Portal
-            </Link>
+          <div className="text-[11px] text-gray-500/50">
+            Engineers Bound by Flight
           </div>
         </div>
 

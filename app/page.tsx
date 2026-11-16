@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useSiteContent } from '@/lib/useContent';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ArrowRight, Eye, ImageIcon } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 35 },
@@ -189,6 +190,101 @@ export default function Home() {
               </div>
             </motion.div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Gallery Showcase Section */}
+      <section className="py-20 md:py-28 bg-[#181818] border-t border-white/5 relative overflow-hidden">
+        {/* Aerospace subtle background ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#D04741]/10 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeUp}
+            custom={0}
+          >
+            <div>
+              <span className="text-[11px] uppercase font-mono tracking-[0.25em] text-[#EF5F5A] font-bold block mb-2 flex items-center gap-2">
+                <ImageIcon size={14} /> Aerospace Archives
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-montserrat uppercase tracking-tight text-white">
+                Visual Media & Field Logs
+              </h2>
+              <p className="text-gray-400 text-sm sm:text-base max-w-xl mt-3 leading-relaxed">
+                Explore our high-fidelity drone renders, workshop fabrications, aerodynamic CFD simulations, and autonomous flight trials.
+              </p>
+            </div>
+
+            <Button asChild size="default" className="rounded-xl font-bold px-6 py-2.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-[#D04741]/50 transition-all shrink-0">
+              <Link href="/gallery" className="inline-flex items-center gap-2">
+                <span>Explore Full Gallery</span>
+                <ArrowRight size={15} />
+              </Link>
+            </Button>
+          </motion.div>
+
+          {/* Gallery Preview Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(
+              content?.gallery
+                ?.filter((item) => item.published !== false && (item.featuredOnHome !== false || item.isCover))
+                ?.slice(0, 3) ||
+              content?.gallery?.slice(0, 3) ||
+              []
+            ).map((item, idx) => (
+              <motion.div
+                key={item.id || idx}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="group relative"
+              >
+                <Link href="/gallery" className="block">
+                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#1f1f1f] border border-white/10 group-hover:border-[#D04741]/60 shadow-xl transition-all duration-300">
+                    <Image
+                      src={item.src}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
+
+                    {/* Top Badges */}
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10">
+                      <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-gray-200">
+                        {item.category || 'Media'}
+                      </span>
+                      {item.project && (
+                        <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-[#D04741]/40 border border-[#D04741]/50 text-white font-bold">
+                          {item.project}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Bottom Title & Eye Icon */}
+                    <div className="absolute bottom-4 left-4 right-4 z-10">
+                      <h3 className="text-lg font-bold font-montserrat text-white group-hover:text-[#ff7872] transition-colors truncate">
+                        {item.title}
+                      </h3>
+                      {item.caption && (
+                        <p className="text-xs text-gray-300 line-clamp-1 mt-1 font-sans">
+                          {item.caption}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
