@@ -15,7 +15,7 @@ import {
   buildUserTurn,
 } from './prompt';
 import { matchShare, search } from './retrieve';
-import { cannedReply } from './smalltalk';
+import { OFF_TOPIC_REPLY, cannedReply, isOffTopic } from './smalltalk';
 import type { Hit } from './retrieve';
 import {
   cacheGet,
@@ -367,6 +367,20 @@ export function runChat(input: ChatInput): ReadableStream {
       }
       const chunks = mergeChunks(facts.extraChunks, hits);
       topic = chunks[0]?.topic;
+
+      // Off-topic guardrail: questions unrelated to the team or drone engineering never reach the answer model.
+      // Follow-ups and non-English questions are judged on their English rewrite; without one they pass through.
+      const judged = query !== input.question || (input.history.length === 0 && !foreign);
+      if (judged) {
+        const bestShare = hits.length ? Math.max(matchShare(query, hits[0].chunk), matchShare(input.question, hits[0].chunk)) : 0;
+        if (isOffTopic(query, facts.extraChunks.length > 0, bestShare) && isOffTopic(input.question, facts.extraChunks.length > 0, bestShare)) {
+          mode = 'cached';
+          flag = 'offtopic';
+          topic = 'faq';
+          say((foreign ? ENGLISH_NOTE : '') + OFF_TOPIC_REPLY);
+          return finish();
+        }
+      }
 
       if (chunks.length === 0) {
         mode = 'cached';

@@ -158,6 +158,17 @@ const RULES: { test: (s: string, raw: string) => boolean; make: () => Canned }[]
     }),
   },
   {
+    // tasks and topics that are clearly not about the team or drones (mixed questions go on to the model,
+    // which answers only the in-scope part)
+    test: (s) =>
+      !IN_SCOPE.test(s) &&
+      /\b(write|generate|create|compose|draft|make) (me )?(an? |the |my )?(code|program|script|function|app|website|essay|poem|story|song|lyrics|letter|cover letter|cv|resume|assignment|thesis|tweet|caption|speech)\b|\b(solve|do|finish|complete|check) (this|my|the) (homework|assignment|equation|math|problem set|exam|quiz)\b|\b(debug|fix|explain) (this|my) (code|program|script|error)\b|\b(python|javascript|java|c\+\+|html|css|sql|react) (code|program|script|function)\b|\b(recipe|cook|weather|forecast|horoscope|lottery|stock price|share price|crypto|bitcoin|forex|betting|cricket score|football score|match score|movie|netflix|anime|tiktok|dating|girlfriend|boyfriend|celebrity|lyrics|translate (this|to|into))\b/.test(s),
+    make: () => ({
+      flag: 'offtopic',
+      reply: `Sorry, I can only help with Team Staraptor CUET and VTOL and drone topics. ${CAN_DO}`,
+    }),
+  },
+  {
     // random key mashing: one "word" with almost no vowels, or the same character repeated
     test: (s) => {
       const t = s.replace(/[^a-z]/g, '');
@@ -168,6 +179,23 @@ const RULES: { test: (s: string, raw: string) => boolean; make: () => Canned }[]
     make: () => ({ flag: 'gibberish', reply: `I couldn't read that as a question. ${CAN_DO} Could you rephrase it?` }),
   },
 ];
+
+// Words that tie a question to the team, its aircraft, the competitions or drone engineering.
+const IN_SCOPE =
+  /\b(staraptor|raptor|team|crew|members?|leads?|leader|captain|advis[oe]rs?|instructors?|mentors?|sub-?teams?|cuet|chittagong|chattogram|bangladesh|vtol|uavs?|uas|drones?|quad ?planes?|quadcopters?|multirotors?|multicopters?|hexacopters?|aircraft|airplanes?|aeroplanes?|planes?|aero\w*|aviation|avionics|flight|fly|flies|flying|flew|pilot\w*|wings?|wingspan|airfoils?|aileron|elevator|rudder|fuselage|tail|propell\w*|props?|rotors?|tilt-?rotor|motors?|bldc|esc|batter(y|ies)|lipo|mah|servos?|pixhawk|ardupilot|px4|mavlink|autopilot|autonom\w*|gps|gnss|imu|sensors?|airspeed|altitude|telemetry|transmitter|receiver|radio|camera|gimbal|payload|endurance|hover\w*|transition|lift|drag|thrust|stall|takeoff|take-off|landing|cruise|speed|weight|wing ?loading|stability|control\w*|pid|cfd|ansys|fluent|simulation|cad|solidworks|xflr5|composites?|carbon|fiberglass|fibreglass|grp|3d print\w*|pla|petg|foam|metu|odtu|teknofest|competitions?|contest|missions?|rules?|categor(y|ies)|sponsor\w*|partners?|proposal|funding|donat\w*|recruit\w*|join|apply|contact|email|phone|address|facebook|instagram|linkedin|website|progress|achievements?|gallery|specs?|specifications?|design|prototype|engineering|engineers?|students?|universit(y|ies)|airspace|regulations?|caab|license|ground station|waypoints?|navigation|mapping|surveying|delivery|agriculture|search and rescue)\b/;
+
+/**
+ * True when a question that reached retrieval has nothing to do with the team or drone engineering:
+ * no in-scope word, no exact fact matched, and the best knowledge passage shares under half of its words.
+ */
+export function isOffTopic(question: string, hasFacts: boolean, bestShare: number): boolean {
+  if (hasFacts) return false;
+  const s = question.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '');
+  if (IN_SCOPE.test(s)) return false;
+  return bestShare < 0.5;
+}
+
+export const OFF_TOPIC_REPLY = `Sorry, I can only help with Team Staraptor CUET and VTOL and drone topics. ${CAN_DO}`;
 
 /** Returns a fixed reply when the message needs no model call, otherwise null. */
 export function cannedReply(question: string): Canned | null {
