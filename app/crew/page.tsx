@@ -6,7 +6,7 @@ import { Member, members as fallbackMembers } from './members';
 import { useSiteContent } from '@/lib/useContent';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Users, Layers, Cpu, Activity, Compass, Rocket } from 'lucide-react';
+import { Users, User, Layers, Cpu, Activity, Compass, Rocket } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -48,16 +48,27 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
       className="h-full"
     >
       <Card className="bg-[#2a2a2a] border-gray-sub/20 rounded-xl p-3 shadow-lg flex flex-col items-center cursor-pointer h-full hover:border-[#D04741]/70 hover:shadow-[0_12px_30px_rgba(208,71,65,0.35)] transition-all">
-        <div className="border border-primary rounded-lg overflow-hidden relative aspect-[3/4] w-full mb-4 group/img">
-          <Image 
-            src={member.image || "/images/kazi miftahul hoque.png"} 
-            alt={member.name} 
-            fill 
-            className="object-cover transition-all duration-500 group-hover/img:scale-110"
-            style={{ filter: 'drop-shadow(0 0 12px rgba(0,0,0,0.6)) blur(0.4px)' }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            unoptimized={member.image?.startsWith('data:') || member.image?.startsWith('http')}
-          />
+        <div className="border border-primary rounded-lg overflow-hidden relative aspect-[3/4] w-full mb-4 group/img bg-[#1c1c1c]">
+          {member.image ? (
+            <Image 
+              src={member.image} 
+              alt={member.name} 
+              fill 
+              className="object-cover transition-all duration-500 group-hover/img:scale-110"
+              style={{ filter: 'drop-shadow(0 0 12px rgba(0,0,0,0.6)) blur(0.4px)' }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              unoptimized={member.image.startsWith('data:') || member.image.startsWith('http')}
+            />
+          ) : (
+            <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#242424] to-[#181818] text-gray-500">
+              <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-2 shadow-inner group-hover/img:scale-105 transition-transform">
+                <User size={26} className="text-gray-400" />
+              </div>
+              <span className="text-[10px] font-mono tracking-wider text-gray-400 uppercase font-semibold">
+                No Photo
+              </span>
+            </div>
+          )}
         </div>
 
         <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase">{member.name}</h3>
