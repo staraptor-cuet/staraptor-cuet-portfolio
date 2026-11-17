@@ -1,14 +1,20 @@
 import fs from 'fs';
 import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
 import { createClient } from '@supabase/supabase-js';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-// Cloudflare R2 Credentials
+// Cloudinary Credentials (25 GB Free, No Card Required)
+const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME;
+const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
+
+// Cloudflare R2 Credentials (10 GB Free, S3 Compatible)
 const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
 const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID;
 const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY;
 const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME || 'staraptor-media';
-const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL; // e.g. https://pub-xxx.r2.dev or https://media.staraptor.com
+const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL;
 
 // Supabase Storage Credentials
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
@@ -16,10 +22,14 @@ const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABA
 const SUPABASE_BUCKET = process.env.SUPABASE_STORAGE_BUCKET || 'staraptor-uploads';
 
 export interface StorageStatus {
-  provider: 'r2' | 'supabase' | 'local';
+  provider: 'cloudinary' | 'r2' | 'supabase' | 'local';
   isCloudConnected: boolean;
   bucket?: string;
   notes: string;
+}
+
+export function isCloudinaryConfigured(): boolean {
+  return !!(CLOUDINARY_CLOUD_NAME && CLOUDINARY_API_KEY && CLOUDINARY_API_SECRET);
 }
 
 export function isR2Configured(): boolean {
@@ -38,6 +48,15 @@ export function getR2Client(): S3Client {
 }
 
 export function getStorageStatus(): StorageStatus {
+  if (isCloudinaryConfigured()) {
+    return {
+      provider: 'cloudinary',
+      isCloudConnected: true,
+      bucket: CLOUDINARY_CLOUD_NAME,
+      notes: 'Connected to Cloudinary (25 GB Free Cloud Storage & Global CDN)',
+    };
+  }
+
   if (isR2Configured()) {
     return {
       provider: 'r2',
@@ -59,7 +78,7 @@ export function getStorageStatus(): StorageStatus {
   return {
     provider: 'local',
     isCloudConnected: false,
-    notes: 'Local disk storage (/public/uploads). Configure Cloudflare R2 or Supabase for persistent cloud deployment on Vercel.',
+    notes: 'Local disk storage (/public/uploads). Configure Cloudinary (25 GB free) for persistent cloud deployment on Vercel.',
   };
 }
 
@@ -72,28 +91,64 @@ export async function uploadFile(
     .toLowerCase()
     .replace(/[^a-z0-9.]/g, '-')
     .replace(/-+/g, '-');
-  const uniqueName = `${Date.now()}-${sanitizedFilename}`;
+  const baseNameWithoutExt = sanitizedFilename.replace(/\.[^/.]+$/, '');
+  const uniqueName = `${Date.now()}-${baseNameWithoutExt}`;
 
-  // 1. If Cloudflare R2 is configured, upload to Cloudflare R2 (Recommended for zero egress fees)
+  // 1. Cloudinary Upload (Recommended: 25GB free, auto-WebP conversion, global CDN)
+  if (isCloudinaryConfigured()) {
+    try {
+      cloudinary.config({
+        cloud_name: CLOUDINARY_CLOUD_NAME,
+        api_key: CLOUDINARY_API_KEY,
+        api_secret: CLOUDINARY_API_SECRET,
+        secure: true,
+      });
+
+      const result = await new Promise<{ secure_url: string }>((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: 'staraptor',
+            public_id: uniqueName,
+            resource_type: 'auto',
+            format: 'webp',
+          },
+          (error, res) => {
+            if (error) return reject(error);
+            resolve(res as any);
+          }
+        );
+        stream.end(buffer);
+      });
+
+      return {
+        url: result.secure_url,
+        provider: 'cloudinary',
+      };
+    } catch (cErr) {
+      console.warn('Falling back from Cloudinary upload attempt:', cErr);
+    }
+  }
+
+  // 2. Cloudflare R2 Upload
   if (isR2Configured()) {
     try {
       const client = getR2Client();
+      const r2Filename = `${Date.now()}-${sanitizedFilename}`;
       await client.send(
         new PutObjectCommand({
           Bucket: R2_BUCKET_NAME,
-          Key: uniqueName,
+          Key: r2Filename,
           Body: buffer,
           ContentType: contentType || 'application/octet-stream',
         })
       );
 
-      // Public URL prefix
       const publicBase = R2_PUBLIC_URL
         ? R2_PUBLIC_URL.replace(/\/$/, '')
         : `https://${R2_BUCKET_NAME}.${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
 
       return {
-        url: `${publicBase}/${uniqueName}`,
+        url: `${publicBase}/${r2Filename}`,
         provider: 'r2',
       };
     } catch (r2Err) {
@@ -101,10 +156,11 @@ export async function uploadFile(
     }
   }
 
-  // 2. If Supabase credentials are configured, upload to Supabase Storage
+  // 3. Supabase Storage Upload
   if (SUPABASE_URL && SUPABASE_KEY) {
     try {
       const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+      const supabaseFilename = `${Date.now()}-${sanitizedFilename}`;
       
       const { data: buckets } = await supabase.storage.listBuckets();
       const bucketExists = buckets?.some(b => b.name === SUPABASE_BUCKET);
@@ -114,7 +170,7 @@ export async function uploadFile(
 
       const { error } = await supabase.storage
         .from(SUPABASE_BUCKET)
-        .upload(uniqueName, buffer, {
+        .upload(supabaseFilename, buffer, {
           contentType: contentType || 'application/octet-stream',
           upsert: true,
         });
@@ -126,7 +182,7 @@ export async function uploadFile(
 
       const { data: publicUrlData } = supabase.storage
         .from(SUPABASE_BUCKET)
-        .getPublicUrl(uniqueName);
+        .getPublicUrl(supabaseFilename);
 
       return {
         url: publicUrlData.publicUrl,
@@ -137,17 +193,18 @@ export async function uploadFile(
     }
   }
 
-  // 3. Fallback to local storage (works out-of-the-box locally)
+  // 4. Local storage fallback
   try {
     const uploadDir = path.join(process.cwd(), 'public', 'uploads');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
-    const filePath = path.join(uploadDir, uniqueName);
+    const localFilename = `${Date.now()}-${sanitizedFilename}`;
+    const filePath = path.join(uploadDir, localFilename);
     fs.writeFileSync(filePath, buffer);
 
     return {
-      url: `/uploads/${uniqueName}`,
+      url: `/uploads/${localFilename}`,
       provider: 'local',
     };
   } catch (fsErr) {

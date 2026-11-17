@@ -9,6 +9,7 @@ import {
   Database,
   Check,
   Zap,
+  Sparkles,
 } from 'lucide-react';
 import ImageUploader from '@/components/admin/ImageUploader';
 
@@ -17,7 +18,7 @@ export default function AdminStorageSetupPage() {
   const [loading, setLoading] = useState(true);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [testImageUrl, setTestImageUrl] = useState('');
-  const [activeTab, setActiveTab] = useState<'r2' | 'supabase'>('r2');
+  const [activeTab, setActiveTab] = useState<'cloudinary' | 'r2' | 'supabase'>('cloudinary');
 
   useEffect(() => {
     fetch('/api/auth/session')
@@ -35,16 +36,21 @@ export default function AdminStorageSetupPage() {
     setTimeout(() => setCopiedKey(null), 2000);
   };
 
+  const cloudinaryEnvTemplate = `# Cloudinary Credentials (25 GB Free • No Credit Card Required)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Admin Credentials (optional)
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=staraptor2026`;
+
   const r2EnvTemplate = `# Cloudflare R2 Object Storage Credentials
 R2_ACCOUNT_ID=your_cloudflare_account_id
 R2_ACCESS_KEY_ID=your_r2_access_key_id
 R2_SECRET_ACCESS_KEY=your_r2_secret_access_key
 R2_BUCKET_NAME=staraptor-media
-R2_PUBLIC_URL=https://pub-yourbucketid.r2.dev
-
-# Admin Credentials (optional custom login)
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=staraptor2026`;
+R2_PUBLIC_URL=https://pub-yourbucketid.r2.dev`;
 
   const sqlSnippet = `-- 1. Create table for persisting dynamic content in Supabase
 CREATE TABLE IF NOT EXISTS site_content (
@@ -66,12 +72,14 @@ CREATE POLICY "Service Role Full Access"
 `;
 
   const getProviderTitle = () => {
+    if (status?.provider === 'cloudinary') return 'Cloudinary Storage Active (25 GB Free)';
     if (status?.provider === 'r2') return 'Cloudflare R2 Storage Active';
     if (status?.provider === 'supabase') return 'Supabase Cloud Storage Active';
     return 'Local Laptop Storage Mode';
   };
 
   const getProviderBadge = () => {
+    if (status?.provider === 'cloudinary') return 'Cloudinary Active (25 GB Free • Global CDN)';
     if (status?.provider === 'r2') return 'Cloudflare R2 (Zero Egress Fees)';
     if (status?.provider === 'supabase') return 'Supabase Cloud Storage';
     return 'Local Development (/public/uploads)';
@@ -83,7 +91,7 @@ CREATE POLICY "Service Role Full Access"
       <div>
         <h1 className="text-2xl font-extrabold text-white font-montserrat">Cloud Storage & Media Sync</h1>
         <p className="text-xs text-gray-400 mt-1">
-          Monitor your active storage provider and configure Cloudflare R2 or Supabase for 100% persistent cloud image storage.
+          Monitor your active storage provider and configure Cloudinary (25 GB Free with No Card) or Cloudflare R2 for persistent cloud image hosting.
         </p>
       </div>
 
@@ -117,8 +125,8 @@ CREATE POLICY "Service Role Full Access"
               </div>
               <p className="text-xs text-gray-300 mt-1 leading-relaxed">
                 {status?.isCloudConnected
-                  ? `Connected to bucket "${status.bucket}". Uploaded media is hosted globally across edge points with zero egress fees.`
-                  : 'Files are saved to your local disk (/public/uploads) for offline work. When deploying to Vercel, connect Cloudflare R2 or Supabase below for persistent cloud hosting.'}
+                  ? `Connected to "${status.bucket || 'cloud'}". Uploaded media is stored in the cloud and served through high-speed CDN.`
+                  : 'Files are saved to your local disk (/public/uploads) for offline work. Connect Cloudinary below for 25 GB of free persistent cloud hosting with zero credit card.'}
               </p>
             </div>
           </div>
@@ -147,7 +155,19 @@ CREATE POLICY "Service Role Full Access"
       </div>
 
       {/* Cloud Provider Tabs */}
-      <div className="flex gap-2 border-b border-white/10 pb-2">
+      <div className="flex flex-wrap gap-2 border-b border-white/10 pb-2">
+        <button
+          onClick={() => setActiveTab('cloudinary')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            activeTab === 'cloudinary'
+              ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-lg'
+              : 'text-gray-400 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          <Sparkles size={14} />
+          <span>Cloudinary (Recommended • 25 GB Free • No Card)</span>
+        </button>
+
         <button
           onClick={() => setActiveTab('r2')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
@@ -157,7 +177,7 @@ CREATE POLICY "Service Role Full Access"
           }`}
         >
           <Zap size={14} />
-          <span>Cloudflare R2 (Recommended • 0$ Egress)</span>
+          <span>Cloudflare R2 (10 GB)</span>
         </button>
 
         <button
@@ -169,11 +189,88 @@ CREATE POLICY "Service Role Full Access"
           }`}
         >
           <Database size={14} />
-          <span>Supabase Storage</span>
+          <span>Supabase (1 GB)</span>
         </button>
       </div>
 
-      {/* TAB 1: CLOUDFLARE R2 SETUP GUIDE */}
+      {/* TAB 1: CLOUDINARY (RECOMMENDED - 25GB FREE) */}
+      {activeTab === 'cloudinary' && (
+        <div className="bg-[#1c1c1c] border border-white/10 rounded-xl p-6 space-y-6">
+          <div className="flex items-center justify-between pb-4 border-b border-white/10">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-[#D04741]/20 text-[#EF5F5A] flex items-center justify-center font-bold">
+                <Sparkles size={16} />
+              </div>
+              <div>
+                <h2 className="text-base font-bold text-white font-montserrat">
+                  Connect Cloudinary (25 GB Free • No Card Required)
+                </h2>
+                <p className="text-xs text-gray-400">
+                  Specialized image cloud with automatic WebP conversion and high-speed global CDN.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://cloudinary.com/users/register_free"
+              target="_blank"
+              rel="noreferrer"
+              className="text-xs font-bold text-[#EF5F5A] hover:underline flex items-center gap-1"
+            >
+              <span>Sign Up Free</span>
+              <ExternalLink size={12} />
+            </a>
+          </div>
+
+          {/* Step 1 */}
+          <div className="space-y-2">
+            <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-[#D04741]/20 text-[#EF5F5A] flex items-center justify-center text-[11px] font-bold">1</span>
+              Create Free Account (30 Seconds)
+            </h3>
+            <p className="text-xs text-gray-300 ml-7">
+              Go to <a href="https://cloudinary.com/users/register_free" target="_blank" rel="noreferrer" className="text-[#EF5F5A] underline">cloudinary.com</a> $\rightarrow$ Click <strong>Sign up with Google or GitHub</strong>. Zero credit card or billing details required.
+            </p>
+          </div>
+
+          {/* Step 2 */}
+          <div className="space-y-2">
+            <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-[#D04741]/20 text-[#EF5F5A] flex items-center justify-center text-[11px] font-bold">2</span>
+              Copy Your 3 API Keys
+            </h3>
+            <p className="text-xs text-gray-300 ml-7">
+              On your Cloudinary Dashboard home screen, you will see your <strong>Product Environment Credentials</strong> box with:
+            </p>
+            <ul className="list-disc list-inside text-xs text-gray-300 ml-9 space-y-1">
+              <li><strong>Cloud Name</strong></li>
+              <li><strong>API Key</strong></li>
+              <li><strong>API Secret</strong> (click copy or view)</li>
+            </ul>
+          </div>
+
+          {/* Step 3 */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between ml-7">
+              <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2 -ml-7">
+                <span className="w-5 h-5 rounded-full bg-[#D04741]/20 text-[#EF5F5A] flex items-center justify-center text-[11px] font-bold">3</span>
+                Paste Into .env.local and Vercel Environment Variables
+              </h3>
+              <button
+                onClick={() => copyToClipboard(cloudinaryEnvTemplate, 'cldenv')}
+                className="text-[11px] text-[#EF5F5A] hover:underline flex items-center gap-1 font-bold cursor-pointer"
+              >
+                {copiedKey === 'cldenv' ? <Check size={12} /> : <Copy size={12} />}
+                <span>{copiedKey === 'cldenv' ? 'Copied Template!' : 'Copy Template'}</span>
+              </button>
+            </div>
+            <pre className="ml-7 p-4 bg-[#111] rounded-lg border border-white/5 text-xs font-mono text-gray-300 overflow-x-auto">
+              {cloudinaryEnvTemplate}
+            </pre>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 2: CLOUDFLARE R2 */}
       {activeTab === 'r2' && (
         <div className="bg-[#1c1c1c] border border-white/10 rounded-xl p-6 space-y-6">
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
@@ -182,7 +279,7 @@ CREATE POLICY "Service Role Full Access"
                 R2
               </div>
               <h2 className="text-base font-bold text-white font-montserrat">
-                Connect Cloudflare R2 (10GB Free • Zero Egress Fees)
+                Connect Cloudflare R2 (10 GB Free • Zero Egress Fees)
               </h2>
             </div>
             <a
@@ -191,59 +288,16 @@ CREATE POLICY "Service Role Full Access"
               rel="noreferrer"
               className="text-xs font-bold text-[#F38020] hover:underline flex items-center gap-1"
             >
-              <span>Open Cloudflare Dashboard</span>
+              <span>Open Cloudflare</span>
               <ExternalLink size={12} />
             </a>
           </div>
 
-          {/* Step 1 */}
           <div className="space-y-2">
             <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
               <span className="w-5 h-5 rounded-full bg-[#F38020]/20 text-[#F38020] flex items-center justify-center text-[11px] font-bold">1</span>
-              Create an R2 Bucket
+              Environment Variables for R2
             </h3>
-            <p className="text-xs text-gray-300 ml-7">
-              Go to Cloudflare Dashboard → <strong>R2 Object Storage</strong> → Click <strong>Create bucket</strong> → Name it e.g. <code className="text-white bg-black/40 px-1.5 py-0.5 rounded font-mono">staraptor-media</code>.
-            </p>
-          </div>
-
-          {/* Step 2 */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-[#F38020]/20 text-[#F38020] flex items-center justify-center text-[11px] font-bold">2</span>
-              Enable Public Access (Or Custom Domain)
-            </h3>
-            <p className="text-xs text-gray-300 ml-7">
-              Inside your bucket, go to <strong>Settings</strong> → Scroll to <strong>Public Access</strong> → Click <strong>Allow Public Access</strong> (this gives you a public URL like <code className="text-white bg-black/40 px-1.5 py-0.5 rounded font-mono">https://pub-xxxx.r2.dev</code>), or attach a custom domain like <code className="text-white bg-black/40 px-1.5 py-0.5 rounded font-mono">media.yourdomain.com</code>.
-            </p>
-          </div>
-
-          {/* Step 3 */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-[#F38020]/20 text-[#F38020] flex items-center justify-center text-[11px] font-bold">3</span>
-              Generate R2 API Token
-            </h3>
-            <p className="text-xs text-gray-300 ml-7">
-              Under <strong>R2 Overview</strong> on the right sidebar, click <strong>Manage R2 API Tokens</strong> → Click <strong>Create API token</strong> → Select <strong>Object Read & Write</strong> permissions → Copy the <strong>Access Key ID</strong> and <strong>Secret Access Key</strong>.
-            </p>
-          </div>
-
-          {/* Step 4 */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between ml-7">
-              <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2 -ml-7">
-                <span className="w-5 h-5 rounded-full bg-[#F38020]/20 text-[#F38020] flex items-center justify-center text-[11px] font-bold">4</span>
-                Add Environment Variables to Vercel or .env.local
-              </h3>
-              <button
-                onClick={() => copyToClipboard(r2EnvTemplate, 'r2env')}
-                className="text-[11px] text-[#F38020] hover:underline flex items-center gap-1 font-bold cursor-pointer"
-              >
-                {copiedKey === 'r2env' ? <Check size={12} /> : <Copy size={12} />}
-                <span>{copiedKey === 'r2env' ? 'Copied Env Vars!' : 'Copy Template'}</span>
-              </button>
-            </div>
             <pre className="ml-7 p-4 bg-[#111] rounded-lg border border-white/5 text-xs font-mono text-gray-300 overflow-x-auto">
               {r2EnvTemplate}
             </pre>
@@ -251,14 +305,14 @@ CREATE POLICY "Service Role Full Access"
         </div>
       )}
 
-      {/* TAB 2: SUPABASE STORAGE SETUP */}
+      {/* TAB 3: SUPABASE */}
       {activeTab === 'supabase' && (
         <div className="bg-[#1c1c1c] border border-white/10 rounded-xl p-6 space-y-6">
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
             <div className="flex items-center gap-2.5">
               <Database size={20} className="text-[#3ECF8E]" />
               <h2 className="text-base font-bold text-white font-montserrat">
-                How to Connect Supabase Cloud Storage
+                Supabase Storage (1 GB)
               </h2>
             </div>
             <a
@@ -272,67 +326,9 @@ CREATE POLICY "Service Role Full Access"
             </a>
           </div>
 
-          {/* Step 1 */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-[#3ECF8E]/20 text-[#3ECF8E] flex items-center justify-center text-[11px] font-bold">1</span>
-              Create a Free Project
-            </h3>
-            <p className="text-xs text-gray-300 ml-7">
-              Log in to <a href="https://supabase.com" target="_blank" rel="noreferrer" className="text-[#ff7973] underline">supabase.com</a> and click <strong>New project</strong> (name it e.g. <code>staraptor-club</code>).
-            </p>
-          </div>
-
-          {/* Step 2 */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-[#3ECF8E]/20 text-[#3ECF8E] flex items-center justify-center text-[11px] font-bold">2</span>
-              Create Cloud Storage Bucket
-            </h3>
-            <p className="text-xs text-gray-300 ml-7">
-              Go to <strong>Storage</strong> in the left sidebar → Click <strong>New Bucket</strong> → Name it <code className="text-white bg-black/40 px-1.5 py-0.5 rounded font-mono">staraptor-uploads</code> → Toggle <strong>Public bucket: ON</strong>.
-            </p>
-          </div>
-
-          {/* Step 3 */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between ml-7">
-              <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2 -ml-7">
-                <span className="w-5 h-5 rounded-full bg-[#3ECF8E]/20 text-[#3ECF8E] flex items-center justify-center text-[11px] font-bold">3</span>
-                Run Database SQL Setup
-              </h3>
-              <button
-                onClick={() => copyToClipboard(sqlSnippet, 'sql')}
-                className="text-[11px] text-[#3ECF8E] hover:underline flex items-center gap-1 font-bold cursor-pointer"
-              >
-                {copiedKey === 'sql' ? <Check size={12} /> : <Copy size={12} />}
-                <span>{copiedKey === 'sql' ? 'Copied SQL!' : 'Copy SQL Script'}</span>
-              </button>
-            </div>
-            <p className="text-xs text-gray-300 ml-7">
-              Go to <strong>SQL Editor</strong> in Supabase, paste this query and click <strong>Run</strong>:
-            </p>
-            <pre className="ml-7 p-3 bg-[#111] rounded-lg border border-white/5 text-[11px] font-mono text-gray-300 overflow-x-auto">
-              {sqlSnippet}
-            </pre>
-          </div>
-
-          {/* Step 4 */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-[#3ECF8E]/20 text-[#3ECF8E] flex items-center justify-center text-[11px] font-bold">4</span>
-              Add Environment Variables
-            </h3>
-            <p className="text-xs text-gray-300 ml-7">
-              Copy your project URL and service/anon key from <strong>Project Settings → API</strong> into your <code className="text-white bg-black/40 px-1.5 py-0.5 rounded font-mono">.env.local</code> and <strong>Vercel Project Settings → Environment Variables</strong>:
-            </p>
-            <div className="ml-7 p-4 bg-[#111] rounded-lg border border-white/5 space-y-2 text-xs font-mono">
-              <div className="text-gray-400"># Cloud Storage & Database Configuration</div>
-              <div className="text-[#3ECF8E]">NEXT_PUBLIC_SUPABASE_URL=<span className="text-gray-400">https://your-project-id.supabase.co</span></div>
-              <div className="text-[#3ECF8E]">SUPABASE_SERVICE_ROLE_KEY=<span className="text-gray-400">your-service-role-key-here</span></div>
-              <div className="text-[#3ECF8E]">SUPABASE_STORAGE_BUCKET=<span className="text-gray-400">staraptor-uploads</span></div>
-            </div>
-          </div>
+          <pre className="p-4 bg-[#111] rounded-lg border border-white/5 text-[11px] font-mono text-gray-300 overflow-x-auto">
+            {sqlSnippet}
+          </pre>
         </div>
       )}
     </div>
