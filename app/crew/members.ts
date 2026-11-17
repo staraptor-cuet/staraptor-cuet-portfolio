@@ -47,6 +47,15 @@ export const members: Member[] = [
     isLead: false,
   },
   {
+    name: "Minhajul Islam Mahad",
+    designation: "Instructor",
+    batch: "EEE-20, CUET",
+    email: "",
+    linkedin: "https://www.linkedin.com/in/minhajul-islam-mahadi-e4/",
+    image: "/images/crew/Minhajul Islam Mahad.webp",
+    isLead: false,
+  },
+  {
     name: "Abrar Azmain",
     designation: "Project Lead",
     batch: "ME-22",

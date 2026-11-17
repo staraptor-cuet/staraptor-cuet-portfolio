@@ -81,6 +81,16 @@
       "isLead": false
     },
     {
+      "id": "member-instructor-minhajul",
+      "name": "Minhajul Islam Mahad",
+      "designation": "Instructor",
+      "batch": "EEE-20, CUET",
+      "email": "",
+      "linkedin": "https://www.linkedin.com/in/minhajul-islam-mahadi-e4/",
+      "image": "/images/crew/Minhajul Islam Mahad.webp",
+      "isLead": false
+    },
+    {
       "id": "member-1",
       "name": "Abrar Azmain",
       "designation": "Project Lead",
