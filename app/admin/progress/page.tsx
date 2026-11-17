@@ -994,23 +994,26 @@ export default function AdminProgressProjectsPage() {
                       <button
                         type="button"
                         onClick={() => addCustomSection('specs')}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-bold transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-bold transition-colors"
                       >
-                        <Plus size={13} /> + Specs Table Section
+                        <Plus size={13} className="text-[#EF5F5A]" />
+                        <span>Add Specs Table</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => addCustomSection('components')}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-bold transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-bold transition-colors"
                       >
-                        <Plus size={13} /> + Component List Section
+                        <Plus size={13} className="text-[#EF5F5A]" />
+                        <span>Add Component List</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => addCustomSection('text')}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-bold transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-bold transition-colors"
                       >
-                        <Plus size={13} /> + Text Block Section
+                        <Plus size={13} className="text-[#EF5F5A]" />
+                        <span>Add Text Block</span>
                       </button>
                     </div>
                   </div>
