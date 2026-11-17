@@ -40,10 +40,10 @@ export function checkCredentials(user: string, pass: string): boolean {
   return user === ADMIN_USER && pass === ADMIN_PASS;
 }
 
-export function createAdminSession(): string {
+export function createAdminSession(user: string = ADMIN_USER): string {
   const sessionData = {
     role: 'admin',
-    user: ADMIN_USER,
+    user: user,
     exp: Date.now() + 7 * 24 * 60 * 60 * 1000, // 7 days
   };
   const token = signToken(JSON.stringify(sessionData));
