@@ -268,8 +268,14 @@ export function runChat(input: ChatInput): ReadableStream {
         const hits = search(input.question, 1);
         const facts = selectFacts(input.question);
         // Show a passage only when it clearly matches: at least half of the question's content words appear in it.
+        const share = hits.length ? matchShare(input.question, hits[0].chunk) : 0;
+        if (!isForeign(input.question) && isOffTopic(input.question, facts.extraChunks.length > 0, share)) {
+          flag = flag ?? 'offtopic';
+          say(OFF_TOPIC_REPLY);
+          return;
+        }
         let close = facts.extraChunks.length > 0;
-        if (!close && hits.length) close = matchShare(input.question, hits[0].chunk) >= 0.5;
+        if (!close && hits.length) close = share >= 0.5;
         if (!close) {
           say(
             lead
