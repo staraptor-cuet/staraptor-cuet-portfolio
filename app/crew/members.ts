@@ -11,6 +11,15 @@ export interface Member {
 
 export const members: Member[] = [
   {
+    name: "Sayed Mohammed Asim",
+    designation: "Software Team",
+    batch: "CSE-23",
+    email: "",
+    linkedin: "",
+    image: "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922831/staraptor/1794922828983-me-removebg-preview.webp",
+    isLead: false,
+  },
+  {
     name: "Mohammad Rafiur Rahman",
     designation: "Software Team",
     batch: "ME-23",

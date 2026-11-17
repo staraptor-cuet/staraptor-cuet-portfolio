@@ -32,8 +32,8 @@ export async function getSiteContent(): Promise<SiteContent> {
     }
   }
 
-  // 2. In-memory cache check
-  if (memoryContentCache) {
+  // 2. In-memory cache check (production optimization)
+  if (process.env.NODE_ENV === 'production' && memoryContentCache) {
     return memoryContentCache;
   }
 

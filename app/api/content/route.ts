@@ -3,17 +3,24 @@ import { getSiteContent, updateSiteContent } from '@/lib/content';
 import { isAuthenticated } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const section = searchParams.get('section');
     const content = await getSiteContent();
 
+    const headers = {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+    };
+
     if (section && section in content) {
-      return NextResponse.json({ [section]: (content as any)[section] });
+      return NextResponse.json({ [section]: (content as any)[section] }, { headers });
     }
 
-    return NextResponse.json(content);
+    return NextResponse.json(content, { headers });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || 'Failed to fetch content' }, { status: 500 });
   }
