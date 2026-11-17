@@ -24,6 +24,11 @@ import {
   FileText,
   Wrench,
   ShieldCheck,
+  Mail,
+  Copy,
+  Check,
+  ExternalLink,
+  X,
 } from 'lucide-react';
 
 const fadeUp = {
@@ -45,11 +50,15 @@ const getBadgeText = (member: Member) => {
   return null;
 };
 
-const CrewMemberCard = ({ member, index }: { member: Member; index: number }) => {
-  const mailHref = member.email
-    ? `mailto:${member.email}?subject=Inquiry%20via%20Staraptor%20CUET`
-    : `mailto:staraptorcuet@gmail.com?subject=Inquiry%20for%20${encodeURIComponent(member.name)}%20via%20Staraptor%20CUET`;
-
+const CrewMemberCard = ({
+  member,
+  index,
+  onOpenEmail,
+}: {
+  member: Member;
+  index: number;
+  onOpenEmail: (member: Member) => void;
+}) => {
   const badgeText = getBadgeText(member);
 
   return (
@@ -117,10 +126,14 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
             <span className="text-[10px] font-bold tracking-wide">LinkedIn</span>
           </a>
 
-          <a
-            href={mailHref}
-            className="flex-1 bg-white/10 hover:bg-white/20 text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all border border-white/10 shadow-sm"
-            title={`Send email to ${member.name} (${member.email || 'Team Staraptor'})`}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenEmail(member);
+            }}
+            className="flex-1 bg-white/10 hover:bg-white/20 text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all border border-white/10 shadow-sm cursor-pointer"
+            title={`Contact ${member.name}`}
           >
             <Image
               src="/icons/mail-fill.svg"
@@ -130,7 +143,7 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
               style={{ filter: 'brightness(0) invert(1)' }}
             />
             <span className="text-[10px] font-bold tracking-wide">Email</span>
-          </a>
+          </button>
         </div>
       </Card>
     </motion.div>
@@ -141,10 +154,12 @@ const CrewSection = ({
   title,
   icon: Icon,
   members,
+  onOpenEmail,
 }: {
   title: string;
   icon?: any;
   members: Member[];
+  onOpenEmail: (member: Member) => void;
 }) => {
   // Always sort Leads to the very first position of each sector
   const sortedMembers = [...members].sort((a, b) => {
@@ -192,7 +207,7 @@ const CrewSection = ({
             key={m.name}
             className="w-[calc(50%-0.375rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] max-w-[240px]"
           >
-            <CrewMemberCard member={m} index={i} />
+            <CrewMemberCard member={m} index={i} onOpenEmail={onOpenEmail} />
           </div>
         ))}
       </div>
@@ -217,6 +232,28 @@ export default function CrewPage() {
 
   const [activeCategory, setActiveCategory] = useState<'advisor' | 'instructor' | 'team'>('team');
   const [selectedSubTeam, setSelectedSubTeam] = useState<string>('ALL');
+
+  // Email modal state
+  const [emailModalMember, setEmailModalMember] = useState<Member | null>(null);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const handleCopyEmail = (email: string) => {
+    if (!email) return;
+    navigator.clipboard.writeText(email);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
+  const getGmailUrl = (email: string, name: string) => {
+    const subject = encodeURIComponent(`Inquiry for ${name} - Team Staraptor CUET`);
+    const body = encodeURIComponent(`Hi ${name},\n\nI am contacting you regarding Team Staraptor CUET.\n\nBest regards,`);
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${subject}&body=${body}`;
+  };
+
+  const getMailtoUrl = (email: string, name: string) => {
+    const subject = encodeURIComponent(`Inquiry for ${name} - Team Staraptor CUET`);
+    return `mailto:${email}?subject=${subject}`;
+  };
 
   // Filter categories
   const advisors = activeMembers.filter(m => 
@@ -466,7 +503,7 @@ export default function CrewPage() {
             {/* 1. Advisor */}
             <button
               onClick={() => setActiveCategory('advisor')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeCategory === 'advisor'
                   ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -487,7 +524,7 @@ export default function CrewPage() {
             {/* 2. Instructor */}
             <button
               onClick={() => setActiveCategory('instructor')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeCategory === 'instructor'
                   ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -508,7 +545,7 @@ export default function CrewPage() {
             {/* 3. Team */}
             <button
               onClick={() => setActiveCategory('team')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeCategory === 'team'
                   ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -532,6 +569,7 @@ export default function CrewPage() {
                 title="Faculty Advisory Board"
                 icon={GraduationCap}
                 members={advisors}
+                onOpenEmail={setEmailModalMember}
               />
             ) : (
               <div className="max-w-2xl mx-auto text-center py-16 px-6 rounded-3xl bg-[#1a1616] border border-white/10 shadow-2xl">
@@ -559,6 +597,7 @@ export default function CrewPage() {
                 title="Flight & Technical Instructors"
                 icon={Compass}
                 members={instructors}
+                onOpenEmail={setEmailModalMember}
               />
             ) : (
               <div className="max-w-2xl mx-auto text-center py-16 px-6 rounded-3xl bg-[#1a1616] border border-white/10 shadow-2xl">
@@ -587,7 +626,7 @@ export default function CrewPage() {
                 <button
                   key={st.id}
                   onClick={() => setSelectedSubTeam(st.id)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all cursor-pointer ${
                     selectedSubTeam === st.id
                       ? 'bg-[#D04741] text-white border border-[#EF5F5A] font-bold shadow-md'
                       : 'bg-[#181818] text-gray-400 border border-white/5 hover:border-white/20 hover:text-white'
@@ -604,6 +643,7 @@ export default function CrewPage() {
                 title="Project Board"
                 icon={Crown}
                 members={projectLeads}
+                onOpenEmail={setEmailModalMember}
               />
             )}
 
@@ -612,6 +652,7 @@ export default function CrewPage() {
                 title="Designing Crew"
                 icon={Palette}
                 members={designCrew}
+                onOpenEmail={setEmailModalMember}
               />
             )}
 
@@ -620,6 +661,7 @@ export default function CrewPage() {
                 title="Simulation Crew"
                 icon={Layers}
                 members={simulationCrew}
+                onOpenEmail={setEmailModalMember}
               />
             )}
 
@@ -628,6 +670,7 @@ export default function CrewPage() {
                 title="Branding & Communication Crew"
                 icon={Sparkles}
                 members={brandingCrew}
+                onOpenEmail={setEmailModalMember}
               />
             )}
 
@@ -636,6 +679,7 @@ export default function CrewPage() {
                 title="Research Crew"
                 icon={Search}
                 members={researchCrew}
+                onOpenEmail={setEmailModalMember}
               />
             )}
 
@@ -644,6 +688,7 @@ export default function CrewPage() {
                 title="Software Crew"
                 icon={Code2}
                 members={softwareCrew}
+                onOpenEmail={setEmailModalMember}
               />
             )}
 
@@ -652,6 +697,7 @@ export default function CrewPage() {
                 title="Documentation Crew"
                 icon={FileText}
                 members={documentationCrew}
+                onOpenEmail={setEmailModalMember}
               />
             )}
 
@@ -660,6 +706,7 @@ export default function CrewPage() {
                 title="General Engineering Crew"
                 icon={Wrench}
                 members={otherCrew}
+                onOpenEmail={setEmailModalMember}
               />
             )}
           </div>
@@ -678,6 +725,126 @@ export default function CrewPage() {
         </motion.div>
 
       </section>
+
+      {/* INTERACTIVE EMAIL DIALOG */}
+      <AnimatePresence>
+        {emailModalMember && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+            onClick={() => setEmailModalMember(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 15 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="relative w-full max-w-md bg-[#1f1a1a] border border-white/15 rounded-3xl p-6 sm:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Glowing top line */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#D04741] via-[#EF5F5A] to-[#D04741]" />
+
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setEmailModalMember(null)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                <X size={16} />
+              </button>
+
+              {/* Member Overview */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-14 h-14 rounded-2xl overflow-hidden relative border border-[#D04741]/40 bg-[#161616] shrink-0 shadow-md">
+                  {emailModalMember.image ? (
+                    <Image
+                      src={emailModalMember.image}
+                      alt={emailModalMember.name}
+                      fill
+                      className="object-cover"
+                      unoptimized={emailModalMember.image.startsWith('data:') || emailModalMember.image.startsWith('http')}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-[#252525] text-gray-400">
+                      <User size={22} />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#EF5F5A] font-bold block mb-0.5">
+                    Send Direct Message
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold font-orbitron text-white uppercase tracking-tight">
+                    {emailModalMember.name}
+                  </h3>
+                  <p className="text-xs text-gray-400 font-mono">
+                    {emailModalMember.designation} • {emailModalMember.batch}
+                  </p>
+                </div>
+              </div>
+
+              {/* Email Address Display Box with 1-Click Copy */}
+              <div className="mb-6">
+                <label className="text-[11px] font-mono uppercase tracking-wider text-gray-400 block mb-1.5 font-semibold">
+                  Official Email Address
+                </label>
+                <div className="p-3 rounded-xl bg-black/50 border border-white/10 flex items-center justify-between gap-2 shadow-inner">
+                  <span className="font-mono text-xs sm:text-sm text-gray-200 select-all truncate">
+                    {emailModalMember.email || 'staraptorcuet@gmail.com'}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleCopyEmail(emailModalMember.email || 'staraptorcuet@gmail.com')}
+                    className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono font-semibold flex items-center gap-1.5 shrink-0 transition-all cursor-pointer"
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <Check size={14} className="text-green-400" />
+                        <span className="text-green-400">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={14} />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                {/* 1. Open in Gmail (Web) */}
+                <a
+                  href={getGmailUrl(emailModalMember.email || 'staraptorcuet@gmail.com', emailModalMember.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] hover:brightness-110 text-white font-heading font-bold text-xs uppercase tracking-wider shadow-[0_4px_20px_rgba(208,71,65,0.4)] transition-all cursor-pointer"
+                >
+                  <Mail size={16} />
+                  <span>Open in Gmail (Web)</span>
+                  <ExternalLink size={14} className="opacity-80" />
+                </a>
+
+                {/* 2. Open in Default Mail App (Mailto) */}
+                <a
+                  href={getMailtoUrl(emailModalMember.email || 'staraptorcuet@gmail.com', emailModalMember.name)}
+                  className="w-full flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white font-heading font-semibold text-xs uppercase tracking-wider transition-all cursor-pointer"
+                >
+                  <Mail size={15} />
+                  <span>Open in Mail App (Mailto)</span>
+                </a>
+              </div>
+
+              {/* Subtext info */}
+              <p className="text-[11px] text-gray-500 font-mono text-center mt-4">
+                Click &quot;Open in Gmail&quot; to write immediately in your browser.
+              </p>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }
