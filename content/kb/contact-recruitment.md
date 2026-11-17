@@ -3,7 +3,7 @@ title: Contact and recruitment at Team Staraptor CUET
 topic: contact
 competition: none
 source_url: https://staraptorcuet.vercel.app/contact
-last_verified: 2026-11-13
+last_verified: 2026-11-18
 owner: branding-team
 visibility: public
 ---
@@ -13,7 +13,7 @@ visibility: public
 The official contact channels of Team Staraptor CUET are:
 
 - Email: staraptorcuet@gmail.com
-- Phone: 01972723321 (Bangladesh)
+- Phone: +880 1972-723321 (Bangladesh)
 - Facebook: https://www.facebook.com/StaraptorCUET
 - Instagram: https://www.instagram.com/staraptor_cuet/
 - LinkedIn: https://www.linkedin.com/company/staraptor-cuet/
@@ -26,15 +26,16 @@ Source: https://staraptorcuet.vercel.app/contact
 ## Joining Team Staraptor CUET (recruitment)
 
 Team Staraptor CUET states on its Crew page that further recruitment will be announced soon. No recruitment dates,
-eligibility rules or application form have been published as of 13 November 2026. Students who are interested can
+eligibility rules or application form have been published as of 18 November 2026. Students who are interested can
 follow the team's Facebook, Instagram and LinkedIn pages for updates or email staraptorcuet@gmail.com. The current
-crew members carry the batch codes ME-22 and ME-23; which departments or batches can apply has not been published.
+student members carry the batch codes ME-22, ME-23 and CSE-23; which departments or batches can apply has not been published.
 
 Source: https://staraptorcuet.vercel.app/crew
 
 ## Contacting individual members of Team Staraptor CUET
 
-The Crew page of the team website lists each member with name, sub-team role, batch and a LinkedIn profile link.
+The Crew page of the team website lists each member with name, sub-team role, batch and a LinkedIn profile link,
+in three groups: Advisor, Instructor and Team.
 To reach a specific member or sub-team, email the team at staraptorcuet@gmail.com or use the member's LinkedIn
 profile from the Crew page.
 

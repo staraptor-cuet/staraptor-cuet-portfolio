@@ -1,6 +1,7 @@
 [
  { "id": "team-what", "q": "What is Team Staraptor CUET?", "all": [  "CUET" ], "any": [  "VTOL",  "UAV" ], "cites": true },
- { "id": "team-size", "q": "How many members are in the team?", "all": [  "20" ] },
+ { "id": "team-size", "q": "How many members are in the team?", "all": [  "24" ] },
+ { "id": "team-instructors", "q": "Who are the instructors of the team?", "all": [  "Zaber Ahsan" ] },
  { "id": "team-founded", "q": "When was the team founded?", "all": [  "2026" ] },
  { "id": "team-subteams", "q": "What sub-teams does Staraptor have?", "all": [  "Design",  "Simulation",  "Software" ] },
  { "id": "crew-lead", "q": "Who is the project lead?", "all": [  "Abrar Azmain" ] },

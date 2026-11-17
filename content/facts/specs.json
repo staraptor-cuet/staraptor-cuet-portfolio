@@ -1,8 +1,8 @@
 {
   "aircraft": "Staraptor VTOL V1",
-  "status": "Design targets published by the team; not flight-verified",
-  "source_url": "https://staraptorcuet.vercel.app/aircraft",
-  "as_of": "2026-11-13",
+  "status": "Design targets published by the team; not flight-verified. Hybrid tilt-rotor VTOL",
+  "source_url": "https://staraptorcuet.vercel.app/progress",
+  "as_of": "2026-11-18",
   "groups": [
     {
       "title": "Physical",

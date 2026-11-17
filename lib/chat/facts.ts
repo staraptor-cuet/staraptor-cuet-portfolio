@@ -59,6 +59,10 @@ function oneEditApart(a: string, b: string): boolean {
 
 export function membersBySubteam(query: string): CrewCardMember[] {
   const q = norm(query);
+  if (/\b(advis[oe]rs?|supervisors?|mentors?|faculty|teachers?)\b/.test(q)) {
+    return members.filter((m) => /advisor/i.test(m.designation)).map(publicMember);
+  }
+  if (/\binstructors?\b/.test(q)) return members.filter((m) => m.designation === 'Instructor').map(publicMember);
   if (/\b(project lead|team lead(er)?|captain|head of the team|who leads|leader of)\b/.test(q) && !SUBTEAMS.some((s) => q.includes(s))) {
     return members.filter((m) => m.designation === 'Project Lead').map(publicMember);
   }
@@ -68,14 +72,18 @@ export function membersBySubteam(query: string): CrewCardMember[] {
   return members.filter((m) => m.designation.toLowerCase().includes(key)).map(publicMember);
 }
 
-const CREW_INTENT = /\b(crew|members?|roster|who (is|are) (in|on)|team leads?|leads?|leader|captain|people|students)\b/i;
+const CREW_INTENT = /\b(crew|members?|roster|advis[oe]rs?|supervisors?|mentors?|instructors?|faculty|who (is|are) (in|on)|team leads?|leads?|leader|captain|people|students)\b/i;
 const SPEC_INTENT = /\b(spec|specs|specification|wingspan|length|weight|payload|endurance|cruise|speed|wing load|airfoil|how (big|heavy|fast|long)|dimension)/i;
 const SPONSOR_INTENT = /\b(sponsor|sponsors|sponsorship|sponser|sponcer|spons|partner|partners|proposal|fund|funding|donat|support the team|invest)/i;
 const CONTACT_INTENT = /\b(contact|email|e-mail|mail|phone|call|reach|facebook|instagram|linkedin|social|address|where are you|join|recruit|apply|press|media)\b/i;
 
 /** Roster text given to the model when the question is about people (no emails). */
 export function rosterChunk(): KbChunk {
-  const lines = members.map((m) => `- ${m.name}: ${m.designation}, batch ${m.batch}`);
+  const isMentor = (m: (typeof members)[number]) => /advisor|instructor/i.test(m.designation);
+  const students = members.filter((m) => !isMentor(m));
+  const mentors = members.filter(isMentor);
+  const lines = students.map((m) => `- ${m.name}: ${m.designation}, batch ${m.batch}`);
+  const mentorLines = mentors.map((m) => `- ${m.name}: ${m.designation}, ${m.batch}`);
   return {
     id: 'facts#crew-roster',
     file: 'app/crew/members.ts',
@@ -87,7 +95,9 @@ export function rosterChunk(): KbChunk {
     url: `${SITE_URL}/crew`,
     sources: [`${SITE_URL}/crew`],
     text:
-      `Team Staraptor CUET has ${members.length} crew members. Roster (name: role, batch):\n${lines.join('\n')}\n` +
+      `The Crew page of Team Staraptor CUET lists ${students.length} student team members, guided by ${mentors.length} advisors and instructors.\n` +
+      `Advisors and instructors (name: role, affiliation):\n${mentorLines.join('\n')}\n` +
+      `Student team members (name: role, batch):\n${lines.join('\n')}\n` +
       'Each member has a LinkedIn link on the Crew page. For contact, use the team email staraptorcuet@gmail.com.',
   };
 }

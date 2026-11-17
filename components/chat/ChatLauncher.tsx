@@ -21,7 +21,7 @@ export default function ChatLauncher() {
     requestAnimationFrame(() => buttonRef.current?.focus());
   }, []);
 
-  if (pathname === '/ask') return null;
+  if (pathname === '/ask' || pathname?.startsWith('/admin')) return null;
 
   return (
     <>

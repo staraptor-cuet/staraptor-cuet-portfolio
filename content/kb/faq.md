@@ -3,7 +3,7 @@ title: Frequently asked questions
 topic: faq
 competition: none
 source_url: https://staraptorcuet.vercel.app/
-last_verified: 2026-11-13
+last_verified: 2026-11-18
 owner: branding-team
 visibility: public
 ---
@@ -13,8 +13,8 @@ visibility: public
 ### What is Team Staraptor CUET?
 
 Team Staraptor CUET is a student team at Chittagong University of Engineering & Technology (CUET), Bangladesh, that
-designs and builds VTOL (vertical take-off and landing) unmanned aerial vehicles. The team has 20 crew members in
-six sub-teams and its tagline is "Engineers Bound by Flight". The team describes itself as the first VTOL drone
+designs and builds VTOL (vertical take-off and landing) unmanned aerial vehicles. The team has 24 student members in
+six sub-teams, guided by 4 advisors and 3 instructors, and its tagline is "Engineers Bound by Flight". The team describes itself as the first VTOL drone
 design team in Bangladesh from CUET.
 
 Source: https://staraptorcuet.vercel.app/ ; https://staraptorcuet.vercel.app/crew
@@ -27,8 +27,18 @@ Source: https://staraptorcuet.vercel.app/
 
 ### How many members does Team Staraptor CUET have?
 
-Team Staraptor CUET has 20 crew members. The crew is organised in six sub-teams: Design, Simulation, Branding &
-Communication, Research, Software and Documentation, with a Project Lead on the Project Board.
+The Crew page lists 24 student team members, 4 advisors and 3 instructors (31 people). The students are organised
+in six sub-teams: Design, Simulation, Branding & Communication, Research, Software and Documentation, with a
+Project Lead on the Project Board. The home page statistic still shows the earlier crew size of 20.
+
+Source: https://staraptorcuet.vercel.app/crew
+
+### Who are the advisors of Team Staraptor CUET?
+
+The Chief Advisor of Team Staraptor CUET is Prof. Dr. Jamal Uddin Ahamed. The other advisors are Prof. Dr. Sajal
+Chandra Banik, Dr. Afnan Hasan and Minhaj Ahmed, all listed with the Department of Mechanical Engineering, CUET. The
+instructors are Minhajul Islam Mahad (EEE-20, CUET), Zaber Ahsan (EEE-20, CUET) and Meraz Ahmed Ohi (Lecturer, IIUC;
+EEE-19, CUET).
 
 Source: https://staraptorcuet.vercel.app/crew
 
@@ -38,17 +48,17 @@ Team Staraptor CUET has two competition goals: the METU VTOL Aircraft Design Com
 Türkiye. The team has not yet published which TEKNOFEST category or which year it will enter, and it has not
 published any competition results.
 
-Source: https://staraptorcuet.vercel.app/vtol-2026 ; team statement, November 2026
+Source: https://staraptorcuet.vercel.app/progress ; team statement, November 2026
 
 ## Aircraft
 
 ### What aircraft is Team Staraptor CUET building?
 
-Team Staraptor CUET is building the Staraptor VTOL V1, a fixed-wing VTOL unmanned aerial vehicle. It takes off and
-lands vertically and flies forward on its wing. It uses electric brushless motors, a Pixhawk flight controller and
-GPS. The first prototype iteration has been completed.
+Team Staraptor CUET is building the Staraptor VTOL V1, a hybrid tilt-rotor VTOL unmanned aerial vehicle for the
+METU VTOL Aircraft Design Competition 2026. It takes off and lands vertically and cruises on its fixed wing. It uses
+electric brushless motors, a Pixhawk flight controller and GPS.
 
-Source: https://staraptorcuet.vercel.app/aircraft
+Source: https://staraptorcuet.vercel.app/progress
 
 ### What are the specifications of the Staraptor VTOL V1?
 
@@ -56,15 +66,15 @@ The team website lists these design targets for the Staraptor VTOL V1, which are
 1.340 m, length 0.99 m, approximate weight 2 kg, payload capacity 8 kg, cruise speed 60-70 km/h, endurance 90 min,
 wing loading 55-75 g/dm², airfoil Eppler E205.
 
-Source: https://staraptorcuet.vercel.app/aircraft
+Source: https://staraptorcuet.vercel.app/progress
 
 ### Has the Staraptor VTOL V1 flown yet?
 
-The team website lists four stages: Conceptual Design (completed), Simulation (completed), Prototype (in progress)
-and Successful Launch (not yet reached). No first-flight date or flight-test data has been published as of
-13 November 2026.
+The Our Progress page shows the status "Active Prototype & Flight Ready" and reports completed initial CFD
+simulations and prototype testing. No first-flight date, flight-test data or flight video has been published as of
+18 November 2026.
 
-Source: https://staraptorcuet.vercel.app/aircraft ; https://staraptorcuet.vercel.app/progress
+Source: https://staraptorcuet.vercel.app/progress
 
 ## Competitions
 
@@ -120,7 +130,7 @@ Source: https://staraptorcuet.vercel.app/sponsors
 ### How can I join Team Staraptor CUET?
 
 The Crew page says that further recruitment will be announced soon. No dates, eligibility rules or application
-form have been published as of 13 November 2026. Follow the team's Facebook, Instagram and LinkedIn pages, or email
+form have been published as of 18 November 2026. Follow the team's Facebook, Instagram and LinkedIn pages, or email
 staraptorcuet@gmail.com.
 
 Source: https://staraptorcuet.vercel.app/crew

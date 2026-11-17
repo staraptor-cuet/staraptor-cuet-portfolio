@@ -3,7 +3,7 @@ title: Sponsorship of Team Staraptor CUET
 topic: sponsorship
 competition: none
 source_url: https://staraptorcuet.vercel.app/sponsors
-last_verified: 2026-11-13
+last_verified: 2026-11-18
 owner: branding-team
 visibility: public
 ---
@@ -28,11 +28,11 @@ Source: https://staraptorcuet.vercel.app/sponsors
 ## How to become a sponsor of Team Staraptor CUET
 
 Organisations that want to sponsor Team Staraptor CUET can email the team at staraptorcuet@gmail.com. The
-sponsorship proposal is available through the "Download Proposal" button on the Sponsors page and the Contact page.
+sponsorship proposal is available through the "Download Proposal" button on the Sponsors page.
 The team states that the development of its VTOL UAV depends on the support of its partners and that it is
 actively looking for organisations to join its mission.
 
-Source: https://staraptorcuet.vercel.app/sponsors ; https://staraptorcuet.vercel.app/contact
+Source: https://staraptorcuet.vercel.app/sponsors
 
 ## Sponsorship proposal download
 

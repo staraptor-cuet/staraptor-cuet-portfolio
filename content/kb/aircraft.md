@@ -2,20 +2,22 @@
 title: Staraptor VTOL V1 aircraft
 topic: aircraft
 competition: none
-source_url: https://staraptorcuet.vercel.app/aircraft
-last_verified: 2026-11-13
+source_url: https://staraptorcuet.vercel.app/progress
+last_verified: 2026-11-18
 owner: design-team
 visibility: public
 ---
 
 ## Overview of the Staraptor VTOL V1
 
-Staraptor VTOL V1 is the first unmanned aerial vehicle of Team Staraptor CUET. It is a fixed-wing VTOL aircraft:
-it takes off and lands vertically and flies forward on its wing. It uses electric propulsion with brushless (BLDC)
-motors, a Pixhawk flight controller and GPS. The first prototype iteration has been completed; the aircraft has not
-yet reached the "Successful Launch" stage listed on the team website.
+Staraptor VTOL V1 is the first unmanned aerial vehicle of Team Staraptor CUET. The team website describes it as a
+hybrid tilt-rotor VTOL aircraft built for the METU VTOL Aircraft Design Competition 2026: it takes
+off and lands vertically and cruises on its fixed wing. The website tags it "Hybrid VTOL", "Tilt-rotor", "Model 1
+active" and "Autonomous", and states the aim of autonomous maritime delivery. It uses electric propulsion with
+brushless (BLDC) motors, a Pixhawk flight controller and GPS. The aircraft details are on the Our Progress page
+(the former Aircraft and VTOL 2026 pages now open the Our Progress page).
 
-Source: https://staraptorcuet.vercel.app/aircraft
+Source: https://staraptorcuet.vercel.app/progress
 
 ## Published specifications of the Staraptor VTOL V1
 
@@ -36,7 +38,7 @@ are not flight-verified.
 The team has not published flight-test data. For confirmed performance numbers, contact the team at
 staraptorcuet@gmail.com.
 
-Source: https://staraptorcuet.vercel.app/aircraft
+Source: https://staraptorcuet.vercel.app/progress
 
 ## Materials and structure of the Staraptor VTOL V1
 
@@ -46,7 +48,7 @@ aerodynamic parts such as wing and fuselage sections where low weight matters. P
 need higher strength and heat resistance. Carbon fibre rods reinforce the wings and frame to add stiffness at low
 weight.
 
-Source: https://staraptorcuet.vercel.app/aircraft
+Source: https://staraptorcuet.vercel.app/progress
 
 ## Electronics and avionics of the Staraptor VTOL V1
 
@@ -56,7 +58,7 @@ a companion computer for computer vision and mission logic, a GPS module, an air
 wide-angle lens, a telemetry radio, and an RC transmitter and receiver. The website states that more components
 are used than those listed. Exact part models are not published.
 
-Source: https://staraptorcuet.vercel.app/aircraft
+Source: https://staraptorcuet.vercel.app/progress
 
 ## CFD analysis of the Staraptor VTOL V1 in hover
 
@@ -66,16 +68,17 @@ rotors under vertical lift. Rotor flow was modelled with rotating-frame techniqu
 regions near the rotor downwash zones and fuselage surfaces, and low-pressure regions that contribute to lift and
 flow recirculation. The outputs are static pressure contours and flow-field visualisation. The purpose is to
 evaluate vertical lift performance, understand rotor-body interaction and support design optimisation. Numerical
-results are not published.
+results are not published. The Our Progress page and the Gallery also show a pressure-distribution plot of the
+transition mode, simulated in ANSYS Fluent.
 
-Source: https://staraptorcuet.vercel.app/aircraft
+Source: https://staraptorcuet.vercel.app/progress
 
 ## Development progress of the Staraptor VTOL V1
 
-The team website lists four development stages for the Staraptor VTOL V1: Conceptual Design (completed), Simulation
-(completed), Prototype (in progress) and Successful Launch (not yet reached). The first prototype iteration allowed
-a preliminary check of the design configuration and structural integrity, and gave insight into assembly
-constraints, material behaviour and component integration. Ongoing work targets structural efficiency, weight
-reduction and alignment accuracy. No first-flight date has been published.
+The Our Progress page shows the status of the Staraptor VTOL V1 as "Active Prototype & Flight Ready". Its progress
+entry dated 1 March 2026, "Initial Design & Aerodynamic Testing", states that the team completed initial aerodynamic
+CFD simulations and prototype testing of its hybrid VTOL configuration, and is validating payload distribution and
+motor thrust figures. Team Staraptor CUET has not published a first-flight date, flight-test results or flight
+videos as of 18 November 2026, and the Achievements page has no posts yet.
 
-Source: https://staraptorcuet.vercel.app/aircraft ; https://staraptorcuet.vercel.app/progress
+Source: https://staraptorcuet.vercel.app/progress ; https://staraptorcuet.vercel.app/achievements
