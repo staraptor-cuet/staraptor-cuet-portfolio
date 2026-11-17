@@ -1,12 +1,30 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Member, members as fallbackMembers } from './members';
 import { useSiteContent } from '@/lib/useContent';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Users, User, Layers, Cpu, Activity, Compass, Rocket } from 'lucide-react';
+import {
+  Users,
+  User,
+  Layers,
+  Cpu,
+  Activity,
+  Compass,
+  Rocket,
+  GraduationCap,
+  Crown,
+  Palette,
+  Sparkles,
+  Search,
+  Code2,
+  FileText,
+  Wrench,
+  ShieldCheck,
+} from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -39,7 +57,7 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.07, ease: 'easeOut' }}
+      transition={{ duration: 0.5, delay: index * 0.05, ease: 'easeOut' }}
       whileHover={{
         y: -8,
         scale: 1.03,
@@ -47,8 +65,8 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
       }}
       className="h-full"
     >
-      <Card className="bg-[#2a2a2a] border-gray-sub/20 rounded-xl p-3 shadow-lg flex flex-col items-center cursor-pointer h-full hover:border-[#D04741]/70 hover:shadow-[0_12px_30px_rgba(208,71,65,0.35)] transition-all">
-        <div className="border border-primary rounded-lg overflow-hidden relative aspect-[3/4] w-full mb-4 group/img bg-[#1c1c1c]">
+      <Card className="bg-[#242424] border-white/10 rounded-2xl p-3.5 shadow-lg flex flex-col items-center cursor-pointer h-full hover:border-[#D04741]/70 hover:shadow-[0_12px_30px_rgba(208,71,65,0.35)] transition-all">
+        <div className="border border-white/10 rounded-xl overflow-hidden relative aspect-[3/4] w-full mb-4 group/img bg-[#181818]">
           {member.image ? (
             <Image 
               src={member.image} 
@@ -60,7 +78,7 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
               unoptimized={member.image.startsWith('data:') || member.image.startsWith('http')}
             />
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#242424] to-[#181818] text-gray-500">
+            <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#222222] to-[#141414] text-gray-500">
               <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-2 shadow-inner group-hover/img:scale-105 transition-transform">
                 <User size={26} className="text-gray-400" />
               </div>
@@ -71,8 +89,8 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
           )}
         </div>
 
-        <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase">{member.name}</h3>
-        <p className="text-white text-xs mb-1">{member.batch}</p>
+        <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase tracking-tight line-clamp-1">{member.name}</h3>
+        <p className="text-gray-400 text-xs mb-1 font-mono">{member.batch}</p>
         {badgeText ? (
           <Badge variant="glow" className="mb-3 text-[10px] font-heading uppercase px-2.5 py-0.5 tracking-wider">
             {badgeText}
@@ -81,37 +99,37 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
           <div className="mb-3" />
         )}
 
-        <div className="flex gap-2 w-full mt-auto">
+        <div className="flex gap-2 w-full mt-auto pt-2 border-t border-white/5">
           <a
             href={member.linkedin || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex-1 bg-gradient-to-r from-[#D04741] to-[#6A2421] hover:brightness-110 text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={(e) => !member.linkedin && e.preventDefault()}
           >
             <Image
               src="/icons/linkedin-box-fill.svg"
               alt="LinkedIn"
-              width={14}
-              height={14}
+              width={13}
+              height={13}
               style={{ filter: 'brightness(0) invert(1)' }}
             />
-            <span className="text-[10px] font-bold">LinkedIn</span>
+            <span className="text-[10px] font-bold tracking-wide">LinkedIn</span>
           </a>
 
           <a
             href={mailHref}
-            className="flex-1 bg-primary hover:bg-[#6A2421] text-white py-1.5 rounded flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+            className="flex-1 bg-white/10 hover:bg-white/20 text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all border border-white/10 shadow-sm"
             title={`Send email to ${member.name} (${member.email || 'Team Staraptor'})`}
           >
             <Image
               src="/icons/mail-fill.svg"
               alt="Email"
-              width={14}
-              height={14}
+              width={13}
+              height={13}
               style={{ filter: 'brightness(0) invert(1)' }}
             />
-            <span className="text-[10px] font-bold">Email</span>
+            <span className="text-[10px] font-bold tracking-wide">Email</span>
           </a>
         </div>
       </Card>
@@ -119,7 +137,15 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
   );
 };
 
-const CrewSection = ({ title, members }: { title: string; members: Member[] }) => {
+const CrewSection = ({
+  title,
+  icon: Icon,
+  members,
+}: {
+  title: string;
+  icon?: any;
+  members: Member[];
+}) => {
   // Always sort Leads to the very first position of each sector
   const sortedMembers = [...members].sort((a, b) => {
     const aLead = (a.isLead || a.designation.includes('Lead') || a.designation.includes('Chief')) ? 1 : 0;
@@ -129,14 +155,37 @@ const CrewSection = ({ title, members }: { title: string; members: Member[] }) =
 
   return (
     <motion.div
-      className="mb-16"
+      className="mb-14"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
       variants={fadeUp}
     >
-      <div className="bg-gradient-to-b from-[#D04741] to-[#6A2421] py-4 px-8 text-center rounded-sm mb-8 shadow-md">
-        <h2 className="text-title-section !text-xl tracking-wider uppercase">{title}</h2>
+      {/* Sleek Modern Glassmorphic Section Header */}
+      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-[#221616] via-[#1a1414] to-[#141414] px-5 sm:px-6 py-4 mb-7 shadow-xl flex items-center justify-between">
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#EF5F5A] to-[#D04741]" />
+        
+        <div className="flex items-center gap-3.5">
+          {Icon && (
+            <div className="w-10 h-10 rounded-xl bg-[#D04741]/15 border border-[#D04741]/30 flex items-center justify-center text-[#EF5F5A] shadow-inner">
+              <Icon size={18} />
+            </div>
+          )}
+          <div>
+            <h2 className="text-base sm:text-lg md:text-xl font-bold font-orbitron uppercase text-white tracking-wider flex items-center gap-2">
+              {title}
+            </h2>
+            <span className="text-[11px] font-mono text-gray-400">
+              {sortedMembers.length} {sortedMembers.length === 1 ? 'Specialist' : 'Specialists'}
+            </span>
+          </div>
+        </div>
+
+        <div className="hidden sm:flex items-center gap-2">
+          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-white/5 border border-white/10 text-gray-400 font-semibold">
+            STARAPTOR • CUET
+          </span>
+        </div>
       </div>
 
       <div className="flex flex-wrap justify-center gap-3 sm:gap-6 max-w-5xl mx-auto">
@@ -153,56 +202,44 @@ const CrewSection = ({ title, members }: { title: string; members: Member[] }) =
   );
 };
 
+const SUB_TEAMS = [
+  { id: 'ALL', label: 'All Sub-Teams' },
+  { id: 'BOARD', label: 'Project Board' },
+  { id: 'DESIGN', label: 'Design' },
+  { id: 'SIMULATION', label: 'Simulation' },
+  { id: 'BRANDING', label: 'Branding' },
+  { id: 'RESEARCH', label: 'Research' },
+  { id: 'SOFTWARE', label: 'Software' },
+  { id: 'DOCS', label: 'Documentation' },
+];
+
 export default function CrewPage() {
   const { content } = useSiteContent();
   const activeMembers: Member[] = content?.crew?.length ? (content.crew as Member[]) : fallbackMembers;
 
-  // Faculty, Advisors & Instructors
-  const advisorsAndInstructors = activeMembers.filter(m => 
-    m.designation.includes("Advisor") || 
+  const [activeCategory, setActiveCategory] = useState<'advisor' | 'instructor' | 'team'>('team');
+  const [selectedSubTeam, setSelectedSubTeam] = useState<string>('ALL');
+
+  // Filter categories
+  const advisors = activeMembers.filter(m => 
+    m.designation.includes("Advisor")
+  );
+  const instructors = activeMembers.filter(m => 
     m.designation.includes("Instructor")
   );
+  const teamMembers = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") && 
+    !m.designation.includes("Instructor")
+  );
 
-  const projectLeads = activeMembers.filter(m => 
-    !m.designation.includes("Advisor") && 
-    !m.designation.includes("Instructor") && 
-    m.designation === "Project Lead"
-  );
-  const designCrew = activeMembers.filter(m => 
-    !m.designation.includes("Advisor") && 
-    !m.designation.includes("Instructor") && 
-    m.designation.includes("Design")
-  );
-  const simulationCrew = activeMembers.filter(m => 
-    !m.designation.includes("Advisor") && 
-    !m.designation.includes("Instructor") && 
-    m.designation.includes("Simulation")
-  );
-  const brandingCrew = activeMembers.filter(m => 
-    !m.designation.includes("Advisor") && 
-    !m.designation.includes("Instructor") && 
-    m.designation.includes("Branding")
-  );
-  const researchCrew = activeMembers.filter(m => 
-    !m.designation.includes("Advisor") && 
-    !m.designation.includes("Instructor") && 
-    m.designation.includes("Research")
-  );
-  const softwareCrew = activeMembers.filter(m => 
-    !m.designation.includes("Advisor") && 
-    !m.designation.includes("Instructor") && 
-    m.designation.includes("Software")
-  );
-  const documentationCrew = activeMembers.filter(m => 
-    !m.designation.includes("Advisor") && 
-    !m.designation.includes("Instructor") && 
-    m.designation.includes("Documentation")
-  );
-  
-  // Any extra members that don't match the specific buckets
-  const otherCrew = activeMembers.filter(m => 
-    !m.designation.includes("Advisor") &&
-    !m.designation.includes("Instructor") &&
+  const projectLeads = teamMembers.filter(m => m.designation === "Project Lead");
+  const designCrew = teamMembers.filter(m => m.designation.includes("Design"));
+  const simulationCrew = teamMembers.filter(m => m.designation.includes("Simulation"));
+  const brandingCrew = teamMembers.filter(m => m.designation.includes("Branding"));
+  const researchCrew = teamMembers.filter(m => m.designation.includes("Research"));
+  const softwareCrew = teamMembers.filter(m => m.designation.includes("Software"));
+  const documentationCrew = teamMembers.filter(m => m.designation.includes("Documentation"));
+  const otherCrew = teamMembers.filter(m => 
     m.designation !== "Project Lead" &&
     !m.designation.includes("Design") &&
     !m.designation.includes("Simulation") &&
@@ -409,77 +446,225 @@ export default function CrewPage() {
       {/* Meet The Crew */}
       <section className="py-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
 
-        <motion.h2
-          className="text-title-section text-center mb-16 tracking-wide uppercase"
+        <motion.div
+          className="text-center mb-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          Meet The Crew
-        </motion.h2>
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#EF5F5A] font-bold block mb-2">
+            The Pioneers of Staraptor
+          </span>
+          <h2 className="text-title-section tracking-wide uppercase">
+            Meet The Crew
+          </h2>
+        </motion.div>
 
-        {advisorsAndInstructors.length > 0 && (
-          <CrewSection
-            title="Advisors & Instructors"
-            members={advisorsAndInstructors}
-          />
+        {/* TOP 3 CATEGORY SWITCHER: Advisor | Instructor | Team */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex items-center p-1.5 rounded-2xl bg-[#1c1c1c] border border-white/10 shadow-2xl backdrop-blur-md">
+            
+            {/* 1. Advisor */}
+            <button
+              onClick={() => setActiveCategory('advisor')}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 ${
+                activeCategory === 'advisor'
+                  ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
+                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <GraduationCap size={16} />
+              <span>Advisor</span>
+              {advisors.length > 0 && (
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 font-mono">
+                  {advisors.length}
+                </span>
+              )}
+            </button>
+
+            {/* Divider */}
+            <div className="h-5 w-[1px] bg-white/10 mx-1" />
+
+            {/* 2. Instructor */}
+            <button
+              onClick={() => setActiveCategory('instructor')}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 ${
+                activeCategory === 'instructor'
+                  ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
+                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Compass size={16} />
+              <span>Instructor</span>
+              {instructors.length > 0 && (
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 font-mono">
+                  {instructors.length}
+                </span>
+              )}
+            </button>
+
+            {/* Divider */}
+            <div className="h-5 w-[1px] bg-white/10 mx-1" />
+
+            {/* 3. Team */}
+            <button
+              onClick={() => setActiveCategory('team')}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 ${
+                activeCategory === 'team'
+                  ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
+                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Users size={16} />
+              <span>Team</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 font-mono">
+                {teamMembers.length}
+              </span>
+            </button>
+
+          </div>
+        </div>
+
+        {/* TAB 1: ADVISOR */}
+        {activeCategory === 'advisor' && (
+          <div className="animate-in fade-in duration-300">
+            {advisors.length > 0 ? (
+              <CrewSection
+                title="Faculty Advisory Board"
+                icon={GraduationCap}
+                members={advisors}
+              />
+            ) : (
+              <div className="max-w-2xl mx-auto text-center py-16 px-6 rounded-3xl bg-[#1a1616] border border-white/10 shadow-2xl">
+                <div className="w-16 h-16 rounded-2xl bg-[#D04741]/15 border border-[#D04741]/30 flex items-center justify-center text-[#EF5F5A] mx-auto mb-4">
+                  <GraduationCap size={32} />
+                </div>
+                <h3 className="text-xl font-orbitron font-bold text-white uppercase mb-2">Faculty Advisory Board</h3>
+                <p className="text-sm text-gray-400 max-w-md mx-auto mb-6 leading-relaxed">
+                  Distinguished CUET faculty advisors and aerospace mentors guiding Staraptor&apos;s research and flight systems.
+                </p>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-gray-400">
+                  <ShieldCheck size={14} className="text-[#EF5F5A]" />
+                  Profiles can be added directly via the Admin Crew panel
+                </div>
+              </div>
+            )}
+          </div>
         )}
 
-        {projectLeads.length > 0 && (
-          <CrewSection
-            title="Project Board"
-            members={projectLeads}
-          />
+        {/* TAB 2: INSTRUCTOR */}
+        {activeCategory === 'instructor' && (
+          <div className="animate-in fade-in duration-300">
+            {instructors.length > 0 ? (
+              <CrewSection
+                title="Flight & Technical Instructors"
+                icon={Compass}
+                members={instructors}
+              />
+            ) : (
+              <div className="max-w-2xl mx-auto text-center py-16 px-6 rounded-3xl bg-[#1a1616] border border-white/10 shadow-2xl">
+                <div className="w-16 h-16 rounded-2xl bg-[#D04741]/15 border border-[#D04741]/30 flex items-center justify-center text-[#EF5F5A] mx-auto mb-4">
+                  <Compass size={32} />
+                </div>
+                <h3 className="text-xl font-orbitron font-bold text-white uppercase mb-2">Flight & Technical Instructors</h3>
+                <p className="text-sm text-gray-400 max-w-md mx-auto mb-6 leading-relaxed">
+                  Certified drone pilots, flight instructors, and technical mentors supervising drone flight testing and fabrication.
+                </p>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-gray-400">
+                  <ShieldCheck size={14} className="text-[#EF5F5A]" />
+                  Profiles can be added directly via the Admin Crew panel
+                </div>
+              </div>
+            )}
+          </div>
         )}
 
-        {designCrew.length > 0 && (
-          <CrewSection
-            title="Designing Crew"
-            members={designCrew}
-          />
-        )}
+        {/* TAB 3: TEAM */}
+        {activeCategory === 'team' && (
+          <div className="animate-in fade-in duration-300">
+            {/* Sub-team filter pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+              {SUB_TEAMS.map((st) => (
+                <button
+                  key={st.id}
+                  onClick={() => setSelectedSubTeam(st.id)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all ${
+                    selectedSubTeam === st.id
+                      ? 'bg-[#D04741] text-white border border-[#EF5F5A] font-bold shadow-md'
+                      : 'bg-[#181818] text-gray-400 border border-white/5 hover:border-white/20 hover:text-white'
+                  }`}
+                >
+                  {st.label}
+                </button>
+              ))}
+            </div>
 
-        {simulationCrew.length > 0 && (
-          <CrewSection
-            title="Simulation Crew"
-            members={simulationCrew}
-          />
-        )}
+            {/* Sub-teams list */}
+            {(selectedSubTeam === 'ALL' || selectedSubTeam === 'BOARD') && projectLeads.length > 0 && (
+              <CrewSection
+                title="Project Board"
+                icon={Crown}
+                members={projectLeads}
+              />
+            )}
 
-        {brandingCrew.length > 0 && (
-          <CrewSection
-            title="Branding & Communication Crew"
-            members={brandingCrew}
-          />
-        )}
+            {(selectedSubTeam === 'ALL' || selectedSubTeam === 'DESIGN') && designCrew.length > 0 && (
+              <CrewSection
+                title="Designing Crew"
+                icon={Palette}
+                members={designCrew}
+              />
+            )}
 
-        {researchCrew.length > 0 && (
-          <CrewSection
-            title="Research Crew"
-            members={researchCrew}
-          />
-        )}
+            {(selectedSubTeam === 'ALL' || selectedSubTeam === 'SIMULATION') && simulationCrew.length > 0 && (
+              <CrewSection
+                title="Simulation Crew"
+                icon={Layers}
+                members={simulationCrew}
+              />
+            )}
 
-        {softwareCrew.length > 0 && (
-          <CrewSection
-            title="Software Crew"
-            members={softwareCrew}
-          />
-        )}
+            {(selectedSubTeam === 'ALL' || selectedSubTeam === 'BRANDING') && brandingCrew.length > 0 && (
+              <CrewSection
+                title="Branding & Communication Crew"
+                icon={Sparkles}
+                members={brandingCrew}
+              />
+            )}
 
-        {documentationCrew.length > 0 && (
-          <CrewSection
-            title="Documentation Crew"
-            members={documentationCrew}
-          />
-        )}
+            {(selectedSubTeam === 'ALL' || selectedSubTeam === 'RESEARCH') && researchCrew.length > 0 && (
+              <CrewSection
+                title="Research Crew"
+                icon={Search}
+                members={researchCrew}
+              />
+            )}
 
-        {otherCrew.length > 0 && (
-          <CrewSection
-            title="General Engineering Crew"
-            members={otherCrew}
-          />
+            {(selectedSubTeam === 'ALL' || selectedSubTeam === 'SOFTWARE') && softwareCrew.length > 0 && (
+              <CrewSection
+                title="Software Crew"
+                icon={Code2}
+                members={softwareCrew}
+              />
+            )}
+
+            {(selectedSubTeam === 'ALL' || selectedSubTeam === 'DOCS') && documentationCrew.length > 0 && (
+              <CrewSection
+                title="Documentation Crew"
+                icon={FileText}
+                members={documentationCrew}
+              />
+            )}
+
+            {selectedSubTeam === 'ALL' && otherCrew.length > 0 && (
+              <CrewSection
+                title="General Engineering Crew"
+                icon={Wrench}
+                members={otherCrew}
+              />
+            )}
+          </div>
         )}
 
         <motion.div
