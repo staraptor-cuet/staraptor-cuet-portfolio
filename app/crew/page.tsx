@@ -87,7 +87,7 @@ const CrewMemberCard = ({
               unoptimized={member.image.startsWith('data:') || member.image.startsWith('http')}
             />
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#222222] to-[#141414] text-gray-500">
+            <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-[#141414] text-gray-500">
               <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-2 shadow-inner group-hover/img:scale-105 transition-transform">
                 <User size={26} className="text-gray-400" />
               </div>
@@ -113,7 +113,7 @@ const CrewMemberCard = ({
             href={member.linkedin || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex-1 bg-gradient-to-r from-[#D04741] to-[#6A2421] hover:brightness-110 text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex-1 bg-[#D04741] hover:bg-[#b83c37] text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={(e) => !member.linkedin && e.preventDefault()}
           >
             <Image
@@ -176,26 +176,27 @@ const CrewSection = ({
       viewport={{ once: true, amount: 0.1 }}
       variants={fadeUp}
     >
-      {/* Red Color Section Header Bar */}
-      <div className="relative overflow-hidden rounded-xl border border-white/15 bg-gradient-to-r from-[#D04741] via-[#A8322D] to-[#6A2421] px-5 sm:px-6 py-3.5 sm:py-4 mb-7 shadow-[0_8px_25px_rgba(208,71,65,0.35)] flex items-center justify-between">
-        <div className="flex items-center gap-3.5">
+      {/* Section Header Bar */}
+      <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#1c1c1c] px-5 sm:px-6 py-3.5 sm:py-4 mb-7 shadow-lg flex items-center justify-between">
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#D04741]" />
+        <div className="flex items-center gap-3.5 pl-1.5 sm:pl-2">
           {Icon && (
-            <div className="w-10 h-10 rounded-lg bg-black/20 border border-white/20 flex items-center justify-center text-white shadow-inner">
+            <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/25 flex items-center justify-center text-[#EF5F5A]">
               <Icon size={18} />
             </div>
           )}
           <div>
-            <h2 className="text-base sm:text-lg md:text-xl font-bold font-orbitron uppercase text-white tracking-wider flex items-center gap-2 drop-shadow-sm">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold font-montserrat uppercase text-white tracking-wider flex items-center gap-2">
               {title}
             </h2>
-            <span className="text-[11px] font-mono text-white/85">
+            <span className="text-[11px] font-mono text-gray-400">
               {sortedMembers.length} {sortedMembers.length === 1 ? 'Specialist' : 'Specialists'}
             </span>
           </div>
         </div>
 
         <div className="hidden sm:flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-black/25 border border-white/20 text-white font-semibold">
+          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-white/5 border border-white/10 text-gray-400 font-semibold">
             STARAPTOR • CUET
           </span>
         </div>
@@ -322,7 +323,7 @@ export default function CrewPage() {
             animate="visible"
             variants={fadeUp}
           >
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-orbitron tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f37c76] to-[#D04741] drop-shadow-[0_0_35px_rgba(208,71,65,0.35)]">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-montserrat uppercase tracking-tight mb-6 text-white">
               We Are Staraptor
             </h1>
 
@@ -360,7 +361,7 @@ export default function CrewPage() {
                   transition={{ duration: 0.45, delay: i * 0.08 }}
                   className="group relative bg-[#1c1c1c]/90 hover:bg-[#222222] border border-white/10 hover:border-[#D04741]/50 rounded-2xl p-5 sm:p-6 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
                 >
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#D04741]/40 to-transparent group-hover:via-[#EF5F5A] transition-all" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#D04741] transition-all" />
 
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-[11px] font-mono uppercase tracking-wider text-gray-400 font-semibold group-hover:text-gray-300 transition-colors">
@@ -372,7 +373,7 @@ export default function CrewPage() {
                   </div>
 
                   <div>
-                    <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-orbitron text-transparent bg-clip-text bg-gradient-to-b from-white to-[#EF5F5A] block tracking-tight mb-1">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-montserrat text-white block tracking-tight mb-1">
                       {value}
                     </span>
                     <span className="text-[11px] text-gray-500 font-mono block">
@@ -393,9 +394,9 @@ export default function CrewPage() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="group relative bg-gradient-to-b from-[#1f1a1a] via-[#1a1818] to-[#141414] border border-white/10 hover:border-[#D04741]/60 rounded-3xl p-6 sm:p-8 shadow-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              className="group relative bg-[#1c1c1c] border border-white/10 hover:border-[#D04741]/60 rounded-3xl p-6 sm:p-8 shadow-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#D04741] via-[#EF5F5A] to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#D04741]" />
 
               <div>
                 <div className="flex items-center gap-3.5 mb-5">
@@ -434,9 +435,9 @@ export default function CrewPage() {
               viewport={{ once: true }}
               variants={fadeUp}
               custom={0.1}
-              className="group relative bg-gradient-to-b from-[#1f1a1a] via-[#1a1818] to-[#141414] border border-white/10 hover:border-[#D04741]/60 rounded-3xl p-6 sm:p-8 shadow-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              className="group relative bg-[#1c1c1c] border border-white/10 hover:border-[#D04741]/60 rounded-3xl p-6 sm:p-8 shadow-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-[#EF5F5A] to-[#D04741]" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#D04741]" />
 
               <div>
                 <div className="flex items-center gap-3.5 mb-5">
@@ -500,7 +501,7 @@ export default function CrewPage() {
               onClick={() => setActiveCategory('advisor')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeCategory === 'advisor'
-                  ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
+                  ? 'bg-[#D04741] text-white shadow-[0_0_15px_rgba(208,71,65,0.4)] font-bold'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -521,7 +522,7 @@ export default function CrewPage() {
               onClick={() => setActiveCategory('instructor')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeCategory === 'instructor'
-                  ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
+                  ? 'bg-[#D04741] text-white shadow-[0_0_15px_rgba(208,71,65,0.4)] font-bold'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -542,7 +543,7 @@ export default function CrewPage() {
               onClick={() => setActiveCategory('team')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-heading uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeCategory === 'team'
-                  ? 'bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white shadow-[0_0_20px_rgba(208,71,65,0.4)] font-bold'
+                  ? 'bg-[#D04741] text-white shadow-[0_0_15px_rgba(208,71,65,0.4)] font-bold'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -571,7 +572,7 @@ export default function CrewPage() {
                 <div className="w-16 h-16 rounded-2xl bg-[#D04741]/15 border border-[#D04741]/30 flex items-center justify-center text-[#EF5F5A] mx-auto mb-4">
                   <GraduationCap size={32} />
                 </div>
-                <h3 className="text-xl font-orbitron font-bold text-white uppercase mb-2">Faculty Advisory Board</h3>
+                <h3 className="text-xl font-montserrat font-bold text-white uppercase mb-2">Faculty Advisory Board</h3>
                 <p className="text-sm text-gray-400 max-w-md mx-auto mb-6 leading-relaxed">
                   Distinguished CUET faculty advisors and aerospace mentors guiding Staraptor&apos;s research and flight systems.
                 </p>
@@ -599,7 +600,7 @@ export default function CrewPage() {
                 <div className="w-16 h-16 rounded-2xl bg-[#D04741]/15 border border-[#D04741]/30 flex items-center justify-center text-[#EF5F5A] mx-auto mb-4">
                   <Compass size={32} />
                 </div>
-                <h3 className="text-xl font-orbitron font-bold text-white uppercase mb-2">Flight & Technical Instructors</h3>
+                <h3 className="text-xl font-montserrat font-bold text-white uppercase mb-2">Flight & Technical Instructors</h3>
                 <p className="text-sm text-gray-400 max-w-md mx-auto mb-6 leading-relaxed">
                   Certified drone pilots, flight instructors, and technical mentors supervising drone flight testing and fabrication.
                 </p>
@@ -736,8 +737,8 @@ export default function CrewPage() {
               className="relative w-full max-w-md bg-[#1f1a1a] border border-white/15 rounded-3xl p-6 sm:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Glowing top line */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#D04741] via-[#EF5F5A] to-[#D04741]" />
+              {/* Top accent line */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#D04741]" />
 
               {/* Close Button */}
               <button
@@ -769,7 +770,7 @@ export default function CrewPage() {
                   <span className="text-[10px] font-mono uppercase tracking-widest text-[#EF5F5A] font-bold block mb-0.5">
                     Send Direct Message
                   </span>
-                  <h3 className="text-base sm:text-lg font-bold font-orbitron text-white uppercase tracking-tight">
+                  <h3 className="text-base sm:text-lg font-bold font-montserrat text-white uppercase tracking-tight">
                     {emailModalMember.name}
                   </h3>
                   <p className="text-xs text-gray-400 font-mono">
@@ -814,7 +815,7 @@ export default function CrewPage() {
                   href={getGmailUrl(emailModalMember.email || 'staraptorcuet@gmail.com', emailModalMember.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] hover:brightness-110 text-white font-heading font-bold text-xs uppercase tracking-wider shadow-[0_4px_20px_rgba(208,71,65,0.4)] transition-all cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-[#D04741] hover:bg-[#b83c37] text-white font-heading font-bold text-xs uppercase tracking-wider shadow-[0_4px_15px_rgba(208,71,65,0.3)] transition-all cursor-pointer"
                 >
                   <Mail size={16} />
                   <span>Open in Gmail (Web)</span>
