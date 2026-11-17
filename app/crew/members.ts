@@ -10,6 +10,15 @@ export interface Member {
 
 export const members: Member[] = [
   {
+    name: "Prof. Dr. Jamal Uddin Ahamed",
+    designation: "Chief Advisor",
+    batch: "Dept. of Mechanical Engineering, CUET",
+    email: "jamal@cuet.ac.bd",
+    linkedin: "https://www.linkedin.com/in/prof-dr-jamal-uddin-ahamed-27b22213/",
+    image: "/images/crew/Jamal Uddin Ahamed.webp",
+    isLead: true,
+  },
+  {
     name: "Abrar Azmain",
     designation: "Project Lead",
     batch: "ME-22",

@@ -35,4 +35,5 @@ next-env.d.ts
 # source assets
 /BG REMOVED
 /With bg
+/pics
 /*.csv
