@@ -65,6 +65,15 @@ export const members: Member[] = [
     isLead: false,
   },
   {
+    name: "Meraz Ahmed Ohi",
+    designation: "Instructor",
+    batch: "Lecturer (IIUC) | EEE-19, CUET",
+    email: "merazahmed10@iiuc.ac.bd",
+    linkedin: "https://www.linkedin.com/in/meraz-ahmed-ohi/",
+    image: "/images/crew/Meraz Ahmed Ohi.webp",
+    isLead: false,
+  },
+  {
     name: "Abrar Azmain",
     designation: "Project Lead",
     batch: "ME-22",
