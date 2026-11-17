@@ -19,6 +19,15 @@ export const members: Member[] = [
     isLead: true,
   },
   {
+    name: "Prof. Dr. Sajal Chandra Banik",
+    designation: "Advisor",
+    batch: "Dept. of Mechanical Engineering, CUET",
+    email: "baniksajal@cuet.ac.bd",
+    linkedin: "https://www.linkedin.com/in/sajal-chandra-banik-2587b616b/",
+    image: "/images/crew/Sajal Chandra Banik.webp",
+    isLead: false,
+  },
+  {
     name: "Abrar Azmain",
     designation: "Project Lead",
     batch: "ME-22",
