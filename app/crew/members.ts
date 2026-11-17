@@ -56,6 +56,15 @@ export const members: Member[] = [
     isLead: false,
   },
   {
+    name: "Zaber Ahsan",
+    designation: "Instructor",
+    batch: "EEE-20, CUET",
+    email: "",
+    linkedin: "https://www.linkedin.com/in/zaber-ahsan-bhuiyan-181157173/",
+    image: "/images/crew/Zaber Ahsan.webp",
+    isLead: false,
+  },
+  {
     name: "Abrar Azmain",
     designation: "Project Lead",
     batch: "ME-22",
