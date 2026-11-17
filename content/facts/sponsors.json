@@ -1,0 +1,12 @@
+{
+  "source_url": "https://staraptorcuet.vercel.app/sponsors",
+  "as_of": "2026-11-13",
+  "proposal_url": "https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing",
+  "contact_email": "staraptorcuet@gmail.com",
+  "tiers": [
+    { "tier": "Title Partner", "sponsors": [{ "name": "Epic Properties Ltd.", "logo": "/images/epic-logo.JPG" }], "open_slots": 0 },
+    { "tier": "Platinum Partners", "sponsors": [], "open_slots": 2 },
+    { "tier": "Gold Partners", "sponsors": [{ "name": "Pusti Group", "logo": "/images/Pusti logo~1.png" }], "open_slots": 0 },
+    { "tier": "Media Partners", "sponsors": [], "open_slots": 3 }
+  ]
+}

@@ -6,23 +6,33 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "kb": "node scripts/build-kb.mjs",
+    "predev": "node scripts/build-kb.mjs",
+    "prebuild": "node scripts/build-kb.mjs",
+    "eval": "node scripts/eval.mjs"
   },
   "dependencies": {
-    "next": "14.2.16",
+    "@ai-sdk/groq": "^4.0.83",
+    "@ai-sdk/react": "^4.0.176",
+    "ai": "^7.0.172",
+    "framer-motion": "^11.11.10",
+    "lucide-react": "^0.453.0",
+    "next": "^14.2.35",
     "react": "^18",
     "react-dom": "^18",
-    "framer-motion": "^11.11.10",
-    "lucide-react": "^0.453.0"
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "^14.2.35",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.16"
+    "typescript": "^5"
   }
 }
