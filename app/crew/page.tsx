@@ -176,12 +176,11 @@ const CrewSection = ({
       viewport={{ once: true, amount: 0.1 }}
       variants={fadeUp}
     >
-      {/* Section Header Bar */}
-      <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#1c1c1c] px-4 sm:px-6 py-3 sm:py-3.5 mb-7 shadow-lg flex items-center justify-between">
-        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#D04741]" />
+      {/* Section Header Bar - Solid Brand Red */}
+      <div className="relative overflow-hidden rounded-xl bg-[#D04741] border border-white/10 px-4 sm:px-6 py-3 sm:py-3.5 mb-7 shadow-[0_4px_20px_rgba(208,71,65,0.35)] flex items-center justify-between">
         <div className="flex items-center gap-3 sm:gap-3.5">
           {Icon && (
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/25 flex items-center justify-center text-[#EF5F5A]">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-black/20 border border-white/20 flex items-center justify-center text-white shadow-inner">
               <Icon size={18} />
             </div>
           )}
@@ -189,14 +188,14 @@ const CrewSection = ({
             <h2 className="text-base sm:text-lg md:text-xl font-bold font-montserrat uppercase text-white tracking-wider flex items-center gap-2">
               {title}
             </h2>
-            <span className="text-[11px] font-mono text-gray-400">
+            <span className="text-[11px] font-mono text-white/90">
               {sortedMembers.length} {sortedMembers.length === 1 ? 'Specialist' : 'Specialists'}
             </span>
           </div>
         </div>
 
         <div className="hidden sm:flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-white/5 border border-white/10 text-gray-400 font-semibold">
+          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-black/25 border border-white/20 text-white font-semibold">
             STARAPTOR • CUET
           </span>
         </div>

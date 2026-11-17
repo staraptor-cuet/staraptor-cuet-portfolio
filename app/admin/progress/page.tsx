@@ -30,7 +30,7 @@ import {
 } from '@/lib/types';
 import ImageUploader from '@/components/admin/ImageUploader';
 
-export default function AdminProgressProjectsPage() {
+function AdminProgressProjectsContent() {
   const searchParams = useSearchParams();
   const [projects, setProjects] = useState<ProgressProject[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1226,5 +1226,13 @@ export default function AdminProgressProjectsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function AdminProgressProjectsPage() {
+  return (
+    <React.Suspense fallback={<div className="p-8 text-gray-400 font-mono">Loading progress manager...</div>}>
+      <AdminProgressProjectsContent />
+    </React.Suspense>
   );
 }

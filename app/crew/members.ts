@@ -115,7 +115,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "rashidofficial5896@gmail.com",
     linkedin: "https://www.linkedin.com/in/rashid-abrar-azmain-csca™-b03683347",
-    image: "/images/crew/Abrar Azmain.png",
+    image: "/images/crew/Abrar Azmain.webp",
     isLead: true,
   },
   {
@@ -124,7 +124,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "tamalkaushik.staraptor@gmail.com",
     linkedin: "http://www.linkedin.com/in/kaushik-barua755",
-    image: "/images/crew/Tamal Kausik Barua.png",
+    image: "/images/crew/Tamal Kausik Barua.webp",
     isLead: true,
   },
   {
@@ -133,7 +133,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "islamzabirul68@gmail.com",
     linkedin: "https://www.linkedin.com/in/zabirul-islam-06a5482b1",
-    image: "/images/crew/Zabirul Islam Nabil.png",
+    image: "/images/crew/Zabirul Islam Nabil.webp",
     isLead: true,
   },
   {
@@ -142,7 +142,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "sarkarjoy186@gmail.com",
     linkedin: "https://www.linkedin.com/in/joy-sarkar-674234276",
-    image: "/images/crew/Joy Sarkar.png",
+    image: "/images/crew/Joy Sarkar.webp",
     isLead: false,
   },
   {
@@ -151,7 +151,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "mrenmoy11034@gmail.com",
     linkedin: "https://www.linkedin.com/in/mrenmoy-kumar-datta-967b512",
-    image: "/images/crew/Mrenmoy Kumar Datta.png",
+    image: "/images/crew/Mrenmoy Kumar Datta.webp",
     isLead: false,
   },
   {
@@ -160,7 +160,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "aaninda009@gmail.com",
     linkedin: "https://www.linkedin.com/in/anindachowdhury009/",
-    image: "/images/crew/Aninda Chowdhury.png",
+    image: "/images/crew/Aninda Chowdhury.webp",
     isLead: false,
   },
   {
@@ -169,7 +169,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "priyantikhushi13@gmail.com",
     linkedin: "https://www.linkedin.com/in/priyanti-biswas-1b6688355/",
-    image: "/images/crew/Priyanti Biswas.png",
+    image: "/images/crew/Priyanti Biswas.webp",
     isLead: false,
   },
   {
@@ -178,7 +178,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "u2203071@student.cuet.ac.bd",
     linkedin: "https://www.linkedin.com/in/mainul-islam-5797013b3/",
-    image: "/images/crew/Mainul Islam.png",
+    image: "/images/crew/Mainul Islam.webp",
     isLead: true,
   },
   {
@@ -187,7 +187,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "nasifhossain07@gmail.com",
     linkedin: "https://www.linkedin.com/in/khan-md-nasif-hossain-9208453a0/",
-    image: "/images/crew/Khan Md. Nasif Hossain.png",
+    image: "/images/crew/Khan Md. Nasif Hossain.webp",
     isLead: true,
   },
   {
@@ -196,7 +196,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "baruabijoy369@gmail.com",
     linkedin: "https://www.linkedin.com/in/bijoybarua/",
-    image: "/images/crew/Bijoy Barua.png",
+    image: "/images/crew/Bijoy Barua.webp",
     isLead: false,
   },
   {
@@ -205,7 +205,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "mahtabahmed0182@gmail.com",
     linkedin: "https://www.linkedin.com/in/mahtab-ahmed-876659352",
-    image: "/images/crew/Md.Mahtab Ahmed.png",
+    image: "/images/crew/Md.Mahtab Ahmed.webp",
     isLead: false,
   },
   {
@@ -214,7 +214,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "mehrabmaher34@gmail.com",
     linkedin: "https://www.linkedin.com/in/mehrab-waliullah-maher-2a8818223/",
-    image: "/images/crew/Mehrab Waliullah.png",
+    image: "/images/crew/Mehrab Waliullah.webp",
     isLead: true,
   },
   {
@@ -223,7 +223,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "mjtanhachy@gmail.com",
     linkedin: "https://www.linkedin.com/in/miftahul-jannat-tanha/",
-    image: "/images/crew/Miftahul Jannat Tanha.png",
+    image: "/images/crew/Miftahul Jannat Tanha.webp",
     isLead: false,
   },
   {
@@ -232,7 +232,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "afia0630ha@gmail.com",
     linkedin: "https://www.linkedin.com/in/aiman-afia-65475b367",
-    image: "/images/crew/Aiman Afia.png",
+    image: "/images/crew/Aiman Afia.webp",
     isLead: false,
   },
   {
@@ -241,7 +241,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "aymankalam06@gmail.com",
     linkedin: "https://www.linkedin.com/in/ayman-kalam-206172203",
-    image: "/images/crew/Ayman Kalam.png",
+    image: "/images/crew/Ayman Kalam.webp",
     isLead: false,
   },
   {
@@ -250,7 +250,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "aymanrafi0418@gmail.com",
     linkedin: "https://www.linkedin.com/in/ayman-rafi-647708302",
-    image: "/images/crew/Ayman Rafi.png",
+    image: "/images/crew/Ayman Rafi.webp",
     isLead: true,
   },
   {
@@ -259,7 +259,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "k.miftu.h@gmail.com",
     linkedin: "https://www.linkedin.com/in/kazi-miftahul-hoque",
-    image: "/images/crew/Kazi Miftahul Hoque.png",
+    image: "/images/crew/Kazi Miftahul Hoque.webp",
     isLead: false,
   },
   {
@@ -268,7 +268,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "tahmid.a158@gmail.com",
     linkedin: "https://www.linkedin.com/in/tahmid-ul-abrar-9999a1282/",
-    image: "/images/crew/Tahmidul Abrar.png",
+    image: "/images/crew/Tahmidul Abrar.webp",
     isLead: true,
   },
   {
@@ -277,7 +277,7 @@ export const members: Member[] = [
     batch: "ME-23",
     email: "mofasserchowdhury@gmail.com",
     linkedin: "https://www.linkedin.com/in/mofasser-hossain-chowdhury-75218121b/",
-    image: "/images/crew/Mofasser Hossain Chowdhury.png",
+    image: "/images/crew/Mofasser Hossain Chowdhury.webp",
     isLead: false,
   },
   {
@@ -286,7 +286,7 @@ export const members: Member[] = [
     batch: "ME-22",
     email: "radiazaman.staraptor@gmail.com",
     linkedin: "https://www.linkedin.com/in/radia-zaman-a867aa2b6/",
-    image: "/images/crew/Radia Zaman.png",
+    image: "/images/crew/Radia Zaman.webp",
     isLead: true,
   },
 ];
