@@ -232,18 +232,19 @@ export default function AdminAchievementsPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           {saveSuccess && (
-            <span className="text-xs text-emerald-400 flex items-center gap-1">
+            <span className="text-xs text-emerald-400 flex items-center gap-1 whitespace-nowrap">
               <Check size={14} /> Saved & Synced
             </span>
           )}
           <button
+            type="button"
             onClick={openAddModal}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white text-sm font-bold shadow-lg shadow-[#D04741]/20 hover:opacity-95 transition-opacity"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white text-sm font-bold shadow-lg shadow-[#D04741]/20 hover:opacity-95 transition-opacity whitespace-nowrap shrink-0 cursor-pointer"
           >
             <Plus size={16} />
-            <span>Create New Post</span>
+            <span className="whitespace-nowrap">Create New Post</span>
           </button>
         </div>
       </div>

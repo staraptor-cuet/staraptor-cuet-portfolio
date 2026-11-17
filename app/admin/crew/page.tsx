@@ -173,18 +173,19 @@ export default function AdminCrewPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           {saveSuccess && (
-            <span className="text-xs text-emerald-400 font-bold flex items-center gap-1 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20">
+            <span className="text-xs text-emerald-400 font-bold flex items-center gap-1 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 whitespace-nowrap">
               <Check size={14} /> Saved Live!
             </span>
           )}
           <button
+            type="button"
             onClick={handleOpenAdd}
-            className="bg-[#D04741] hover:bg-[#b03934] text-white px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-[#D04741]/20"
+            className="bg-[#D04741] hover:bg-[#b03934] text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-[#D04741]/20 whitespace-nowrap shrink-0 cursor-pointer"
           >
             <Plus size={16} />
-            <span>Add Member</span>
+            <span className="whitespace-nowrap">Add Member</span>
           </button>
         </div>
       </div>

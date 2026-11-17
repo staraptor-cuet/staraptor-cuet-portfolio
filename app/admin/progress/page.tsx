@@ -366,18 +366,19 @@ function AdminProgressProjectsContent() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           {saveSuccess && (
-            <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-mono bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 animate-fade-in">
+            <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-mono bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 animate-fade-in whitespace-nowrap">
               <Check size={14} /> Changes Saved Live!
             </span>
           )}
           <button
+            type="button"
             onClick={handleOpenAdd}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] hover:opacity-95 text-white text-xs font-bold transition-all shadow-lg shadow-[#D04741]/20"
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] hover:opacity-95 text-white text-xs font-bold transition-all shadow-lg shadow-[#D04741]/20 whitespace-nowrap shrink-0 cursor-pointer"
           >
             <Plus size={16} />
-            <span>Add Aircraft Project from Scratch</span>
+            <span className="whitespace-nowrap">Add Aircraft Project from Scratch</span>
           </button>
         </div>
       </div>

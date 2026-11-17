@@ -305,10 +305,10 @@ export default function AdminGalleryPage() {
     <div className="space-y-6">
       
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <span className="p-2 rounded-lg bg-[#D04741]/10 text-[#EF5F5A]">
+            <span className="p-2 rounded-lg bg-[#D04741]/10 text-[#EF5F5A] shrink-0">
               <ImageIcon size={20} />
             </span>
             <h1 className="text-2xl font-extrabold text-white font-montserrat">
@@ -320,29 +320,31 @@ export default function AdminGalleryPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           {saveSuccess && (
-            <span className="text-xs text-emerald-400 flex items-center gap-1 font-semibold">
+            <span className="text-xs text-emerald-400 flex items-center gap-1 font-semibold whitespace-nowrap">
               <Check size={14} /> Synced & Saved
             </span>
           )}
 
           {/* Multiple Upload Button */}
           <button
+            type="button"
             onClick={() => setBatchModalOpen(true)}
-            className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/10 text-sm font-semibold transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 h-11 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/10 text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
           >
-            <UploadCloud size={16} />
-            <span>Multiple Upload</span>
+            <UploadCloud size={18} className="shrink-0" />
+            <span className="whitespace-nowrap">Multiple Upload</span>
           </button>
 
           {/* Single Add Photo Button */}
           <button
+            type="button"
             onClick={openAddModal}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white text-sm font-bold shadow-lg shadow-[#D04741]/20 hover:opacity-95 transition-opacity"
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 h-11 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white text-sm font-bold shadow-lg shadow-[#D04741]/20 hover:opacity-95 transition-opacity whitespace-nowrap shrink-0 cursor-pointer"
           >
-            <Plus size={16} />
-            <span>Add Photo</span>
+            <Plus size={18} className="shrink-0" />
+            <span className="whitespace-nowrap">Add Photo</span>
           </button>
         </div>
       </div>
