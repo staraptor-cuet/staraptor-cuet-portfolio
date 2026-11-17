@@ -60,11 +60,6 @@ export default function ContactPage() {
           variants={fadeUp}
           custom={0}
         >
-          {/* Top Pill Badge */}
-          <div className="inline-flex items-center px-4 py-1 rounded-full bg-[#D04741]/10 border border-[#D04741]/30 text-[#EF5F5A] text-xs font-mono font-bold uppercase tracking-wider mb-4 shadow-[0_0_15px_rgba(208,71,65,0.15)]">
-            Contact
-          </div>
-
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold font-montserrat text-white tracking-tight mb-4">
             Contact us
           </h1>

@@ -155,9 +155,6 @@ export default function GalleryPage() {
           variants={fadeUp}
           custom={0}
         >
-          <Badge variant="glow" className="uppercase tracking-widest text-[11px] font-mono px-3 py-1 mb-3">
-            Media & Field Archives
-          </Badge>
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-orbitron font-bold text-[#d84e46]">
             Media Gallery
           </h1>

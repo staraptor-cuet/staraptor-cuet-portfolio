@@ -322,11 +322,6 @@ export default function CrewPage() {
             animate="visible"
             variants={fadeUp}
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D04741]/15 border border-[#D04741]/30 text-[#EF5F5A] text-[11px] font-mono uppercase tracking-widest mb-5 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#EF5F5A] animate-pulse" />
-              <span>Team Staraptor CUET • Aerospace Engineering</span>
-            </div>
-
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-orbitron tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f37c76] to-[#D04741] drop-shadow-[0_0_35px_rgba(208,71,65,0.35)]">
               We Are Staraptor
             </h1>

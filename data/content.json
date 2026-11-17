@@ -41,46 +41,6 @@
   },
   "crew": [
     {
-      "id": "member-1794909903182",
-      "name": "Sayed Mohammed Asim",
-      "designation": "Software Team",
-      "batch": "CSE-23",
-      "email": "smasim825@gmail.com",
-      "linkedin": "https://www.linkedin.com/in/sayed-mohammed-asim/",
-      "image": "/uploads/sayed_mohammed_asim_nobg.png",
-      "isLead": false
-    },
-    {
-      "id": "member-1794909849666",
-      "name": "Mohammad Rafiur Rahman",
-      "designation": "Software Team",
-      "batch": "ME-23",
-      "email": "mdrafiurrahman123098@gmail.com",
-      "linkedin": "https://www.linkedin.com/in/rafiur-rahman-182239202/",
-      "image": "",
-      "isLead": false
-    },
-    {
-      "id": "member-1794909677218",
-      "name": "Towki Fardin Chowdhury",
-      "designation": "Branding & Communication Team",
-      "batch": "ME-23",
-      "email": "towkyfardin@gmail.com",
-      "linkedin": "https://www.linkedin.com/in/towki-fardin/",
-      "image": "/uploads/towki_fardin_chowdhury_nobg.png",
-      "isLead": false
-    },
-    {
-      "id": "member-1794909616420",
-      "name": "Mohammed Ehsanur Rahman",
-      "designation": "Branding & Communication Team",
-      "batch": "ME-23",
-      "email": "ehsancuetme@gmail.com",
-      "linkedin": "",
-      "image": "/uploads/mohammed_ehsanur_rahman_nobg.png",
-      "isLead": false
-    },
-    {
       "id": "member-1",
       "name": "Abrar Azmain",
       "designation": "Project Lead",

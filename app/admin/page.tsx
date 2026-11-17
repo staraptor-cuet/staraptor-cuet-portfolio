@@ -62,9 +62,6 @@ export default function AdminDashboardPage() {
       <div className="bg-gradient-to-r from-[#201515] to-[#1c1c1c] border border-white/10 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
         <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-[#D04741]/10 to-transparent pointer-events-none" />
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D04741]/20 border border-[#D04741]/30 text-[#ff7973] text-xs font-semibold uppercase tracking-wider mb-3">
-            <Shield size={12} /> Flight Control Operational
-          </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat tracking-tight mb-2">
             Staraptor CUET Portal
           </h1>
