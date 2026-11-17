@@ -17,10 +17,22 @@ const fadeUp = {
   }),
 };
 
+const getBadgeText = (member: Member) => {
+  const d = member.designation || '';
+  if (d.includes('Chief Advisor')) return 'Chief Advisor';
+  if (d.includes('Advisor')) return 'Advisor';
+  if (d.includes('Instructor')) return 'Instructor';
+  if (d === 'Project Lead') return 'Project Lead';
+  if (member.isLead || d.includes('Lead')) return 'Lead';
+  return null;
+};
+
 const CrewMemberCard = ({ member, index }: { member: Member; index: number }) => {
   const mailHref = member.email
     ? `mailto:${member.email}?subject=Inquiry%20via%20Staraptor%20CUET`
     : `mailto:staraptorcuet@gmail.com?subject=Inquiry%20for%20${encodeURIComponent(member.name)}%20via%20Staraptor%20CUET`;
+
+  const badgeText = getBadgeText(member);
 
   return (
     <motion.div
@@ -50,12 +62,13 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
 
         <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase">{member.name}</h3>
         <p className="text-white text-xs mb-1">{member.batch}</p>
-        {(member.isLead || member.designation.includes("Advisor") || member.designation.includes("Instructor")) && (
-          <Badge variant="glow" className="mb-3 text-[10px] font-heading uppercase px-2 py-0.5">
-            {member.designation}
+        {badgeText ? (
+          <Badge variant="glow" className="mb-3 text-[10px] font-heading uppercase px-2.5 py-0.5 tracking-wider">
+            {badgeText}
           </Badge>
+        ) : (
+          <div className="mb-3" />
         )}
-        {!member.isLead && !member.designation.includes("Advisor") && !member.designation.includes("Instructor") && <div className="mb-3" />}
 
         <div className="flex gap-2 w-full mt-auto">
           <a
@@ -95,30 +108,39 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
   );
 };
 
-const CrewSection = ({ title, members }: { title: string; members: Member[] }) => (
-  <motion.div
-    className="mb-16"
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, amount: 0.1 }}
-    variants={fadeUp}
-  >
-    <div className="bg-gradient-to-b from-[#D04741] to-[#6A2421] py-4 px-8 text-center rounded-sm mb-8 shadow-md">
-      <h2 className="text-title-section !text-xl tracking-wider uppercase">{title}</h2>
-    </div>
+const CrewSection = ({ title, members }: { title: string; members: Member[] }) => {
+  // Always sort Leads to the very first position of each sector
+  const sortedMembers = [...members].sort((a, b) => {
+    const aLead = (a.isLead || a.designation.includes('Lead') || a.designation.includes('Chief')) ? 1 : 0;
+    const bLead = (b.isLead || b.designation.includes('Lead') || b.designation.includes('Chief')) ? 1 : 0;
+    return bLead - aLead;
+  });
 
-    <div className="flex flex-wrap justify-center gap-3 sm:gap-6 max-w-5xl mx-auto">
-      {members.map((m, i) => (
-        <div
-          key={m.name}
-          className="w-[calc(50%-0.375rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] max-w-[240px]"
-        >
-          <CrewMemberCard member={m} index={i} />
-        </div>
-      ))}
-    </div>
-  </motion.div>
-);
+  return (
+    <motion.div
+      className="mb-16"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={fadeUp}
+    >
+      <div className="bg-gradient-to-b from-[#D04741] to-[#6A2421] py-4 px-8 text-center rounded-sm mb-8 shadow-md">
+        <h2 className="text-title-section !text-xl tracking-wider uppercase">{title}</h2>
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-6 max-w-5xl mx-auto">
+        {sortedMembers.map((m, i) => (
+          <div
+            key={m.name}
+            className="w-[calc(50%-0.375rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] max-w-[240px]"
+          >
+            <CrewMemberCard member={m} index={i} />
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
 
 export default function CrewPage() {
   const { content } = useSiteContent();
