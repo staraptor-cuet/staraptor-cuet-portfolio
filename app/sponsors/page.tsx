@@ -143,22 +143,23 @@ export default function SponsorsPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.65 }}
         >
-          <p className="text-lg md:text-xl text-white mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-white mb-8 max-w-3xl mx-auto leading-relaxed">
             To become one of our sponsors, please contact us via email at:{' '}
-            <a href={`mailto:${contactEmail}`} className="underline hover:text-primary transition-colors">
+            <a href={`mailto:${contactEmail}`} className="underline hover:text-[#EF5F5A] transition-colors font-medium">
               {contactEmail}
             </a>
           </p>
-          <Button asChild size="lg" className="rounded-lg font-bold gap-2">
+          <div className="flex justify-center">
             <a
               href={proposalUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white font-montserrat font-bold text-sm sm:text-base shadow-[0_4px_20px_rgba(208,71,65,0.4)] hover:shadow-[0_8px_30px_rgba(208,71,65,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <span>Download Proposal</span>
-              <Download size={20} />
+              <Download size={18} />
             </a>
-          </Button>
+          </div>
         </motion.div>
 
       </div>
