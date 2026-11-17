@@ -161,28 +161,26 @@ const CrewSection = ({
       viewport={{ once: true, amount: 0.1 }}
       variants={fadeUp}
     >
-      {/* Sleek Modern Glassmorphic Section Header */}
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-[#221616] via-[#1a1414] to-[#141414] px-5 sm:px-6 py-4 mb-7 shadow-xl flex items-center justify-between">
-        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#EF5F5A] to-[#D04741]" />
-        
+      {/* Red Color Section Header Bar */}
+      <div className="relative overflow-hidden rounded-xl border border-white/15 bg-gradient-to-r from-[#D04741] via-[#A8322D] to-[#6A2421] px-5 sm:px-6 py-3.5 sm:py-4 mb-7 shadow-[0_8px_25px_rgba(208,71,65,0.35)] flex items-center justify-between">
         <div className="flex items-center gap-3.5">
           {Icon && (
-            <div className="w-10 h-10 rounded-xl bg-[#D04741]/15 border border-[#D04741]/30 flex items-center justify-center text-[#EF5F5A] shadow-inner">
+            <div className="w-10 h-10 rounded-lg bg-black/20 border border-white/20 flex items-center justify-center text-white shadow-inner">
               <Icon size={18} />
             </div>
           )}
           <div>
-            <h2 className="text-base sm:text-lg md:text-xl font-bold font-orbitron uppercase text-white tracking-wider flex items-center gap-2">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold font-orbitron uppercase text-white tracking-wider flex items-center gap-2 drop-shadow-sm">
               {title}
             </h2>
-            <span className="text-[11px] font-mono text-gray-400">
+            <span className="text-[11px] font-mono text-white/85">
               {sortedMembers.length} {sortedMembers.length === 1 ? 'Specialist' : 'Specialists'}
             </span>
           </div>
         </div>
 
         <div className="hidden sm:flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-white/5 border border-white/10 text-gray-400 font-semibold">
+          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-black/25 border border-white/20 text-white font-semibold">
             STARAPTOR • CUET
           </span>
         </div>
