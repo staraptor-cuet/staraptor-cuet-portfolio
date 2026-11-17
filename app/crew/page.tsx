@@ -176,29 +176,11 @@ const CrewSection = ({
       viewport={{ once: true, amount: 0.1 }}
       variants={fadeUp}
     >
-      {/* Section Header Bar - Solid Brand Red */}
-      <div className="relative overflow-hidden rounded-xl bg-[#D04741] border border-white/10 px-4 sm:px-6 py-3 sm:py-3.5 mb-7 shadow-[0_4px_20px_rgba(208,71,65,0.35)] flex items-center justify-between">
-        <div className="flex items-center gap-3 sm:gap-3.5">
-          {Icon && (
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-black/20 border border-white/20 flex items-center justify-center text-white shadow-inner">
-              <Icon size={18} />
-            </div>
-          )}
-          <div>
-            <h2 className="text-base sm:text-lg md:text-xl font-bold font-montserrat uppercase text-white tracking-wider flex items-center gap-2">
-              {title}
-            </h2>
-            <span className="text-[11px] font-mono text-white/90">
-              {sortedMembers.length} {sortedMembers.length === 1 ? 'Specialist' : 'Specialists'}
-            </span>
-          </div>
-        </div>
-
-        <div className="hidden sm:flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-black/25 border border-white/20 text-white font-semibold">
-            STARAPTOR • CUET
-          </span>
-        </div>
+      {/* Section Header Bar - Title Partners Red Banner Style */}
+      <div className="bg-gradient-to-b from-[#D04741] to-[#6A2421] py-3.5 sm:py-4 px-8 text-center rounded-sm mb-8 shadow-md">
+        <h2 className="text-title-section !text-lg sm:!text-xl tracking-widest uppercase">
+          {title}
+        </h2>
       </div>
 
       <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
