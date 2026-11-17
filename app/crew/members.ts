@@ -39,6 +39,16 @@ export const members: Member[] = [
     isLead: false,
   },
   {
+    name: "Minhaj Ahmed",
+    designation: "Advisor",
+    batch: "Dept. of Mechanical Engineering, CUET",
+    email: "minhaz@cuet.ac.bd",
+    phone: "01537202191",
+    linkedin: "",
+    image: "/images/crew/Minhaj Ahmed.webp",
+    isLead: false,
+  },
+  {
     name: "Abrar Azmain",
     designation: "Project Lead",
     batch: "ME-22",
