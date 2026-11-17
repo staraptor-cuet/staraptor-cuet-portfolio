@@ -29,6 +29,7 @@ import {
   Check,
   ExternalLink,
   X,
+  Phone,
 } from 'lucide-react';
 
 const fadeUp = {
@@ -109,22 +110,33 @@ const CrewMemberCard = ({
         )}
 
         <div className="flex gap-2 w-full mt-auto pt-2 border-t border-white/5">
-          <a
-            href={member.linkedin || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex-1 bg-[#D04741] hover:bg-[#b83c37] text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
-            onClick={(e) => !member.linkedin && e.preventDefault()}
-          >
-            <Image
-              src="/icons/linkedin-box-fill.svg"
-              alt="LinkedIn"
-              width={13}
-              height={13}
-              style={{ filter: 'brightness(0) invert(1)' }}
-            />
-            <span className="text-[10px] font-bold tracking-wide">LinkedIn</span>
-          </a>
+          {member.phone && !member.linkedin ? (
+            <a
+              href={`tel:${member.phone}`}
+              className="flex-1 bg-[#D04741] hover:bg-[#b83c37] text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm"
+              title={`Call ${member.name} (${member.phone})`}
+            >
+              <Phone size={13} />
+              <span className="text-[10px] font-bold tracking-wide">Phone</span>
+            </a>
+          ) : (
+            <a
+              href={member.linkedin || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex-1 bg-[#D04741] hover:bg-[#b83c37] text-white py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm ${!member.linkedin ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={(e) => !member.linkedin && e.preventDefault()}
+            >
+              <Image
+                src="/icons/linkedin-box-fill.svg"
+                alt="LinkedIn"
+                width={13}
+                height={13}
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              <span className="text-[10px] font-bold tracking-wide">LinkedIn</span>
+            </a>
+          )}
 
           <button
             type="button"
@@ -780,7 +792,7 @@ export default function CrewPage() {
               </div>
 
               {/* Email Address Display Box with 1-Click Copy */}
-              <div className="mb-6">
+              <div className="mb-4">
                 <label className="text-[11px] font-mono uppercase tracking-wider text-gray-400 block mb-1.5 font-semibold">
                   Official Email Address
                 </label>
@@ -807,6 +819,27 @@ export default function CrewPage() {
                   </button>
                 </div>
               </div>
+
+              {/* Phone Number Display Box (if available) */}
+              {emailModalMember.phone && (
+                <div className="mb-6">
+                  <label className="text-[11px] font-mono uppercase tracking-wider text-gray-400 block mb-1.5 font-semibold">
+                    Contact Phone Number
+                  </label>
+                  <div className="p-3 rounded-xl bg-black/50 border border-white/10 flex items-center justify-between gap-2 shadow-inner">
+                    <span className="font-mono text-xs sm:text-sm text-gray-200 select-all font-semibold">
+                      {emailModalMember.phone}
+                    </span>
+                    <a
+                      href={`tel:${emailModalMember.phone}`}
+                      className="px-3 py-1.5 rounded-lg bg-[#D04741] hover:bg-[#b83c37] text-white text-xs font-mono font-semibold flex items-center gap-1.5 shrink-0 transition-all cursor-pointer"
+                    >
+                      <Phone size={13} />
+                      <span>Call</span>
+                    </a>
+                  </div>
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="space-y-3">

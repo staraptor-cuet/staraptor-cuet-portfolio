@@ -6,6 +6,7 @@ export interface Member {
   linkedin: string;
   image: string;
   isLead: boolean;
+  phone?: string;
 }
 
 export const members: Member[] = [
@@ -25,6 +26,16 @@ export const members: Member[] = [
     email: "baniksajal@cuet.ac.bd",
     linkedin: "https://www.linkedin.com/in/sajal-chandra-banik-2587b616b/",
     image: "/images/crew/Sajal Chandra Banik.webp",
+    isLead: false,
+  },
+  {
+    name: "Dr. Afnan Hasan",
+    designation: "Advisor",
+    batch: "Dept. of Mechanical Engineering, CUET",
+    email: "afnanhasan@cuet.ac.bd",
+    phone: "01303042334",
+    linkedin: "",
+    image: "/images/crew/Dr. Afnan Hasan.webp",
     isLead: false,
   },
   {

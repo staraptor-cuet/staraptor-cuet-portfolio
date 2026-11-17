@@ -61,6 +61,17 @@
       "isLead": false
     },
     {
+      "id": "member-advisor-afnan",
+      "name": "Dr. Afnan Hasan",
+      "designation": "Advisor",
+      "batch": "Dept. of Mechanical Engineering, CUET",
+      "email": "afnanhasan@cuet.ac.bd",
+      "phone": "01303042334",
+      "linkedin": "",
+      "image": "/images/crew/Dr. Afnan Hasan.webp",
+      "isLead": false
+    },
+    {
       "id": "member-1",
       "name": "Abrar Azmain",
       "designation": "Project Lead",

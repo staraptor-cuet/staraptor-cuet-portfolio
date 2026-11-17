@@ -32,6 +32,7 @@ export interface CrewMember {
   linkedin: string;
   image: string;
   isLead: boolean;
+  phone?: string;
 }
 
 export interface SponsorItem {
