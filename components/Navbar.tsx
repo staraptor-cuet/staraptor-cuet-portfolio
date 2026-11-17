@@ -11,22 +11,29 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menu on route change
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  // Close menus on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
-  // Lock body scroll when menu is open
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  // Never render the public website navbar inside the admin portal
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   const links = [
     { name: 'Home', path: '/' },
-    { name: 'Aircraft', path: '/aircraft' },
     { name: 'Our Progress', path: '/progress' },
-    { name: 'VTOL 2026', path: '/vtol-2026' },
+    { name: 'Achievements', path: '/achievements' },
     { name: 'Crew', path: '/crew' },
     { name: 'Sponsors', path: '/sponsors' },
+    { name: 'Gallery', path: '/gallery' },
   ];
 
   return (
@@ -36,26 +43,33 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 md:h-20">
             
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 shrink-0">
+            <Link href="/" className="flex items-center gap-2 shrink-0 outline-none focus:outline-none focus:ring-0">
               <div className="relative w-12 h-12 md:w-16 md:h-16 -my-2">
-                <Image src="/images/logo.svg" alt="Staraptor Logo" fill className="object-contain" />
+                <Image src="/images/logo.svg" alt="Staraptor Logo" fill className="object-contain" priority />
               </div>
               <span className="text-white font-bebas tracking-[0.05em] text-[1.6rem] md:text-[2rem] pt-1 uppercase">
                 Staraptor
               </span>
             </Link>
 
-            {/* Desktop Links */}
+            {/* Desktop Navigation Links: Home, Our Progress, Achievements, Crew, Sponsors */}
             <div className="hidden md:flex items-center space-x-8">
               {links.map((link) => (
                 <Link
                   key={link.name}
                   href={link.path}
-                  className={`text-base font-semibold transition-colors ${
-                    pathname === link.path ? 'text-white' : 'text-gray-sub hover:text-white'
+                  className={`relative text-base font-semibold transition-colors py-1 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none ${
+                    pathname === link.path ? 'text-white' : 'text-gray-300 hover:text-white'
                   }`}
                 >
-                  {link.name}
+                  <span className="hover:text-[#EF5F5A] transition-colors">{link.name}</span>
+                  {pathname === link.path && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#EF5F5A] rounded-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </Link>
               ))}
             </div>
@@ -64,14 +78,14 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className="hidden sm:inline-flex px-4 py-2 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-all text-sm font-semibold"
+                className="hidden sm:inline-flex px-4 py-2 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-all text-sm font-semibold outline-none focus:outline-none focus:ring-0"
               >
                 Contact Us
               </Link>
 
               {/* Hamburger button (mobile only) */}
               <button
-                className="md:hidden flex items-center justify-center w-10 h-10 rounded-md text-white hover:bg-white/10 transition-colors"
+                className="md:hidden flex items-center justify-center w-10 h-10 rounded-md text-white hover:bg-white/10 transition-colors outline-none focus:outline-none focus:ring-0"
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-label="Toggle menu"
               >
@@ -98,23 +112,23 @@ export default function Navbar() {
 
             {/* Drawer */}
             <motion.div
-              className="fixed top-[64px] left-0 right-0 z-50 bg-[#1a1a1a] border-b border-gray-sub/20 md:hidden shadow-2xl"
+              className="fixed top-[64px] left-0 right-0 z-50 bg-[#1a1a1a] border-b border-gray-sub/20 md:hidden shadow-2xl max-h-[calc(100vh-64px)] overflow-y-auto"
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
             >
-              <div className="flex flex-col py-4 px-4">
+              <div className="flex flex-col py-4 px-4 space-y-1">
                 {links.map((link, i) => (
                   <motion.div
                     key={link.name}
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05, duration: 0.2 }}
+                    transition={{ delay: i * 0.04, duration: 0.2 }}
                   >
                     <Link
                       href={link.path}
-                      className={`flex items-center gap-3 py-3.5 px-3 rounded-lg text-base font-semibold transition-colors ${
+                      className={`flex items-center gap-3 py-3 px-3 rounded-lg text-base font-semibold transition-colors outline-none focus:outline-none focus:ring-0 ${
                         pathname === link.path
                           ? 'text-white bg-white/8'
                           : 'text-gray-sub hover:text-white hover:bg-white/5'
@@ -127,6 +141,7 @@ export default function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
+
                 <div className="mt-3 pt-3 border-t border-gray-sub/10">
                   <Link
                     href="/contact"

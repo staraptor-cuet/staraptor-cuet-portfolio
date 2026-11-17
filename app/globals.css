@@ -7,6 +7,14 @@
     @apply bg-background text-gray-sub font-sans;
   }
 
+  /* Remove default browser focus rings on links and interactive elements */
+  a:focus,
+  a:focus-visible,
+  button:focus,
+  button:focus-visible {
+    outline: none !important;
+  }
+
   /* Typography Design System */
   .text-title-main {
     font-family: var(--font-montserrat);
@@ -57,3 +65,76 @@
     @apply bg-clip-text text-transparent bg-gradient-to-b from-[#EF5F5A] to-[#6A2421];
   }
 }
+
+/* Staraptor Bird Loader */
+.loader-stage {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  width: 100%;
+}
+
+.bird-loader {
+  width: min(48rem, 84vw);
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0 2rem rgba(222, 45, 37, 0.35));
+  animation: bird-hover 2s ease-in-out infinite;
+}
+
+.bird-mark {
+  transform-origin: center;
+  animation: bird-breathe 2s ease-in-out infinite;
+}
+
+.bird-sweep {
+  animation: bird-sweep 1.65s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes bird-hover {
+  0%,
+  100% {
+    transform: translateY(3px);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes bird-sweep {
+  0% {
+    transform: translateX(0);
+  }
+
+  72%,
+  100% {
+    transform: translateX(1660px);
+  }
+}
+
+@keyframes bird-breathe {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: scale(0.992);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bird-loader,
+  .bird-mark,
+  .bird-sweep {
+    animation: none;
+  }
+
+  .bird-sweep {
+    transform: translateX(700px);
+  }
+}
+

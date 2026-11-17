@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    background: #151313;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 46%, rgba(109, 23, 20, 0.13), transparent 34%), #151313;
+  }
+}
+
+.loader-stage {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+}
+
+.bird-loader {
+  width: min(58rem, 88vw);
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0 1.25rem rgba(222, 45, 37, 0.18));
+  animation: bird-hover 2s ease-in-out infinite;
+}
+
+.bird-mark {
+  transform-origin: center;
+  animation: bird-breathe 2s ease-in-out infinite;
+}
+
+.bird-sweep {
+  animation: bird-sweep 1.65s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes bird-hover {
+  0%,
+  100% {
+    transform: translateY(3px);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes bird-sweep {
+  0% {
+    transform: translateX(0);
+  }
+
+  72%,
+  100% {
+    transform: translateX(1660px);
+  }
+}
+
+@keyframes bird-breathe {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: scale(0.992);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bird-loader,
+  .bird-mark,
+  .bird-sweep {
+    animation: none;
+  }
+
+  .bird-sweep {
+    transform: translateX(700px);
+  }
+}

@@ -3,72 +3,97 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
+import { useSiteContent } from '@/lib/useContent';
+import { SponsorTier as SponsorTierType } from '@/lib/types';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
-const SponsorTier = ({
-  title,
-  count,
-  sponsorName,
-  sponsorLogo,
-}: {
-  title: string;
-  count: number;
-  sponsorName?: string;
-  sponsorLogo?: string;
-}) => (
-  <motion.div
-    className="mb-16"
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.65, ease: 'easeOut' }}
-  >
-    <div className="bg-gradient-to-b from-[#D04741] to-[#6A2421] py-4 px-8 text-center rounded-sm mb-8 shadow-md">
-      <h2 className="text-title-section !text-xl tracking-widest uppercase">
-        {title}
-      </h2>
-    </div>
+const SponsorTierComponent = ({ tier }: { tier: SponsorTierType }) => {
+  const filledSponsors = tier.sponsors || [];
+  const totalSlots = Math.max(tier.count, filledSponsors.length);
+  const slots = Array(totalSlots).fill(0);
 
-    <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-      {Array(count)
-        .fill(0)
-        .map((_, i) => (
-          <motion.div
-            key={i}
-            className="w-[calc(50%-0.5rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] bg-[#1f1f1f] border border-gray-sub/10 rounded-lg aspect-video flex flex-col items-center justify-center p-4 sm:p-6 group hover:border-primary/50 hover:bg-[#252525] hover:shadow-[0_0_20px_rgba(208,71,65,0.15)] transition-all"
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: i * 0.08 }}
-            whileHover={{ scale: 1.03 }}
-          >
-            {sponsorLogo && sponsorName ? (
-              <>
-                <div className="relative w-full h-24 sm:h-28 mb-4">
-                  <Image
-                    src={sponsorLogo}
-                    alt={`${sponsorName} logo`}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+  return (
+    <motion.div
+      className="mb-16"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.65, ease: 'easeOut' }}
+    >
+      <div className="bg-gradient-to-b from-[#D04741] to-[#6A2421] py-4 px-8 text-center rounded-sm mb-8 shadow-md">
+        <h2 className="text-title-section !text-xl tracking-widest uppercase">
+          {tier.title}
+        </h2>
+      </div>
 
-                <p className="text-white font-bold tracking-wide text-sm sm:text-base text-center">
-                  {sponsorName}
-                </p>
-              </>
-            ) : (
-              <p className="text-gray-sub/50 font-bold tracking-widest uppercase text-xs sm:text-sm group-hover:text-primary transition-colors">
-                TBA
-              </p>
-            )}
-          </motion.div>
-        ))}
-    </div>
-  </motion.div>
-);
- 
+      <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+        {slots.map((_, i) => {
+          const sponsor = filledSponsors[i];
+          return (
+            <motion.div
+              key={i}
+              className="w-[calc(50%-0.5rem)] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] aspect-video"
+              initial={{ opacity: 0, scale: 0.92 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.08 }}
+              whileHover={{ scale: 1.03 }}
+            >
+              <Card className="h-full bg-[#1f1f1f] border-gray-sub/10 rounded-lg flex flex-col items-center justify-center p-4 sm:p-6 group hover:border-[#D04741]/50 hover:bg-[#252525] hover:shadow-[0_0_20px_rgba(208,71,65,0.15)] transition-all">
+                {sponsor && sponsor.name ? (
+                  <>
+                    <div className="relative w-full h-24 sm:h-28 mb-4">
+                      {sponsor.logo ? (
+                        <Image
+                          src={sponsor.logo}
+                          alt={`${sponsor.name} logo`}
+                          fill
+                          className="object-contain"
+                          unoptimized={sponsor.logo.startsWith('data:') || sponsor.logo.startsWith('http')}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center font-bold text-gray-400">
+                          {sponsor.name}
+                        </div>
+                      )}
+                    </div>
+
+                    {sponsor.website ? (
+                      <a
+                        href={sponsor.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white hover:text-primary font-bold tracking-wide text-sm sm:text-base text-center transition-colors truncate max-w-full"
+                      >
+                        {sponsor.name}
+                      </a>
+                    ) : (
+                      <p className="text-white font-bold tracking-wide text-sm sm:text-base text-center truncate max-w-full">
+                        {sponsor.name}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-gray-sub/50 font-bold tracking-widest uppercase text-xs sm:text-sm group-hover:text-primary transition-colors">
+                    TBA
+                  </p>
+                )}
+              </Card>
+            </motion.div>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+};
 
 export default function SponsorsPage() {
+  const { content } = useSiteContent();
+  const tiers = content?.sponsors || [];
+  const contactEmail = content?.general?.contactEmail || 'staraptorcuet@gmail.com';
+  const proposalUrl = content?.general?.proposalUrl || 'https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing';
+
   return (
     <div className="bg-background min-h-screen py-16 md:py-24 text-gray-sub relative overflow-hidden">
       {/* MASCOT */}
@@ -106,19 +131,9 @@ export default function SponsorsPage() {
           </p>
         </motion.div>
 
-        <SponsorTier
-            title="Title Partners"
-            count={1}
-            sponsorName="Epic Properties Ltd."
-            sponsorLogo="/images/epic-logo.JPG"
-        />
-        <SponsorTier title="Platinum Partners" count={2} />
-        <SponsorTier
-          title="Gold Partners"
-          count={1}
-          sponsorName="Pusti Group"
-          sponsorLogo="/images/Pusti logo~1.png"
-        />        <SponsorTier title="Media Partners" count={3} />
+        {tiers.map((tier) => (
+          <SponsorTierComponent key={tier.id} tier={tier} />
+        ))}
 
         {/* CTA Section */}
         <motion.div
@@ -128,21 +143,23 @@ export default function SponsorsPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.65 }}
         >
-          <p className="text-lg md:text-xl text-white mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-white mb-8 max-w-3xl mx-auto leading-relaxed">
             To become one of our sponsors, please contact us via email at:{' '}
-            <a href="mailto:staraptorcuet@gmail.com" className="underline hover:text-primary transition-colors">
-              staraptorcuet@gmail.com
+            <a href={`mailto:${contactEmail}`} className="underline hover:text-[#EF5F5A] transition-colors font-medium">
+              {contactEmail}
             </a>
           </p>
-          <a
-            href="https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#D04741] to-[#6A2421] text-white px-8 py-3.5 rounded-lg font-bold hover:scale-105 transition-transform shadow-lg"
-          >
-            Download Proposal
-            <Download size={20} />
-          </a>
+          <div className="flex justify-center">
+            <a
+              href={proposalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#D04741] to-[#EF5F5A] text-white font-montserrat font-bold text-sm sm:text-base shadow-[0_4px_20px_rgba(208,71,65,0.4)] hover:shadow-[0_8px_30px_rgba(208,71,65,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              <span>Download Proposal</span>
+              <Download size={18} />
+            </a>
+          </div>
         </motion.div>
 
       </div>

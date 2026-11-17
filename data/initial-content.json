@@ -1,0 +1,792 @@
+{
+  "general": {
+    "tagline": "Engineers Bound by Flight",
+    "heroSubtitle": "Team Staraptor CUET",
+    "aboutTitle": "We Are Staraptor",
+    "aboutDescription": "Team Staraptor CUET is the first VTOL drone design team in Bangladesh from Chittagong University of Engineering & Technology (CUET). Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge UAV and VTOL aircraft systems. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!",
+    "stats": [
+      {
+        "id": "stat-1",
+        "label": "Crew Size",
+        "value": "20",
+        "labelFirst": true
+      },
+      {
+        "id": "stat-2",
+        "label": "VTOL Design Team",
+        "value": "1st",
+        "labelFirst": false
+      },
+      {
+        "id": "stat-3",
+        "label": "Founding",
+        "value": "2026",
+        "labelFirst": true
+      },
+      {
+        "id": "stat-4",
+        "label": "Target",
+        "value": "July 2026",
+        "labelFirst": true
+      }
+    ],
+    "proposalUrl": "https://drive.google.com/drive/folders/1VGXoYQska6DDrVHstDyD-W608TmDV1BK?usp=sharing",
+    "contactEmail": "staraptorcuet@gmail.com",
+    "socials": {
+      "facebook": "https://www.facebook.com/staraptor.cuet",
+      "linkedin": "https://www.linkedin.com/company/staraptor-cuet",
+      "instagram": "https://www.instagram.com/staraptor.cuet",
+      "youtube": ""
+    }
+  },
+  "crew": [
+    {
+      "id": "member-1794922834008",
+      "name": "Sayed Mohammed Asim",
+      "designation": "Software Team",
+      "batch": "CSE-23",
+      "email": "",
+      "linkedin": "",
+      "image": "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922831/staraptor/1794922828983-me-removebg-preview.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-1794922753391",
+      "name": "Mohammad Rafiur Rahman",
+      "designation": "Software Team",
+      "batch": "ME-23",
+      "email": "mdrafiurrahman123098@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/rafiur-rahman-182239202?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      "image": "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922738/staraptor/1794922736344-whatsapp-image-2026-11-17-at-18.00.00-removebg-preview.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-1794922272583",
+      "name": "Ehsanur Rahman",
+      "designation": "Branding & Communication Team",
+      "batch": "ME-23",
+      "email": "",
+      "linkedin": "",
+      "image": "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922281/staraptor/1794922279404-1747762067194-removebg-preview.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-1794922260831",
+      "name": "Towki Fardin Chowdhury",
+      "designation": "Branding & Communication Team",
+      "batch": "ME-23",
+      "email": "",
+      "linkedin": "",
+      "image": "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922173/staraptor/1794922171166-whatsapp-image-2026-11-16-at-21.13.47-removebg-preview.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-advisor-jamal",
+      "name": "Prof. Dr. Jamal Uddin Ahamed",
+      "designation": "Chief Advisor",
+      "batch": "Dept. of Mechanical Engineering, CUET",
+      "email": "jamal@cuet.ac.bd",
+      "linkedin": "https://www.linkedin.com/in/prof-dr-jamal-uddin-ahamed-27b22213/",
+      "image": "/images/crew/Jamal Uddin Ahamed.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-advisor-sajal",
+      "name": "Prof. Dr. Sajal Chandra Banik",
+      "designation": "Advisor",
+      "batch": "Dept. of Mechanical Engineering, CUET",
+      "email": "baniksajal@cuet.ac.bd",
+      "linkedin": "https://www.linkedin.com/in/sajal-chandra-banik-2587b616b/",
+      "image": "/images/crew/Sajal Chandra Banik.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-advisor-afnan",
+      "name": "Dr. Afnan Hasan",
+      "designation": "Advisor",
+      "batch": "Dept. of Mechanical Engineering, CUET",
+      "email": "afnanhasan@cuet.ac.bd",
+      "linkedin": "",
+      "image": "/images/crew/Dr. Afnan Hasan.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-advisor-minhaj",
+      "name": "Minhaj Ahmed",
+      "designation": "Advisor",
+      "batch": "Dept. of Mechanical Engineering, CUET",
+      "email": "minhaz@cuet.ac.bd",
+      "linkedin": "",
+      "image": "/images/crew/Minhaj Ahmed.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-instructor-minhajul",
+      "name": "Minhajul Islam Mahad",
+      "designation": "Instructor",
+      "batch": "EEE-20, CUET",
+      "email": "",
+      "linkedin": "https://www.linkedin.com/in/minhajul-islam-mahadi-e4/",
+      "image": "/images/crew/Minhajul Islam Mahad.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-instructor-zaber",
+      "name": "Zaber Ahsan",
+      "designation": "Instructor",
+      "batch": "EEE-20, CUET",
+      "email": "",
+      "linkedin": "https://www.linkedin.com/in/zaber-ahsan-bhuiyan-181157173/",
+      "image": "/images/crew/Zaber Ahsan.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-instructor-meraz",
+      "name": "Meraz Ahmed Ohi",
+      "designation": "Instructor",
+      "batch": "Lecturer (IIUC) | EEE-19, CUET",
+      "email": "merazahmed10@iiuc.ac.bd",
+      "linkedin": "https://www.linkedin.com/in/meraz-ahmed-ohi/",
+      "image": "/images/crew/Meraz Ahmed Ohi.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-1",
+      "name": "Abrar Azmain",
+      "designation": "Project Lead",
+      "batch": "ME-22",
+      "email": "rashidofficial5896@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/rashid-abrar-azmain-csca™-b03683347",
+      "image": "/images/crew/Abrar Azmain.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-2",
+      "name": "Tamal Kaushik Barua",
+      "designation": "Design Team Lead",
+      "batch": "ME-22",
+      "email": "tamalkaushik.staraptor@gmail.com",
+      "linkedin": "http://www.linkedin.com/in/kaushik-barua755",
+      "image": "/images/crew/Tamal Kausik Barua.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-3",
+      "name": "Zabirul Islam Nabil",
+      "designation": "Design Team Lead",
+      "batch": "ME-22",
+      "email": "islamzabirul68@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/zabirul-islam-06a5482b1",
+      "image": "/images/crew/Zabirul Islam Nabil.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-4",
+      "name": "Joy Sarkar",
+      "designation": "Design Team",
+      "batch": "ME-23",
+      "email": "sarkarjoy186@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/joy-sarkar-674234276",
+      "image": "/images/crew/Joy Sarkar.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-5",
+      "name": "Mrenmoy Kumar Datta",
+      "designation": "Design Team",
+      "batch": "ME-23",
+      "email": "mrenmoy11034@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/mrenmoy-kumar-datta-967b512",
+      "image": "/images/crew/Mrenmoy Kumar Datta.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-6",
+      "name": "Aninda Chowdhury",
+      "designation": "Design Team",
+      "batch": "ME-23",
+      "email": "aaninda009@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/anindachowdhury009/",
+      "image": "/images/crew/Aninda Chowdhury.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-7",
+      "name": "Priyanti Biswas",
+      "designation": "Design Team",
+      "batch": "ME-23",
+      "email": "priyantikhushi13@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/priyanti-biswas-1b6688355/",
+      "image": "/images/crew/Priyanti Biswas.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-8",
+      "name": "Mainul Islam",
+      "designation": "Simulation Team Lead",
+      "batch": "ME-22",
+      "email": "u2203071@student.cuet.ac.bd",
+      "linkedin": "https://www.linkedin.com/in/mainul-islam-5797013b3/",
+      "image": "/images/crew/Mainul Islam.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-9",
+      "name": "Khan Md. Nasif Hossain",
+      "designation": "Simulation Team Lead",
+      "batch": "ME-22",
+      "email": "nasifhossain07@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/khan-md-nasif-hossain-9208453a0/",
+      "image": "/images/crew/Khan Md. Nasif Hossain.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-10",
+      "name": "Bijoy Barua",
+      "designation": "Simulation Team",
+      "batch": "ME-23",
+      "email": "baruabijoy369@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/bijoybarua/",
+      "image": "/images/crew/Bijoy Barua.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-11",
+      "name": "Md. Mahtab Ahmed",
+      "designation": "Simulation Team",
+      "batch": "ME-23",
+      "email": "mahtabahmed0182@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/mahtab-ahmed-876659352",
+      "image": "/images/crew/Md.Mahtab Ahmed.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-12",
+      "name": "Mehrab Waliullah",
+      "designation": "Branding & Communication Team Lead",
+      "batch": "ME-22",
+      "email": "mehrabmaher34@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/mehrab-waliullah-maher-2a8818223/",
+      "image": "/images/crew/Mehrab Waliullah.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-13",
+      "name": "Miftahul Jannat Tanha",
+      "designation": "Branding & Communication Team",
+      "batch": "ME-23",
+      "email": "mjtanhachy@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/miftahul-jannat-tanha/",
+      "image": "/images/crew/Miftahul Jannat Tanha.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-14",
+      "name": "Aiman Afia",
+      "designation": "Branding & Communication Team",
+      "batch": "ME-23",
+      "email": "afia0630ha@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/aiman-afia-65475b367",
+      "image": "/images/crew/Aiman Afia.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-15",
+      "name": "Ayman Kalam",
+      "designation": "Branding & Communication Team",
+      "batch": "ME-23",
+      "email": "aymankalam06@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/ayman-kalam-206172203",
+      "image": "/images/crew/Ayman Kalam.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-16",
+      "name": "Ayman Rafi",
+      "designation": "Research Team Lead",
+      "batch": "ME-22",
+      "email": "aymanrafi0418@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/ayman-rafi-647708302",
+      "image": "/images/crew/Ayman Rafi.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-17",
+      "name": "Kazi Miftahul Hoque",
+      "designation": "Research Team",
+      "batch": "ME-23",
+      "email": "k.miftu.h@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/kazi-miftahul-hoque",
+      "image": "/images/crew/Kazi Miftahul Hoque.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-18",
+      "name": "Tahmidul Abrar",
+      "designation": "Software Team Lead",
+      "batch": "ME-22",
+      "email": "tahmid.a158@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/tahmid-ul-abrar-9999a1282/",
+      "image": "/images/crew/Tahmidul Abrar.webp",
+      "isLead": true
+    },
+    {
+      "id": "member-19",
+      "name": "Mofasser Hossain Chowdhury",
+      "designation": "Software Team",
+      "batch": "ME-23",
+      "email": "mofasserchowdhury@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/mofasser-hossain-chowdhury-75218121b/",
+      "image": "/images/crew/Mofasser Hossain Chowdhury.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-20",
+      "name": "Radia Zaman",
+      "designation": "Documentation Team Lead",
+      "batch": "ME-22",
+      "email": "radiazaman.staraptor@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/radia-zaman-a867aa2b6/",
+      "image": "/images/crew/Radia Zaman.webp",
+      "isLead": true
+    }
+  ],
+  "sponsors": [
+    {
+      "id": "tier-1",
+      "title": "Title Partners",
+      "count": 1,
+      "sponsors": [
+        {
+          "id": "sp-1",
+          "name": "Epic Properties Ltd.",
+          "logo": "/images/epic-logo.webp",
+          "website": "https://epic.com.bd"
+        }
+      ]
+    },
+    {
+      "id": "tier-2",
+      "title": "Platinum Partners",
+      "count": 2,
+      "sponsors": []
+    },
+    {
+      "id": "tier-3",
+      "title": "Gold Partners",
+      "count": 1,
+      "sponsors": [
+        {
+          "id": "sp-2",
+          "name": "Pusti Group",
+          "logo": "/images/Pusti logo~1.png",
+          "website": "https://www.pustigroup.com"
+        }
+      ]
+    },
+    {
+      "id": "tier-4",
+      "title": "Media Partners",
+      "count": 3,
+      "sponsors": []
+    }
+  ],
+  "progress": [
+    {
+      "id": "prog-1",
+      "title": "Initial Design & Aerodynamic Testing",
+      "date": "2026-03-01",
+      "description": "Completed initial aerodynamic CFD simulations and prototype testing for our hybrid VTOL configuration. The team is currently validating payload distribution and motor thrust metrics.",
+      "image": "/images/analysis-img-1.webp"
+    }
+  ],
+  "achievements": [],
+  "gallery": [
+    {
+      "id": "gal-1",
+      "src": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp",
+      "title": "Staraptor VTOL 3D Model",
+      "caption": "Aerodynamic high-speed hybrid tilt-rotor 3D airframe render with high-aspect Eppler E205 wings.",
+      "category": "Render",
+      "project": "Staraptor V1",
+      "year": "2026",
+      "date": "2026-03-01",
+      "isCover": true,
+      "featuredOnHome": true,
+      "published": true
+    },
+    {
+      "id": "gal-2",
+      "src": "/images/progress image.jpg",
+      "title": "Team Testing & Prototype Workshop",
+      "caption": "CUET aerospace engineering team conducting motor thrust benchmarking and structural assembly.",
+      "category": "Workshop",
+      "project": "Staraptor V1",
+      "year": "2026",
+      "date": "2026-02-15",
+      "isCover": false,
+      "featuredOnHome": true,
+      "published": true
+    },
+    {
+      "id": "gal-3",
+      "src": "/images/analysis-img-1.webp",
+      "title": "CFD Pressure Distribution",
+      "caption": "Transition mode aerodynamic surface pressure contours simulated in ANSYS Fluent.",
+      "category": "CFD Analysis",
+      "project": "METU VTOL 2026",
+      "year": "2026",
+      "date": "2026-01-20",
+      "isCover": false,
+      "featuredOnHome": true,
+      "published": true
+    },
+    {
+      "id": "gal-4",
+      "src": "/images/analysis-img-2.webp",
+      "title": "Velocity Streamlines Analysis",
+      "caption": "Hover mode downwash turbulence and crosswind hover stabilization aerodynamics.",
+      "category": "CFD Analysis",
+      "project": "METU VTOL 2026",
+      "year": "2026",
+      "date": "2026-01-10",
+      "isCover": false,
+      "featuredOnHome": false,
+      "published": true
+    }
+  ],
+  "aircraft": {
+    "classification": "Unmanned Aerial Vehicle",
+    "name": "STARAPTOR VTOL - V1",
+    "heroImage": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp",
+    "physicalData": [
+      {
+        "id": "pd-1",
+        "label": "Wingspan",
+        "value": "1.340 m"
+      },
+      {
+        "id": "pd-2",
+        "label": "Length",
+        "value": "0.99 m"
+      },
+      {
+        "id": "pd-3",
+        "label": "Payload Capacity",
+        "value": "8 Kg"
+      },
+      {
+        "id": "pd-4",
+        "label": "Approximate Weight",
+        "value": "2 Kg"
+      }
+    ],
+    "performanceData": [
+      {
+        "id": "perf-1",
+        "label": "Cruise Speed",
+        "value": "60-70 Kmph"
+      },
+      {
+        "id": "perf-2",
+        "label": "Endurance",
+        "value": "90 min"
+      },
+      {
+        "id": "perf-3",
+        "label": "Wing Load",
+        "value": "55-75 gm/dm²"
+      }
+    ],
+    "avionics": [
+      {
+        "id": "av-1",
+        "title": "Top Quality Materials",
+        "desc": "Carbon Fiber / GRP Composite Sheet"
+      },
+      {
+        "id": "av-2",
+        "title": "Airfoil Type",
+        "desc": "Eppler E205"
+      },
+      {
+        "id": "av-3",
+        "title": "Electronics",
+        "desc": "BLDC motors, Pixhawk flight controller, GPS"
+      }
+    ],
+    "components": [
+      {
+        "name": "3D Printer",
+        "desc": "Used to manufacture custom aircraft parts such as mounts, brackets, and structural components during prototyping and testing."
+      },
+      {
+        "name": "LW-PLA Filament",
+        "desc": "Lightweight PLA filament used for printing aerodynamic components such as wings and fuselage parts where low weight is critical."
+      },
+      {
+        "name": "PETG Filament",
+        "desc": "Durable 3D printing material used for parts requiring higher strength and heat resistance."
+      },
+      {
+        "name": "Carbon Fiber Rods",
+        "desc": "Structural reinforcement elements used inside wings or frames to increase stiffness while keeping weight low."
+      },
+      {
+        "name": "Brushless Motor",
+        "desc": "Electric motor responsible for generating thrust to propel the aircraft."
+      },
+      {
+        "name": "Propellers",
+        "desc": "Rotating blades that convert motor torque into thrust to move the aircraft through the air."
+      },
+      {
+        "name": "ESC (Electronic Speed Controller)",
+        "desc": "Controls the speed and power delivered from the battery to the brushless motor."
+      },
+      {
+        "name": "Servo Motor",
+        "desc": "Actuator used to control aircraft control surfaces such as ailerons, elevators, and rudders."
+      },
+      {
+        "name": "LiPo Battery",
+        "desc": "Primary onboard power source that supplies electrical energy to motors and electronics."
+      },
+      {
+        "name": "LiPo Charger",
+        "desc": "Specialized charger designed to safely charge lithium polymer batteries."
+      },
+      {
+        "name": "Flight Controller",
+        "desc": "The central autopilot system that stabilizes the aircraft and manages navigation, sensors, and control algorithms."
+      },
+      {
+        "name": "Companion Computer",
+        "desc": "Auxiliary onboard computer used for advanced processing such as computer vision, AI tasks, or mission logic."
+      },
+      {
+        "name": "GPS Module",
+        "desc": "Provides global positioning data for navigation, waypoint following, and autonomous flight operations."
+      },
+      {
+        "name": "Airspeed Sensor",
+        "desc": "Measures the aircraft's airspeed to support accurate flight control and efficiency optimization."
+      },
+      {
+        "name": "Camera",
+        "desc": "Captures visual data for monitoring, surveillance, or computer vision tasks."
+      },
+      {
+        "name": "Wide Angle Lens",
+        "desc": "Expands the camera's field of view to capture a broader visual area during flight."
+      },
+      {
+        "name": "Telemetry Radio",
+        "desc": "Enables wireless data communication between the aircraft and the ground control station."
+      },
+      {
+        "name": "RC Transmitter",
+        "desc": "Handheld remote controller used by the pilot to send control commands to the aircraft."
+      },
+      {
+        "name": "RC Receiver",
+        "desc": "Onboard device that receives signals from the RC transmitter and passes them to the flight controller."
+      }
+    ],
+    "analyses": [
+      {
+        "src": "/images/analysis-img-2.webp",
+        "alt": "CFD Analysis 2",
+        "caption": "VTOL UAV Aerodynamic CFD (Hover Mode Analysis)"
+      },
+      {
+        "src": "/images/analysis-img-1.webp",
+        "alt": "CFD Analysis 1",
+        "caption": "VTOL UAV Pressure Distribution (Transition Mode)"
+      }
+    ]
+  },
+  "vtol2026": {
+    "title": "METU VTOL-2026",
+    "subtitle": "Current Objective",
+    "overviewText": "The 9th VTOL Aircraft Design Competition challenges university teams to design, build, and autonomously operate a hybrid VTOL UAV for simulated logistics missions. The scenario simulates cargo delivery to offshore platforms, requiring aircraft capable of vertical takeoff, efficient fixed-wing flight, and precise autonomous operation.",
+    "posterImage": "/images/metu poster.png",
+    "requirements": [
+      {
+        "title": "Aircraft Requirement",
+        "description": "Hybrid VTOL configuration with vertical takeoff and landing capability, transition mechanism, autonomous hover stabilization, and minimum 5kg payload bay."
+      },
+      {
+        "title": "Mission Logistics",
+        "description": "Simulated multi-point offshore maritime delivery including waypoint navigation, crosswind tolerance, and autonomous return-to-base failsafe protocols."
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "staraptor-vtol-v1",
+      "slug": "vtol-v1",
+      "name": "STARAPTOR VTOL - V1",
+      "category": "FEATURED PROJECT: Active Aerospace Platform",
+      "competition": "METU VTOL 2026",
+      "summary": "Flagship hybrid tilt-rotor VTOL aircraft engineered for the 9th METU Competition. Combines fixed-wing aerodynamic cruise speed with vertical hover precision and autonomous maritime delivery.",
+      "heroImage": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp",
+      "badges": [
+        "HYBRID VTOL",
+        "TILT-ROTOR",
+        "MODEL 1 ACTIVE",
+        "AUTONOMOUS"
+      ],
+      "statusText": "Active Prototype & Flight Ready",
+      "date": "2026-03-01",
+      "featured": true,
+      "physicalData": [
+        {
+          "id": "pd-1",
+          "label": "Wingspan",
+          "value": "1.340 m"
+        },
+        {
+          "id": "pd-2",
+          "label": "Length",
+          "value": "0.99 m"
+        },
+        {
+          "id": "pd-3",
+          "label": "Payload Capacity",
+          "value": "8 Kg"
+        },
+        {
+          "id": "pd-4",
+          "label": "Approximate Weight",
+          "value": "2 Kg"
+        }
+      ],
+      "performanceData": [
+        {
+          "id": "perf-1",
+          "label": "Cruise Speed",
+          "value": "60-70 Kmph"
+        },
+        {
+          "id": "perf-2",
+          "label": "Endurance",
+          "value": "90 min"
+        },
+        {
+          "id": "perf-3",
+          "label": "Wing Load",
+          "value": "55-75 gm/dm²"
+        }
+      ],
+      "avionics": [
+        {
+          "id": "av-1",
+          "title": "Top Quality Materials",
+          "desc": "Carbon Fiber / GRP Composite Sheet"
+        },
+        {
+          "id": "av-2",
+          "title": "Airfoil Type",
+          "desc": "Eppler E205"
+        },
+        {
+          "id": "av-3",
+          "title": "Electronics",
+          "desc": "BLDC motors, Pixhawk flight controller, GPS"
+        }
+      ],
+      "components": [
+        {
+          "name": "3D Printer",
+          "desc": "Used to manufacture custom aircraft parts such as mounts, brackets, and structural components during prototyping and testing."
+        },
+        {
+          "name": "LW-PLA Filament",
+          "desc": "Lightweight PLA filament used for printing aerodynamic components such as wings and fuselage parts where low weight is critical."
+        },
+        {
+          "name": "PETG Filament",
+          "desc": "Durable 3D printing material used for parts requiring higher strength and heat resistance."
+        },
+        {
+          "name": "Carbon Fiber Rods",
+          "desc": "Structural reinforcement elements used inside wings or frames to increase stiffness while keeping weight low."
+        },
+        {
+          "name": "Brushless Motor",
+          "desc": "Electric motor responsible for generating thrust to propel the aircraft."
+        },
+        {
+          "name": "Propellers",
+          "desc": "Rotating blades that convert motor torque into thrust to move the aircraft through the air."
+        },
+        {
+          "name": "ESC (Electronic Speed Controller)",
+          "desc": "Controls the speed and power delivered from the battery to the brushless motor."
+        },
+        {
+          "name": "Servo Motor",
+          "desc": "Actuator used to control aircraft control surfaces such as ailerons, elevators, and rudders."
+        },
+        {
+          "name": "LiPo Battery",
+          "desc": "Primary onboard power source that supplies electrical energy to motors and electronics."
+        },
+        {
+          "name": "LiPo Charger",
+          "desc": "Specialized charger designed to safely charge lithium polymer batteries."
+        },
+        {
+          "name": "Flight Controller",
+          "desc": "The central autopilot system that stabilizes the aircraft and manages navigation, sensors, and control algorithms."
+        },
+        {
+          "name": "Companion Computer",
+          "desc": "Auxiliary onboard computer used for advanced processing such as computer vision, AI tasks, or mission logic."
+        },
+        {
+          "name": "GPS Module",
+          "desc": "Provides global positioning data for navigation, waypoint following, and autonomous flight operations."
+        },
+        {
+          "name": "Airspeed Sensor",
+          "desc": "Measures the aircraft's airspeed to support accurate flight control and efficiency optimization."
+        },
+        {
+          "name": "Camera",
+          "desc": "Captures visual data for monitoring, surveillance, or computer vision tasks."
+        },
+        {
+          "name": "Wide Angle Lens",
+          "desc": "Expands the camera's field of view to capture a broader visual area during flight."
+        },
+        {
+          "name": "Telemetry Radio",
+          "desc": "Enables wireless data communication between the aircraft and the ground control station."
+        },
+        {
+          "name": "RC Transmitter",
+          "desc": "Handheld remote controller used by the pilot to send control commands to the aircraft."
+        },
+        {
+          "name": "RC Receiver",
+          "desc": "Onboard device that receives signals from the RC transmitter and passes them to the flight controller."
+        }
+      ],
+      "analyses": [
+        {
+          "src": "/images/analysis-img-2.webp",
+          "alt": "CFD Analysis 2",
+          "caption": "VTOL UAV Aerodynamic CFD (Hover Mode Analysis)"
+        },
+        {
+          "src": "/images/analysis-img-1.webp",
+          "alt": "CFD Analysis 1",
+          "caption": "VTOL UAV Pressure Distribution (Transition Mode)"
+        }
+      ],
+      "customSections": []
+    }
+  ]
+}

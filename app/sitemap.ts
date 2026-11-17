@@ -21,12 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: 'https://staraptorcuet.vercel.app/vtol-2026',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: 'https://staraptorcuet.vercel.app/crew',
       lastModified: new Date(),
       changeFrequency: 'monthly',
