@@ -209,7 +209,7 @@ export default function Chat({ variant, onClose }: { variant: 'panel' | 'page'; 
             </h2>
             <div className="flex items-center gap-1.5 text-[11px] text-gray-400 mt-0.5 whitespace-nowrap">
               <span className={`h-2 w-2 rounded-full shrink-0 ${statusDot}`} aria-hidden />
-              <span className="truncate">Team Staraptor AI</span>
+              <span className="truncate">AI Assistant</span>
               <span className="text-gray-500 shrink-0" aria-hidden>·</span>
               <span className="shrink-0 font-medium text-emerald-400">{statusText}</span>
             </div>
