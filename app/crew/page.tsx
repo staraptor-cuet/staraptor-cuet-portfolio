@@ -50,12 +50,12 @@ const CrewMemberCard = ({ member, index }: { member: Member; index: number }) =>
 
         <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase">{member.name}</h3>
         <p className="text-white text-xs mb-1">{member.batch}</p>
-        {member.isLead && (
+        {(member.isLead || member.designation.includes("Advisor") || member.designation.includes("Instructor")) && (
           <Badge variant="glow" className="mb-3 text-[10px] font-heading uppercase px-2 py-0.5">
-            {member.designation === "Project Lead" ? "Project Lead" : "Team Lead"}
+            {member.designation}
           </Badge>
         )}
-        {!member.isLead && <div className="mb-3" />}
+        {!member.isLead && !member.designation.includes("Advisor") && !member.designation.includes("Instructor") && <div className="mb-3" />}
 
         <div className="flex gap-2 w-full mt-auto">
           <a
@@ -124,16 +124,52 @@ export default function CrewPage() {
   const { content } = useSiteContent();
   const activeMembers: Member[] = content?.crew?.length ? (content.crew as Member[]) : fallbackMembers;
 
-  const projectLeads = activeMembers.filter(m => m.designation === "Project Lead");
-  const designCrew = activeMembers.filter(m => m.designation.includes("Design"));
-  const simulationCrew = activeMembers.filter(m => m.designation.includes("Simulation"));
-  const brandingCrew = activeMembers.filter(m => m.designation.includes("Branding"));
-  const researchCrew = activeMembers.filter(m => m.designation.includes("Research"));
-  const softwareCrew = activeMembers.filter(m => m.designation.includes("Software"));
-  const documentationCrew = activeMembers.filter(m => m.designation.includes("Documentation"));
+  // Faculty, Advisors & Instructors
+  const advisorsAndInstructors = activeMembers.filter(m => 
+    m.designation.includes("Advisor") || 
+    m.designation.includes("Instructor")
+  );
+
+  const projectLeads = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") && 
+    !m.designation.includes("Instructor") && 
+    m.designation === "Project Lead"
+  );
+  const designCrew = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") && 
+    !m.designation.includes("Instructor") && 
+    m.designation.includes("Design")
+  );
+  const simulationCrew = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") && 
+    !m.designation.includes("Instructor") && 
+    m.designation.includes("Simulation")
+  );
+  const brandingCrew = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") && 
+    !m.designation.includes("Instructor") && 
+    m.designation.includes("Branding")
+  );
+  const researchCrew = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") && 
+    !m.designation.includes("Instructor") && 
+    m.designation.includes("Research")
+  );
+  const softwareCrew = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") && 
+    !m.designation.includes("Instructor") && 
+    m.designation.includes("Software")
+  );
+  const documentationCrew = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") && 
+    !m.designation.includes("Instructor") && 
+    m.designation.includes("Documentation")
+  );
   
   // Any extra members that don't match the specific buckets
   const otherCrew = activeMembers.filter(m => 
+    !m.designation.includes("Advisor") &&
+    !m.designation.includes("Instructor") &&
     m.designation !== "Project Lead" &&
     !m.designation.includes("Design") &&
     !m.designation.includes("Simulation") &&
@@ -349,6 +385,13 @@ export default function CrewPage() {
         >
           Meet The Crew
         </motion.h2>
+
+        {advisorsAndInstructors.length > 0 && (
+          <CrewSection
+            title="Advisors & Instructors"
+            members={advisorsAndInstructors}
+          />
+        )}
 
         {projectLeads.length > 0 && (
           <CrewSection

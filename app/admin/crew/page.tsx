@@ -43,6 +43,9 @@ export default function AdminCrewPage() {
   });
 
   const PRESET_DESIGNATIONS = [
+    'Chief Advisor',
+    'Advisor',
+    'Instructor',
     'Project Lead',
     'Design Team Lead',
     'Design Team',
@@ -368,13 +371,18 @@ export default function AdminCrewPage() {
                       value={formData.designation || ''}
                       onChange={(e) => {
                         const val = e.target.value;
-                        const isLead = val.includes('Lead');
+                        const isLead = val.includes('Lead') || val.includes('Advisor') || val.includes('Instructor');
                         setFormData({ ...formData, designation: val, isLead });
                       }}
                       className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-[#D04741] cursor-pointer"
                     >
                       <option value="" disabled>-- Select Designation --</option>
-                      <optgroup label="Leadership">
+                      <optgroup label="Advisors & Instructors">
+                        <option value="Chief Advisor">Chief Advisor</option>
+                        <option value="Advisor">Advisor</option>
+                        <option value="Instructor">Instructor</option>
+                      </optgroup>
+                      <optgroup label="Student Leadership">
                         <option value="Project Lead">Project Lead</option>
                       </optgroup>
                       <optgroup label="Design Sub-Team">
@@ -416,6 +424,9 @@ export default function AdminCrewPage() {
                   {/* 1-Click Quick Toggle Chips */}
                   <div className="flex flex-wrap gap-1 mt-2">
                     {[
+                      { label: 'Chief Advisor', value: 'Chief Advisor', isLead: true },
+                      { label: 'Advisor', value: 'Advisor', isLead: true },
+                      { label: 'Instructor', value: 'Instructor', isLead: true },
                       { label: 'Project Lead', value: 'Project Lead', isLead: true },
                       { label: 'Design', base: 'Design Team' },
                       { label: 'Simulation', base: 'Simulation Team' },
