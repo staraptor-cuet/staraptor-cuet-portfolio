@@ -3,7 +3,7 @@
     "tagline": "Engineers Bound by Flight",
     "heroSubtitle": "Team Staraptor CUET",
     "aboutTitle": "We Are Staraptor",
-    "aboutDescription": "Team Staraptor CUET is the first VTOL drone design team in Bangladesh from Chittagong University of Engineering & Technology (CUET). Set to make our mark at the METU VTOL Competition, our team of 20 passionate students\u2014specializing in mechanical, aerospace, and related fields\u2014is dedicated to designing cutting-edge UAV and VTOL aircraft systems. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!",
+    "aboutDescription": "Team Staraptor CUET is the first VTOL drone design team in Bangladesh from Chittagong University of Engineering & Technology (CUET). Set to make our mark at the METU VTOL Competition, our team of 20 passionate students—specializing in mechanical, aerospace, and related fields—is dedicated to designing cutting-edge UAV and VTOL aircraft systems. We're combining lightweight materials, advanced aerodynamics, and smart control systems to deliver a drone that excels in stability, efficiency, and mission accuracy. Our vision is to showcase Bangladesh's engineering talent on a global stage, inspiring innovation and collaboration across borders. Join us as we take flight!",
     "stats": [
       {
         "id": "stat-1",
@@ -46,7 +46,7 @@
       "designation": "Project Lead",
       "batch": "ME-22",
       "email": "rashidofficial5896@gmail.com",
-      "linkedin": "https://www.linkedin.com/in/rashid-abrar-azmain-csca\u2122-b03683347",
+      "linkedin": "https://www.linkedin.com/in/rashid-abrar-azmain-csca™-b03683347",
       "image": "/images/crew/Abrar Azmain.png",
       "isLead": true
     },
@@ -411,7 +411,7 @@
       {
         "id": "perf-3",
         "label": "Wing Load",
-        "value": "55-75 gm/dm\u00b2"
+        "value": "55-75 gm/dm²"
       }
     ],
     "avionics": [
@@ -592,7 +592,7 @@
         {
           "id": "perf-3",
           "label": "Wing Load",
-          "value": "55-75 gm/dm\u00b2"
+          "value": "55-75 gm/dm²"
         }
       ],
       "avionics": [
