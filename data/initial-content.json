@@ -41,6 +41,36 @@
   },
   "crew": [
     {
+      "id": "member-1794922753391",
+      "name": "Mohammad Rafiur Rahman",
+      "designation": "Software Team",
+      "batch": "ME-23",
+      "email": "mdrafiurrahman123098@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/rafiur-rahman-182239202?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      "image": "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922738/staraptor/1794922736344-whatsapp-image-2026-11-17-at-18.00.00-removebg-preview.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-1794922272583",
+      "name": "Ehsanur Rahman",
+      "designation": "Branding & Communication Team",
+      "batch": "ME-23",
+      "email": "",
+      "linkedin": "",
+      "image": "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922281/staraptor/1794922279404-1747762067194-removebg-preview.webp",
+      "isLead": false
+    },
+    {
+      "id": "member-1794922260831",
+      "name": "Towki Fardin Chowdhury",
+      "designation": "Branding & Communication Team",
+      "batch": "ME-23",
+      "email": "",
+      "linkedin": "",
+      "image": "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922173/staraptor/1794922171166-whatsapp-image-2026-11-16-at-21.13.47-removebg-preview.webp",
+      "isLead": false
+    },
+    {
       "id": "member-advisor-jamal",
       "name": "Prof. Dr. Jamal Uddin Ahamed",
       "designation": "Chief Advisor",
@@ -357,7 +387,7 @@
       "title": "Initial Design & Aerodynamic Testing",
       "date": "2026-03-01",
       "description": "Completed initial aerodynamic CFD simulations and prototype testing for our hybrid VTOL configuration. The team is currently validating payload distribution and motor thrust metrics.",
-      "image": "/images/progress image.jpg"
+      "image": "/images/analysis-img-1.webp"
     }
   ],
   "achievements": [],
@@ -410,32 +440,6 @@
       "project": "METU VTOL 2026",
       "year": "2026",
       "date": "2026-01-10",
-      "isCover": false,
-      "featuredOnHome": false,
-      "published": true
-    },
-    {
-      "id": "gal-5",
-      "src": "/images/we are staraptor bg.png",
-      "title": "Staraptor Mascot Silhouette",
-      "caption": "Aesthetic aerospace emblem artwork developed for competition livery and uniforms.",
-      "category": "Branding",
-      "project": "Team Staraptor",
-      "year": "2026",
-      "date": "2026-01-05",
-      "isCover": false,
-      "featuredOnHome": false,
-      "published": true
-    },
-    {
-      "id": "gal-6",
-      "src": "/images/logo.webp",
-      "title": "Official Team Insignia",
-      "caption": "The vanguard crest representing Chittagong University of Engineering & Technology.",
-      "category": "Branding",
-      "project": "Team Staraptor",
-      "year": "2026",
-      "date": "2026-01-01",
       "isCover": false,
       "featuredOnHome": false,
       "published": true

@@ -11,6 +11,33 @@ export interface Member {
 
 export const members: Member[] = [
   {
+    name: "Mohammad Rafiur Rahman",
+    designation: "Software Team",
+    batch: "ME-23",
+    email: "mdrafiurrahman123098@gmail.com",
+    linkedin: "https://www.linkedin.com/in/rafiur-rahman-182239202?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    image: "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922738/staraptor/1794922736344-whatsapp-image-2026-11-17-at-18.00.00-removebg-preview.webp",
+    isLead: false,
+  },
+  {
+    name: "Ehsanur Rahman",
+    designation: "Branding & Communication Team",
+    batch: "ME-23",
+    email: "",
+    linkedin: "",
+    image: "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922281/staraptor/1794922279404-1747762067194-removebg-preview.webp",
+    isLead: false,
+  },
+  {
+    name: "Towki Fardin Chowdhury",
+    designation: "Branding & Communication Team",
+    batch: "ME-23",
+    email: "",
+    linkedin: "",
+    image: "https://res.cloudinary.com/dgnxsfqdf/image/upload/v1794922173/staraptor/1794922171166-whatsapp-image-2026-11-16-at-21.13.47-removebg-preview.webp",
+    isLead: false,
+  },
+  {
     name: "Prof. Dr. Jamal Uddin Ahamed",
     designation: "Chief Advisor",
     batch: "Dept. of Mechanical Engineering, CUET",
