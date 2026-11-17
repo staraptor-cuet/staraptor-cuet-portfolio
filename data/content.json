@@ -250,7 +250,7 @@
         {
           "id": "sp-1",
           "name": "Epic Properties Ltd.",
-          "logo": "/images/epic-logo.JPG",
+          "logo": "/images/epic-logo.webp",
           "website": "https://epic.com.bd"
         }
       ]
@@ -287,14 +287,14 @@
       "title": "Initial Design & Aerodynamic Testing",
       "date": "2026-03-01",
       "description": "Completed initial aerodynamic CFD simulations and prototype testing for our hybrid VTOL configuration. The team is currently validating payload distribution and motor thrust metrics.",
-      "image": "/images/analysis-img-1.png"
+      "image": "/images/analysis-img-1.webp"
     }
   ],
   "achievements": [],
   "gallery": [
     {
       "id": "gal-1",
-      "src": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png",
+      "src": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp",
       "title": "Staraptor VTOL 3D Model",
       "caption": "Aerodynamic high-speed hybrid tilt-rotor 3D airframe render with high-aspect Eppler E205 wings.",
       "category": "Render",
@@ -320,7 +320,7 @@
     },
     {
       "id": "gal-3",
-      "src": "/images/analysis-img-1.png",
+      "src": "/images/analysis-img-1.webp",
       "title": "CFD Pressure Distribution",
       "caption": "Transition mode aerodynamic surface pressure contours simulated in ANSYS Fluent.",
       "category": "CFD Analysis",
@@ -333,7 +333,7 @@
     },
     {
       "id": "gal-4",
-      "src": "/images/analysis-img-2.png",
+      "src": "/images/analysis-img-2.webp",
       "title": "Velocity Streamlines Analysis",
       "caption": "Hover mode downwash turbulence and crosswind hover stabilization aerodynamics.",
       "category": "CFD Analysis",
@@ -348,7 +348,7 @@
   "aircraft": {
     "classification": "Unmanned Aerial Vehicle",
     "name": "STARAPTOR VTOL - V1",
-    "heroImage": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png",
+    "heroImage": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp",
     "physicalData": [
       {
         "id": "pd-1",
@@ -485,12 +485,12 @@
     ],
     "analyses": [
       {
-        "src": "/images/analysis-img-2.png",
+        "src": "/images/analysis-img-2.webp",
         "alt": "CFD Analysis 2",
         "caption": "VTOL UAV Aerodynamic CFD (Hover Mode Analysis)"
       },
       {
-        "src": "/images/analysis-img-1.png",
+        "src": "/images/analysis-img-1.webp",
         "alt": "CFD Analysis 1",
         "caption": "VTOL UAV Pressure Distribution (Transition Mode)"
       }
@@ -520,7 +520,7 @@
       "category": "FEATURED PROJECT: Active Aerospace Platform",
       "competition": "METU VTOL 2026",
       "summary": "Flagship hybrid tilt-rotor VTOL aircraft engineered for the 9th METU Competition. Combines fixed-wing aerodynamic cruise speed with vertical hover precision and autonomous maritime delivery.",
-      "heroImage": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png",
+      "heroImage": "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp",
       "badges": [
         "HYBRID VTOL",
         "TILT-ROTOR",
@@ -666,12 +666,12 @@
       ],
       "analyses": [
         {
-          "src": "/images/analysis-img-2.png",
+          "src": "/images/analysis-img-2.webp",
           "alt": "CFD Analysis 2",
           "caption": "VTOL UAV Aerodynamic CFD (Hover Mode Analysis)"
         },
         {
-          "src": "/images/analysis-img-1.png",
+          "src": "/images/analysis-img-1.webp",
           "alt": "CFD Analysis 1",
           "caption": "VTOL UAV Pressure Distribution (Transition Mode)"
         }

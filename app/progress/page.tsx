@@ -48,7 +48,7 @@ function ProgressContent() {
     competition: 'METU VTOL 2026',
     summary:
       'Flagship hybrid tilt-rotor VTOL aircraft engineered for the 9th METU Competition. Combines fixed-wing aerodynamic cruise speed with vertical hover precision and autonomous maritime delivery.',
-    heroImage: content?.aircraft?.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png',
+    heroImage: content?.aircraft?.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp',
     badges: ['HYBRID VTOL', 'TILT-ROTOR', 'MODEL 1 ACTIVE', 'AUTONOMOUS'],
     statusText: 'Active Prototype & Flight Ready',
     date: '2026-03-01',
@@ -168,7 +168,7 @@ function ProgressContent() {
                           {/* Cover Image / 3D Render Preview */}
                           <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-[#181818] border border-white/5 mb-5 group-hover:border-[#D04741]/30 transition-colors">
                             <Image
-                              src={project.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png'}
+                              src={project.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp'}
                               alt={project.name}
                               fill
                               className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -307,7 +307,7 @@ function ProgressContent() {
                   {/* High-Resolution Hero Render */}
                   <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-gradient-to-b from-[#181818] to-[#121212] border border-white/5 mb-10 shadow-inner group">
                     <Image
-                      src={activeProject.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png'}
+                      src={activeProject.heroImage || '/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp'}
                       alt={activeProject.name}
                       fill
                       className="object-contain p-4 group-hover:scale-105 transition-transform duration-700 ease-out"

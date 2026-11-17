@@ -111,7 +111,7 @@ export default function Home() {
               >
                 <Link href="/progress" className="block relative w-full h-full">
                   <Image
-                    src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.png"}
+                    src={content?.aircraft?.heroImage || "/images/9f0826138db81f3fd3a81d12f0d6df8086daaca0.webp"}
                     alt="Staraptor VTOL Aircraft"
                     fill
                     className="object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]"
