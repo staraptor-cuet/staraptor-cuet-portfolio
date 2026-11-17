@@ -98,8 +98,8 @@ const CrewMemberCard = ({
           )}
         </div>
 
-        <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase tracking-tight line-clamp-1">{member.name}</h3>
-        <p className="text-gray-400 text-xs mb-1 font-mono">{member.batch}</p>
+        <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase tracking-tight line-clamp-2 min-h-[2.5rem] flex items-center justify-center">{member.name}</h3>
+        <p className="text-gray-400 text-xs mb-2 font-mono text-center px-1 line-clamp-2">{member.batch}</p>
         {badgeText ? (
           <Badge variant="glow" className="mb-3 text-[10px] font-heading uppercase px-2.5 py-0.5 tracking-wider">
             {badgeText}
@@ -170,18 +170,18 @@ const CrewSection = ({
 
   return (
     <motion.div
-      className="mb-14"
+      className="mb-14 max-w-5xl mx-auto"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
       variants={fadeUp}
     >
       {/* Section Header Bar */}
-      <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#1c1c1c] px-5 sm:px-6 py-3.5 sm:py-4 mb-7 shadow-lg flex items-center justify-between">
+      <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#1c1c1c] px-4 sm:px-6 py-3 sm:py-3.5 mb-7 shadow-lg flex items-center justify-between">
         <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#D04741]" />
-        <div className="flex items-center gap-3.5 pl-1.5 sm:pl-2">
+        <div className="flex items-center gap-3 sm:gap-3.5">
           {Icon && (
-            <div className="w-10 h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/25 flex items-center justify-center text-[#EF5F5A]">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#D04741]/10 border border-[#D04741]/25 flex items-center justify-center text-[#EF5F5A]">
               <Icon size={18} />
             </div>
           )}
@@ -202,7 +202,7 @@ const CrewSection = ({
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-3 sm:gap-6 max-w-5xl mx-auto">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
         {sortedMembers.map((m, i) => (
           <div
             key={m.name}
@@ -475,10 +475,10 @@ export default function CrewPage() {
       </section>
 
       {/* Meet The Crew */}
-      <section className="py-20 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
 
         <motion.div
-          className="text-center mb-10"
+          className="text-center mb-8 sm:mb-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -508,7 +508,7 @@ export default function CrewPage() {
               <GraduationCap size={16} />
               <span>Advisor</span>
               {advisors.length > 0 && (
-                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 font-mono">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/40 font-mono font-bold">
                   {advisors.length}
                 </span>
               )}
@@ -529,7 +529,7 @@ export default function CrewPage() {
               <Compass size={16} />
               <span>Instructor</span>
               {instructors.length > 0 && (
-                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 font-mono">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/40 font-mono font-bold">
                   {instructors.length}
                 </span>
               )}
@@ -549,7 +549,7 @@ export default function CrewPage() {
             >
               <Users size={16} />
               <span>Team</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/30 font-mono">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/40 font-mono font-bold">
                 {teamMembers.length}
               </span>
             </button>
