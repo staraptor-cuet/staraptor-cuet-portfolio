@@ -200,34 +200,58 @@ export default function Chat({ variant, onClose }: { variant: 'panel' | 'page'; 
   return (
     <div className={`flex h-full flex-col bg-[#231f20] text-gray-100 ${variant === 'page' ? 'rounded-xl border border-white/10' : ''}`}>
       {/* Header */}
-      <header className="flex items-center gap-3 border-b border-white/10 bg-[#1b1819] px-4 py-3">
-        <Avatar size={36} />
-        <div className="min-w-0 flex-1">
-          <h2 id="raptor-title" className="!font-orbitron !text-sm !font-bold !normal-case !tracking-[0.15em] !text-white">
-            RAPTOR
-          </h2>
-          <p className="flex items-center gap-1.5 text-[11px] text-gray-400">
-            <span className={`h-1.5 w-1.5 rounded-full ${statusDot}`} aria-hidden />
-            <span>Team Staraptor AI assistant</span>
-            <span aria-hidden>·</span>
-            <span>{statusText}</span>
-          </p>
+      <header className="flex items-center justify-between gap-3 border-b border-white/10 bg-[#1b1819] px-4 py-3 shrink-0">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
+          <Avatar size={36} />
+          <div className="min-w-0 flex-1">
+            <h2 id="raptor-title" className="!font-orbitron !text-sm !font-bold !normal-case !tracking-[0.15em] !text-white leading-tight">
+              RAPTOR
+            </h2>
+            <div className="flex items-center gap-1.5 text-[11px] text-gray-400 mt-0.5 whitespace-nowrap">
+              <span className={`h-2 w-2 rounded-full shrink-0 ${statusDot}`} aria-hidden />
+              <span className="truncate">Team Staraptor AI</span>
+              <span className="text-gray-500 shrink-0" aria-hidden>·</span>
+              <span className="shrink-0 font-medium text-emerald-400">{statusText}</span>
+            </div>
+          </div>
         </div>
-        {messages.length > 0 && (
-          <button type="button" onClick={clear} aria-label="Clear conversation" className="flex h-9 w-9 items-center justify-center rounded text-gray-400 hover:bg-white/10 hover:text-white">
-            <Trash2 size={16} />
-          </button>
-        )}
-        {variant === 'panel' && (
-          <>
-            <Link href="/ask" onClick={onClose} aria-label="Open full page assistant" className="hidden h-9 w-9 items-center justify-center rounded text-gray-400 hover:bg-white/10 hover:text-white sm:flex">
-              <Maximize2 size={16} />
-            </Link>
-            <button type="button" onClick={onClose} aria-label="Close assistant" className="flex h-9 w-9 items-center justify-center rounded text-gray-400 hover:bg-white/10 hover:text-white">
-              <X size={18} />
+
+        {/* Header Actions */}
+        <div className="flex items-center gap-1 shrink-0">
+          {messages.length > 0 && (
+            <button
+              type="button"
+              onClick={clear}
+              aria-label="Clear conversation"
+              title="Clear conversation"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+            >
+              <Trash2 size={15} />
             </button>
-          </>
-        )}
+          )}
+          {variant === 'panel' && (
+            <>
+              <Link
+                href="/ask"
+                onClick={onClose}
+                aria-label="Open full page assistant"
+                title="Expand to full page"
+                className="hidden sm:flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+              >
+                <Maximize2 size={15} />
+              </Link>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close assistant"
+                title="Close assistant"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+              >
+                <X size={17} />
+              </button>
+            </>
+          )}
+        </div>
       </header>
 
       {/* Messages */}

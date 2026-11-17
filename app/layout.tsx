@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Outfit, Bebas_Neue, Orbitron } from 'next/font/google';
+import { Inter, Outfit, Bebas_Neue } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
 import { Suspense } from 'react';
@@ -12,7 +12,7 @@ import PreviewBanner from '@/components/PreviewBanner';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'], variable: '--font-bebas' });
-const orbitron = Orbitron({ weight: ['400', '700'], subsets: ['latin'], variable: '--font-orbitron' });
+const orbitron = { variable: 'font-orbitron' };
 
 const mechanical = localFont({
   src: '../public/font/Mechanical FREE.otf',
