@@ -34,6 +34,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   const [storageStatus, setStorageStatus] = useState<{ isCloudConnected: boolean; provider: string } | null>(null);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
 
   const getPreviewRoute = (adminPath: string) => {
     if (adminPath.includes('/admin/achievements')) return '/achievements';
@@ -45,10 +46,13 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
     return '/';
   };
 
-  const isLoginPage = pathname === '/admin/login';
+  const isLoginPage = pathname === '/admin/login' || pathname === '/admin/reset-password';
 
   useEffect(() => {
-    if (isLoginPage) return;
+    if (isLoginPage) {
+      setAuthChecked(true);
+      return;
+    }
     
     // Check session
     fetch('/api/auth/session')
@@ -56,8 +60,11 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
       .then((data) => {
         if (!data.authenticated) {
           router.replace('/admin/login');
-        } else if (data.storage) {
-          setStorageStatus(data.storage);
+        } else {
+          setAuthChecked(true);
+          if (data.storage) {
+            setStorageStatus(data.storage);
+          }
         }
       })
       .catch(() => {
@@ -80,6 +87,21 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
 
   if (isLoginPage) {
     return <>{children}</>;
+  }
+
+  // Prevent flash of unauthenticated admin content while checking session
+  if (!authChecked) {
+    return (
+      <div className="min-h-screen bg-[#141414] flex flex-col items-center justify-center gap-4">
+        <div className="relative w-12 h-12">
+          <Image src="/images/logo.svg" alt="Staraptor Logo" fill className="object-contain animate-pulse" priority />
+        </div>
+        <div className="w-8 h-8 rounded-full border-2 border-[#D04741] border-t-transparent animate-spin" />
+        <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+          Authenticating Admin Portal...
+        </span>
+      </div>
+    );
   }
 
   const navItems = [
