@@ -65,10 +65,6 @@ ALTER TABLE site_content ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public Read Access"
   ON site_content FOR SELECT
   USING (true);
-
-CREATE POLICY "Service Role Full Access"
-  ON site_content FOR ALL
-  USING (true);
 `;
 
   const getProviderTitle = () => {

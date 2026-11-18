@@ -193,14 +193,20 @@ export async function uploadFile(
     }
   }
 
-  // 4. Local storage fallback
+  // 4. Local storage fallback (Safe local disk mode with strict path traversal prevention)
   try {
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+    const uploadDir = path.resolve(process.cwd(), 'public', 'uploads');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
-    const localFilename = `${Date.now()}-${sanitizedFilename}`;
-    const filePath = path.join(uploadDir, localFilename);
+    const safeBase = path.basename(sanitizedFilename);
+    const localFilename = `${Date.now()}-${safeBase}`;
+    const filePath = path.resolve(uploadDir, localFilename);
+
+    if (!filePath.startsWith(uploadDir)) {
+      throw new Error('Path traversal attempt detected');
+    }
+
     fs.writeFileSync(filePath, buffer);
 
     return {

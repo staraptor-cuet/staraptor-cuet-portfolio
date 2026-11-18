@@ -19,6 +19,7 @@ function originAllowed(req: Request): boolean {
   }
   if (host === req.headers.get('host')) return true; // same deployment (production, preview, localhost)
   if (host === new URL(SITE_URL).host) return true;
+  if (host === 'staraptor-website.vercel.app' || host === 'staraptorcuet.vercel.app') return true;
   const extra = (process.env.CHAT_ALLOWED_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean);
   return extra.includes(origin);
 }

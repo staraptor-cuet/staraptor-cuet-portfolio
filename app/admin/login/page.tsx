@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Lock, Mail, User, ArrowRight, ShieldCheck, AlertCircle, CheckCircle2, KeyRound } from 'lucide-react';
+import { Lock, Mail, User, ArrowRight, AlertCircle, CheckCircle2, KeyRound } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabaseClient';
 
 function AdminLoginContent() {
@@ -15,8 +15,8 @@ function AdminLoginContent() {
   const [mode, setMode] = useState<'login' | 'forgot'>('login');
 
   // Form states
-  const [identifier, setIdentifier] = useState('admin');
-  const [password, setPassword] = useState('staraptor2026');
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
   const [resetEmail, setResetEmail] = useState('');
   
   // Feedback states
@@ -190,16 +190,6 @@ function AdminLoginContent() {
               </div>
             </div>
 
-            {/* Local dev credentials info box */}
-            <div className="p-3 bg-white/5 rounded-lg border border-white/5 text-[11px] text-gray-400 flex items-center justify-between">
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck size={14} className="text-emerald-400" />
-                Auth Mode:
-              </span>
-              <span className="font-mono text-gray-300">
-                {isSupabaseConfigured ? 'Supabase Auth Active' : 'Local Fallback (admin)'}
-              </span>
-            </div>
 
             <button
               type="submit"

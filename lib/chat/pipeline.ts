@@ -61,7 +61,13 @@ function apiKeys(): string[] {
 }
 
 const LOCAL_INJECTION =
-  /(ignore|disregard|forget) (all |any |your |the )?(previous|prior|above|earlier|system) (instructions|prompts?|rules)|(reveal|print|show|repeat|output) (me )?(your |the )?(system|hidden|initial) (prompt|instructions|message)|\b(DAN|developer mode|jailbreak|do anything now)\b|you are now (?!on)|pretend (to be|you are)|act as (?!a guide)/i;
+  /(ignore|disregard|forget|override) (all |any |your |the )?(previous|prior|above|earlier|system) (instructions|prompts?|rules)|(reveal|print|show|repeat|output|dump|echo|tell me) (me )?(your |the )?(system|hidden|initial|admin) (prompt|instructions|message|keys?|secrets?|tokens?|env|credentials?)|\b(DAN|developer mode|jailbreak|do anything now|unrestricted)\b|you are now (?!on)|pretend (to be|you are)|act as (?!a guide)|\b(GROQ_API|ADMIN_SECRET|SUPABASE_KEY|CLOUDINARY_API|SECRET_KEY)\b/i;
+
+function redactSecrets(text: string): string {
+  return text
+    .replace(/gsk_[a-zA-Z0-9_-]+/g, '[REDACTED_API_KEY]')
+    .replace(/eyJ[a-zA-Z0-9_-]{20,}\.[a-zA-Z0-9_-]{20,}\.[a-zA-Z0-9_-]{20,}/g, '[REDACTED_JWT]');
+}
 
 /** Per-model options: gpt-oss reasons before answering (keep it short); qwen must not print its thinking. */
 function modelOptions(modelId: string): { extraTokens: number; providerOptions: { groq: Record<string, string> } } {
@@ -234,9 +240,10 @@ export function runChat(input: ChatInput): ReadableStream {
       let topic: string | undefined;
 
       const say = (text: string) => {
-        answer += text;
+        const clean = redactSecrets(text);
+        answer += clean;
         writer.write({ type: 'text-start', id: textId });
-        writer.write({ type: 'text-delta', id: textId, delta: text });
+        writer.write({ type: 'text-delta', id: textId, delta: clean });
         writer.write({ type: 'text-end', id: textId });
       };
       const sendCards = (cards: Cards) => {
@@ -328,7 +335,7 @@ export function runChat(input: ChatInput): ReadableStream {
 
       // 4. Answer cache (first-turn questions only; the key changes whenever the knowledge base is rebuilt)
       const builtAt = (kb as { built_at: string }).built_at;
-      const cacheKey = sha(`${CACHE_VERSION}|${builtAt}|${input.question.toLowerCase().replace(/[ -/:-@[-`{-¿ -⁯]+/g, ' ').trim()}`);
+      const cacheKey = sha(`${CACHE_VERSION}|${builtAt}|${input.question.toLowerCase().replace(/[-/:-@[-`{-¿ -⁯]+/g, ' ').trim()}`);
       if (input.history.length === 0) {
         const hit = await cacheGet<CachedAnswer>(cacheKey);
         if (hit) {
@@ -456,8 +463,9 @@ export function runChat(input: ChatInput): ReadableStream {
                     writer.write({ type: 'text-delta', id: textId, delta: ENGLISH_NOTE });
                   }
                 }
-                answer += piece;
-                writer.write({ type: 'text-delta', id: textId, delta: piece });
+                const cleanPiece = redactSecrets(piece);
+                answer += cleanPiece;
+                writer.write({ type: 'text-delta', id: textId, delta: cleanPiece });
               }
             }
             if (!opened) throw new Error('empty-answer');

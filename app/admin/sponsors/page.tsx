@@ -275,7 +275,7 @@ export default function AdminSponsorsPage() {
               {tier.sponsors.length === 0 && (
                 <div className="col-span-full py-8 text-center bg-[#141414] rounded-lg border border-dashed border-white/10">
                   <p className="text-xs text-gray-500 font-semibold mb-2">
-                    No active sponsors in this tier yet (Displays as "To Be Announced" on website)
+                    No active sponsors in this tier yet (Displays as &quot;To Be Announced&quot; on website)
                   </p>
                   <button
                     onClick={() => handleOpenAddSponsor(tier.id)}

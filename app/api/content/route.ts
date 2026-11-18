@@ -21,8 +21,8 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json(content, { headers });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message || 'Failed to fetch content' }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: 'Failed to fetch content' }, { status: 500 });
   }
 }
 
@@ -55,13 +55,13 @@ export async function PUT(req: NextRequest) {
       revalidatePath('/achievements');
       revalidatePath('/gallery');
       revalidatePath('/contact');
-    } catch (e) {
+    } catch {
       // Revalidation non-fatal in development
     }
 
     return NextResponse.json({ success: true, content: updated });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message || 'Failed to update content' }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: 'Failed to update content' }, { status: 500 });
   }
 }
 
