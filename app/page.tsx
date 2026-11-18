@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -21,6 +22,16 @@ export default function Home() {
   const { content } = useSiteContent();
   const general = content?.general;
   const crewCount = content?.crew?.length || 20;
+
+  // Auto-redirect to reset-password if landing on home with recovery hash
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hash = window.location.hash;
+      if (hash.includes('type=recovery') || (hash.includes('access_token=') && hash.includes('refresh_token='))) {
+        window.location.replace(`/admin/reset-password${hash}`);
+      }
+    }
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -83,7 +83,8 @@ function AdminLoginContent() {
     setLoading(true);
 
     try {
-      const redirectUrl = `${window.location.origin}/admin/reset-password`;
+      const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+      const redirectUrl = `${siteOrigin}/admin/reset-password`;
       const { error: resetError } = await supabase.auth.resetPasswordForEmail(resetEmail, {
         redirectTo: redirectUrl,
       });
