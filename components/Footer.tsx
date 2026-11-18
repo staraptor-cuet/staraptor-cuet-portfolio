@@ -30,7 +30,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#141416] text-gray-300 border-t border-white/5 overflow-hidden pt-12 pb-4">
+    <footer className="relative bg-[#141416] text-gray-300 font-sans border-t border-white/5 overflow-hidden pt-12 pb-4">
       {/* Dynamic Red Aerospace Background Gradient */}
       <FooterBackgroundGradient />
 
@@ -92,14 +92,14 @@ export default function Footer() {
               <span className="w-1.5 h-1.5 rounded-full bg-[#EF5F5A]"></span>
               Navigation
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3 font-sans">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-white hover:translate-x-1 inline-flex items-center text-sm transition-all group"
+                    className="text-gray-400 font-sans hover:text-white hover:translate-x-1 inline-flex items-center text-sm transition-all group"
                   >
-                    <span className="group-hover:text-[#EF5F5A] transition-colors">{link.label}</span>
+                    <span className="font-sans group-hover:text-[#EF5F5A] transition-colors">{link.label}</span>
                   </Link>
                 </li>
               ))}
@@ -107,12 +107,12 @@ export default function Footer() {
           </div>
 
           {/* Contact Information */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="lg:col-span-4 space-y-4 font-sans">
             <h4 className="text-white font-montserrat font-bold text-sm tracking-wider uppercase mb-5 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#EF5F5A]"></span>
               Headquarters
             </h4>
-            <ul className="space-y-3.5 text-sm text-gray-400">
+            <ul className="space-y-3.5 text-sm font-sans text-gray-400">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-[#EF5F5A] shrink-0 mt-0.5" />
                 <span>{headquarters}</span>
