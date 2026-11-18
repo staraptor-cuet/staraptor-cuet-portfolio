@@ -44,7 +44,7 @@ export default function Footer() {
                 <Image src="/images/logo.svg" alt="Staraptor Logo" fill className="object-contain" />
               </div>
               <div>
-                <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#EF5F5A] block leading-none mb-1">
+                <span className="text-[10px] font-montserrat font-semibold tracking-[0.2em] uppercase text-[#EF5F5A] block leading-none mb-1">
                   CUET Aerospace Division
                 </span>
                 <h3 className="text-white font-montserrat font-extrabold text-xl tracking-tight uppercase leading-tight">
@@ -53,13 +53,13 @@ export default function Footer() {
               </div>
             </div>
 
-            <p className="text-gray-400 text-sm leading-relaxed max-w-md pt-2">
+            <p className="text-gray-400 font-sans text-sm leading-relaxed max-w-md pt-2">
               Engineering the future of autonomous vertical flight. Team Staraptor is CUET&apos;s pioneering VTOL UAV research team, developing advanced aerial systems and pushing the boundaries of aerospace innovation.
             </p>
 
             {/* Social Media Icons */}
             <div className="pt-2">
-              <span className="text-xs font-mono uppercase tracking-wider text-gray-400 block mb-3">Connect With Us</span>
+              <span className="text-xs font-montserrat font-semibold uppercase tracking-wider text-gray-400 block mb-3">Connect With Us</span>
               <div className="flex items-center gap-3.5">
                 {[
                   { icon: 'linkedin-box-fill.svg', label: 'LinkedIn', href: 'https://www.linkedin.com/company/staraptor-cuet/' },
@@ -140,9 +140,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright & Status Bar */}
-        <div className="pt-2 pb-1 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-500/70 font-mono border-t border-white/5">
+        <div className="pt-2 pb-1 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-400 font-sans border-t border-white/5">
           <p>© {new Date().getFullYear()} Team Staraptor CUET. All rights reserved.</p>
-          <div className="text-[11px] text-gray-500/50">
+          <div className="text-[11px] text-gray-500 font-sans">
             Engineers Bound by Flight
           </div>
         </div>

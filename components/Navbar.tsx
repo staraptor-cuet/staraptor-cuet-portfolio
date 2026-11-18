@@ -53,12 +53,12 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation Links: Home, Our Progress, Achievements, Crew, Sponsors */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-8 font-sans">
               {links.map((link) => (
                 <Link
                   key={link.name}
                   href={link.path}
-                  className={`relative text-base font-semibold transition-colors py-1 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none ${
+                  className={`relative text-base font-sans font-semibold transition-colors py-1 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none ${
                     pathname === link.path ? 'text-white' : 'text-gray-300 hover:text-white'
                   }`}
                 >
@@ -78,7 +78,7 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className="hidden sm:inline-flex px-4 py-2 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-all text-sm font-semibold outline-none focus:outline-none focus:ring-0"
+                className="hidden sm:inline-flex px-4 py-2 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-all text-sm font-sans font-semibold outline-none focus:outline-none focus:ring-0"
               >
                 Contact Us
               </Link>
@@ -128,7 +128,7 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.path}
-                      className={`flex items-center gap-3 py-3 px-3 rounded-lg text-base font-semibold transition-colors outline-none focus:outline-none focus:ring-0 ${
+                      className={`flex items-center gap-3 py-3 px-3 rounded-lg text-base font-sans font-semibold transition-colors outline-none focus:outline-none focus:ring-0 ${
                         pathname === link.path
                           ? 'text-white bg-white/8'
                           : 'text-gray-sub hover:text-white hover:bg-white/5'
@@ -145,7 +145,7 @@ export default function Navbar() {
                 <div className="mt-3 pt-3 border-t border-gray-sub/10">
                   <Link
                     href="/contact"
-                    className="w-full flex items-center justify-center px-4 py-3 rounded-md bg-primary text-white font-bold text-sm tracking-wide"
+                    className="w-full flex items-center justify-center px-4 py-3 rounded-md bg-primary text-white font-sans font-bold text-sm tracking-wide"
                     onClick={() => setMenuOpen(false)}
                   >
                     Contact Us

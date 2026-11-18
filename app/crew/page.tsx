@@ -99,7 +99,7 @@ const CrewMemberCard = ({
         </div>
 
         <h3 className="text-white font-heading font-bold text-sm text-center mb-1 uppercase tracking-tight line-clamp-2 min-h-[2.5rem] flex items-center justify-center">{member.name}</h3>
-        <p className="text-gray-400 text-xs mb-2 font-mono text-center px-1 line-clamp-2">{member.batch}</p>
+        <p className="text-gray-400 text-xs mb-2 font-sans font-medium text-center px-1 line-clamp-2">{member.batch}</p>
         {badgeText ? (
           <Badge variant="glow" className="mb-3 text-[10px] font-heading uppercase px-2.5 py-0.5 tracking-wider">
             {badgeText}
@@ -814,7 +814,7 @@ export default function CrewPage() {
               </div>
 
               {/* Subtext info */}
-              <p className="text-[11px] text-gray-500 font-mono text-center mt-4">
+              <p className="text-[11px] text-gray-500 font-sans text-center mt-4">
                 Click &quot;Open in Gmail&quot; to write immediately in your browser.
               </p>
             </motion.div>
