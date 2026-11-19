@@ -80,13 +80,27 @@ export default function ResetPasswordPage() {
         return;
       }
 
+      // Automatically establish server admin session with active recovery session
+      const { data: sessionData } = await client.auth.getSession();
+      const token = sessionData?.session?.access_token;
+      if (token) {
+        try {
+          await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ supabaseAccessToken: token }),
+          });
+        } catch {}
+      }
+
       setSuccess(true);
       setLoading(false);
 
-      // Auto redirect to login after 3 seconds
+      // Auto redirect to dashboard after 2 seconds
       setTimeout(() => {
-        router.push('/admin/login?reset=success');
-      }, 2500);
+        router.push('/admin');
+        router.refresh();
+      }, 2000);
     } catch (err: any) {
       setError(err.message || 'Failed to update password');
       setLoading(false);
@@ -129,13 +143,13 @@ export default function ResetPasswordPage() {
             </div>
             <h2 className="text-lg font-bold text-white mb-2">Password Changed Successfully!</h2>
             <p className="text-xs text-gray-400 mb-6">
-              Your new password is now active. Redirecting you to the admin login page...
+              Your new password is now active. Redirecting you to the admin dashboard...
             </p>
             <Link
-              href="/admin/login"
+              href="/admin"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#D04741] text-white text-xs font-bold hover:bg-[#b83c37] transition-all"
             >
-              <span>Go to Login</span>
+              <span>Go to Dashboard</span>
               <ArrowRight size={14} />
             </Link>
           </div>

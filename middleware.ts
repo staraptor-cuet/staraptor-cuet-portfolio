@@ -49,7 +49,11 @@ export async function middleware(request: NextRequest) {
     !pathname.startsWith('/admin/reset-password')
   ) {
     const sessionCookie = request.cookies.get('staraptor_admin_session');
-    const secret = process.env.ADMIN_SECRET;
+    const secret =
+      process.env.ADMIN_SECRET ||
+      process.env.SUPABASE_SERVICE_ROLE_KEY ||
+      process.env.CLOUDINARY_API_SECRET ||
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
     let isValid = false;
     if (sessionCookie?.value && secret) {
