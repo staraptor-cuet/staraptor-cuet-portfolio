@@ -51,7 +51,7 @@ function AdminLoginContent() {
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        setError(data.error || 'Invalid credentials');
+        setError(data.error || 'Wrong password');
         setLoading(false);
         return;
       }

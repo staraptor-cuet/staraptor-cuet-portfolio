@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       {
-        error: `Invalid email/username or password. ${failedStatus.remainingAttempts} attempt(s) remaining before temporary lockout.`,
+        error: 'Wrong password',
       },
       { status: 401 }
     );
